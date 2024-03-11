@@ -1,0 +1,33 @@
+ #sidebar {
+     height: 100%;
+     width: 0;
+     position: fixed;
+     z-index: 1;
+     top: 0;
+     left:0;
+     background-color: #374151;
+     overflow-x: hidden;
+     transition: 0.2s;
+     padding-top: 9rem;
+
+     >li {
+         padding: 8px 8px 8px 32px;
+     }
+
+ }
+
+ #open-sidebar{
+    background-color: #374151;
+    width:5rem;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+
+
+    >#burger{
+        font-weight: bold;
+        color:white;
+        font-size: 2rem;
+        margin: 1rem;
+    }
+ }

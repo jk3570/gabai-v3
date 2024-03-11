@@ -1,0 +1,11 @@
+.faq-description {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.faq-description.open {
+    max-height: 1000px;
+    opacity: 1;
+}

@@ -1,0 +1,13 @@
+@keyframes animate-pop {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  .animate-pop {
+    animation: animate-pop 0.3s ease forwards;
+  }
+  

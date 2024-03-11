@@ -1,0 +1,9 @@
+/* CSS for navbar */
+
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color:#336699; /* Hex code ni Azure */
+}
+
