@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import JoinScreen from "../../components/lawyer/video-call/joinScreen";
-import MeetingView from "../../components/lawyer/video-call/meetingView";
+import JoinScreen from "../../components/lawyer/video-call/JoinScreen";
+import MeetingView from "../../components/lawyer/video-call/MeetingView";
 import { MeetingProvider } from "@videosdk.live/react-sdk";
-import { authToken, createMeeting } from "../../API";
+/* import { authToken, createMeeting } from "../../API"; */
 import { Helmet } from "react-helmet";
 
 function VideoCon() {
@@ -34,7 +34,7 @@ function VideoCon() {
   );
 }
 
-const App = () => {
+const Lawyer = () => {
   return (
     <div className=" py-20 px-auto flex justify-center items-center h-screen">
       <Helmet>
@@ -45,4 +45,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Lawyer;

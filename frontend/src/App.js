@@ -26,6 +26,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import UserList from "./pages/admin/UserList";
 import CasesList from "./pages/admin/CasesList";
 import FeedbacksList from "./pages/admin/FeedbackList";
+import Lawyer from "./pages/lawyer/Lawyer";
 
 const App = () => {
 
@@ -53,6 +54,9 @@ const App = () => {
           <Route path="/admin/users" element={<UserList />} />
           <Route path="/admin/cases" element={<CasesList />} />
           <Route path="/admin/feedbacks" element={<FeedbacksList />} />
+          
+          {/* Lawyer route */}
+          <Route path="/lawyer" elements={<Lawyer />} />
 
           {/* 404 route */}
           <Route path="*" element={<PageNotFound />} />
