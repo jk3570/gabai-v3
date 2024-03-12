@@ -49,10 +49,6 @@ const userSchema = new Schema({
     required: true,
     unique: true
   },
-  emailHash: {
-    type: String,
-    required: true
-  },
   password: {
     type: String,
     required: true
@@ -111,8 +107,6 @@ userSchema.statics.signup = async function(username,
 
   return user
 }
-
-// Static login method
 // Get the user from the database
 userSchema.statics.login = async function(identifier, password) {
 
@@ -123,6 +117,9 @@ userSchema.statics.login = async function(identifier, password) {
   const user = await this.findOne({
     $or: [{ username: identifier }, { email: identifier }]
   })
+  
+  // .select('username email firstname lastname gender birthdate region province city barangay') //get the user's information from the database
+
   if (!user) {
     throw Error('Incorrect username or email')
   }

@@ -1,6 +1,10 @@
 //CSS
 import "../css/nav.css";
 
+
+//AuthContext provider
+import { useAuthContext } from "../hooks/useAuthContext";
+import Profile from "./Profile";
 import { useState, useEffect } from "react";
 
 //Images and Icons
@@ -19,6 +23,9 @@ const toggle = () => {
 };
 
 function Navbar() {
+
+  const { user, dispatch } = useAuthContext();
+
   function scrollToElement(id) {
     const element = document.querySelector(id);
     if (element) {
@@ -105,7 +112,10 @@ function Navbar() {
               </div>
             
             {/* Login Btn */}
-            <Login />
+            {user ? null : <Login />}
+
+            {/* Profile Btn */}
+            {user ? <Profile />: null}
 
             {/* Search Icon */}
             <Link to="/search">
@@ -113,9 +123,6 @@ function Navbar() {
             </Link>
 
             {/* Toggle night mode */}
-            
-
-
             <BsMoon className="text-2xl hover:scale-[1.1] transition-all duration-200 ease-in-out" onClick={toggle} />
           </div>
         </div>

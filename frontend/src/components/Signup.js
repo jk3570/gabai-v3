@@ -5,6 +5,10 @@ import { useSignup } from "../hooks/useSignup";
 import Popup from "reactjs-popup";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import toast, { Toaster } from 'react-hot-toast';
+import { Link } from "react-router-dom";
+import Login from "./Login";
+
+
 
 
 // Define the saveSettings function
@@ -184,12 +188,11 @@ const Signup = ( {initialAddress }) => {
 
   return (
     <Popup
-      trigger={<a href="#" className="text-azure">Sign up here</a>}
+      trigger={<Link to="#signup" className="text-azure">Sign up here</Link>}
       modal
-      nested
     >
       {(close) => (
-        <form className="signup" onSubmit={handleSubmit(onSubmit)}>
+        <form className="signup" id="signup"onSubmit={handleSubmit(onSubmit)}>
           
                 
                 

@@ -27,7 +27,7 @@ const Developers = () => {
 
       <div className="relative z-10">    
         <center>
-          <h1 className="text-4xl font-bold my-5">Meet the Developers</h1>
+          <h1 className="text-4xl font-bold my-5">The Developers</h1>
         </center>
 
                   <div >

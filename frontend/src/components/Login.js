@@ -5,9 +5,12 @@ import Signup from "./Signup";
 import { useLogin } from "../hooks/useLogin";
 
 const Login = () => {
+
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const { login, error, isLoading } = useLogin();
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,7 +22,7 @@ const Login = () => {
       trigger={
         <button className="rounded-xl p-4 py-1.5 bg-azure-500 text-white hover:scale-[1.1] transition-all duration-100 ease-in-out 
         relative z-10
-        after:absolute after:-z-20  after:h-1 after:w-1 after:bg-azure-300 after:left-5 overflow-hidden after:bottom-0 after:translate-y-full after:rounded-md after:hover:scale-[30] after:hover:transition-all after:hover:duration-650 after:transition-all after:duration-300">
+        after:absolute after:-z-20  after:h-1 after:w-1 after:bg-azure-300 after:left-5 overflow-hidden after:bottom-0 after:translate-y-full after:rounded-md after:hover:scale-[50] after:hover:transition-all after:hover:duration-650 after:transition-all after:duration-300">
           Log in
         </button>
       }
@@ -85,7 +88,7 @@ const Login = () => {
             <br />
             <div className="flex flex-row items-center justify-center">
               <p>
-                Don't have an account? <Signup />
+                Don't have an account?   <Signup />
               </p>
             </div>
           </div>
