@@ -26,42 +26,39 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import UserList from "./pages/admin/UserList";
 import CasesList from "./pages/admin/CasesList";
 import FeedbacksList from "./pages/admin/FeedbackList";
-import Lawyer from "./pages/lawyer/Lawyer";
+import Lawyer from "./pages/lawyer/lawyer";
 
 const App = () => {
-
   return (
     <Router>
       <Navbar />
-        <Routes>
+      <Routes>
+        {/* Landing route */}
+        <Route path="/" element={<LandingPage />} />
 
-          {/* Landing route */}
-          <Route path="/" element={<LandingPage />} />
+        {/* Search routes */}
+        <Route path="/search" element={<Search />} />
+        <Route path="/search/result" element={<SearchResults />} />
 
-          {/* Search routes */}
-          <Route path="/search" element={<Search />}/>
-          <Route path="/search/result" element={<SearchResults />} />
-          
-          {/* Components routes */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/chat" element={<Chat />} />
-          <Route path="/terms" element={<Terms />} />
+        {/* Components routes */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/chat" element={<Chat />} />
+        <Route path="/terms" element={<Terms />} />
 
-          {/* Admin routes */}
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/admin/users" element={<UserList />} />
-          <Route path="/admin/cases" element={<CasesList />} />
-          <Route path="/admin/feedbacks" element={<FeedbacksList />} />
-          
-          {/* Lawyer route */}
-          <Route path="/lawyer" elements={<Lawyer />} />
+        {/* Admin routes */}
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin/users" element={<UserList />} />
+        <Route path="/admin/cases" element={<CasesList />} />
+        <Route path="/admin/feedbacks" element={<FeedbacksList />} />
 
-          {/* 404 route */}
-          <Route path="*" element={<PageNotFound />} />
+        {/* Lawyer route */}
+        <Route path="/lawyer" elements={<Lawyer />} />
 
-        </Routes>
+        {/* 404 route */}
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
       <Footer />
     </Router>
   );
