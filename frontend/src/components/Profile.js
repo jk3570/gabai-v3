@@ -2,7 +2,20 @@ import Popup from "reactjs-popup";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import ProfileSettings from "./ProfileSettings";
 import { Link } from "react-router-dom";
+
+//AuthContext provider
+import { useAuthContext } from "../hooks/useAuthContext";
+
+
+
+
+
 const Profile = () => {
+
+  const { user, dispatch } = useAuthContext();
+
+  const userEmail = user ? user.email : null;
+
   const backdrop =
     "fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 backdrop-filter backdrop-blur-lg bg-opacity-25 bg-black ";
   const bg =
@@ -37,12 +50,13 @@ const Profile = () => {
 
               <div className="flex flex-col items-center justify-center">
                 {/* <div className="h-[7rem] w-[7rem] bg-gray-300 rounded-full"></div> */}
-                <h2>User1234</h2>
-                <p>1234@domain.com</p>
+                {userEmail&& <h2>{userEmail}</h2>}
+                <p>Name: dasdasda </p>
+                <p>Email: hdsfjhdjksfhk@gmail.com </p>
               </div>
               <br />
               <div className="flex flex-col items-center justify-center">
-                <ProfileSettings></ProfileSettings>
+                {/* <ProfileSettings></ProfileSettings> */}
                 <br />
                 <Link to="/">
                   <button className={btnRed}>Log Out</button>

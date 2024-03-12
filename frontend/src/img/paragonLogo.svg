@@ -2,7 +2,7 @@
 {
     fill:none;
     stroke:#A3C2E0;
-    opacity: .20;
+    opacity: 1;
     stroke-linejoin:
     round;stroke-width:7px;}
 

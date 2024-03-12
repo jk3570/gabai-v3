@@ -4,6 +4,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./css/App.css";
 import "animate.css";
 
+//AuthContext provider
+import { useAuthContext } from "./hooks/useAuthContext";
+
 //Components routes
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -29,6 +32,8 @@ import FeedbacksList from "./pages/admin/FeedbackList";
 import Lawyer from "./pages/lawyer/lawyer";
 
 const App = () => {
+  const { user, dispatch } = useAuthContext();
+
   return (
     <Router>
       <Navbar />

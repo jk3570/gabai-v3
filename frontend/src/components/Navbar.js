@@ -1,6 +1,10 @@
 //CSS
 import "../css/nav.css";
 
+
+//AuthContext provider
+import { useAuthContext } from "../hooks/useAuthContext";
+import Profile from "./Profile";
 import { useState, useEffect } from "react";
 
 //Images and Icons
@@ -19,6 +23,9 @@ const toggle = () => {
 };
 
 function Navbar() {
+
+  const { user, dispatch } = useAuthContext();
+
   function scrollToElement(id) {
     const element = document.querySelector(id);
     if (element) {
@@ -70,7 +77,7 @@ function Navbar() {
                 after:-z-20 after:absolute after:h-1 after:w-1 after:bg-azure-300 after:left-5 overflow-hidden after:bottom-0 after:translate-y-full after:rounded-md after:hover:scale-[100] after:hover:transition-all after:hover:delay-100 after:hover:duration-700 after:transition-all after:duration-500
                 "
               >
-                  {/* before:absolute before:-z-10 before:left-6 before:top-6 before:w-6 before:h-6 before:bg-azure before:hover:bg-azure before:rotate-90 */}
+                 
                 <img src={iconWhite} alt="Logo" style={{ height: "35px" }} />
               <span
                 class="origin-left inline-flex duration-100 text-white group-hover:duration-300 group-hover:delay-100 opacity-0 group-hover:opacity-100 pl-3 transform scale-x-0 group-hover:scale-x-100 transition-all text-4xl font-medium"
