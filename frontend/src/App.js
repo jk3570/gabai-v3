@@ -4,6 +4,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./css/App.css";
 import "animate.css";
 
+//AuthContext provider
+import { useAuthContext } from "./hooks/useAuthContext";
+
 //Components routes
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -30,6 +33,8 @@ import Lawyer from "./pages/lawyer/Lawyer";
 
 const App = () => {
 
+const { user, dispatch } = useAuthContext();
+
   return (
     <Router>
       <Navbar />
@@ -43,9 +48,9 @@ const App = () => {
           <Route path="/search/result" element={<SearchResults />} />
           
           {/* Components routes */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/profile" element={<Profile />} />
+          { user ? null :  <Route path="/login" element={<Login />} /> }
+          { user ? null : <Route path="/signup" element={<Signup />} /> }
+          { user ? <Route path="/profile" element={<Profile />} /> : null }
           <Route path="/chat" element={<Chat />} />
           <Route path="/terms" element={<Terms />} />
 
