@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import JoinScreen from "../../components/lawyer/video-call/JoinScreen";
 import MeetingView from "../../components/lawyer/video-call/MeetingView";
 import { MeetingProvider } from "@videosdk.live/react-sdk";
-/* import { authToken, createMeeting } from "../../API"; */
+import { authToken, createMeeting } from "../../API";
 import { Helmet } from "react-helmet";
 
 function VideoCon() {
