@@ -20,7 +20,7 @@ const Developers = () => {
             <div class="absolute z-0 inset-0 w-full inset-0 px-[8rem] pb-[8rem]">
               <img 
                 id="paragonLogo" 
-                className="object-cover" 
+                className="object-cover opacity-20" 
                 src={paragon} alt="Paragon Logo">
               </img>
             </div>
@@ -50,17 +50,17 @@ const Developers = () => {
             </div>
             <div className={center}>
               <div className={img}>
+                <img src={Leonard} alt="" className={rounded} />
+              </div>
+              <h2 className={devName}>John Leonard Leano</h2>
+              <p className={devPos}>UI/UX Designer</p>
+            </div>
+            <div className={center}>
+              <div className={img}>
                 <img src={Kadu} alt="" className={rounded} />
               </div>
               <h2 className={devName}>Evehn Kadusale</h2>
               <p className={devPos}>Lead AI Developer</p>
-            </div>
-            <div className={center}>
-              <div className={img}>
-                <img src={Even} alt="" className={rounded} />
-              </div>
-              <h2 className={devName}>Evenezer Francis Basan</h2>
-              <p className={devPos}>Frontend Developer / AI Prompt Engineer</p>
             </div>
             <div className={center}>
               <div className={img}>
@@ -78,10 +78,10 @@ const Developers = () => {
             </div>
             <div className={center}>
               <div className={img}>
-                <img src={Leonard} alt="" className={rounded} />
+                <img src={Even} alt="" className={rounded} />
               </div>
-              <h2 className={devName}>John Leonard Leano</h2>
-              <p className={devPos}>UI/UX Designer / AI Prompt Engineer</p>
+              <h2 className={devName}>Evenezer Francis Basan</h2>
+              <p className={devPos}>Frontend Developer / AI Prompt Engineer</p>
             </div>
           </div>
         </div>

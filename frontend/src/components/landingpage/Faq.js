@@ -48,7 +48,7 @@ const Faq = () => {
         <div key={index} className={box}>
           <div onClick={() => toggleDesc(index)}>
             <div className="flex justify-between items-center">
-              <h2 className="font-semibold ml-3 mb-2 mt-2 text-xl">{faq.question}</h2>
+              <h2 className="font-semibold ml-3 mb-2 mt-2 text-xl text-azure">{faq.question}</h2>
               <div className="font-bold">
                 {showDescriptions[index] ? <FaChevronUp /> : <FaChevronDown />}
               </div>

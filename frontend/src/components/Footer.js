@@ -3,10 +3,26 @@ import "../css/footer.css";
 import { FaFacebook, FaPhone, FaMailBulk } from "react-icons/fa";
 
 import Logo from "../img/Logo.png";
+import iconAzure from "../img/iconAzure.svg";
+import paragonLogoSolid from "../img/paragonLogoSolid.svg";
 
 function Footer() {
-    const title = "font-semibold text-black text-sm  mb-4";
-    const content = "text-xs text-gray-700 max-sm:text-center ";
+
+    function scrollToElement(id) {
+        const element = document.querySelector(id);
+        if (element) {
+          const offset = 100; // Adjust this value as needed
+          const elementPosition = element.offsetTop - offset;
+      
+          window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth' // Add smooth scrolling behavior
+          });
+        }
+      } 
+
+    const title = "font-semibold text-black text-sm mb-4";
+    const content = "text-xs text-gray-700 my-2 max-sm:text-center ";
 
   return (
     <div className="relative z-10 flex justify-center mt-10">
@@ -20,16 +36,41 @@ function Footer() {
         >
 
            {/* Top Part */}
-            <div alt="Footer Content" class="mx-auto w-full p-4 py-0 lg:py-8 max-w-4xl ">
-                <div class="md:flex md:justify-between">
-                <div class="h-[3rem] w-[8rem] mb-6 md:mb-0">
-                        <img 
-                            src={Logo} class="" 
-                            alt="GabAi Logo" />
-                </div>
-                
+            <div alt="Footer Content" className="mx-auto w-full p-4 py-0 lg:py-8 max-w-4xl ">
+                <div className="md:flex md:justify-between">
+                    <div className=" md:mb-0 relative inline-block">
+                        <div className="flex flex-row gap-3 mb-5">
+                          <Link to="#home" onClick ={() => scrollToElement('#home')} className="relative group">
+                            <img 
+                                src={iconAzure}  className="h-[3.5rem] w-[3.5rem] p-[0.2rem] opacity-50"
+                                alt="GabAi Logo" />
+                                <span class="absolute -top-9 left-[50%] -translate-x-[50%] 
+                                    z-30 origin-left scale-0 px-3 rounded-lg bg-white opacity-70 text-azure-500 py-2 text-xs font-semibold
+                                    shadow-md transition-all duration-300 ease-in-out delay-200
+                                    group-hover:scale-100">GabAi</span>
+                          </Link>
+                          <Link to="#developers" onClick ={() => scrollToElement('#developers')} className="relative group">
+                            <img
+                                src={paragonLogoSolid} className="h-[3.5rem] w-[3.5rem] opacity-50"
+                                alt="Paragon Logo"/>
+                                <span class="absolute -top-9 left-[50%] -translate-x-[50%] 
+                                    z-30 origin-left scale-0 px-3 rounded-lg bg-white opacity-70 text-azure-500 py-2 text-xs font-semibold
+                                    shadow-md transition-all duration-300 ease-in-out delay-200
+                                    group-hover:scale-100">PARAGON</span>
+                          </Link>  
+                        </div>
+                        <div className="text-xl text-azure text-bold opacity-50 font-medium">
+                            GabAi
+                        </div>
+                        <div className="text-xs text-gray-700 w-[18rem] pr-[3rem]">
+                        Your web application for comprehensive legal guides against workplace discrimination in the Philippines.
+                        </div>
+                    </div>
+                    
+                    
+
                 {/* Links */}
-                <div class="flex flex-row gap-8">
+                <div className="flex flex-row gap-8">
 
                     <div>
                     <b className={title}>Location</b>
@@ -60,7 +101,7 @@ function Footer() {
                     </ul>
                     </div>
                     
-                    <div className="w-[8rem]">
+                    <div className="w-[6rem]">
                     <b className={title}>Legal</b>
                     <br />
                     <ul>
