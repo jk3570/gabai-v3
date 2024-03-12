@@ -48,16 +48,17 @@ const Faq = () => {
         <div key={index} className={box}>
           <div onClick={() => toggleDesc(index)}>
             <div className="flex justify-between items-center">
-              <h2 className="font-bold ml-3 mb-3 mt-2">{faq.question}</h2>
+              <h2 className="font-semibold text-azure ml-3 mb-2 mt-2 text-xl">{faq.question}</h2>
               <div className="font-bold">
                 {showDescriptions[index] ? <FaChevronUp /> : <FaChevronDown />}
               </div>
             </div>
 
             <p
-              className={`ml-3 mb-1  faq-description ${
+              className={`ml-3 mb-1 mr-4 leading-relaxed faq-description ${
                 showDescriptions[index] ? "open" : ""
               }`}
+              style={{ transitionDuration: showDescriptions[index] ? "700ms" : "0ms" }}
             >
               {faq.answer}
             </p>

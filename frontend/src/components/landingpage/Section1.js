@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import blob from "../../img/Blob.svg";
 import gabAnimation from "../../img/gabAnimation.gif";
-import lawJust from "../../img/lawJust.png";
+import lawJust from "../../img/justice.png";
 import iconWhite from "../../img/iconWhite.svg";
 
 const WorkplaceDiscriminationLaws = () => {
@@ -31,11 +31,10 @@ const WorkplaceDiscriminationLaws = () => {
           <div class="fixed inset-0 w-full h-screen inset-0 z-0">
             <img 
               id="backgroundImage" 
-              className="h-full w-full object-cover transition-opacity duration-100" 
+              className="h-full w-full object-cover transition-opacity duration-100 animation-duration-100" 
               src={blob} alt="Background Image">
             </img>
           </div>
-          
 
       <div 
       className="flex flex-row justify-between items-center gap-x-20 max-md:flex-col-reverse"
@@ -60,7 +59,7 @@ const WorkplaceDiscriminationLaws = () => {
               max-md:mx-1
             "
           >
-            A safe space against
+            A guide against
             <br />
             workplace discrimination.
           </h1>
@@ -79,7 +78,7 @@ const WorkplaceDiscriminationLaws = () => {
               className={button}
               >
                 Talk with Gab! 
-             
+                
               </button>
               </a>
               <span className="absolute z-10 left-6 translate-y-8 w-6 h-6 bg-azure rotate-45"></span>
@@ -91,7 +90,7 @@ const WorkplaceDiscriminationLaws = () => {
         <div className="grid items-center">
           <img 
             src={lawJust} 
-            className="z-20 h-[23rem] w-[23rem]"
+            className="z-20 h-[25rem] w-[25rem]"
             alt="Justitia goddess of justice"  />
         </div>
       </div>

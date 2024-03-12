@@ -24,12 +24,11 @@ const Section4 = () => {
           GabAi helps you and the many others to shout their voices and be
           heard!
         </p>
-
-          <button className="hover:scale-[1.1] transition-all duration-200 ease-in-out bg-azure text-white font-bold p-3.5 rounded-lg  h-55 w-[15rem]">
-            Join now!  
-          </button>
-
-
+        <button className="group px-3 z-30 py-2 bg-azure rounded-lg hover:scale-[1.1] max-md:w-32 lg:w-60 text-white 
+        relative after:-z-20 after:absolute after:h-1 after:w-1 after:bg-azure-300 after:left-30 overflow-hidden after:bottom-0 after:translate-y-full after:rounded-md after:hover:scale-[200] after:hover:transition-all after:hover:duration-700 after:transition-all after:duration-300 transition-all duration-600 text-2xl
+        ">Join now!
+        </button>
+        <span className="absolute z-10 translate-x-[4rem] translate-y-[5.8rem] w-6 h-6 bg-azure rotate-45"></span>
       </div>
     </div>
   );

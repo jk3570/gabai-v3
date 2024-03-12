@@ -1,3 +1,4 @@
+import paragon from "../../img/paragonLogo.svg";
 import Joko from "../../img/developers/Joko.jpg";
 import Lei from "../../img/developers/lei.png";
 import Kadu from "../../img/developers/kadu.png";
@@ -9,14 +10,24 @@ import Even from "../../img/developers/even.png";
 const Developers = () => {
   const img = "w-[6rem] h-[6rem] mb-3";
   const center = "flex flex-col justify-center items-center mb-5";
-  const rounded = "rounded-full border-0 border-gray-500";
+  const rounded = "rounded-full shadow-lg";
   const devName = "font-bold text-azure mb-2 text-xl";
   const devPos = "text-center text-sm max-md:text-center";
   return (
     <>
-      <div className="relative z-10 mt-20 flex flex-col gap-y-2 justify-center items-center text-center ">
+      <div className="relative z-10 mt-20 mb-[9rem] flex flex-col gap-y-2 justify-center items-center text-center ">
+        
+            <div class="absolute z-0 inset-0 w-full inset-0 px-[8rem] pb-[8rem]">
+              <img 
+                id="paragonLogo" 
+                className="object-cover" 
+                src={paragon} alt="Paragon Logo">
+              </img>
+            </div>
+
+      <div className="relative z-10">    
         <center>
-          <h1 className="text-4xl font-bold my-5">Team <span className="text-azure">PARAGON</span></h1>
+          <h1 className="text-4xl font-bold my-5">The Developers</h1>
         </center>
 
                   <div >
@@ -74,6 +85,7 @@ const Developers = () => {
             </div>
           </div>
         </div>
+        </div>  
       </div>
     </>
   );

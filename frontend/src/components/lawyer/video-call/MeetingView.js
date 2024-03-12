@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useMeeting } from "@videosdk.live/react-sdk";
-import ParticipantView from "./participantView";
-import Controls from "./controls";
+import ParticipantView from "./ParticipantView";
+import Controls from "./Controls";
 
 const btnStyle = "p-2 rounded-xl bg-azure text-white";
 
