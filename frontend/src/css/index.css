@@ -15,7 +15,30 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
+/* For WebKit/Blink browsers */
+::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #fff; /* Color of the track */
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #336699; /* Color of the thumb */
+    border-radius: 6px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #578FC7; /* Color of the thumb on hover */
+  }
+  
+
 /* Firefox */
 input[type=number] {
     -moz-appearance: textfield;
 }
+
+* {
+    scrollbar-color: #336699 #f1f1f1; /* thumb and track colors */
+  }
