@@ -46,9 +46,9 @@ const App = () => {
         <Route path="/search/result" element={<SearchResults />} />
 
         {/* Components routes */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/profile" element={<Profile />} />
+        {user ? null : <Route path="/login" element={<Login />} />}
+        {user ? null : <Route path="/signup" element={<Signup />} />}
+        {user ? <Route path="/profile" element={<Profile />} /> : null}
         <Route path="/chat" element={<Chat />} />
         <Route path="/terms" element={<Terms />} />
 
