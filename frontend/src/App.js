@@ -40,7 +40,7 @@ const App = () => {
 
           {/* Search routes */}
           <Route path="/search" element={<Search />}/>
-          <Route path="search/result" element={<SearchResults />} />
+          <Route path="/search/result" element={<SearchResults />} />
           
           {/* Components routes */}
           <Route path="/login" element={<Login />} />
