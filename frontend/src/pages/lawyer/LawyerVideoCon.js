@@ -5,7 +5,7 @@ import { MeetingProvider } from "@videosdk.live/react-sdk";
 import { authToken, createMeeting } from "../../API";
 import { Helmet } from "react-helmet";
 
-function VideoCon() {
+const VideoCon = () => {
   const [meetingId, setMeetingId] = useState(null);
 
   const getMeetingAndToken = async (id) => {
@@ -32,9 +32,9 @@ function VideoCon() {
   ) : (
     <JoinScreen getMeetingAndToken={getMeetingAndToken} />
   );
-}
+};
 
-const Lawyer = () => {
+const LawyerVideoCon = () => {
   return (
     <div className=" py-20 px-auto flex justify-center items-center h-screen">
       <Helmet>
@@ -45,4 +45,4 @@ const Lawyer = () => {
   );
 };
 
-export default Lawyer;
+export default LawyerVideoCon;
