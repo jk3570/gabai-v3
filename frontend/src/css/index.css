@@ -39,7 +39,6 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
-
 * {
     scrollbar-color: #336699 #f1f1f1; /* thumb and track colors */
   }
