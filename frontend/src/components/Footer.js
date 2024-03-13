@@ -5,6 +5,7 @@ import { FaFacebook, FaPhone, FaMailBulk } from "react-icons/fa";
 import Logo from "../img/Logo.png";
 import iconAzure from "../img/iconAzure.svg";
 import paragonLogoSolid from "../img/paragonLogoSolid.svg";
+import uccLogo from "../img/uccLogo.svg";
 
 function Footer() {
 
@@ -58,6 +59,15 @@ function Footer() {
                                     shadow-md transition-all duration-300 ease-in-out delay-200
                                     group-hover:scale-100">PARAGON</span>
                           </Link>  
+                          <Link to="https://ucc-caloocan.edu.ph/" target="_blank" className="relative group">
+                            <img
+                                src={uccLogo} className="h-[3.5rem] w-[3.5rem] opacity-50"
+                                alt="UCC Logo"/>
+                                <span class="absolute -top-9 left-[50%] -translate-x-[50%] 
+                                    z-30 origin-left scale-0 px-3 rounded-lg bg-white opacity-70 text-azure-500 py-2 text-xs font-semibold
+                                    shadow-md transition-all duration-300 ease-in-out delay-200
+                                    group-hover:scale-100">UCC</span>
+                          </Link> 
                         </div>
                         <div className="text-xl text-azure text-bold opacity-50 font-medium">
                             GabAi
