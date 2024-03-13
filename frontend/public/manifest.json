@@ -1,6 +1,6 @@
 {
   "short_name": "GabAI",
-  "name": "Create React App Sample",
+  "name": "GabAI",
   "icons": [
     {
       "src": "favicon.ico",
@@ -21,5 +21,6 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "form_factor": "wide"
 }
