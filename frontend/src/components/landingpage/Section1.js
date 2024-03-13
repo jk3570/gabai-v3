@@ -12,15 +12,19 @@ const WorkplaceDiscriminationLaws = () => {
       const background = document.getElementById('backgroundImage');
       const scrollPosition = window.scrollY;
       const opacity = 1 - (scrollPosition / window.innerHeight);
+      const scale = 1 - (scrollPosition / window.innerHeight);
+      
       background.style.opacity = opacity > 0 ? opacity : 0;
+      background.style.transform = `scale(${scale}) translate(${scrollPosition * 5}px, -${scrollPosition * 2}px)`;
     };
-
+  
     window.addEventListener('scroll', handleScroll);
-
+  
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+  
 
   const button = 'group px-3 z-30 py-2 bg-azure rounded-lg hover:scale-[1.1] max-md:w-32 lg:w-60 text-white relative after:-z-20 after:absolute after:h-1 after:w-1 after:bg-azure-300 after:left-5 overflow-hidden after:bottom-0 after:translate-y-full after:rounded-md after:hover:scale-[300] after:hover:transition-all after:hover:duration-700 after:transition-all after:duration-700 transition-all duration-600 text-2xl';
 
@@ -31,7 +35,7 @@ const WorkplaceDiscriminationLaws = () => {
           <div class="fixed inset-0 w-full h-screen inset-0 z-0">
             <img 
               id="backgroundImage" 
-              className="h-full w-full object-cover transition-opacity duration-100 animation-duration-100" 
+              className="h-full w-full object-cover transition-opacity duration-1000 animation-duration-1000" 
               src={blob} alt="Background Image">
             </img>
           </div>
