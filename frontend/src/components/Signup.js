@@ -719,7 +719,7 @@ const Signup = ({ initialAddress }) => {
                       <div className="" style={{ display: 'flex', justifyContent: 'space-between' }}>
                       <a href="#" className="px-2 py-2 text-md text-center text-black" onClick={prevStep}> {"<"} Previous</a>
                       <br/>
-                      <button type="submit" onClick={!error ? notify : undefined} className="w-24 bg-azure-500 text-white rounded-xl p-2 " disabled={error || isLoading || passwordMatchError}>
+                      <button type="submit" onClick={!error || !errors ? notify : undefined} className="w-24 bg-azure-500 text-white rounded-xl p-2 " disabled={error || errors || isLoading || passwordMatchError}>
                         Sign Up!
                       </button>
                       </div>
