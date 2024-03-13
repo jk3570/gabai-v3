@@ -1,4 +1,4 @@
-import "../../css/section-3.css";
+
 /* 
 import { useEffect, useRef } from 'react'; */
 

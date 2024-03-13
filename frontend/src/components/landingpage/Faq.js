@@ -2,12 +2,21 @@ import "../../css/faq.css";
 import { useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 
+
+
 const Faq = () => {
   const [showDescriptions, setShowDescriptions] = useState([]);
 
   const toggleDesc = (index) => {
     setShowDescriptions((prevState) => {
       const newState = [...prevState];
+      // Close all other answers
+      newState.forEach((_, i) => {
+        if (i !== index) {
+          newState[i] = false;
+        }
+      });
+      // Toggle the state of the clicked FAQ item
       newState[index] = !newState[index];
       return newState;
     });
