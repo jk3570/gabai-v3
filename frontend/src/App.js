@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+
 import "./css/App.css";
 import "animate.css";
 
@@ -29,7 +30,9 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import UserList from "./pages/admin/UserList";
 import CasesList from "./pages/admin/CasesList";
 import FeedbacksList from "./pages/admin/FeedbackList";
-import Lawyer from "./pages/lawyer/LawyerVideoCon";
+
+//Lawyer routes
+import LawyerVideoCon from "./pages/lawyer/LawyerVideoCon";
 
 const App = () => {
   const { user, dispatch } = useAuthContext();
@@ -39,7 +42,7 @@ const App = () => {
       <Navbar />
       <Routes>
         {/* Landing route */}
-        <Route path="/" element={<LandingPage />} />
+        <Route path="/" element={<LandingPage/>} />
 
         {/* Search routes */}
         <Route path="/search" element={<Search />} />
@@ -59,7 +62,7 @@ const App = () => {
         <Route path="/admin/feedbacks" element={<FeedbacksList />} />
 
         {/* Lawyer route */}
-        <Route path="/lawyer" element={<Lawyer />} />
+        <Route path="/lawyer" element={<LawyerVideoCon />} />
 
         {/* 404 route */}
         <Route path="*" element={<PageNotFound />} />

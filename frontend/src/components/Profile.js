@@ -12,6 +12,13 @@ import { useAuthContext } from "../hooks/useAuthContext";
 
 const Profile = () => {
 
+    const handleLogout = () => {
+    // Remove user from local storage
+    localStorage.removeItem("user");
+    // Dispatch logout action
+    dispatch({ type: "LOGOUT" });
+  };
+
   const { user, dispatch } = useAuthContext();
 
   const userEmail = user ? user.email : null;
@@ -59,7 +66,7 @@ const Profile = () => {
                 {/* <ProfileSettings></ProfileSettings> */}
                 <br />
                 <Link to="/">
-                  <button className={btnRed}>Log Out</button>
+                  <button className={btnRed} onClick={handleLogout}>Log Out</button>
                 </Link>
               </div>
             </div>

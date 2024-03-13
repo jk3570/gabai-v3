@@ -1,9 +1,10 @@
 // Modules
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Helmet from "react-helmet";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 // Components
+import Search from "./search/Search";
 import Section1 from "../components/landingpage/Section1";
 import Section2 from "../components/landingpage/Section2";
 import Section3 from "../components/landingpage/Section3";
@@ -12,15 +13,9 @@ import Developers from "../components/landingpage/Developers";
 import Faq from "../components/landingpage/Faq";
 import { FaQq } from "react-icons/fa6";
 
-function LandingPage() {
-  const { user, dispatch } = useAuthContext();
 
-  const handleLogout = () => {
-    // Remove user from local storage
-    localStorage.removeItem("user");
-    // Dispatch logout action
-    dispatch({ type: "LOGOUT" });
-  };
+const LandingPage = () => {
+  const { user, dispatch } = useAuthContext();
 
   useEffect(() => {
     const scrollFadeDiv = document.getElementById('scrollFadeDiv');
@@ -54,7 +49,7 @@ function LandingPage() {
   return (
     <>
       <Helmet>
-        <title>GabAI</title>
+        <title>GabAi | Home</title>
       </Helmet>
 
       <div id="scrollFadeDiv" className="fixed z-50 bottom-10 left-1/2 transform -translate-x-1/20 animate-bounce duration-10 opacity-100 transition-opacity">
@@ -67,7 +62,7 @@ function LandingPage() {
       <div class="w-full relative max-w-4xl px-5 lg:px-0 center mx-auto">
       <section id="home">
           {/* 1st section of landing page */}
-          <Section1 />
+         { !user ? <Section1 /> : <Search /> }
         </section>
 
         <section id="about">
@@ -97,7 +92,7 @@ function LandingPage() {
       </div>
       {/* 
       Logout button */}
-      {user && <button onClick={handleLogout}>Logout</button>}
+      {/* {user && <button onClick={handleLogout}>Logout</button>} */}
     </>
   );
 }

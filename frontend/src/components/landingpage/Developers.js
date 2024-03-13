@@ -17,7 +17,7 @@ const Developers = () => {
     <>
       <div className="relative z-10 mt-20 mb-[9rem] flex flex-col gap-y-2 justify-center items-center text-center ">
         
-            <div class="absolute z-0 inset-0 w-full inset-0 px-[8rem] pb-[8rem]">
+            <div class="absolute z-0 inset-0 w-full px-[8rem] pb-[8rem]">
               <img 
                 id="paragonLogo" 
                 className="object-cover opacity-20" 
@@ -46,14 +46,7 @@ const Developers = () => {
                 <img src={Lei} alt="" className={rounded} />
               </div>
               <h2 className={devName}>Louise Angelo Ocopio</h2>
-              <p className={devPos}>Lead Frontend Developer</p>
-            </div>
-            <div className={center}>
-              <div className={img}>
-                <img src={Leonard} alt="" className={rounded} />
-              </div>
-              <h2 className={devName}>John Leonard Leano</h2>
-              <p className={devPos}>UI/UX Designer</p>
+              <p className={devPos}>Fullstack Developer</p>
             </div>
             <div className={center}>
               <div className={img}>
@@ -61,6 +54,13 @@ const Developers = () => {
               </div>
               <h2 className={devName}>Evehn Kadusale</h2>
               <p className={devPos}>Lead AI Developer</p>
+            </div>
+            <div className={center}>
+              <div className={img}>
+                <img src={Leonard} alt="" className={rounded} />
+              </div>
+              <h2 className={devName}>John Leonard Leaño</h2>
+              <p className={devPos}>UI/UX Developer</p>
             </div>
             <div className={center}>
               <div className={img}>

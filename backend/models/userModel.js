@@ -21,7 +21,7 @@ const userSchema = new Schema({
   },
   gender: {
     type: String,
-    enum: ['Male', 'Female', 'LGBTQ', 'Prefer not to answer'],
+    enum: ['Male', 'Female', 'LGBTQ', 'Prefer not to say'],
     required: true
   },
   birthdate: {
@@ -80,9 +80,13 @@ userSchema.statics.signup = async function(username,
   }
 
   const exists = await this.findOne({ email })
-
   if (exists) {
     throw Error('Email already in use')
+  }
+  
+  const usernameExists = await this.findOne({ username })
+  if (usernameExists) {
+    throw Error('Username already in use')
   }
 
   //initialize the hashing attribute
@@ -107,6 +111,8 @@ userSchema.statics.signup = async function(username,
 
   return user
 }
+
+
 // Get the user from the database
 userSchema.statics.login = async function(identifier, password) {
 

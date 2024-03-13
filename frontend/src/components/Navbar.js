@@ -150,7 +150,10 @@ function Navbar() {
             </div>
 
             {/* Login Btn */}
-            <Login />
+            {user ? null : <Login />}
+
+            {/* Profile Btn */}
+            {user ? <Profile /> : null }
 
             {/* Search Icon */}
             <Link to="/search">
