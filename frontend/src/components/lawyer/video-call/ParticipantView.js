@@ -45,15 +45,19 @@ function ParticipantView(props) {
   }, [webcamOn]);
 
   return (
-    <div>
+    <div className="flex flex-row justify-center items-center">
       <audio ref={micRef} autoPlay playsInline muted={isLocal} />{" "}
       {/* Audio element for mic playback */}
       <div>
         {/* Conditionally render ReactPlayer or gray background based on webcam status */}
         {webcamOn ? ( // If webcam is on
-          <div>
+          <div
+            style={{ position: "relative", width: "100%", height: "100%" }}
+            className="bg-gray-700 rounded-xl z-0"
+          >
             <ReactPlayer
-              className="rounded-xl"
+              style={{ zIndex: "999" }}
+              className="rounded-xl flex"
               playsinline
               pip={false}
               light={false}
@@ -61,8 +65,8 @@ function ParticipantView(props) {
               muted={true}
               playing={true}
               url={videoStream} // Passing the constructed video stream as URL
-              height={"100%"}
-              width={"320px"}
+              height={"320px"}
+              width={"480px"}
               onError={(err) => {
                 console.log(err, "participant video error");
               }} // Handling ReactPlayer errors
@@ -70,11 +74,7 @@ function ParticipantView(props) {
           </div>
         ) : (
           // If webcam is off
-          <div
-            className=" bg-gray-500 rounded-xl"
-            height={"100%"}
-            width={"720px"}
-          /> // Displaying a gray background
+          <div className=" bg-gray-700 rounded-xl w-[480px] h-[320px] z-0" /> // Displaying a gray background
         )}
       </div>
     </div>

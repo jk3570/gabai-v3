@@ -52,41 +52,42 @@ function MeetingView(props) {
   };
 
   return (
-    <div>
-      <div className="container">
-        <h3>Meeting Id: {props.meetingId}</h3> {/* Display meeting ID */}
-        {joined && joined === "JOINED" ? ( // If meeting joined successfully
+    <>
+      <div>
+        <div className="container">
           <div>
-            {/* Display preview of user's webcam and microphone */}
-            {mediaStream && (
-              <div className="bg-gray-300 flex flex-row items-center justify-center w-[480px] h-[360px] rounded-xl">
-                {" "}
+            <h3>Meeting Id: {props.meetingId}</h3> {/* Display meeting ID */}
+            {joined && joined === "JOINED" ? ( // If meeting joined successfully
+              <div className="flex flex-col gap-2 justify-center items-center">
+                {/* Display preview of user's webcam and microphone */}
+                {mediaStream && <div />}
+                {/* Render ParticipantView component for each participant */}
+                {[...participants.keys()].map((participantId) => (
+                  <div key={participantId} className="flex flex-row gap-2">
+                    <ParticipantView
+                      participantId={participantId} // Pass participant ID as prop
+                    />
+                  </div>
+                ))}
+                <div className="sticky bottom-0 left-0 right-0">
+                  <Controls
+                    className=""
+                    toggleWebcam={() => toggleWebcam()} // Pass toggleWebcam function to Controls component
+                    toggleMic={() => toggleMic()} // Pass toggleMic function to Controls component
+                  />
+                </div>
               </div>
+            ) : joined && joined === "JOINING" ? ( // If joining the meeting
+              <p>Joining the meeting...</p>
+            ) : (
+              <button onClick={joinMeeting} className={btnStyle}>
+                Join
+              </button> // Render join button
             )}
-            {/* Render ParticipantView component for each participant */}
-            {[...participants.keys()].map((participantId) => (
-              <div>
-                <ParticipantView
-                  participantId={participantId} // Pass participant ID as prop
-                  key={participantId}
-                />
-              </div>
-            ))}
-            <div></div>
-            <Controls
-              toggleWebcam={() => toggleWebcam()} // Pass toggleWebcam function to Controls component
-              toggleMic={() => toggleMic()} // Pass toggleMic function to Controls component
-            />
           </div>
-        ) : joined && joined === "JOINING" ? ( // If joining the meeting
-          <p>Joining the meeting...</p>
-        ) : (
-          <button onClick={joinMeeting} className={btnStyle}>
-            Join
-          </button> // Render join button
-        )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
