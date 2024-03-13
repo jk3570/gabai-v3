@@ -26,8 +26,8 @@ function MeetingView(props) {
     const requestMediaStream = async () => {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
-          video: true,
-          audio: true,
+          video: false,
+          audio: false,
         }); // Requesting access to webcam and microphone
         setMediaStream(stream); // Set the media stream to state
       } catch (error) {
