@@ -1,70 +1,84 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { useParticipant } from "@videosdk.live/react-sdk";
-import ReactPlayer from "react-player";
+import { useParticipant } from "@videosdk.live/react-sdk"; // Importing a custom hook to manage participant streams
+import ReactPlayer from "react-player"; // Importing ReactPlayer component for video playback
 
 function ParticipantView(props) {
-  const micRef = useRef(null);
+  const micRef = useRef(null); // Creating a ref to hold reference to audio element
   const { webcamStream, micStream, webcamOn, micOn, isLocal } = useParticipant(
     props.participantId
-  );
+  ); // Destructuring properties from the useParticipant custom hook
 
   // Memoized video stream based on webcam status
   const videoStream = useMemo(() => {
     if (webcamOn && webcamStream) {
-      const mediaStream = new MediaStream();
-      mediaStream.addTrack(webcamStream.track);
-      return mediaStream;
+      // If webcam is on and stream exists
+      const mediaStream = new MediaStream(); // Creating a new MediaStream object
+      mediaStream.addTrack(webcamStream.track); // Adding webcam track to the stream
+      return mediaStream; // Returning the constructed stream
     }
-  }, [webcamStream, webcamOn]);
+  }, [webcamStream, webcamOn]); // Dependency array for memoization
 
   // Effect to handle mic stream and playback
   useEffect(() => {
     if (micRef.current) {
+      // Checking if the micRef has been initialized
       if (micOn && micStream) {
-        const mediaStream = new MediaStream();
-        mediaStream.addTrack(micStream.track);
+        // If mic is on and micStream exists
+        const mediaStream = new MediaStream(); // Creating a new MediaStream object
+        mediaStream.addTrack(micStream.track); // Adding mic track to the stream
 
-        micRef.current.srcObject = mediaStream;
+        micRef.current.srcObject = mediaStream; // Setting audio element's srcObject to the constructed stream
         micRef.current
           .play()
           .catch((error) =>
             console.error("videoElem.current.play() failed", error)
-          );
+          ); // Attempting to play the audio element, catching any errors
       } else {
-        micRef.current.srcObject = null;
+        micRef.current.srcObject = null; // Setting audio element's srcObject to null if mic is off or micStream is null
       }
     }
-  }, [micStream, micOn]);
+  }, [micStream, micOn]); // Dependency array for mic effect
+
+  // Effect to ensure re-render when webcamOn changes
+  useEffect(() => {
+    // This effect will run whenever webcamOn changes, ensuring the component re-renders
+  }, [webcamOn]);
 
   return (
     <div>
-      <p>
-        Webcam: {webcamOn ? "ON" : "OFF"} | Mic: {micOn ? "ON" : "OFF"}
-      </p>
-      <audio ref={micRef} autoPlay playsInline muted={isLocal} />
-      <div className="flex h-full w-[480px]">
+      <audio ref={micRef} autoPlay playsInline muted={isLocal} />{" "}
+      {/* Audio element for mic playback */}
+      <div>
         {/* Conditionally render ReactPlayer or gray background based on webcam status */}
-        {webcamOn ? (
-          <ReactPlayer
-            playsinline
-            pip={false}
-            light={false}
-            controls={false}
-            muted={true}
-            playing={true}
-            url={videoStream}
+        {webcamOn ? ( // If webcam is on
+          <div>
+            <ReactPlayer
+              className="rounded-xl"
+              playsinline
+              pip={false}
+              light={false}
+              controls={false}
+              muted={true}
+              playing={true}
+              url={videoStream} // Passing the constructed video stream as URL
+              height={"100%"}
+              width={"320px"}
+              onError={(err) => {
+                console.log(err, "participant video error");
+              }} // Handling ReactPlayer errors
+            />
+          </div>
+        ) : (
+          // If webcam is off
+          <div
+            className=" bg-gray-500 rounded-xl"
             height={"100%"}
             width={"720px"}
-            onError={(err) => {
-              console.log(err, "participant video error");
-            }}
-          />
-        ) : (
-          <div className="bg-gray-500 w-[480px] h-auto absolute"></div>
+          /> // Displaying a gray background
         )}
       </div>
     </div>
   );
 }
 
-export default ParticipantView;
+export default ParticipantView; // Exporting the ParticipantView component
