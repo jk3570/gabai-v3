@@ -2,18 +2,28 @@ import React from "react";
 import { BarChart, PieChart } from "@mui/x-charts";
 
 // Data for the Bar Graph and Pie Chart
-var maleCount = 10;
-var femaleCount = 50;
 
 const MyBarGraph = React.memo(() => (
   <BarChart
-    xAxis={[{ scaleType: "band", data: ["Sex"] }]}
+    xAxis={[{ scaleType: "band", data: ["Age"] }]}
     series={[
-      { data: [maleCount], label: "Male", color: "#38BDF8" },
-      { data: [femaleCount], label: "Female", color: "#F472B6" },
+      { data: ["10"], label: "18-20" },
+      { data: ["20"], label: "21-30" },
+      { data: ["20"], label: "31-40" },
+      { data: ["20"], label: "41-50" },
+      { data: ["20"], label: "51-59" },
+      { data: ["20"], label: "60 above" },
     ]}
     width={250}
     height={300}
+    slotProps={{
+      legend: {
+        direction: "row",
+        position: { vertical: "bottom", horizontal: "middle" },
+        padding: 0,
+        hidden: true,
+      },
+    }}
   />
 ));
 
@@ -22,8 +32,12 @@ const PieChartComponent = React.memo(() => (
     series={[
       {
         data: [
-          { id: 0, value: maleCount, label: "Male", color: "#38BDF8" },
-          { id: 1, value: femaleCount, label: "Female", color: "#F472B6" },
+          { id: 0, value: "10", label: "18-20" },
+          { id: 1, value: "20", label: "21-30" },
+          { id: 2, value: "20", label: "31-40" },
+          { id: 3, value: "20", label: "41-50" },
+          { id: 4, value: "20", label: "51-59" },
+          { id: 5, value: "20", label: "60 above" },
         ],
       },
     ]}

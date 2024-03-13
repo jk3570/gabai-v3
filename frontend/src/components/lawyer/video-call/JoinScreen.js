@@ -21,7 +21,7 @@ function JoinScreen({ getMeetingAndToken }) {
         <input
           type="text"
           className={inputStyle}
-          placeholder="Enter Meeting Id"
+          placeholder="Enter Meeting ID"
           onChange={(e) => {
             setMeetingId(e.target.value);
           }}

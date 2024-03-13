@@ -28,12 +28,12 @@ function AdminDashboard() {
         <title>Admin Dashboard - GabAI</title>
       </Helmet>
 
-      <div className="flex flex-row h-screen">
+      <div className="flex flex-row h-screen py-20">
         <div>
           <Sidebar />
         </div>
 
-        <div id="main-content" className="flex flex-col w-full">
+        <div id="main-content" className="flex flex-col w-full ">
           {/* Contents */}
           <div>
             <h1>Welcome, {name}!</h1>
