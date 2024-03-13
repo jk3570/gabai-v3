@@ -30,8 +30,6 @@ function LandingPage() {
         const distanceFromTop = window.scrollY;
         const windowHeight = window.innerHeight;
         const oneScreenHeight = windowHeight / 8;
-
-        // Calculate the opacity based on the scroll position relative to one screen height
         let opacity = 1 - (distanceFromTop / oneScreenHeight);
 
         // Ensure opacity is between 0 and 1
