@@ -29,7 +29,9 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import UserList from "./pages/admin/UserList";
 import CasesList from "./pages/admin/CasesList";
 import FeedbacksList from "./pages/admin/FeedbackList";
-import Lawyer from "./pages/lawyer/LawyerVideoCon";
+
+//Lawyer routes
+import LawyerVideoCon from "./pages/lawyer/LawyerVideoCon";
 
 const App = () => {
   const { user, dispatch } = useAuthContext();
@@ -59,7 +61,7 @@ const App = () => {
         <Route path="/admin/feedbacks" element={<FeedbacksList />} />
 
         {/* Lawyer route */}
-        <Route path="/lawyer" element={<Lawyer />} />
+        <Route path="/lawyer" element={<LawyerVideoCon />} />
 
         {/* 404 route */}
         <Route path="*" element={<PageNotFound />} />

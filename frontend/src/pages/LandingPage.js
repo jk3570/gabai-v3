@@ -15,12 +15,6 @@ import { FaQq } from "react-icons/fa6";
 function LandingPage() {
   const { user, dispatch } = useAuthContext();
 
-  const handleLogout = () => {
-    // Remove user from local storage
-    localStorage.removeItem("user");
-    // Dispatch logout action
-    dispatch({ type: "LOGOUT" });
-  };
 
   useEffect(() => {
     const scrollFadeDiv = document.getElementById('scrollFadeDiv');
@@ -97,7 +91,7 @@ function LandingPage() {
       </div>
       {/* 
       Logout button */}
-      {user && <button onClick={handleLogout}>Logout</button>}
+      {/* {user && <button onClick={handleLogout}>Logout</button>} */}
     </>
   );
 }

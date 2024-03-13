@@ -46,14 +46,7 @@ const Developers = () => {
                 <img src={Lei} alt="" className={rounded} />
               </div>
               <h2 className={devName}>Louise Angelo Ocopio</h2>
-              <p className={devPos}>Lead Frontend Developer</p>
-            </div>
-            <div className={center}>
-              <div className={img}>
-                <img src={Leonard} alt="" className={rounded} />
-              </div>
-              <h2 className={devName}>John Leonard Leano</h2>
-              <p className={devPos}>UI/UX Designer</p>
+              <p className={devPos}>Fullstack Developer</p>
             </div>
             <div className={center}>
               <div className={img}>
@@ -61,6 +54,13 @@ const Developers = () => {
               </div>
               <h2 className={devName}>Evehn Kadusale</h2>
               <p className={devPos}>Lead AI Developer</p>
+            </div>
+            <div className={center}>
+              <div className={img}>
+                <img src={Leonard} alt="" className={rounded} />
+              </div>
+              <h2 className={devName}>John Leonard Leaño</h2>
+              <p className={devPos}>UI/UX Developer</p>
             </div>
             <div className={center}>
               <div className={img}>
