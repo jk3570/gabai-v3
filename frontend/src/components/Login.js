@@ -7,12 +7,13 @@ import { Icon } from "react-icons-kit";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
 
-const Login = () => {
+const Login = ({ setLoginSuccess }) => {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [type, setType] = useState("password");
   const [icon, setIcon] = useState(eyeOff);
   const { login, error, isLoading } = useLogin();
+  // const [isFormValid, setIsFormValid] = useState(false);
 
   const handleToggle = () => {
     if (type === "password") {
@@ -24,15 +25,23 @@ const Login = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
     await login(identifier, password);
-  };
+};
 
-  const handleInputChange = (e) => {
-    setPassword(e.target.value);
-    // Your validation logic here, set error state accordingly
-  };
+  //   const notify = () => {
+  //   toast.success("Account has been created successfully!", {
+  //     position: "top-center",
+  //     duration: 1000,
+  //   });
+  // }
+
+  //   useEffect(() => {
+  //   // Check if identifier and password are not empty
+  //   setIsFormValid(identifier.trim() !== "" && password.trim() !== "");
+  // }, [identifier, password]);
+
 
   return (
     <Popup
@@ -57,6 +66,10 @@ const Login = () => {
                 onClick={() => close()}
               />
             </div>
+                      {/* <div>
+                        <Toaster position="top-center" />
+                      </div> */}
+
             <div className="flex flex-col items-center justify-center">
               <h1 className="font-bold text-4xl">
                 Log in to <span className="text-azure">GabAi</span>
@@ -97,26 +110,21 @@ const Login = () => {
                   </span>
                 </div>
 
-                {error && <div className="text-red-500 error">{error}</div>}
+                {error && <span className="text-red-500 error">{error}</span>}
               </div>
-
-
-              <a href="/forgotpassword" className="">Forgot password?</a>
+              <a href="/forgotpassword" className="flex flex-row items-center justify-center">Forgot password?</a>
               
               <div className="mx-12">
-                <br />
                 <button
                   disabled={isLoading}
                   type="submit"
                   className="w-full bg-azure-500 text-white font-bold rounded-xl p-2"
+                  // onClick={error ? undefined : notify}
                 >
                   Log In
                 </button>
-                <br />
               </div>
             </form>
-
-            <br />
             <div className="flex flex-row items-center justify-center">
               <p>
                 Don't have an account? <Signup />
@@ -124,6 +132,8 @@ const Login = () => {
             </div>
           </div>
         </div>
+
+        
       )}
     </Popup>
   );

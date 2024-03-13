@@ -1,6 +1,7 @@
 const User = require('../models/userModel');
 const jwt = require('jsonwebtoken');
 
+
 const createToken = (_id) => {
   //Create a token using the ID provided
   //Expires in one day
@@ -66,6 +67,8 @@ const signupUser = async (req, res) => {
 
     // Create a token
     const token = createToken(user._id);
+
+
 
     //response on local storage
     res.status(200).json({ token });

@@ -1,5 +1,5 @@
 // Modules
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Helmet from "react-helmet";
 import { useAuthContext } from "../hooks/useAuthContext";
 
@@ -12,8 +12,9 @@ import Developers from "../components/landingpage/Developers";
 import Faq from "../components/landingpage/Faq";
 import { FaQq } from "react-icons/fa6";
 
-function LandingPage() {
+const LandingPage = () => {
   const { user, dispatch } = useAuthContext();
+  const [loginSuccess, setLoginSuccess] = useState(false);
 
 
   useEffect(() => {

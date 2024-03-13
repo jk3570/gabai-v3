@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+
 import "./css/App.css";
 import "animate.css";
 
@@ -41,7 +42,7 @@ const App = () => {
       <Navbar />
       <Routes>
         {/* Landing route */}
-        <Route path="/" element={<LandingPage />} />
+        <Route path="/" element={<LandingPage/>} />
 
         {/* Search routes */}
         <Route path="/search" element={<Search />} />

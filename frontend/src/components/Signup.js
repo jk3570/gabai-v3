@@ -17,33 +17,6 @@ import { Icon } from "react-icons-kit";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
 
-// Define the saveSettings function
-const saveSettings = (settings) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      // Simulate saving settings for 3 seconds
-      // After 3 seconds, resolve the promise to indicate success
-      resolve();
-    }, 1000); // 3000 milliseconds = 3 seconds
-  });
-};
-
-// Define the notify function
-const notify = (settings) =>
-  toast.promise(
-    saveSettings(settings), // Pass settings as an argument to saveSettings
-    {
-      loading: "Creating an account...",
-      success: <b>Account has been created successfully!</b>,
-      error: <b>Creating failed.</b>,
-    }
-  );
-
-const notifyErr = () =>
-  toast.error("Error messsage", {
-    position: "top-center",
-  });
-
 const Signup = ({ initialAddress }) => {
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedProvince, setSelectedProvince] = useState("");
@@ -61,6 +34,7 @@ const Signup = ({ initialAddress }) => {
     formState: { errors },
     watch,
   } = useForm();
+
   const passwordValue = watch("password");
   const [step, setStep] = useState(1);
   const [passwordMatchError, setPasswordMatchError] = useState(false);
@@ -68,6 +42,7 @@ const Signup = ({ initialAddress }) => {
   const [password, setPassword] = useState("");
   const [type, setType] = useState("password");
   const [icon, setIcon] = useState(eyeOff);
+    const [isFormValid, setIsFormValid] = useState(false);
 
   // Toggle show/hide password
   const handleToggle = () => {
@@ -225,6 +200,33 @@ const Signup = ({ initialAddress }) => {
       data.password
     );
   };
+
+  const notify = () => {
+    toast.success("Account has been created successfully!", {
+      position: "top-center",
+      duration: 1000,
+    });
+  };
+
+useEffect(() => {
+  // Check if form fields are not empty
+  setIsFormValid(
+    watch("email")?.trim() !== "" &&
+    watch("username")?.trim() !== "" &&
+    watch("password")?.trim() !== "" &&
+    watch("confirmPassword")?.trim() !== ""
+  );
+
+  // Check if password and confirm password match
+  if (passwordValue !== "" && passwordValue === watch("confirmPassword")) {
+    setIsFormValid(true);
+  } else {
+    setIsFormValid(false);
+  }
+}, [watch, passwordValue]);
+
+
+
 
   // Start of Signup Form
   return (
@@ -719,7 +721,7 @@ const Signup = ({ initialAddress }) => {
                       <div className="" style={{ display: 'flex', justifyContent: 'space-between' }}>
                       <a href="#" className="px-2 py-2 text-md text-center text-black" onClick={prevStep}> {"<"} Previous</a>
                       <br/>
-                      <button type="submit" onClick={!error || !errors ? notify : undefined} className="w-24 bg-azure-500 text-white rounded-xl p-2 " disabled={error || errors || isLoading || passwordMatchError}>
+                      <button type="submit" className="w-24 bg-azure-500 text-white rounded-xl p-2 " disabled={!isFormValid || error || isLoading || passwordMatchError} onClick={!errors ? undefined : notify}>
                         Sign Up!
                       </button>
                       </div>
