@@ -25,7 +25,7 @@ const Section4 = () => {
         relative after:-z-20 after:absolute after:h-1 after:w-1 after:bg-azure-300 after:left-30 overflow-hidden after:bottom-0 after:translate-y-full after:rounded-md after:hover:scale-[200] after:hover:transition-all after:hover:duration-700 after:transition-all after:duration-300 transition-all duration-600 text-2xl
         ">Sign up now!
         </button>
-        <span className="absolute z-10 translate-x-[4rem] translate-y-[5.8rem] w-6 h-6 bg-azure rotate-45"></span>
+        <span className="absolute z-10 translate-x-[4rem] translate-y-[5.2rem] w-6 h-6 bg-azure rotate-45"></span>
       </div>
     </div>
   );
