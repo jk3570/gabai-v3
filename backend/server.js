@@ -1,8 +1,9 @@
-require('dotenv').config()
 
+//import modules
 const express = require('express')
 const mongoose = require('mongoose')
 const userRoutes = require('./routes/user')
+require('dotenv').config()
 
 // express app
 const app = express()
@@ -19,7 +20,7 @@ app.use((req, res, next) => {
 app.use('/api/user', userRoutes)
 
 // connect to db
-mongoose.connect("mongodb+srv://jokogadingan357:AFUN1idU7d7ImLqD@cluster0.q6hd8be.mongodb.net/gabai")
+mongoose.connect(process.env.MONG_URI)
   .then(() => {
     // listen for requests
     app.listen(process.env.PORT, () => {
