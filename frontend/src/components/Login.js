@@ -69,6 +69,8 @@ const Login = () => {
                 />
                 {error && <div className="text-red-500 error">{error}</div>}
               </div>
+
+              <a href="/forgotpassword" className="">Forgot password?</a>
               
               <div className="mx-12">
                 <br />
