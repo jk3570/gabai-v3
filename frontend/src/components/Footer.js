@@ -37,13 +37,13 @@ function Footer() {
         >
 
            {/* Top Part */}
-            <div alt="Footer Content" className="mx-auto w-full p-4 py-0 lg:py-8 max-w-4xl ">
+            <div alt="Footer Content" className="mx-auto w-full py-4 py-0 lg:py-8 max-w-4xl ">
                 <div className="md:flex md:justify-between">
                     <div className=" md:mb-0 relative inline-block">
                         <div className="flex flex-row gap-3 mb-5">
                           <Link to="#home" onClick ={() => scrollToElement('#home')} className="relative group">
                             <img 
-                                src={iconAzure}  className="h-[3.5rem] w-[3.5rem] p-[0.2rem] opacity-50"
+                                src={iconAzure}  className="h-[3.5rem] w-[3.2rem] py-[0.2rem] opacity-50"
                                 alt="GabAi Logo" />
                                 <span class="absolute -top-9 left-[50%] -translate-x-[50%] 
                                     z-30 origin-left scale-0 px-3 rounded-lg bg-white opacity-70 text-azure-500 py-2 text-xs font-semibold
