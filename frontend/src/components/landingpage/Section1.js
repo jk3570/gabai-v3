@@ -15,7 +15,7 @@ const WorkplaceDiscriminationLaws = () => {
       const scale = 1 - (scrollPosition / window.innerHeight);
       
       background.style.opacity = opacity > 0 ? opacity : 0;
-      background.style.transform = `scale(${scale}) translate(${scrollPosition * 5}px, -${scrollPosition * 5}px)`;
+      background.style.transform = `scale(${scale}) translate(${scrollPosition * 5}px, -${scrollPosition * 2}px)`;
     };
   
     window.addEventListener('scroll', handleScroll);
@@ -35,7 +35,7 @@ const WorkplaceDiscriminationLaws = () => {
           <div class="fixed inset-0 w-full h-screen inset-0 z-0">
             <img 
               id="backgroundImage" 
-              className="h-full w-full object-cover transition-opacity duration-100 animation-duration-100" 
+              className="h-full w-full object-cover transition-opacity duration-1000 animation-duration-1000" 
               src={blob} alt="Background Image">
             </img>
           </div>
