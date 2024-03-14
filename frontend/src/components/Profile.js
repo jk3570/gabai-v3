@@ -21,7 +21,11 @@ const Profile = () => {
 
   const { user, dispatch } = useAuthContext();
 
-  const userEmail = user ? user.email : null;
+  const firstname = user ? user.firstname : null;
+  const lastname = user ? user.lastname : null;
+  const email = user ? user.email : null;
+  const username = user ? user.username : null;
+
 
   const backdrop =
     "fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 backdrop-filter backdrop-blur-lg bg-opacity-25 bg-black ";
@@ -57,9 +61,28 @@ const Profile = () => {
 
               <div className="flex flex-col items-center justify-center">
                 {/* <div className="h-[7rem] w-[7rem] bg-gray-300 rounded-full"></div> */}
-                {userEmail&& <h2>{userEmail}</h2>}
-                <p>Name: dasdasda </p>
-                <p>Email: hdsfjhdjksfhk@gmail.com </p>
+
+                <label>First name: </label>
+                <input
+                  value={firstname && firstname}
+                ></input>
+
+                <label>Last name: </label>
+                <input
+                  value={lastname && lastname}
+                ></input>
+
+                <label>Email: </label>
+                <input
+                  value={email && email}
+                ></input>
+
+                <label>Username: </label>
+                <input
+                  value={username && username}
+                ></input>
+
+
               </div>
               <br />
               <div className="flex flex-col items-center justify-center">

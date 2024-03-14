@@ -7,7 +7,6 @@ const userRoutes = require("./routes/user");
 const OpenAI = require("openai");
 
 require("dotenv").config();
-env;
 
 //OpenAI's API
 const openai = new OpenAI({
@@ -27,23 +26,8 @@ app.use((req, res, next) => {
 
 app.get("/", (req, res) => res.send("Express on Vercel"));
 
-app.listen(3000, () => console.log("Server ready on port 3000."));
-
 // routes
 app.use("/api/user", userRoutes);
-
-// connect to db
-mongoose
-  .connect(process.env.MONG_URI)
-  .then(() => {
-    // listen for requests
-    app.listen(process.env.PORT, () => {
-      console.log("connected to db & listening on port", process.env.PORT);
-    });
-  })
-  .catch((error) => {
-    console.log(error);
-  });
 
 app.post("/chat", async (req, res) => {
   try {
@@ -81,8 +65,18 @@ app.post("/chat", async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+// connect to db
+mongoose
+  .connect(process.env.MONG_URI)
+  .then(() => {
+    // listen for requests
+    app.listen(process.env.PORT, () => {
+      console.log("Connected to Database (MongoDB Atlas) & listening on Port: ", process.env.PORT);
+    });
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
 
 module.exports = app;

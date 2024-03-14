@@ -6,6 +6,10 @@ const Schema = mongoose.Schema
 
 // User structure in database
 const userSchema = new Schema({
+  role: {
+    type: String,
+    required: true
+  },
   username: {
     type: String,
     required: true,
@@ -53,10 +57,13 @@ const userSchema = new Schema({
     type: String,
     required: true
   }
+
 })
 
 // Static signup method
-userSchema.statics.signup = async function(username,
+userSchema.statics.signup = async function(
+  role,
+  username,
   firstname,
   lastname,
   gender,
@@ -69,7 +76,7 @@ userSchema.statics.signup = async function(username,
   password) {
   
   // Validation of all fields
-  if (!username || !firstname || !lastname || !gender || !birthdate || !region || !city || !email || !password) {
+  if (!role || !username || !firstname || !lastname || !gender || !birthdate || !region || !city || !email || !password ) {
     throw Error('All fields are required')
   }
   if (!validator.isEmail(email)) {
@@ -97,6 +104,7 @@ userSchema.statics.signup = async function(username,
 
   // Inserting data to database
   const user = await this.create({ 
+    role,
     username,
     firstname,
     lastname,
@@ -107,7 +115,8 @@ userSchema.statics.signup = async function(username,
     city,
     barangay,
     email,
-    password: passwordHash })
+    password: passwordHash
+    })
 
   return user
 }

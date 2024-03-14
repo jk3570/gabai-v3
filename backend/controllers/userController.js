@@ -20,8 +20,16 @@ const loginUser = async (req, res) => {
     // Get the user id from the model and pass it as argument to the createToken function
     const token = createToken(user._id);
 
-    //response on local storage
-    res.status(200).json({ token });
+    //Response on local storage
+    res.status(200).json({ 
+      token,
+      role: user.role,
+      email: user.email,
+      username: user.username,
+      firstname: user.firstname,
+      lastname: user.lastname,
+    
+    });
     //user: user.email
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -32,6 +40,7 @@ const loginUser = async (req, res) => {
 // Signup a user
 const signupUser = async (req, res) => {
   const {
+    role,
     username,
     firstname,
     lastname,
@@ -48,11 +57,12 @@ const signupUser = async (req, res) => {
   try {
     console.log('Signup Request Body:', req.body); // Log the request body
     // Check if all required fields are provided
-    if (!username || !firstname || !lastname || !gender || !birthdate || !region || !province || !city || !barangay || !email || !password) {
+    if (!role || !username || !firstname || !lastname || !gender || !birthdate || !region || !province || !city || !barangay || !email || !password) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
     const user = await User.signup(
+      role,
       username,
       firstname,
       lastname,
@@ -68,10 +78,16 @@ const signupUser = async (req, res) => {
     // Create a token
     const token = createToken(user._id);
 
-
-
     //response on local storage
-    res.status(200).json({ token });
+    res.status(200).json({ 
+      token,
+      role: user.role,
+      email: user.email,
+      username: user.username,
+      firstname: user.firstname,
+      lastname: user.lastname,
+    });
+
     //user: user.email
   } catch (error) {
     res.status(400).json({ error: error.message });

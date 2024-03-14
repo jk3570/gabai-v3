@@ -6,6 +6,7 @@ import { useLogin } from "../hooks/useLogin";
 import { Icon } from "react-icons-kit";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
+import SignupAdminAndLawyer from "./SignupAdminAndLawyer";
 
 const Login = ({ setLoginSuccess }) => {
   const [identifier, setIdentifier] = useState("");
@@ -28,6 +29,8 @@ const Login = ({ setLoginSuccess }) => {
 const handleSubmit = async (e) => {
   e.preventDefault();
     await login(identifier, password);
+
+
 };
 
   //   const notify = () => {
@@ -128,6 +131,7 @@ const handleSubmit = async (e) => {
             <div className="flex flex-row items-center justify-center">
               <p>
                 Don't have an account? <Signup />
+                {/* <SignupAdminAndLawyer /> */}
               </p>
             </div>
           </div>
