@@ -6,6 +6,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.3.0",
     "mongoose": "^8.1.2",
+    "openai": "^4.29.0",
     "validator": "^13.11.0"
   },
   "scripts": {
