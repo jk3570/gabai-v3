@@ -35,23 +35,10 @@ app.use((req, res, next) => {
 
 app.get("/", (req, res) => res.send("Express on Vercel"));
 
-app.listen(CHAT_PORT, () => console.log(`Server ready on port ${CHAT_PORT}.`));
+app.listen(CHAT_PORT, () => console.log(`Server ready on port ${CHAT_PORT}`));
 
 // routes
 app.use("/api/user", userRoutes);
-
-// connect to db
-mongoose
-  .connect(process.env.MONG_URI)
-  .then(() => {
-    // listen for requests
-    app.listen(process.env.PORT, () => {
-      console.log("connected to db & listening on port", process.env.PORT);
-    });
-  })
-  .catch((error) => {
-    console.log(error);
-  });
 
 app.post("/chat", async (req, res) => {
   try {
@@ -80,5 +67,3 @@ app.post("/chat", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-
-module.exports = app;

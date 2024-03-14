@@ -14,6 +14,7 @@ import Footer from "./components/Footer";
 import Terms from "./components/Terms";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import SignupAdminAndLawyer from "./components/SignupAdminAndLawyer";
 import Chat from "./components/Chat";
 import Profile from "./components/Profile";
 import PageNotFound from "./components/PageNotFound";
@@ -40,33 +41,35 @@ const App = () => {
   return (
     <Router>
       <Navbar />
-      <Routes>
-        {/* Landing route */}
-        <Route path="/" element={<LandingPage/>} />
+        <Routes>
 
-        {/* Search routes */}
-        <Route path="/search" element={<Search />} />
-        <Route path="/search/result" element={<SearchResults />} />
+          {/* Landing route */}
+          <Route path="/" element={<LandingPage/>} />
 
-        {/* Components routes */}
-        {user ? null : <Route path="/login" element={<Login />} />}
-        {user ? null : <Route path="/signup" element={<Signup />} />}
-        {user ? <Route path="/profile" element={<Profile />} /> : null}
-        <Route path="/chat" element={<Chat />} />
-        <Route path="/terms" element={<Terms />} />
+          {/* Search routes */}
+          <Route path="/search" element={<Search />} />
+          <Route path="/search/result" element={<SearchResults />} />
 
-        {/* Admin routes */}
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/admin/users" element={<UserList />} />
-        <Route path="/admin/cases" element={<CasesList />} />
-        <Route path="/admin/feedbacks" element={<FeedbacksList />} />
+          {/* Components routes */}
+          {user ? null : <Route path="/login" element={<Login />} />}
+          {user ? null : <Route path="/signup" element={<Signup />} />}
+          {user ? <Route path="/profile" element={<Profile />} /> : null}
+          <Route path="/chat" element={<Chat />} />
+          <Route path="/terms" element={<Terms />} />
 
-        {/* Lawyer route */}
-        <Route path="/lawyer" element={<LawyerVideoCon />} />
+          {/* Admin routes */}  
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/signup-admin-lawyer" element={<SignupAdminAndLawyer />} />
+          <Route path="/admin/cases" element={<CasesList />} />
+          <Route path="/admin/feedbacks" element={<FeedbacksList />} />
 
-        {/* 404 route */}
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
+          {/* Lawyer route */}
+          <Route path="/lawyer" element={<LawyerVideoCon />} />
+
+          {/* 404 route */}
+          <Route path="*" element={<PageNotFound />} />
+
+        </Routes>
       <Footer />
     </Router>
   );

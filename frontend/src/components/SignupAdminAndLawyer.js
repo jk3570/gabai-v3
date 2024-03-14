@@ -17,8 +17,8 @@ import { Icon } from "react-icons-kit";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
 
-const Signup = ({ initialAddress }) => {
-  const [role, setRole] = useState("user");
+const SignupAdminAndLawyer = ({ initialAddress }) => {
+
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedProvince, setSelectedProvince] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
@@ -188,7 +188,7 @@ const Signup = ({ initialAddress }) => {
 
     // Call signup function with converted address names
     await signup(
-      role,
+      data.role,
       data.username,
       data.firstname,
       data.lastname,
@@ -234,8 +234,8 @@ useEffect(() => {
   return (
     <Popup
       trigger={
-        <Link to="#signup" className="text-azure">
-          Sign up here
+        <Link to="#signup-admin-lawyer" className="text-azure">
+          Sign up here as admin
         </Link>
       }
       modal
@@ -271,8 +271,7 @@ useEffect(() => {
                       placeholder="Juan"
                       {...register("firstname", {
                         required: true,
-                        pattern: /^[A-Za-z\s]+$/,
-
+                        pattern: /^[A-Za-z]+$/,
                       })}
                       className="w-[full] border-2 border-black rounded-xl p-2"
                     />
@@ -297,7 +296,7 @@ useEffect(() => {
                       placeholder="Dela Cruz"
                       {...register("lastname", {
                         required: true,
-                        pattern: /^[A-Za-z\s]+$/,
+                        pattern: /^[A-Za-z]+$/,
                       })}
                       className="w-[full] border-2 border-black rounded-xl p-2"
                     />
@@ -577,6 +576,27 @@ useEffect(() => {
                         <b className="flex flex-col items-center justify-center text-xl">
                           Account Information 3/3
                         </b>
+                    
+                    {/* Role */}
+                    <div className="flex flex-col">
+                      <label htmlFor="role">Role</label>
+                      <select
+                        name="role"
+                        id="role"
+                        {...register("role", { required: true })}
+                        className="w-[full] border-2 border-black rounded-xl p-2"
+                      >
+                        <option value="">- Select Role -</option>
+                        <option value="admin">Admin</option>
+                        <option value="lawyer">Lawyer</option>
+                        <option value="user">User</option>
+                      </select>
+                      {errors.role && (
+                        <span className="text-red-500 error">
+                          Role is required
+                        </span>
+                      )}
+                    </div>
                         <label htmlFor="username">Username</label>
                         <input
                           type="text"
@@ -745,4 +765,4 @@ useEffect(() => {
   );
 };
 
-export default Signup;
+export default SignupAdminAndLawyer;
