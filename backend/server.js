@@ -16,7 +16,7 @@ console.log(PORT);
 
 //OpenAI's API
 const openai = new OpenAI({
-  apiKey: "sk - N1drhBk8qwY0VdlcheshT3BlbkFJxUUFDkhNL6RTOiDg6C8C",
+  apiKey: "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",
 });
 
 // express app
