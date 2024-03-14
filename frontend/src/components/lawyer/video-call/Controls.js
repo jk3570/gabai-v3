@@ -20,7 +20,8 @@ function Controls(props) {
   const { webcamStream, micStream, isLocal } = useParticipant(
     props.participantId
   );
-  const { leave, toggleMic, toggleWebcam } = useMeeting();
+  const { leave, toggleMic, toggleWebcam, enableWebcam, disableWebcam } =
+    useMeeting();
 
   // State variables to keep track of mic and webcam state
   const [micOn, setMicOn] = useState(true);
@@ -35,7 +36,10 @@ function Controls(props) {
   // Function to toggle webcam state
   const handleWebcamToggle = () => {
     toggleWebcam(); // Call SDK function to toggle webcam
-    setWebcamOn((prevState) => !prevState); // Toggle webcamOn state
+    // Enable or disable webcam based on state
+    setWebcamOn((prevState) => !prevState);
+
+    // Toggle webcamOn state
   };
 
   const leaveBtn = () => {
