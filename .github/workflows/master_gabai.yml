@@ -26,11 +26,10 @@ jobs:
           cd backend
           npm install
           
-      - name: Install npm packages, build then copy files - frontend
+      - name: Install npm packages - frontend
         run: |
           cd frontend
           npm install
-          npm run build
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
