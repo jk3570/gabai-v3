@@ -3,21 +3,19 @@ import { useState, useEffect } from "react";
 const ChatComponent = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
+  const [isSendDisabled, setIsSendDisabled] = useState(true);
 
   useEffect(() => {
-    // Fetch initial messages or data from your backend
     fetch("http://localhost:5000/api/chat")
       .then((response) => response.json())
       .then((data) => setMessages(data.messages));
   }, []);
 
   const sendMessage = () => {
-    // Function to send a message to your backend
     const newMessage = { role: "user", content: input };
     setMessages([...messages, newMessage]);
     setInput("");
 
-    // Send the message to the backend
     fetch("http://localhost:5000/api/chat", {
       method: "POST",
       headers: {
@@ -27,32 +25,44 @@ const ChatComponent = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        // Assuming the response from the server is an object with a 'message' property
         const aiMessage = { role: "ai", content: data.message };
         setMessages([...messages, newMessage, aiMessage]);
       })
       .catch((error) => console.error("Error:", error));
   };
 
+  useEffect(() => {
+    setIsSendDisabled(input === "");
+  }, [input]);
+
   return (
-    <div className="mt-20 h-screen ">
+    <div className="w-full h-[60vh] relative max-w-4xl px-5 lg:px-0 mx-auto mt-20">
       <div>
         {messages.map((message, index) => (
-          <>
-            <p>{message.role === "user" ? "user" : "Gab"}</p>
-            <p key={index}>{message.content}</p>
-          </>
+          <div className="p-5 bg-gray-100 " key={index}>
+            <p>{message.role === "user" ? "You" : "Gab"}</p>
+            <p>{message.content}</p>
+          </div>
         ))}
       </div>
-      <div className="bottom-0">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault(); // Prevent the default form submission behavior
+          sendMessage(); // Call your sendMessage function
+        }}
+        className="flex flex-row gap-1 absolute bottom-0 w-full"
+      >
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          className="input"
+          className="p-3"
+          placeholder="Type your message here"
         />
-        <button onClick={sendMessage}>Send</button>
-      </div>
+        <button type="submit" id="sendBtn" disabled={isSendDisabled}>
+          Send
+        </button>
+      </form>
     </div>
   );
 };
