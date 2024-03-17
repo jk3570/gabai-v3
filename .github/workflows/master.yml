@@ -24,7 +24,7 @@ jobs:
     environment: Testing
     strategy:
       matrix:
-        node-version: [14.x , 16.x]
+        node-version: [20.x]
       max-parallel: 1  
     
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -34,23 +34,23 @@ jobs:
         with: 
           ref: 'master'
 
-      - name: Install server npm packages
-        uses: bahmutov/npm-install@v1
+      - name: Install backend npm packages
+        uses: bahmutov/npm-install@v4
         with:
           working-directory: backend
 
-      - name: Install client npm packages
-        uses: bahmutov/npm-install@v1
+      - name: Install frontend npm packages
+        uses: bahmutov/npm-install@v3
         with:
           working-directory: frontend
 
       - name: Start server in the background
         env: 
           MONG_URI: ${{ secrets.MONG_URI }}
-        run: (cd mern/server && echo "MONG_URI=$MONG_URI" > config.env  && npm start &)
+        run: (cd backend && echo "MONG_URI=$MONG_URI" > .env  && node server.js &)
 
       - name: Start React app in the background
-        run: (cd mern/client && npm start &)
+        run: (cd frontend && npm start &)
 
       - name: Install Cypress and run tests
         uses: cypress-io/github-action@v2
