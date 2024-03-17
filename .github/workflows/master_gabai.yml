@@ -28,6 +28,8 @@ jobs:
           
       - name: Install npm packages, build then copy files - frontend
         run: |
+          cd frontend
+          npm install
           npm run build
           cp -r ./build ../server/public
 
