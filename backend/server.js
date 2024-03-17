@@ -22,6 +22,18 @@ const app = express();
 // Enable CORS for all routes
 app.use(cors());
 
+//connect to db
+
+mongoose
+  .connect(process.env.MONG_URI)
+  .then(() => {
+    //listen for requests
+    app.listen(process.env.PORT, () => {
+      console.log(`Server ready on port ${PORT}`);
+    });
+  })
+  .catch((error) => console.error(error));
+
 // middleware
 app.use(express.json());
 
