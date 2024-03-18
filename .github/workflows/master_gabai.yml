@@ -11,7 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set CI=false
+        run: echo "CI=false" >> $GITHUB_ENV
 
       - name: Set up Node.js version
         uses: actions/setup-node@v3
@@ -52,11 +56,13 @@ jobs:
 
     steps:
       - name: Download backend artifact from build job
+        id: download-backend-artifact
         uses: actions/download-artifact@v3
         with:
           name: backend
 
       - name: Download frontend artifact from build job
+        id: download-frontend-artifact
         uses: actions/download-artifact@v3
         with:
           name: frontend
