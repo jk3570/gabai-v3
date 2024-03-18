@@ -1,34 +1,37 @@
 //import modules
 const fs = require("fs");
-
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors"); // Import the cors module
 const userRoutes = require("./routes/user");
 const OpenAI = require("openai");
-
 require("dotenv").config();
+const path = require("path");
+
+
+const port = process.env.PORT || 4000;
+
+// express app
+const app = express();
+
+// middleware
+app.use(cors());
+app.use(express.json());
+
+// Serve static files
+app.use(express.static(path.resolve(__dirname, '../frontend/build')));
+
+// routes
+app.use("/api/user", userRoutes);
 
 //OpenAI's API
 const openai = new OpenAI({
   apiKey: process.env.AI_API,
 });
 
-// express app
-const app = express();
-
-// middleware
-app.use(express.json());
-
-app.use((req, res, next) => {
-  console.log(req.path, req.method);
-  next();
-});
-
-// routes
-app.use("/api/user", userRoutes);
-
 app.post("/chat", async (req, res) => {
   try {
+    let messages = [];
     // Read the JSON file containing messages
     fs.readFile("./messages.json", "utf8", async (err, data) => {
       if (err) {
@@ -36,7 +39,10 @@ app.post("/chat", async (req, res) => {
       }
 
       // Parse the JSON data
-      const messages = JSON.parse(data);
+      messages = JSON.parse(data);
+      if (!req.body.messages) {
+        req.body.messages = [];
+      }
 
       try {
         // Call OpenAI API with messages from JSON file and request body
@@ -68,13 +74,12 @@ mongoose
   .connect(process.env.MONG_URI)
   .then(() => {
     // listen for requests
-    app.listen(process.env.PORT, () => {
-      console.log("Connected to Database (MongoDB Atlas) & listening on Port: ", process.env.PORT);
+    app.listen(port, () => {
+      console.log("Connected to Database (MongoDB Atlas) & listening on Port: ", port);
     });
   })
   .catch((error) => {
     console.log(error);
   });
-
 
 module.exports = app;

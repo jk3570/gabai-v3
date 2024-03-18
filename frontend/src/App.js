@@ -44,7 +44,7 @@ const App = () => {
         <Routes>
 
           {/* Landing route */}
-          <Route path="/" element={<LandingPage/>} />
+          <Route exact path="/" element={<LandingPage/>} />
 
           {/* Search routes */}
           <Route path="/search" element={<Search />} />
