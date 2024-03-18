@@ -24,7 +24,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/", (req, res) => res.send("Express on Vercel"));
+app.get("/", (req, res) => res.send("Expresggs on Vercel"));
 
 // routes
 app.use("/api/user", userRoutes);
