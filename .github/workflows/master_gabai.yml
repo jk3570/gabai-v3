@@ -33,7 +33,7 @@ jobs:
           npm install
           npm run build
 
-      - name: Upload artifact for deployment job
+      - name: Upload backend artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: backend

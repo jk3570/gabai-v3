@@ -1,4 +1,4 @@
-//import modules
+// import modules
 const fs = require("fs");
 const express = require("express");
 const mongoose = require("mongoose");
@@ -7,7 +7,6 @@ const userRoutes = require("./routes/user");
 const OpenAI = require("openai");
 require("dotenv").config();
 const path = require("path");
-
 
 const port = process.env.PORT || 4000;
 
@@ -24,7 +23,7 @@ app.use(express.static(path.resolve(__dirname, '../frontend/build')));
 // routes
 app.use("/api/user", userRoutes);
 
-//OpenAI's API
+// OpenAI's API
 const openai = new OpenAI({
   apiKey: process.env.AI_API,
 });
@@ -67,6 +66,11 @@ app.post("/chat", async (req, res) => {
     // Handle file read error
     res.status(500).json({ error: error.message });
   }
+});
+
+// Wildcard route to serve the index.html file for all routes
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../frontend/build", "index.html"));
 });
 
 // connect to db
