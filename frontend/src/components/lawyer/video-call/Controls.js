@@ -9,11 +9,11 @@ import { IoIosMic, IoIosMicOff } from "react-icons/io";
 import { HiMiniVideoCamera, HiMiniVideoCameraSlash } from "react-icons/hi2";
 
 const leaveBtnStyle =
-  "bg-red-500 p-3 rounded-full text-white text-center hover:bg-red-300 transition-all duration-150";
+  "bg-red-500 p-3 h-10 w-10 rounded-full text-white text-center hover:bg-red-300 transition-all duration-150";
 const btnStyle =
-  "bg-azure p-3 rounded-full text-white text-center hover:bg-azure-300 transition-all duration-150";
+  "bg-azure p-3 h-10 w-10 rounded-full text-white text-center hover:bg-azure-300 transition-all duration-150";
 const disabledBtnStyle =
-  "bg-gray-500 p-3 rounded-full text-white text-center hover:bg-gray-300 transition-all duration-150";
+  "bg-gray-500 p-3 h-10 w-10 rounded-full text-white text-center hover:bg-gray-300 transition-all duration-150";
 
 function Controls(props) {
   // Get participant data and meeting functions from the SDK

@@ -1,4 +1,9 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
+import { HiMiniVideoCamera } from "react-icons/hi2";
+
+import Markdown from "react-markdown";
 
 const ChatComponent = () => {
   const [messages, setMessages] = useState([]);
@@ -36,33 +41,65 @@ const ChatComponent = () => {
   }, [input]);
 
   return (
-    <div className="w-full h-[60vh] relative max-w-4xl px-5 lg:px-0 mx-auto mt-20">
-      <div>
+    <div className="w-full h-screen relative max-w-4xl px-5 lg:px-0 mx-auto mt-20">
+      <div
+        className="
+      h-[80%] overflow-y-scroll flex flex-col gap-2 p-5
+      "
+      >
         {messages.map((message, index) => (
-          <div className="p-5 bg-gray-100 " key={index}>
-            <p>{message.role === "user" ? "You" : "Gab"}</p>
-            <p>{message.content}</p>
+          <div
+            className="p-5 bg-gray-100 rounded-xl animate__animated "
+            key={index}
+          >
+            <p>
+              {" "}
+              <b>{message.role === "user" ? "You" : "Gab"}</b>
+            </p>
+            <p>
+              <Markdown>{message.content}</Markdown>
+            </p>
           </div>
         ))}
       </div>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault(); // Prevent the default form submission behavior
-          sendMessage(); // Call your sendMessage function
-        }}
-        className="flex flex-row gap-1 absolute bottom-0 w-full"
-      >
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          className="p-3"
-          placeholder="Type your message here"
-        />
-        <button type="submit" id="sendBtn" disabled={isSendDisabled}>
-          Send
-        </button>
-      </form>
+      <div>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault(); // Prevent the default form submission behavior
+            sendMessage(); // Call your sendMessage function
+          }}
+          className="flex flex-row gap-1 bottom-0 w-full py-2"
+          type="submit"
+        >
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            className="p-3 border-2 border-black rounded-full w-full"
+            placeholder="Type your message here"
+          />
+          <button
+            type="submit"
+            id="sendBtn"
+            disabled={isSendDisabled}
+            className={
+              isSendDisabled
+                ? "p-3 rounded-xl bg-gray-400 text-white"
+                : "p-3 rounded-xl bg-azure-300 text-white"
+            }
+          >
+            Send
+          </button>
+          <Link to="/lawyer" className="p-3 rounded-xl bg-azure text-white">
+            <HiMiniVideoCamera className="text-xl" />
+          </Link>
+        </form>
+      </div>
+      <div className="flex justify-center items-center">
+        <p className="text-gray-400 text-sm">
+          GabAI can make mistakes. Consider checking important information.
+        </p>
+      </div>
     </div>
   );
 };

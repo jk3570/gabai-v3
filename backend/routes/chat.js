@@ -14,7 +14,7 @@ app.use(express.json());
 const router = express.Router();
 
 // Correct way to initialize OpenAI in version 4
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const openai = new OpenAI({ apiKey: process.env.AI_API });
 const systemContent = process.env.SYSTEM_CONTENT;
 const userContent = process.env.USER_CONTENT;
 const assistantContent = process.env.ASSISTANT_CONTENT;
@@ -35,10 +35,6 @@ router.post("/chat", async (req, res) => {
         {
           role: "system",
           content: systemContent,
-        },
-        {
-          role: "assistant",
-          content: assistantContent,
         },
       ],
       temperature: 1,
