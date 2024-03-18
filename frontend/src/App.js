@@ -8,8 +8,11 @@ import "animate.css";
 //AuthContext provider
 import { useAuthContext } from "./hooks/useAuthContext";
 
-//Components routes
+//Navbars
 import Navbar from "./components/Navbar";
+import Navbar2 from "./components/Navbar2";
+
+//Components routes
 import Footer from "./components/Footer";
 import Terms from "./components/Terms";
 import Login from "./components/Login";
@@ -39,7 +42,9 @@ const App = () => {
 
   return (
     <Router>
-      <Navbar />
+      {user ? null : <Navbar />}
+      {user ? <Navbar2 /> : null}
+      
       <Routes>
         {/* Landing route */}
         <Route path="/" element={<LandingPage/>} />
@@ -56,7 +61,7 @@ const App = () => {
         <Route path="/terms" element={<Terms />} />
 
         {/* Admin routes */}
-        <Route path="/admin" element={<AdminDashboard />} />
+        {user ? <Route path="/admin" element={<AdminDashboard />} /> : <Route path="*" element={<PageNotFound />} />}
         <Route path="/admin/users" element={<UserList />} />
         <Route path="/admin/cases" element={<CasesList />} />
         <Route path="/admin/feedbacks" element={<FeedbacksList />} />
@@ -67,7 +72,7 @@ const App = () => {
         {/* 404 route */}
         <Route path="*" element={<PageNotFound />} />
       </Routes>
-      <Footer />
+      {user ? null : <Footer />}
     </Router>
   );
 };

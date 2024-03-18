@@ -37,9 +37,7 @@ const Profile = () => {
     <>
       <Popup
         trigger={
-          <button className=" p-4 py-1 text-azure-500 flex justify-center items-center">
-            <span className="bg-gray-300 rounded-full h-10 w-10 flex items-center justify-center mr-3"></span>
-            Profile
+          <button className="bg-gray-300 rounded-full h-10 w-10 flex items-center justify-center">
           </button>
         }
         modal

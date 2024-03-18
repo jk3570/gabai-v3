@@ -27,27 +27,30 @@ function AdminDashboard() {
         {/* Title of the Page */}
         <title>Admin Dashboard - GabAI</title>
       </Helmet>
-
-      <div className="flex flex-row h-screen py-20">
-        <div>
-          <Sidebar />
-        </div>
-
-        <div id="main-content" className="flex flex-col w-full ">
-          {/* Contents */}
+      <div className="w-full relative px-5 lg:px-0 center mx-auto">
+      <div className="relative z-10 flex flex-col justify-center min-h-screen max-md:p-1">
+      <div className="flex z-10 flex-row justify-between items-center">
+        <div className="flex flex-row h-screen py-[3.875rem] w-full">
           <div>
-            <h1>Welcome, {name}!</h1>
+            <Sidebar />
           </div>
 
-          {/* Shows the Number of Users, Cases, etc. */}
+          <div id="main-content" className="flex flex-col w-full mx-5">
+            {/* Contents */}
+            {/* Shows the Number of Users, Cases, etc. */}
+            <TotalList />
 
-          <TotalList />
+            <div>
+              <h1 className="text-2xl font-semibold">Welcome, {name}!</h1>
+            </div>
 
-          <br />
-          <div className=" max-w-4xl flex justify-center self-center mx-auto">
-            <AllDemo />
+            <div className="flex flex-col justify-stretch w-full mt-2">
+              <AllDemo />
+            </div>
           </div>
         </div>
+        </div>
+      </div>
       </div>
     </>
   );
