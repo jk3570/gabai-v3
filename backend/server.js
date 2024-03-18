@@ -17,15 +17,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('testing');
-});
-app.get('/home', (req, res) => {
-  res.send('testing of home');
-});
-
 // Serve static files
-app.use(express.static(path.resolve(__dirname, '../frontend/build')));
+app.use(express.static(path.join(__dirname, "../frontend/build")));
 
 // routes
 app.use("/api/user", userRoutes);
@@ -75,10 +68,10 @@ app.post("/chat", async (req, res) => {
   }
 });
 
-// Wildcard route to serve the index.html file for all routes
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../frontend/build", "index.html"));
-});
+// // Wildcard route to serve the index.html file for all routes
+// app.get("*", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "../frontend/build", "index.html"));
+// });
 
 // connect to db
 mongoose
