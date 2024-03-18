@@ -3,7 +3,7 @@ import { useParticipant, useMeeting } from "@videosdk.live/react-sdk"; // Import
 import ParticipantView from "./ParticipantView"; // Importing ParticipantView component
 import Controls from "./Controls"; // Importing Controls component
 
-const btnStyle = "p-2 rounded-xl bg-azure text-white"; // Button style
+const btnStyle = "p-2 rounded-xl bg-azure text-white w-[20em]"; // Button style
 
 function MeetingView(props) {
   const [joined, setJoined] = useState(null); // State to track meeting join status
@@ -56,7 +56,10 @@ function MeetingView(props) {
       <div>
         <div className="container">
           <div>
-            <h3>Meeting Id: {props.meetingId}</h3> {/* Display meeting ID */}
+            <div className="top-[5rem] left-0 absolute p-4 bg-gray-300 w-screen">
+              <h3>Meeting Id: {props.meetingId}</h3>
+            </div>
+            {/* Display meeting ID */}
             {joined && joined === "JOINED" ? ( // If meeting joined successfully
               <div className="flex flex-col gap-2 justify-center items-center">
                 {/* Display preview of user's webcam and microphone */}
@@ -69,21 +72,32 @@ function MeetingView(props) {
                     />
                   </div>
                 ))}
-                <div className="sticky bottom-0 left-0 right-0">
-                  <Controls
-                    className=""
-                    toggleWebcam={() => toggleWebcam()} // Pass toggleWebcam function to Controls component
-                    toggleMic={() => toggleMic()} // Pass toggleMic function to Controls component
-                  />
-                </div>
               </div>
             ) : joined && joined === "JOINING" ? ( // If joining the meeting
               <p>Joining the meeting...</p>
             ) : (
-              <button onClick={joinMeeting} className={btnStyle}>
-                Join
-              </button> // Render join button
+              <div>
+                <div className="flex flex-row gap-2">
+                  <ParticipantView
+                  // Pass participant ID as prop
+                  />
+                </div>
+                <div className="flex flex-row gap-2">
+                  <button onClick={joinMeeting} className={btnStyle}>
+                    Join
+                  </button>{" "}
+                </div>
+              </div>
             )}
+          </div>
+
+          <div className="bottom-0 left-0 flex items-center justify-center absolute bg-gray-300 w-screen h-16">
+            {" "}
+            <Controls
+              className=""
+              toggleWebcam={() => toggleWebcam()} // Pass toggleWebcam function to Controls component
+              toggleMic={() => toggleMic()} // Pass toggleMic function to Controls component
+            />
           </div>
         </div>
       </div>

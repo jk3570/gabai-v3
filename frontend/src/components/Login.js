@@ -2,6 +2,7 @@ import { useState } from "react";
 import Popup from "reactjs-popup";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import Signup from "./Signup";
+import ForgotPass from "./ForgotPass";
 import { useLogin } from "../hooks/useLogin";
 import { Icon } from "react-icons-kit";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
@@ -26,12 +27,10 @@ const Login = ({ setLoginSuccess }) => {
     }
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     await login(identifier, password);
-
-
-};
+  };
 
   //   const notify = () => {
   //   toast.success("Account has been created successfully!", {
@@ -44,7 +43,6 @@ const handleSubmit = async (e) => {
   //   // Check if identifier and password are not empty
   //   setIsFormValid(identifier.trim() !== "" && password.trim() !== "");
   // }, [identifier, password]);
-
 
   return (
     <Popup
@@ -69,7 +67,7 @@ const handleSubmit = async (e) => {
                 onClick={() => close()}
               />
             </div>
-                      {/* <div>
+            {/* <div>
                         <Toaster position="top-center" />
                       </div> */}
 
@@ -115,8 +113,10 @@ const handleSubmit = async (e) => {
 
                 {error && <span className="text-red-500 error">{error}</span>}
               </div>
-              <a href="/forgotpassword" className="flex flex-row items-center justify-center">Forgot password?</a>
-              
+              <div className="flex flex-row items-center justify-center">
+                <ForgotPass />
+              </div>
+
               <div className="mx-12">
                 <button
                   disabled={isLoading}
@@ -136,8 +136,6 @@ const handleSubmit = async (e) => {
             </div>
           </div>
         </div>
-
-        
       )}
     </Popup>
   );
