@@ -20,6 +20,9 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.send('testing');
 });
+app.get('/home', (req, res) => {
+  res.send('testing of home');
+});
 
 // Serve static files
 app.use(express.static(path.resolve(__dirname, '../frontend/build')));
