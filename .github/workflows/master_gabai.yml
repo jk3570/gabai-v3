@@ -32,13 +32,14 @@ jobs:
           cd frontend
           npm install
           npm run build
-          cp -r ./build/* ../backend/
 
-      - name: Upload backend artifact for deployment job
-        uses: actions/upload-artifact@v3
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v2
         with:
-          name: backend
-          path: backend
+          name: build-artifacts
+          path: |
+            backend
+            frontend/build
 
       - name: Upload frontend artifact for deployment job
         uses: actions/upload-artifact@v3
@@ -56,17 +57,10 @@ jobs:
       id-token: write #This is required for requesting the JWT
 
     steps:
-      - name: Download backend artifact from build job
-        id: download-backend-artifact
-        uses: actions/download-artifact@v3
+      - name: Download build artifacts
+        uses: actions/download-artifact@v2
         with:
-          name: backend
-
-      - name: Download frontend artifact from build job
-        id: download-frontend-artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: frontend
+          name: build-artifacts
 
       - name: Login to Azure
         uses: azure/login@v1

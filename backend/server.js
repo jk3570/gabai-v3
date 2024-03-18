@@ -68,10 +68,10 @@ app.post("/chat", async (req, res) => {
   }
 });
 
-// // Wildcard route to serve the index.html file for all routes
-// app.get("*", (req, res) => {
-//   res.sendFile(path.resolve(__dirname, "../frontend/build", "index.html"));
-// });
+// Wildcard route to serve the index.html file for all routes
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
+});
 
 // connect to db
 mongoose
