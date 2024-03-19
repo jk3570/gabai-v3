@@ -46,9 +46,8 @@ const App = () => {
         {/* Landing route */}
         <Route path="/" element={<LandingPage />} />
 
-        {/* Search routes */}
-        <Route path="/search" element={<Search />} />
-        <Route path="/search/result" element={<SearchResults />} />
+        {/* Landing route */}
+        <Route exact path="/" element={<LandingPage />} />
 
         {/* Components routes */}
         {user ? null : <Route path="/login" element={<Login />} />}
