@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useParticipant, useMeeting } from "@videosdk.live/react-sdk"; // Importing custom hooks for managing participants and meetings
 import ParticipantView from "./ParticipantView"; // Importing ParticipantView component
 import Controls from "./Controls"; // Importing Controls component
+import { useNavigate } from "react-router"; // Using the useNavigate hook to navigate to the meeting page
+import addNotification from "react-push-notification";
 
 const btnStyle = "p-2 rounded-xl bg-azure text-white w-[20em]"; // Button style
 
 function MeetingView(props) {
   const [joined, setJoined] = useState(null); // State to track meeting join status
   const [mediaStream, setMediaStream] = useState(null); // State to hold media stream
+  const navigate = useNavigate(); // Using the useNavigate hook to navigate to the meeting page
 
   // Destructuring functions from useMeeting hook
   const { join, participants, toggleWebcam, toggleMic } = useMeeting({
@@ -20,6 +23,15 @@ function MeetingView(props) {
       props.onMeetingLeave(); // Call parent component's onMeetingLeave function
     },
   });
+
+  const notif = () => {
+    addNotification({
+      title: "Notifications",
+      message: "Meeting ID: " + props.meetingId,
+      native: true,
+      // Remove the textarea from the body
+    });
+  };
 
   // Effect to request access to user's media devices (webcam and microphone)
   useEffect(() => {
@@ -56,8 +68,10 @@ function MeetingView(props) {
       <div>
         <div className="container">
           <div>
-            <div className="top-[5rem] left-0 absolute p-4 bg-gray-300 w-screen">
+            <div className="top-[5rem] left-0 absolute p-4 bg-gray-300 w-screen flex flex-row gap-2">
               <h3>Meeting Id: {props.meetingId}</h3>
+              <br />
+              <p onClick={notif}>Click to send to anyone</p>
             </div>
             {/* Display meeting ID */}
             {joined && joined === "JOINED" ? ( // If meeting joined successfully
@@ -66,7 +80,7 @@ function MeetingView(props) {
                 {mediaStream && <div />}
                 {/* Render ParticipantView component for each participant */}
                 {[...participants.keys()].map((participantId) => (
-                  <div key={participantId} className="flex flex-row gap-2">
+                  <div key={participantId} className="grid gap-2">
                     <ParticipantView
                       participantId={participantId} // Pass participant ID as prop
                     />

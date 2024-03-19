@@ -1,12 +1,15 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import { useParticipant } from "@videosdk.live/react-sdk"; // Importing a custom hook to manage participant streams
 import ReactPlayer from "react-player"; // Importing ReactPlayer component for video playback
+import addNotification from "react-push-notification";
+import { useNavigate } from "react-router";
 
 function ParticipantView(props) {
   const micRef = useRef(null); // Creating a ref to hold reference to audio element
   const { webcamStream, micStream, webcamOn, micOn, isLocal } = useParticipant(
     props.participantId
   ); // Destructuring properties from the useParticipant custom hook
+  // Using the useNavigate hook to navigate to the meeting page
 
   // Memoized video stream based on webcam status
   const videoStream = useMemo(() => {
@@ -65,7 +68,7 @@ function ParticipantView(props) {
               muted={true}
               playing={true}
               url={videoStream} // Passing the constructed video stream as URL
-              height={"320px"}
+              height={"100%"}
               width={"480px"}
               onError={(err) => {
                 console.log(err, "participant video error");
@@ -74,7 +77,10 @@ function ParticipantView(props) {
           </div>
         ) : (
           // If webcam is off
-          <div className=" bg-gray-700 rounded-xl w-[480px] h-[320px] z-0" /> // Displaying a gray background
+          <div
+            style={{ position: "relative", width: "480px", height: "100%" }}
+            className="bg-gray-700 rounded-xl z-0"
+          />
         )}
       </div>
     </div>

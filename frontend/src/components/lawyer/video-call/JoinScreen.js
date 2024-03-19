@@ -1,11 +1,14 @@
 import React, { useState } from "react";
+import addNotification from "react-push-notification";
+import { useNavigate } from "react-router";
 
 // Styles for buttons and input fields
 const btnStyle = "p-2 rounded-xl bg-azure text-white"; // Button style
 const inputStyle = "border-2 rounded-xl p-2 w-[15rem]"; // Input field style
 
-function JoinScreen({ getMeetingAndToken }) {
+function JoinScreen({ getMeetingAndToken }, props) {
   const [meetingId, setMeetingId] = useState(null); // State for storing meeting ID
+  const navigate = useNavigate();
 
   // Function to handle joining a meeting
 
@@ -19,8 +22,7 @@ function JoinScreen({ getMeetingAndToken }) {
 
   // Added missing arrow function
   const onCreateClick = async () => {
-    // Implement your logic for creating a meeting
-    await getMeetingAndToken(meetingId);
+    await getMeetingAndToken(meetingId); // Adjust this line based on your actual implementation
   };
 
   return (
