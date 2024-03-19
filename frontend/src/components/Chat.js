@@ -30,7 +30,7 @@ const ChatComponent = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        const aiMessage = { role: "ai", content: data.message };
+        const aiMessage = { role: "assistant", content: data.message };
         setMessages([...messages, newMessage, aiMessage]);
       })
       .catch((error) => console.error("Error:", error));
@@ -49,7 +49,7 @@ const ChatComponent = () => {
       >
         {messages.map((message, index) => (
           <div
-            className="p-5 bg-gray-100 rounded-xl animate__animated "
+            className="p-5 bg-gray-100 rounded-xl animate__animated"
             key={index}
           >
             <p>
@@ -97,7 +97,7 @@ const ChatComponent = () => {
       </div>
       <div className="flex justify-center items-center">
         <p className="text-gray-400 text-sm">
-          GabAI can make mistakes. Consider checking important information.
+          All conversation is completely confidential.
         </p>
       </div>
     </div>
