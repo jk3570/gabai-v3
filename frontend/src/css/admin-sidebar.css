@@ -1,8 +1,8 @@
- #sidebar {
+/*  #sidebar {
      height: 100%;
      width: 0;
      position: fixed;
-     z-index: 1;
+     z-index: 0;
      top: 0;
      left:0;
      background-color: #374151;
@@ -14,9 +14,9 @@
          padding: 8px 8px 8px 32px;
      }
 
- }
+ } */
 
- #open-sidebar{
+/*  #open-sidebar{
     background-color: #374151;
     width:5rem;
     display: flex;
@@ -30,4 +30,4 @@
         font-size: 2rem;
         margin: 1rem;
     }
- }
+ } */

@@ -11,6 +11,7 @@ import { useAuthContext } from "./hooks/useAuthContext";
 //Navbars
 import Navbar from "./components/Navbar";
 import Navbar2 from "./components/Navbar2";
+import Sidebar from "./components/admin/Sidebar.js";
 
 //Components routes
 import Footer from "./components/Footer";
@@ -42,8 +43,10 @@ const App = () => {
 
   return (
     <Router>
-      {user ? null : <Navbar />}
-      {user ? <Navbar2 /> : null}
+      {/* {user ? null : <Navbar />}
+      {user ? <Navbar2 /> : null} */}
+      <Sidebar />
+      <Navbar2 />
       
       <Routes>
         {/* Landing route */}
@@ -61,7 +64,8 @@ const App = () => {
         <Route path="/terms" element={<Terms />} />
 
         {/* Admin routes */}
-        {user ? <Route path="/admin" element={<AdminDashboard />} /> : <Route path="*" element={<PageNotFound />} />}
+        {/* {user ? <Route path="/admin" element={<AdminDashboard />} /> : <Route path="*" element={<PageNotFound />} />} */}
+        <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/admin/users" element={<UserList />} />
         <Route path="/admin/cases" element={<CasesList />} />
         <Route path="/admin/feedbacks" element={<FeedbacksList />} />

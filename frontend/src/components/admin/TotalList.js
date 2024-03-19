@@ -10,10 +10,10 @@ const Counter = () => {
   const feedbackCount = 0;
 
   const totalNoStyle =
-    "flex flex-row border-2 rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl h-auto w-[20rem] text-1xl p-3 justify-between items-center border-azure-500";
+    "flex flex-row bg-gray-200 rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl h-auto w-[35%] text-1xl p-5 justify-between items-center border-azure-500";
 
   return (
-    <div className="flex flex-row gap-1 mt-5 mx-5 items-center justify-start shrink self-center w-full">
+    <div className="flex flex-row gap-3 mt-5 mx-auto justify-center shrink self-center w-full">
       {/* Start */}
       <div className={totalNoStyle}>
         <div>

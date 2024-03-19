@@ -26,7 +26,9 @@ const Profile = () => {
   const backdrop =
     "fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 backdrop-filter backdrop-blur-lg bg-opacity-25 bg-black ";
   const bg =
-    "modal h-[28rem] w-[31.25rem] rounded-2xl bg-white flex flex-col mx-10 p-3";
+    "h-auto w-[16rem] rounded-2xl bg-azure flex flex-col p-3 shadow-lg";
+
+  const content = "w-100 p-0 m-0 list-none my-xs"
 
   const btnRed = "bg-red-500 text-white p-2 w-full rounded-xl";
 
@@ -40,35 +42,17 @@ const Profile = () => {
           <button className="bg-gray-300 rounded-full h-10 w-10 flex items-center justify-center">
           </button>
         }
-        modal
         nested
+        
       >
         {(close) => (
-          <div className={backdrop}>
-            <div className={bg}>
-              <div className={closeBtn}>
-                <IoIosCloseCircleOutline
-                  className="text-3xl cursor-pointer"
-                  onClick={() => close()}
-                />
-              </div>
+          <div className={bg}>
 
-              <div className="flex flex-col items-center justify-center">
-                {/* <div className="h-[7rem] w-[7rem] bg-gray-300 rounded-full"></div> */}
-                {userEmail&& <h2>{userEmail}</h2>}
-                <p>Name: dasdasda </p>
-                <p>Email: hdsfjhdjksfhk@gmail.com </p>
-              </div>
-              <br />
-              <div className="flex flex-col items-center justify-center">
-                {/* <ProfileSettings></ProfileSettings> */}
-                <br />
-                <Link to="/">
-                  <button className={btnRed} onClick={handleLogout}>Log Out</button>
-                </Link>
-              </div>
-            </div>
+            <div className={content}>ssss</div>
+            <div className={content}>ssss</div>
+            <div className={content}>ssss</div>
           </div>
+
         )}
       </Popup>
     </>
