@@ -49,7 +49,7 @@ const LandingPage = () => {
   return (
     <>
       <Helmet>
-        <title>GabAi | Home</title>
+        <title>Home | GabAi</title>
       </Helmet>
 
       <div id="scrollFadeDiv" className="fixed z-50 bottom-10 left-1/2 transform -translate-x-1/20 animate-bounce duration-10 opacity-100 transition-opacity">

@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "../frontend/build")));
 
 // routes
-app.use("/api/user", userRoutes);
+app.use("/user", userRoutes);
 
 // OpenAI's API
 const openai = new OpenAI({
