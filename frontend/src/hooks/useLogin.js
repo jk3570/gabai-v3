@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useAuthContext } from './useAuthContext'
-import toast, { Toaster } from "react-hot-toast";
+import { BaseURL } from '../BaseURL'
 
 export const useLogin = () => {
 
@@ -9,10 +9,11 @@ export const useLogin = () => {
   const { dispatch } = useAuthContext()
 
   const login = async (identifier, password) => { // Changed parameter name to identifier
+    
     setIsLoading(true)
     setError(null)
 
-    const response = await fetch('/api/user/login', {
+    const response = await fetch(`${BaseURL}/user/login`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ identifier, password }) // Changed email to identifier

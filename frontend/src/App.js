@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-
 import "./css/App.css";
 import "animate.css";
 
@@ -30,7 +29,7 @@ import Search from "./pages/search/Search";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import UserList from "./pages/admin/UserList";
 import CasesList from "./pages/admin/CasesList";
-import FeedbacksList from "./pages/admin/FeedbackList";
+import FeedbackList from "./pages/admin/FeedbackList";
 
 //Lawyer routes
 import LawyerVideoCon from "./pages/lawyer/LawyerVideoCon";
@@ -44,7 +43,7 @@ const App = () => {
         <Routes>
 
           {/* Landing route */}
-          <Route path="/" element={<LandingPage/>} />
+          <Route exact path="/" element={<LandingPage/>} />
 
           {/* Search routes */}
           <Route path="/search" element={<Search />} />
@@ -60,8 +59,9 @@ const App = () => {
           {/* Admin routes */}  
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/signup-admin-lawyer" element={<SignupAdminAndLawyer />} />
+          <Route path="/admin/cases" element={<UserList />} />
           <Route path="/admin/cases" element={<CasesList />} />
-          <Route path="/admin/feedbacks" element={<FeedbacksList />} />
+          <Route path="/admin/feedbacks" element={<FeedbackList />} />
 
           {/* Lawyer route */}
           <Route path="/lawyer" element={<LawyerVideoCon />} />

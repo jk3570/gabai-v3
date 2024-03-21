@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 
 import blob from "../../img/Blob.svg";
-import gabAnimation from "../../img/gabAnimation.gif";
 import lawJust from "../../img/justice.png";
-import iconWhite from "../../img/iconWhite.svg";
+
 
 const WorkplaceDiscriminationLaws = () => {
 
