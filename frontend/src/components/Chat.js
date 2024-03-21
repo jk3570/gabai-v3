@@ -45,6 +45,7 @@ const ChatComponent = () => {
 
   return (
     <div className="w-full h-screen relative max-w-4xl px-5 lg:px-0 mx-auto mt-20">
+      <ChatHistory />
       <div
         className="
       h-[80%] overflow-y-scroll flex flex-col gap-2 p-5
@@ -74,9 +75,7 @@ const ChatComponent = () => {
           className="flex flex-row gap-1 bottom-0 w-full py-2"
           type="submit"
         >
-          <div className="w-[5rem] text-black">
-            <ChatHistory />
-          </div>
+          <div className="w-[5rem] text-black"></div>
           <input
             type="text"
             value={input}
