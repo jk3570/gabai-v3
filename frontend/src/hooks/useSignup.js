@@ -1,12 +1,15 @@
 import { useState } from 'react'
 import { useAuthContext } from './useAuthContext'
+import { BaseURL } from '../BaseURL'
 
 export const useSignup = () => {
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(null)
   const { dispatch } = useAuthContext()
 
-  const signup = async (username,
+  const signup = async (
+    role,
+    username,
     firstname,
     lastname,
     gender,
@@ -20,10 +23,12 @@ export const useSignup = () => {
     setIsLoading(true)
     setError(null)
 
-    const response = await fetch('/api/user/signup', {
+    const response = await fetch(`${BaseURL}/user/signup`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ username,
+      body: JSON.stringify({ 
+        role,
+        username,
         firstname,
         lastname,
         gender,

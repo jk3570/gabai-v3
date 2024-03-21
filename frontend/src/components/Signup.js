@@ -18,6 +18,7 @@ import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
 
 const Signup = ({ initialAddress }) => {
+  const [role, setRole] = useState("user");
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedProvince, setSelectedProvince] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
@@ -187,6 +188,7 @@ const Signup = ({ initialAddress }) => {
 
     // Call signup function with converted address names
     await signup(
+      role,
       data.username,
       data.firstname,
       data.lastname,
@@ -269,7 +271,8 @@ useEffect(() => {
                       placeholder="Juan"
                       {...register("firstname", {
                         required: true,
-                        pattern: /^[A-Za-z]+$/,
+                        pattern: /^[A-Za-z\s]+$/,
+
                       })}
                       className="w-[full] border-2 border-black rounded-xl p-2"
                     />
@@ -294,7 +297,7 @@ useEffect(() => {
                       placeholder="Dela Cruz"
                       {...register("lastname", {
                         required: true,
-                        pattern: /^[A-Za-z]+$/,
+                        pattern: /^[A-Za-z\s]+$/,
                       })}
                       className="w-[full] border-2 border-black rounded-xl p-2"
                     />
