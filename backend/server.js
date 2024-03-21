@@ -7,6 +7,7 @@ const userRoutes = require("./routes/user");
 const OpenAI = require("openai");
 require("dotenv").config();
 const path = require("path");
+const { MongoClient } = require('mongodb');
 
 const port = process.env.PORT || 4000;
 
@@ -19,6 +20,33 @@ app.use(express.json());
 
 // Serve static files
 app.use(express.static(path.join(__dirname, "../frontend/build")));
+
+const client = new MongoClient(process.env.MONG_URI);
+
+async function getData() {
+  try {
+    // Connect to the MongoDB Atlas cluster
+    await client.connect();
+    
+    // Access the database and collection
+    const database = client.db(process.env.DB_NAME);
+    const collection = database.collection(process.env.USER_COLLECTION);
+    
+    // Query the collection to retrieve all documents
+    const cursor = collection.find({});
+    
+    // Iterate over the cursor and log each document
+    await cursor.forEach(doc => console.log(doc));
+    
+    // Close the connection
+    await client.close();
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+
+// Call the getData function to retrieve and log data
+getData();
 
 // routes
 app.use("/user", userRoutes);

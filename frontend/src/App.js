@@ -31,7 +31,7 @@ import Search from "./pages/search/Search";
 
 //Admin routes
 import AdminDashboard from "./pages/admin/AdminDashboard";
-import UserList from "./pages/admin/UserList";
+import UserTable from "./pages/admin/UserTable";
 import CasesList from "./pages/admin/CasesList";
 import FeedbackList from "./pages/admin/FeedbackList";
 
@@ -60,11 +60,12 @@ const App = () => {
           <Route path="/chat" element={<Chat />} />
           <Route path="/terms" element={<Terms />} />
 
-        {/* Admin routes */}
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/admin/users" element={<UserList />} />
-        <Route path="/admin/cases" element={<CasesList />} />
-        <Route path="/admin/feedbacks" element={<FeedbackList />} />
+          {/* Admin routes */}  
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/signup-admin-lawyer" element={<SignupAdminAndLawyer />} />
+          <Route path="/admin/user-table" element={<UserTable />} />
+          <Route path="/admin/cases" element={<CasesList />} />
+          <Route path="/admin/feedbacks" element={<FeedbackList />} />
 
           {/* Lawyer route */}
           <Route path="/lawyer" element={<LawyerVideoCon />} />
