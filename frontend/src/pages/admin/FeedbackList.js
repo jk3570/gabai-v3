@@ -24,7 +24,7 @@ const formatNumber = (num) =>
 function FeedbackList() {
   return (
     <div className="bg-gray-200 h-screen flex flex-row p-1">
-      <Sidebar />
+     
       <div className="flex flex-col w-full mt-6">
         <div className="p-4">
           <div className="flex justify-between items-center">
