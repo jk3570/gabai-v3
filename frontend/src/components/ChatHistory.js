@@ -4,7 +4,7 @@ import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import "../css/chat-history.css";
 
 const openHistory = () => {
-  document.getElementById("chat-history").style.width = "20rem";
+  document.getElementById("chat-history").style.width = "35rem";
 };
 
 const closeHistory = () => {
