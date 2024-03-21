@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Popup from "reactjs-popup";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import Signup from "./Signup";
+import ForgotPass from "./ForgotPass";
 import { useLogin } from "../hooks/useLogin";
 import { Icon } from "react-icons-kit";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
@@ -27,14 +28,15 @@ const Login = ({ setLoginSuccess }) => {
     }
   };
 
-  const navigate = useNavigate();
+
+
+const navigate = useNavigate();
 
 const handleSubmit = async (e) => {
   e.preventDefault();
+
     await login(identifier, password);
-
-
-};
+  };
 
   //   const notify = () => {
   //   toast.success("Account has been created successfully!", {
@@ -73,6 +75,7 @@ const handleSubmit = async (e) => {
     >
       {(close) => (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 backdrop-filter backdrop-blur-lg bg-opacity-25 bg-black ">
+
           <div className="modal relative h-auto w-[70%] sm:w-[55%] md:w-[50%] lg:w-[45%] xl:w-[35%] rounded-2xl bg-white flex flex-col pt-7 py-10 p-3">
                       <div className="absolute flex align-center p-1 inset-y-0 right-0">
                         <IoIosCloseCircleOutline
@@ -81,6 +84,16 @@ const handleSubmit = async (e) => {
                       </div>
 
                       {/* <div>
+=======
+          <div className="modal h-[23rem] w-[31.00rem] rounded-2xl bg-white flex flex-col mx-10 ">
+            <div className="flex flex-row align-center justify-end p-1">
+              <IoIosCloseCircleOutline
+                className="text-3xl cursor-pointer"
+                onClick={() => close()}
+              />
+            </div>
+            {/* <div>
+
                         <Toaster position="top-center" />
                       </div> */}
 
@@ -129,8 +142,16 @@ const handleSubmit = async (e) => {
                 
                 {error && <span className={warning}>{error}</span>}
               </div>
+
               
               <div className="flex items-center justify-center">
+
+              <div className="flex flex-row items-center justify-center">
+                <ForgotPass />
+              </div>
+
+              <div className="mx-12">
+
                 <button
                   disabled={isLoading}
                   type="submit"
@@ -156,8 +177,6 @@ const handleSubmit = async (e) => {
           </div>
           </div>
         </div>
-
-        
       )}
     </Popup>
   );

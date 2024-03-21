@@ -8,16 +8,28 @@ function JoinScreen({ getMeetingAndToken }) {
   const [meetingId, setMeetingId] = useState(null); // State for storing meeting ID
 
   // Function to handle joining a meeting
-
   const onJoinClick = async () => {
     if (!meetingId) {
-      alert("Please enter a meeting ID"); // Alert if meeting ID is empty
+      alert("Please enter a meeting ID");
       return;
     }
-    await getMeetingAndToken(meetingId); // Calling the getMeetingAndToken function with the entered meeting ID
-  };
 
-  // Added missing arrow function
+    try {
+      const meetingInfo = await getMeetingAndToken(meetingId);
+      if (!meetingInfo || !meetingInfo.participantCount) {
+        throw new Error("Meeting information is invalid");
+      }
+
+      if (meetingInfo.participantCount >= 2) {
+        alert("The meeting is full. You cannot join.");
+        return;
+      }
+    } catch (error) {
+      console.error("Error joining meeting:", error);
+      alert("Error joining meeting. Please try again.");
+    }
+  };
+  // Function to handle creating a meeting
   const onCreateClick = async () => {
     // Implement your logic for creating a meeting
     await getMeetingAndToken(meetingId);

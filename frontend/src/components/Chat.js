@@ -1,61 +1,112 @@
-import { BsArrowRight } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
-const chat = {
-  bottom: 0,
-};
+import Markdown from "react-markdown";
 
-function Chat() {
-  const username = "User";
-  const textbox = "w-full h-10 p-2 rounded-full border-2 border-gray-500";
-  const submitBtn = "bg-azure text-white font-bold py-2 px-4 rounded-md";
+import { useState, useEffect } from "react";
 
-  const prompt = [
-    {
-      message:
-        "Hi Gab, I've been facing some issues at work. I think I'm experiencing discrimination. Can you help?",
-      name: username,
-      color: "bg-gray-500",
-    },
-    {
-      message:
-        "I'm here for you. I'm sorry to hear about your situation. Can you provide some details about the discrimination you're facing?",
-      name: "Gab",
-      color: "bg-azure",
-    },
-  ];
+import { HiMiniVideoCamera } from "react-icons/hi2";
+
+import ChatHistory from "./ChatHistory";
+
+const ChatComponent = () => {
+  const [messages, setMessages] = useState([]);
+  const [input, setInput] = useState("");
+  const [isSendDisabled, setIsSendDisabled] = useState(true);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/chat")
+      .then((response) => response.json())
+      .then((data) => setMessages(data.messages));
+  }, []);
+
+  const sendMessage = () => {
+    const newMessage = { role: "user", content: input };
+    setMessages([...messages, newMessage]);
+    setInput("");
+
+    fetch("http://localhost:5000/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ messages: [newMessage] }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        const aiMessage = { role: "assistant", content: data.message };
+        setMessages([...messages, newMessage, aiMessage]);
+      })
+      .catch((error) => console.error("Error:", error));
+  };
+
+  useEffect(() => {
+    setIsSendDisabled(input === "");
+  }, [input]);
 
   return (
-    <div
-      style={chat}
-      className=" w-full h-[60vh] relative max-w-4xl px-5 lg:px-0 mx-auto mt-20"
-    >
-      <div className="chatbox mb-12 bottom-0">
-        {prompt.map((item, index) => (
-          <div key={index} className="p-5 bg-gray-100 ">
-            <div className="flex flex-row gap-3 items-center">
-              <div
-                className={
-                  item.color +
-                  " h-10 w-10 rounded-full flex justify-center items-center "
-                }
-              ></div>
-              <p>
-                <b>{item.name}</b>
-              </p>
-            </div>
-            <br />
-            <p className="ml-10">{item.message}</p>
+    <div className="w-full h-screen relative max-w-4xl px-5 lg:px-0 mx-auto mt-20">
+      <ChatHistory />
+      <div
+        className="
+      h-[80%] overflow-y-scroll flex flex-col gap-2 p-5
+      "
+      >
+        {messages.map((message, index) => (
+          <div
+            className="p-5 bg-gray-100 rounded-xl animate__animated"
+            key={index}
+          >
+            <p>
+              {" "}
+              <b>{message.role === "user" ? "You" : "Gab"}</b>
+            </p>
+            <p>
+              <Markdown>{message.content}</Markdown>
+            </p>
           </div>
         ))}
       </div>
-      <form action="" className="flex flex-row gap-1 absolute bottom-0 w-full">
-        <input type="text" name="" id="" className={textbox} />
-        <button type="submit" className={submitBtn}>
-          Send
-        </button>
-      </form>
+      <div>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault(); // Prevent the default form submission behavior
+            sendMessage(); // Call your sendMessage function
+          }}
+          className="flex flex-row gap-1 bottom-0 w-full py-2"
+          type="submit"
+        >
+          <div className="w-[5rem] text-black"></div>
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            className="p-3 border-2 border-black rounded-full w-full"
+            placeholder="Type your message here"
+          />
+          <button
+            type="submit"
+            id="sendBtn"
+            disabled={isSendDisabled}
+            className={
+              isSendDisabled
+                ? "p-3 rounded-xl bg-gray-400 text-white"
+                : "p-3 rounded-xl bg-azure-300 text-white"
+            }
+          >
+            Send
+          </button>
+          <Link to="/lawyer" className="p-3 rounded-xl bg-azure text-white">
+            <HiMiniVideoCamera className="text-xl" />
+          </Link>
+        </form>
+      </div>
+      <div className="flex justify-center items-center">
+        <p className="text-gray-400 text-sm">
+          All conversation is completely confidential.
+        </p>
+      </div>
     </div>
   );
-}
+};
 
-export default Chat;
+export default ChatComponent;
