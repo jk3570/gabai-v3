@@ -41,7 +41,7 @@ import LawyerVideoCon from "./pages/lawyer/LawyerVideoCon";
 const App = () => {
   const { user, dispatch } = useAuthContext();
 
-  return (
+  return ( 
     <Router>
       {/* {user ? null : <Navbar />}
       {user ? <Navbar2 /> : null} */}
