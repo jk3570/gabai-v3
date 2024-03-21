@@ -60,20 +60,12 @@ const App = () => {
           <Route path="/chat" element={<Chat />} />
           <Route path="/terms" element={<Terms />} />
 
-<<<<<<< HEAD
           {/* Admin routes */}  
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/signup-admin-lawyer" element={<SignupAdminAndLawyer />} />
           <Route path="/admin/user-table" element={<UserTable />} />
           <Route path="/admin/cases" element={<CasesList />} />
           <Route path="/admin/feedbacks" element={<FeedbackList />} />
-=======
-        {/* Admin routes */}
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/admin/users" element={<UserList />} />
-        <Route path="/admin/cases" element={<CasesList />} />
-        <Route path="/admin/feedbacks" element={<FeedbackList />} />
->>>>>>> 57e74c4829d9282eceb041a8e60e12624e74e07e
 
           {/* Lawyer route */}
           <Route path="/lawyer" element={<LawyerVideoCon />} />
