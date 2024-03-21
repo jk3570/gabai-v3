@@ -1,9 +1,12 @@
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+
+import Markdown from "react-markdown";
+
+import { useState, useEffect } from "react";
 
 import { HiMiniVideoCamera } from "react-icons/hi2";
 
-import Markdown from "react-markdown";
+import ChatHistory from "./ChatHistory";
 
 const ChatComponent = () => {
   const [messages, setMessages] = useState([]);
@@ -71,6 +74,9 @@ const ChatComponent = () => {
           className="flex flex-row gap-1 bottom-0 w-full py-2"
           type="submit"
         >
+          <div className="p-3">
+            <ChatHistory />
+          </div>
           <input
             type="text"
             value={input}
