@@ -43,7 +43,8 @@ const App = () => {
 
   return ( 
     <Router>
-      <Navbar />
+      <Navbar2 />
+      <Sidebar />
       <Routes>
         {/* Landing route */}
         <Route path="/" element={<LandingPage/>} />
@@ -63,7 +64,7 @@ const App = () => {
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/admin/users" element={<UserList />} />
         <Route path="/admin/cases" element={<CasesList />} />
-        <Route path="/admin/feedbacks" element={<FeedbacksList />} />
+        <Route path="/admin/feedbacks" element={<FeedbackList />} />
 
           {/* Lawyer route */}
           <Route path="/lawyer" element={<LawyerVideoCon />} />
@@ -71,7 +72,8 @@ const App = () => {
         {/* 404 route */}
         <Route path="*" element={<PageNotFound />} />
       </Routes>
-      <Footer />
+      
+      {/* {user ? null : <Footer />} */}
     </Router>
   );
 };
