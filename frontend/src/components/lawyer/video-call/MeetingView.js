@@ -61,7 +61,7 @@ function MeetingView(props) {
             </div>
             {/* Display meeting ID */}
             {joined && joined === "JOINED" ? ( // If meeting joined successfully
-              <div className="flex flex-col gap-2 justify-center items-center">
+              <div className="flex flex-row gap-2 justify-center items-center">
                 {/* Display preview of user's webcam and microphone */}
                 {mediaStream && <div />}
                 {/* Render ParticipantView component for each participant */}
