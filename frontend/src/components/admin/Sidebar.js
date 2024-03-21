@@ -8,55 +8,73 @@ import { FaBoxArchive } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import "../../css/admin-sidebar.css";
 
-const open = () => {
-  document.getElementById("sidebar").style.width = "320px";
-};
+import React, { useState } from 'react';
 
-const close = () => {
-  document.getElementById("sidebar").style.width = "0";
-};
 
 function Sidebar() {
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const text = "flex flex-row gap-4 ml-5 text-2xl ";
+  /* focus:bg-white focus:text-azure-600 focus:font-semibold */
+  const icon = "text-3xl";
+
   return (
     <>
-      <div id="open-sidebar">
+        <div className={`fixed z-50 ${isOpen ? 'hidden' : 'block'}`}>
         <div
-          className="justify-center cursor-pointer"
-          onClick={open}
-          id="burger"
+          className="justify-center items-center font-bold text-azure-500 text-2xl m-4 cursor-pointer"
+          onClick={toggleSidebar}
+          style={{ height: "30px" }}
         >
           &#9776;
         </div>
       </div>
-
-      <div id="sidebar">
-        <div className="my-5 text-white">
-          <div className="flex justify-end px-10 ">
-            <span onClick={close} className="text-3xl cursor-pointer">
-              &times;
-            </span>
+      <div className={`fixed z-50 ${isOpen ? 'block' : 'hidden'}`}>
+        <div
+          className="justify-center items-center font-block text-azure-500 text-4xl m-4 -translate-y-2 cursor-pointer"
+          onClick={toggleSidebar}
+          style={{ height: "30px" }}
+        >
+          &times;
+        </div>
+      </div>
+      <div
+        id="sidebar"
+        className={`fixed z-40 h-full w-0 top-0 left-0 bg-gray-100 overflow-x-hidden transition duration-200 shadow-lg ${isOpen ? 'block' : 'hidden'}`}
+        style={{ width: isOpen ? "320px" : "0", top: 0, bottom: 0 }}
+      >
+      
+      {/* <div id="sidebar" className="fixed z-40 h-full w-0 top-0 left-0 bg-gray-100 overflow-x-hidden transition duration-200 shadow-lg translate-y-[3.875rem]">
+        */} 
+        {/* Top area */}
+      
+      <div className="mt-20 m-5 text-center">
+          <h1 className=" text-black font-bold text-2xl">Admin Dashboard</h1>
           </div>
+        <div className="mt-10 text-black text-1xl">
 
-          <br />
-          <h1 className="font-bold text-2xl">Admin Dashboard</h1>
-          <br className="my-5" />
-
-          <nav className="flex flex-col gap-10 list-none items-start text-white p-3">
+        {/* Navigation Area */}
+          <nav className="flex flex-col gap-10 list-none items-start text-black font-normal p-3">
             <li>
               <Link
                 to="/admin"
-                className="flex flex-row gap-2 text-2xl"
+                className={text}
               >
-                <RxDashboard className="text-3xl" />
+                <RxDashboard className={icon} />
                 Dashboard
               </Link>
             </li>
             <li>
               <Link
                 to="/admin/users"
-                className="flex flex-row gap-2 text-2xl"
+                className={text}
               >
-                <FaUsers className="text-3xl" />
+                <FaUsers className={icon} />
                 Users
               </Link>
             </li>
@@ -64,9 +82,9 @@ function Sidebar() {
             <li>
               <Link
                 to="/admin/cases"
-                className="flex flex-row gap-2 text-2xl"
+                className={text}
               >
-                <LiaBalanceScaleSolid className="text-3xl" />
+                <LiaBalanceScaleSolid className={icon} />
                 Cases
               </Link>
             </li>
@@ -74,16 +92,16 @@ function Sidebar() {
             <li>
               <Link
                 to="admin/feedbacks"
-                className="flex flex-row gap-2 text-2xl"
+                className={text}
               >
-                <VscFeedback className="text-3xl" />
+                <VscFeedback className={icon} />
                 Feedbacks
               </Link>
             </li>
 
             <li>
-              <Link className="flex flex-row gap-2 text-2xl">
-                <FaBoxArchive className="text-3xl" />
+              <Link className={text}>
+                <FaBoxArchive className={icon} />
                 Archived
               </Link>
             </li>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Popup from "reactjs-popup";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import Signup from "./Signup";
@@ -27,8 +28,13 @@ const Login = ({ setLoginSuccess }) => {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+
+
+const navigate = useNavigate();
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
     await login(identifier, password);
   };
 

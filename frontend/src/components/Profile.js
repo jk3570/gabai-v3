@@ -30,7 +30,9 @@ const Profile = () => {
   const backdrop =
     "fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 backdrop-filter backdrop-blur-lg bg-opacity-25 bg-black ";
   const bg =
-    "modal h-[28rem] w-[31.25rem] rounded-2xl bg-white flex flex-col mx-10 p-3";
+    "h-auto w-[16rem] rounded-2xl bg-azure flex flex-col p-3 shadow-lg";
+
+  const content = "w-100 p-0 m-0 list-none my-xs"
 
   const btnRed = "bg-red-500 text-white p-2 w-full rounded-xl";
 
@@ -41,13 +43,11 @@ const Profile = () => {
     <>
       <Popup
         trigger={
-          <button className=" p-4 py-1 text-azure-500 flex justify-center items-center">
-            <span className="bg-gray-300 rounded-full h-10 w-10 flex items-center justify-center mr-3"></span>
-            Profile
+          <button className="bg-gray-300 rounded-full h-10 w-10 flex items-center justify-center">
           </button>
         }
-        modal
         nested
+        
       >
         {(close) => (
           <div className={backdrop}>
@@ -94,6 +94,7 @@ const Profile = () => {
               </div>
             </div>
           </div>
+
         )}
       </Popup>
     </>
