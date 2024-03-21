@@ -20,10 +20,10 @@ const Login = ({ setLoginSuccess }) => {
 
   const handleToggle = () => {
     if (type === "password") {
-      setIcon(eyeOff);
+      setIcon(eye);
       setType("text");
     } else {
-      setIcon(eye);
+      setIcon(eyeOff);
       setType("password");
     }
   };
@@ -50,6 +50,15 @@ const handleSubmit = async (e) => {
   //   setIsFormValid(identifier.trim() !== "" && password.trim() !== "");
   // }, [identifier, password]);
 
+  const label = "block font-normal text-sm"
+  
+  const warning = "block font-normal text-sm text-red-500 error mt-1"
+
+  const input = "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-xs ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+
+  const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-center items-center w-full text-sm"
+
+
   return (
     <Popup
       trigger={
@@ -66,6 +75,16 @@ const handleSubmit = async (e) => {
     >
       {(close) => (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 backdrop-filter backdrop-blur-lg bg-opacity-25 bg-black ">
+
+          <div className="modal relative h-auto w-[70%] sm:w-[55%] md:w-[50%] lg:w-[45%] xl:w-[35%] rounded-2xl bg-white flex flex-col pt-7 py-10 p-3">
+                      <div className="absolute flex align-center p-1 inset-y-0 right-0">
+                        <IoIosCloseCircleOutline
+                          className="text-3xl cursor-pointer"
+                          onClick={() => close()}/>
+                      </div>
+
+                      {/* <div>
+=======
           <div className="modal h-[23rem] w-[31.00rem] rounded-2xl bg-white flex flex-col mx-10 ">
             <div className="flex flex-row align-center justify-end p-1">
               <IoIosCloseCircleOutline
@@ -74,72 +93,88 @@ const handleSubmit = async (e) => {
               />
             </div>
             {/* <div>
+
                         <Toaster position="top-center" />
                       </div> */}
 
+          <div className="w-full h-full flex flex-col-1 justify-center px-4">
+          <div className="w-full h-full grid grid-cols-1 gap-4">
             <div className="flex flex-col items-center justify-center">
-              <h1 className="font-bold text-4xl">
+              <h1 className="font-bold text-3xl m-0">
                 Log in to <span className="text-azure">GabAi</span>
               </h1>
-              <p>Empower your workplace today!</p>
-              <br />
+              <p className={label}>Empower your workplace today!</p>
             </div>
 
-            <form onSubmit={handleSubmit}>
-              <div className="flex flex-col items-center justify-center">
-                <input
-                  type="text"
-                  id="identifier"
-                  name="identifier"
-                  placeholder="Email or Username"
-                  onChange={(e) => setIdentifier(e.target.value)}
-                  value={identifier}
-                  className="w-[25rem] border-2 border-black rounded-xl p-2"
-                />
-                <span className="py-2"></span>
-                <div className="flex">
+          <div className="w-full h-full flex flex-col-1">
+            <form onSubmit={handleSubmit} className="w-full h-full grid grid-cols-1 gap-3">
+              <div className="flex flex-col items-center justify-center gap-2">
                   <input
-                    type={type}
-                    id="password"
-                    name="password"
-                    placeholder="Password"
-                    onChange={(e) => {
-                      setPassword(e.target.value);
-                    }}
-                    value={password}
-                    className="w-[25rem] border-2 border-black rounded-xl p-2"
+                    type="text"
+                    id="identifier"
+                    name="identifier"
+                    placeholder="Email or Username"
+                    onChange={(e) => setIdentifier(e.target.value)}
+                    value={identifier}
+                    className={input}
                   />
-                  <span
-                    class="flex justify-around items-center"
-                    onClick={handleToggle}
-                  >
-                    <Icon class="absolute mr-10" icon={icon} size={15} />
-                  </span>
-                </div>
 
-                {error && <span className="text-red-500 error">{error}</span>}
+                  <div className="relative w-full flex items-center">
+                    <input
+                      type={type}
+                      id="password"
+                      name="password"
+                      placeholder="Password"
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                      }}
+                      value={password}
+                      className={input}
+                    />
+
+                    <span
+                      class="absolute inset-y-0 right-0 flex items-center justify-end mx-5"
+                      onClick={handleToggle}
+                    >
+                      <Icon class="" icon={icon} size={15} />
+                    </span>
+                  </div>
+                
+                {error && <span className={warning}>{error}</span>}
               </div>
+
+              
+              <div className="flex items-center justify-center">
+
               <div className="flex flex-row items-center justify-center">
                 <ForgotPass />
               </div>
 
               <div className="mx-12">
+
                 <button
                   disabled={isLoading}
                   type="submit"
-                  className="w-full bg-azure-500 text-white font-bold rounded-xl p-2"
+                  className={button}
                   // onClick={error ? undefined : notify}
                 >
                   Log In
                 </button>
               </div>
+
+              <div className="flex items-center justify-center">
+                <a href="/forgotpassword" className="items-center justify-center font-normal text-xs underline hover:text-azure">Forgot password?</a>
+              </div>
             </form>
-            <div className="flex flex-row items-center justify-center">
-              <p>
+          </div>
+            <div className="flex items-center justify-center">
+              <p className={label}>
                 Don't have an account? <Signup />
                 {/* <SignupAdminAndLawyer /> */}
               </p>
             </div>
+          </div>
+          </div>
           </div>
         </div>
       )}
