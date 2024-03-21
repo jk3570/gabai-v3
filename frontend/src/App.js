@@ -7,8 +7,12 @@ import "animate.css";
 //AuthContext provider
 import { useAuthContext } from "./hooks/useAuthContext";
 
-//Components routes
+//Navbars
 import Navbar from "./components/Navbar";
+import Navbar2 from "./components/Navbar2";
+import Sidebar from "./components/admin/Sidebar.js";
+
+//Components routes
 import Footer from "./components/Footer";
 import Terms from "./components/Terms";
 import Login from "./components/Login";
@@ -37,13 +41,13 @@ import LawyerVideoCon from "./pages/lawyer/LawyerVideoCon";
 const App = () => {
   const { user, dispatch } = useAuthContext();
 
-  return (
+  return ( 
     <Router>
-      <Navbar />
-        <Routes>
-
-          {/* Landing route */}
-          <Route exact path="/" element={<LandingPage/>} />
+      <Navbar2 />
+      <Sidebar />
+      <Routes>
+        {/* Landing route */}
+        <Route path="/" element={<LandingPage/>} />
 
           {/* Search routes */}
           <Route path="/search" element={<Search />} />
@@ -56,21 +60,29 @@ const App = () => {
           <Route path="/chat" element={<Chat />} />
           <Route path="/terms" element={<Terms />} />
 
+<<<<<<< HEAD
           {/* Admin routes */}  
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/signup-admin-lawyer" element={<SignupAdminAndLawyer />} />
           <Route path="/admin/user-table" element={<UserTable />} />
           <Route path="/admin/cases" element={<CasesList />} />
           <Route path="/admin/feedbacks" element={<FeedbackList />} />
+=======
+        {/* Admin routes */}
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin/users" element={<UserList />} />
+        <Route path="/admin/cases" element={<CasesList />} />
+        <Route path="/admin/feedbacks" element={<FeedbackList />} />
+>>>>>>> 57e74c4829d9282eceb041a8e60e12624e74e07e
 
           {/* Lawyer route */}
           <Route path="/lawyer" element={<LawyerVideoCon />} />
 
-          {/* 404 route */}
-          <Route path="*" element={<PageNotFound />} />
-
-        </Routes>
-      <Footer />
+        {/* 404 route */}
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
+      
+      {/* {user ? null : <Footer />} */}
     </Router>
   );
 };

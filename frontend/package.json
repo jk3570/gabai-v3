@@ -27,7 +27,11 @@
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.12.0",
     "react-icons-kit": "^2.0.0",
+<<<<<<< HEAD
     "react-paginate": "^8.2.0",
+=======
+    "react-markdown": "^9.0.1",
+>>>>>>> 57e74c4829d9282eceb041a8e60e12624e74e07e
     "react-player": "^2.15.1",
     "react-router-dom": "^6.21.3",
     "react-scripts": "5.0.1",
