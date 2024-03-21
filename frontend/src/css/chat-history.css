@@ -5,8 +5,9 @@
         z-index: 1;
         top: 0;
         left: 0;
-        background-color: white;
+        background-color: rgb(175, 175, 175);
         overflow-x: hidden;
         transition: 0.2s;
         padding-top: 9rem;
+        color: black;
 }
