@@ -74,7 +74,7 @@ const ChatComponent = () => {
           className="flex flex-row gap-1 bottom-0 w-full py-2"
           type="submit"
         >
-          <div className="p-3">
+          <div className="w-[5rem] text-black">
             <ChatHistory />
           </div>
           <input

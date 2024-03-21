@@ -47,6 +47,12 @@ function MeetingView(props) {
 
   // Function to join the meeting
   const joinMeeting = () => {
+    // Check if there are already 2 participants
+    if (participants.size > 2) {
+      alert("The meeting is full. You cannot join.");
+      return; // Prevent further execution
+    }
+
     setJoined("JOINING"); // Update joined state to indicate joining
     join(); // Call the join function from the useMeeting hook
   };
