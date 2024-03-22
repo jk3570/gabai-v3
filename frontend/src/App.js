@@ -43,8 +43,8 @@ const App = () => {
 
   return ( 
     <Router>
-      <Navbar2 />
-      <Sidebar />
+      <Navbar />
+     {/*  <Sidebar /> */}
       <Routes>
         {/* Landing route */}
         <Route path="/" element={<LandingPage/>} />
