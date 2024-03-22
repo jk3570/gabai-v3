@@ -95,8 +95,8 @@ function Navbar() {
       <nav
         className={`fixed top-0 z-50 bg-white h-[3.875rem] w-full font-bold border-b-2 border-azure-500 transition-all duration-300 ${navbarHeight}`}
       >
-        {/* Brand Name */}
         <div className="w-full max-w-4xl flex justify-between items-center">
+          {/* Brand Logo */}
           <Link to="/#home" onClick={() => scrollToElement("#home")}>
             <button
               class="group relative z-10 w-12 hover:w-44 h-12 hover:bg-azure-500 bg-azure-500 rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl text-neutral-50 font-bold flex justify-start gap-1 items-center pl-0.5
@@ -106,7 +106,7 @@ function Navbar() {
             >
               <img src={iconWhite} alt="Logo" style={{ height: "35px" }} />
               <span class="origin-left inline-flex duration-100 text-white group-hover:duration-300 group-hover:delay-100 opacity-0 group-hover:opacity-100 pl-3 transform scale-x-0 group-hover:scale-x-100 transition-all text-4xl font-medium">
-                GabAi{" "}
+                GabAi
               </span>
             </button>
           </Link>
@@ -148,24 +148,20 @@ function Navbar() {
                 </li>
               </nav>
             </div>
-
-            {/* Login Btn */}
-            {user ? null : <Login />}
-
-            {/* Profile Btn */}
-            {user ? <Profile /> : null }
-
+            
             {/* Search Icon */}
             <Link to="/search">
               <FaSearch className="text-2xl hover:scale-[1.1] transition-all duration-200 ease-in-out" />
             </Link>
 
             {/* Toggle night mode */}
-
             <BsMoon
               className="text-2xl hover:scale-[1.1] transition-all duration-200 ease-in-out"
               onClick={toggle}
             />
+
+            {/* Login Btn */}
+            <Login />
           </div>
         </div>
       </nav>

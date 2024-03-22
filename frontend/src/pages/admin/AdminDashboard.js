@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet";
 import Sidebar from "../../components/admin/Sidebar.js";
 import AllDemo from "../../components/admin/AllDemo";
 import TotalList from "../../components/admin/TotalList";
+import Tabs from "../../components/admin/Tabs";
 
 //icon sets
 
@@ -28,27 +29,24 @@ function AdminDashboard() {
         <title>Admin Dashboard - GabAI</title>
       </Helmet>
 
-      <div className="flex flex-row h-screen py-20">
-        <div>
-          <Sidebar />
-        </div>
+      <div className="relative z-10 w-full py-[3.875rem] flex flex-col justify-center items-center min-h-screen max-md:p-1">
+            <div id="main-content" className="flex flex-col w-full mx-auto max-w-5xl">
+              {/* Contents */}
+              <div className="mt-2">
+                <h1 className="text-2xl font-semibold">Welcome, {name}!</h1>
+              </div>
 
-        <div id="main-content" className="flex flex-col w-full ">
-          {/* Contents */}
-          <div>
-            <h1>Welcome, {name}!</h1>
-          </div>
+              {/* Shows the Number of Users, Cases, etc. */}
+              <TotalList />
 
-          {/* Shows the Number of Users, Cases, etc. */}
-
-          <TotalList />
-
-          <br />
-          <div className=" max-w-4xl flex justify-center self-center mx-auto">
-            <AllDemo />
+             {/*  <div className="flex flex-col justify-stretch w-full mt-2">
+                <Tabs />
+              </div> */}
+              <div className="flex flex-col justify-stretch items-stretch mt-2">
+                <AllDemo />
+              </div>
           </div>
         </div>
-      </div>
     </>
   );
 }

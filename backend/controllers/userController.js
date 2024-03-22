@@ -1,7 +1,6 @@
 const User = require('../models/userModel');
 const jwt = require('jsonwebtoken');
 
-
 const createToken = (_id) => {
   //Create a token using the ID provided
   //Expires in one day
@@ -94,4 +93,30 @@ const signupUser = async (req, res) => {
   } 
 };
 
-module.exports = { signupUser, loginUser };
+  // get all the users
+  const getAllUsers = async (req, res) => {
+    try {
+      const users = await User.find();
+      res.status(200).json(users);
+    } catch (error) {
+      console.error('Error fetching users:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  };
+
+
+  //update the user profile
+  const updateUser = async (req, res) => {
+    const { userId } = req.params;
+    const userData = req.body;
+    try {
+      // Logic to update user data
+      res.status(200).json(/* updated user data */);
+    } catch (error) {
+      console.error('Error:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  };
+
+
+module.exports = { signupUser, loginUser, getAllUsers, updateUser };

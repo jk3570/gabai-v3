@@ -29,7 +29,7 @@ const formatNumber = (num) =>
 function UserList() {
   return (
     <div className="bg-gray-200 h-screen flex flex-row">
-      <AdminSidebar />
+      
       <div className="flex flex-col w-full">
         <div className="p-4">
           <div className="flex justify-between items-center mt-6">
