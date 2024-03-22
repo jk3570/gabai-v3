@@ -13,7 +13,7 @@ const forgotPass = () => {
               onClick={() => close()}
             />
           </div>
-          <span className="text-center">
+          <span className="items-center justify-center font-normal text-xs underline hover:text-azure">
             <h1>Forgot Password</h1>
           </span>
           <br />

@@ -37,23 +37,26 @@ const UserTable = () => {
     )
   );
 
+  const tableHeader = "px-2 py-1 border-x-2 border-gray-300 text-nowrap text-start h-8"
+  const tableBody = "px-2 border-x-2 border-gray-300 text-wrap text-start h-8"
+
   const offset = currentPage * itemsPerPage;
   const currentPageData = filteredData
     .slice(offset, offset + itemsPerPage)
     .map((user) => (
       <tr key={user._id} className="border-b border-gray-300">
-        <td className="px-4 py-2">{user.firstname}</td>
-        <td className="px-4 py-2">{user.lastname}</td>
-        <td className="px-4 py-2">{user.username}</td>
-        <td className="px-4 py-2">{user.email}</td>
-        <td className="px-4 py-2">{user.gender}</td>
-        <td className="px-4 py-2">{user.birthdate}</td>
-        <td className="px-4 py-2">{user.region}</td>
-        <td className="px-4 py-2">{user.province}</td>
-        <td className="px-4 py-2">{user.city}</td>
-        <td className="px-4 py-2">{user.barangay}</td>
-        <td className="px-4 py-2">{user.role}</td>
-        <td className="px-4 py-2">
+        <td className={tableBody}>{user.firstname}</td>
+        <td className={tableBody}>{user.lastname}</td>
+        <td className={tableBody}>{user.username}</td>
+        <td className={tableBody}>{user.email}</td>
+        <td className={tableBody}>{user.gender}</td>
+        <td className={tableBody}>{user.birthdate}</td>
+        <td className={tableBody}>{user.region}</td>
+        <td className={tableBody}>{user.province}</td>
+        <td className={tableBody}>{user.city}</td>
+        <td className={tableBody}>{user.barangay}</td>
+        <td className={tableBody}>{user.role}</td>
+        <td className={tableBody}>
           <button onClick={() => handleEdit(user)}>Edit</button>
         </td>
       </tr>
@@ -65,35 +68,62 @@ const UserTable = () => {
     setCurrentPage(selectedPage);
   };
 
+
   return (
-    <div>
-      <h2 className="text-xl font-semibold mb-4">User Data Table</h2>
+    <div className="relative z-10 w-full py-[3.875rem] flex flex-col justify-start items-start min-h-screen max-md:p-1">
+      <div id="main-content" className="flex flex-col w-full mx-auto max-w-7xl gap-3">
+      <div className="flex flex-row-1 justify-between items-center mt-4">
+        <h1 className="text-2xl font-semibold text-nowrap">User Data Table</h1>
+        {/* search field */}
+        <div className="flex flex-row-1 justify-end items-end w-full bg-gray">
+            <div className="w-64 relative  bg-azure">
+              <input
+                type="text"
+                placeholder="Search..."
+                value={searchTerm}
+                onChange={handleSearch}
+                className="relative px-4 py-2 w-full border border-gray-300 rounded-md text-xs"
+              />
+              <span className="absolute inset-y-0 right-0 flex items-center justify-end mx-5">
+              <svg
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                className="items-center p-1 h-[1.5rem] w-[1.5rem]"
+                >
+                <path
+                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                  stroke="currentColor"
+                ></path>
+              </svg>
+              </span> 
+            </div>
+        </div>
+      </div>
+          
 
-      {/* search field */}
-      <input
-        type="text"
-        placeholder="Search..."
-        value={searchTerm}
-        onChange={handleSearch}
-        className="mb-4 px-4 py-2 border border-gray-300 rounded-md"
-      />
-
-      <div className="overflow-x-auto">
-        <table className="table-auto w-full border-collapse border border-gray-300" style={{ margin: '20px' }}>
+      {/* Full Table */}
+      <div className="bg-white h-96 overflow-x-auto">
+      <div className="overflow-x-auto max-w-7xl">
+        <table className="table-auto w-full border-collapse border border-gray-200 text-xs">
           <thead>
             <tr className="bg-gray-200">
-              <th className="px-4 py-2">First name</th>
-              <th className="px-4 py-2">Last name</th>
-              <th className="px-4 py-2">Username</th>
-              <th className="px-4 py-2">Email</th>
-              <th className="px-4 py-2">Gender</th>
-              <th className="px-4 py-2">Birthdate</th>
-              <th className="px-4 py-2">Region</th>
-              <th className="px-4 py-2">Province</th>
-              <th className="px-4 py-2">City</th>
-              <th className="px-4 py-2">Barangay</th>
-              <th className="px-4 py-2">Role</th>
-              <th className="px-4 py-2">Actions</th>
+              <th className={tableHeader}>First name</th>
+              <th className={tableHeader}>Last name</th>
+              <th className={tableHeader}>Username</th>
+              <th className={tableHeader}>Email</th>
+              <th className={tableHeader}>Gender</th>
+              <th className={tableHeader}>Birthdate</th>
+              <th className={tableHeader}>Region</th>
+              <th className={tableHeader}>Province</th>
+              <th className={tableHeader}>City</th>
+              <th className={tableHeader}>Barangay</th>
+              <th className={tableHeader}>Role</th>
+              <th className={tableHeader}>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -112,18 +142,28 @@ const UserTable = () => {
           </tbody>
         </table>
       </div>
-      <p>Total No. of Users: {filteredData.length}</p>
-      <ReactPaginate
-        previousLabel={'Previous'}
-        nextLabel={'Next'}
-        breakLabel={'...'}
-        pageCount={pageCount}
-        marginPagesDisplayed={2}
-        pageRangeDisplayed={5}
-        onPageChange={handlePageClick}
-        containerClassName={'pagination'}
-        activeClassName={'active'}
-      />
+      </div>
+      
+      <div>
+        <p>Total No. of Users: {filteredData.length}</p>
+      </div>
+
+      {/* Pagination */}
+      <div className='justify-center flex'>
+        <ReactPaginate
+          className="flex flex-row font-medium text-xs gap-5"
+          previousLabel={'<<Previous'}
+          nextLabel={'Next>>'}
+          breakLabel={'...'}
+          pageCount={pageCount}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={handlePageClick}
+          containerClassName={'pagination'}
+          activeClassName={'active'}
+        />
+      </div>
+    </div>
     </div>
   );
 };

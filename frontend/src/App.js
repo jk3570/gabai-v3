@@ -44,39 +44,42 @@ const App = () => {
   return ( 
     <Router>
 
-      <Navbar />
-      {/* <Sidebar /> */}
-        <Routes>
-          {/* Landing route */}
-          <Route path="/" element={<LandingPage/>} />
+        {user ? <Navbar2/> : null}
+        {user ? null : <Navbar />}
+        {user ? <Sidebar /> : null}
 
-            {/* Search routes */}
-            <Route path="/search" element={<Search />} />
-            <Route path="/search/result" element={<SearchResults />} />
+          <Routes>
+            {/* Landing route */}
+            <Route path="/" element={<LandingPage/>} />
 
-            {/* Components routes */}
-            {user ? null : <Route path="/login" element={<Login />} />}
-            {user ? null : <Route path="/signup" element={<Signup />} />}
-            {user ? <Route path="/profile" element={<Profile />} /> : null}
-            <Route path="/chat" element={<Chat />} />
-            <Route path="/terms" element={<Terms />} />
+                {/* Search routes */}
+                <Route path="/search" element={<Search />} />
+                <Route path="/search/result" element={<SearchResults />} />
 
-            {/* Admin routes */}  
-            <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/admin/signup-admin-lawyer" element={<SignupAdminAndLawyer />} />
-            <Route path="/admin/user-table" element={<UserTable />} />
-            <Route path="/admin/cases" element={<CasesList />} />
-            <Route path="/admin/feedbacks" element={<FeedbackList />} />
+                {/* Components routes */}
+                {user ? null : <Route path="/login" element={<Login />} />}
+                {user ? null : <Route path="/signup" element={<Signup />} />}
+                {user ? <Route path="/profile" element={<Profile />} /> : null}
+                <Route path="/chat" element={<Chat />} />
+                <Route path="/terms" element={<Terms />} />
 
-            {/* Lawyer route */}
-            <Route path="/lawyer" element={<LawyerVideoCon />} />
+                {/* Admin routes */}  
+                <Route path="/admin" element={<AdminDashboard />} />
+                <Route path="/admin/signup-admin-lawyer" element={<SignupAdminAndLawyer />} />
+                <Route path="/admin/user-table" element={<UserTable />} />
+                <Route path="/admin/cases" element={<CasesList />} />
+                <Route path="/admin/feedbacks" element={<FeedbackList />} />
 
-          {/* 404 route */}
-          {/* <Route path="*" element={<PageNotFound />} /> */}
+                {/* Lawyer route */}
+                <Route path="/lawyer" element={<LawyerVideoCon />} />
 
-        </Routes>
-      <Footer />
-      {/* {user ? null : <Footer />} */}
+                {/* 404 route */}
+                {/* <Route path="*" element={<PageNotFound />} /> */}
+
+            </Routes>
+      
+      {user ? null : <Footer />}
+
     </Router>
   );
 };
