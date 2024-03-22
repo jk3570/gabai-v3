@@ -106,11 +106,6 @@ const Login = ({ setLoginSuccess }) => {
                       <div className="items-center justify-center font-normal text-sm underline hover:text-azure">
                         <ForgotPass />
                       </div>
-                      {/* <div className="flex items-center justify-center">
-                        <a href="/forgotpassword" className="items-center justify-center font-normal text-xs underline hover:text-azure">
-                          Forgot password?
-                        </a>
-                      </div> */}
                     </div>
                   </form>
                 </div>

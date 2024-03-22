@@ -43,8 +43,15 @@ const App = () => {
 
   return ( 
     <Router>
+
+      {user ? <Navbar2/> : null}
+      {user ? null : <Navbar />}
+
+      {user ? <Sidebar /> : null}
+      
       <Navbar />
      {/*  <Sidebar /> */}
+
       <Routes>
         {/* Landing route */}
         <Route path="/" element={<LandingPage/>} />
@@ -74,7 +81,7 @@ const App = () => {
         {/* <Route path="*" element={<PageNotFound />} /> */}
       </Routes>
       
-      {/* {user ? null : <Footer />} */}
+      {user ? null : <Footer />}
     </Router>
   );
 };
