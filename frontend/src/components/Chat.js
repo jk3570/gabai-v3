@@ -49,7 +49,12 @@ const ChatComponent = () => {
 
   return (
     <div className="w-full h-screen relative max-w-4xl px-5 lg:px-0 mx-auto mt-20">
-      <div className="h-[80%] overflow-y-scroll flex flex-col gap-2 p-5">
+      <ChatHistory />
+      <div
+        className="
+      h-[80%] overflow-y-scroll flex flex-col gap-2 p-5
+      "
+      >
         {messages.map((message, index) => (
           <div className="p-5 bg-gray-100 rounded-xl animate__animated" key={index}>
             <p> <b>{message.role === 'user' ? 'You' : 'Gab'}</b></p>
@@ -64,11 +69,9 @@ const ChatComponent = () => {
             sendMessage();
           }}
           className="flex flex-row gap-1 bottom-0 w-full py-2"
-          type="submit">
-          <div className="p-3">
-            <ChatHistory />
-          </div>
-
+          type="submit"
+        >
+          <div className="w-[5rem] text-black"></div>
           <input
             type="text"
             value={input}
