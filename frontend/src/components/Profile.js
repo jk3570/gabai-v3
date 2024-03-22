@@ -20,80 +20,147 @@ const Profile = () => {
   };
 
   const { user, dispatch } = useAuthContext();
-
+/* 
   const firstname = user ? user.firstname : null;
   const lastname = user ? user.lastname : null;
   const email = user ? user.email : null;
-  const username = user ? user.username : null;
+  const username = user ? user.username : null; */
 
+  /* Text Hierarchy */
+  const label = "block font-normal text-sm"
 
-  const backdrop =
-    "fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 backdrop-filter backdrop-blur-lg bg-opacity-25 bg-black ";
-  const bg =
-    "modal h-[28rem] w-[31.25rem] rounded-2xl bg-white flex flex-col mx-10 p-3";
+  const input = "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-xs ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 
-  const btnRed = "bg-red-500 text-white p-2 w-full rounded-xl";
+  const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-center items-center w-[12rem] ml-2 text-sm"
 
-  const btnBlue = "bg-azure-500 text-white p-2 w-full rounded-xl";
-
-  const closeBtn = "flex flex-row align-center justify-end p-1 ";
   return (
     <>
       <Popup
         trigger={
-          <button className=" p-4 py-1 text-azure-500 flex justify-center items-center">
-            <span className="bg-gray-300 rounded-full h-10 w-10 flex items-center justify-center mr-3"></span>
-            Profile
+          <button className="bg-gray-300 rounded-full h-10 w-10 flex items-center justify-center">
           </button>
         }
-        modal
         nested
+        
       >
         {(close) => (
-          <div className={backdrop}>
-            <div className={bg}>
-              <div className={closeBtn}>
-                <IoIosCloseCircleOutline
-                  className="text-3xl cursor-pointer"
-                  onClick={() => close()}
-                />
+          <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 backdrop-filter backdrop-blur-lg bg-opacity-25 bg-black ">
+            <div className="modal relative h-[80%] w-[80%] rounded-2xl bg-gray-100 flex flex-col mx-10 pt-1 p-2">
+                      <div className="absolute flex align-center p-1 inset-y-0 right-0">
+                        <IoIosCloseCircleOutline
+                          className="text-3xl cursor-pointer"
+                          onClick={() => close()}/>
+                      </div>
+              
+              <div className="w-full h-full flex flex-col-2 gap-4 p-2 px-4">
+
+                {/* General Details */}
+                <div className="w-[30%] h-full flex bg-white rounded-xl p-5">
+                  <div className="text-center">
+                      <div className="grid items-start mb-7">
+                        <div className="w-full flex items-center justify-center mt-3 mb-4">
+                          <img className="rounded-full overflow-clip w-[7rem] h-[7rem]" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin"/>
+                        </div>
+                        <h5 className="user-name font-medium text-2xl text-azure">Yuki Hayashi</h5>
+                        <h6 className="user-email text-sm text-gray-500">yuki@Maxwell.com</h6>
+                        <button className="text-xs mt-4 text-gray-800 underline hover:text-azure">change password</button>
+                      </div>
+                      <div className="about grid items-start gap-3 text-center">
+                        <h5 className="text-azure font-medium text-1xl">About</h5>
+                        <p className="text-xs">I'm Yuki. Full Stack Designer I enjoy creating user-centric, delightful and human experiences.</p>
+                      </div>
+                  </div>
+
+                </div>
+                
+
+                {/* More Details */}
+                <div className="w-full h-full bg-white rounded-xl p-5">
+                <div className="card-body">
+                    <div className="grid grid-cols-1 gap-4">
+                        <div>
+                            <h6 className="mb-2 text-primary text-azure font-medium text-1xl">Personal Details</h6>
+                            <div className="grid grid-cols-1 gap-4">
+                              <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label className={label}>First Name</label>
+                                    <input type="text" id="firstName" placeholder="First Name" className={input}/>
+                                </div>
+                                <div>
+                                    <label className={label}>Last Name</label>
+                                    <input type="text" id="lastName" placeholder="Last Name" className={input}/>
+                                </div>
+                              </div>
+                              <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label className={label}>Gender</label>
+                                    <select
+                                          name="gender"
+                                          id="gender"
+                                          className={input}
+                                        >
+                                          <option value="">- Select Gender -</option>
+                                          <option value="Male">Male</option>
+                                          <option value="Female">Female</option>
+                                          <option value="LGBTQ">LGBTQ</option>
+                                          <option value="Prefer not to say">
+                                            Prefer not to say
+                                          </option>
+                                        </select>
+                                    {/* <input type="" id="gender" placeholder="Gender" className={input}/> */}
+                                </div>
+                                <div>
+                                    <label className={label}>Birthdate</label>
+                                    <input type="date" id="birthDate" placeholder="DD/MM/YY" className={input}/>
+                                </div>
+                              </div>
+                                {/* <div>
+                                    <label className={label}>Email</label>
+                                    <input type="email" id="eMail" placeholder="Email" className={input}/>
+                                </div> */}
+                          </div>
+                        </div>
+                        <div>
+                            <h6 className="mb-2 text-primary text-azure font-medium text-1xl">Address</h6>
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label  className={label}>Region</label>
+                                    <input type="text" id="Street" placeholder="Region" className={input}/>
+                                </div>
+                                <div>
+                                    <label  className={label}>Province</label>
+                                    <input type="text" id="ciTy" placeholder="Province" className={input}/>
+                                </div>
+                                <div>
+                                    <label className={label}>City</label>
+                                    <input type="text" id="sTate" placeholder="City" className={input}/>
+                                </div>
+                                <div>
+                                    <label className={label}>Barangay</label>
+                                    <input type="text" id="zIp" placeholder="Barangay" className={input}/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flex justify-end mt-10">
+                        <button id="submit" name="submit" className={button}>Cancel</button>
+                        <button id="submit" name="submit" className={button}>Update</button>
+                    </div>
+                </div>  
+
+                </div>
               </div>
 
-              <div className="flex flex-col items-center justify-center">
-                {/* <div className="h-[7rem] w-[7rem] bg-gray-300 rounded-full"></div> */}
-
-                <label>First name: </label>
-                <input
-                  value={firstname && firstname}
-                ></input>
-
-                <label>Last name: </label>
-                <input
-                  value={lastname && lastname}
-                ></input>
-
-                <label>Email: </label>
-                <input
-                  value={email && email}
-                ></input>
-
-                <label>Username: </label>
-                <input
-                  value={username && username}
-                ></input>
-
-
-              </div>
-              <br />
-              <div className="flex flex-col items-center justify-center">
-                {/* <ProfileSettings></ProfileSettings> */}
-                <br />
+              {/* <div className="flex flex-col items-center justify-center">
+                <ProfileSettings></ProfileSettings>
+                
                 <Link to="/">
                   <button className={btnRed} onClick={handleLogout}>Log Out</button>
                 </Link>
-              </div>
-            </div>
+              </div> */}
+            </div> {/*  main modal */}
           </div>
+
         )}
       </Popup>
     </>

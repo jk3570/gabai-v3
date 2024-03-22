@@ -10,20 +10,20 @@ const Counter = () => {
   const feedbackCount = 0;
 
   const totalNoStyle =
-    "flex flex-row border-2 rounded-xl h-[8rem] w-[16rem] p-3 justify-between items-center border-black";
+    "flex flex-row bg-gray-200 rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl h-auto w-[35%] text-1xl p-5 justify-between items-center border-azure-500";
 
   return (
-    <div className="flex flex-row gap-1 items-center justify-center self-center w-[75vw]">
+    <div className="flex flex-row gap-3 mx-auto justify-center shrink self-center w-full">
       {/* Start */}
       <div className={totalNoStyle}>
         <div>
           {/* User Count */}
           Total No. of Users
           <br />
-          <span className="text-5xl">{userCount}</span>
+          <span className="text-5xl text-azure">{userCount}</span>
         </div>
         <div>
-          <FaRegUser className="text-7xl" />
+          <FaRegUser className="h-[4rem] w-[4rem] p-2 fill-azure" />
         </div>
       </div>
       {/* End */}
@@ -34,10 +34,10 @@ const Counter = () => {
           {/* Case Count */}
           Total No. of Cases
           <br />
-          <span className="text-5xl">{caseCount}</span>
+          <span className="text-5xl text-azure">{caseCount}</span>
         </div>
         <div>
-          <LiaBalanceScaleSolid className="text-7xl" />
+          <LiaBalanceScaleSolid className="h-[4rem] w-[4rem] fill-azure" />
         </div>
       </div>
       {/* End */}
@@ -48,10 +48,10 @@ const Counter = () => {
           {/* Feedback Count */}
           Total No. of Feedback
           <br />
-          <span className="text-5xl">{feedbackCount}</span>
+          <span className="text-5xl text-azure">{feedbackCount}</span>
         </div>
         <div>
-          <VscFeedback className="text-7xl" />
+          <VscFeedback className="h-[4rem] w-[4rem] p-1 fill-azure" />
         </div>
       </div>
       {/* End */}

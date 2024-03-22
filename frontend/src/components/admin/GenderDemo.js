@@ -38,12 +38,6 @@ const PieChartComponent = React.memo(() => (
 function Sex() {
   return (
     <>
-      <div>
-        <center>
-          <h1 className="text-3xl font-bold">Sex Demographics</h1>
-        </center>
-      </div>
-
       <div className="flex flex-row gap-1 items-center justify-center text-azure">
         <div>
           {/* Bar Graph */}
