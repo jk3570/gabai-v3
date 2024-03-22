@@ -98,7 +98,7 @@ const Login = ({ setLoginSuccess }) => {
 
                     <div className="flex items-center justify-center">
                       <div className="flex flex-row items-center justify-center">
-                        <ForgotPass />
+                        {/* <ForgotPass /> */}
                       </div>
                       <div className="mx-12">
                         <button disabled={isLoading} type="submit" className={button}>
