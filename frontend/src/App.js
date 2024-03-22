@@ -43,11 +43,14 @@ const App = () => {
 
   return ( 
     <Router>
+
       {user ? <Navbar2/> : null}
       {user ? null : <Navbar />}
 
       {user ? <Sidebar /> : null}
       
+      <Navbar />
+     {/*  <Sidebar /> */}
 
       <Routes>
         {/* Landing route */}
