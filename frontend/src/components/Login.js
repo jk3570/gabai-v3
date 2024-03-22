@@ -89,7 +89,7 @@ const Login = ({ setLoginSuccess }) => {
                           value={password}
                           className={input}
                         />
-                        <span class="absolute inset-y-0 right-0 flex items-center justify-end mx-5" onClick={handleToggle}>
+                        <span className="absolute inset-y-0 right-0 flex items-center justify-end mx-5" onClick={handleToggle}>
                           <Icon class="" icon={icon} size={15} />
                         </span>
                       </div>
