@@ -13,7 +13,7 @@ const Counter = () => {
     "flex flex-row bg-gray-200 rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl h-auto w-[35%] text-1xl p-5 justify-between items-center border-azure-500";
 
   return (
-    <div className="flex flex-row gap-3 mt-5 mx-auto justify-center shrink self-center w-full">
+    <div className="flex flex-row gap-3 mx-auto justify-center shrink self-center w-full">
       {/* Start */}
       <div className={totalNoStyle}>
         <div>

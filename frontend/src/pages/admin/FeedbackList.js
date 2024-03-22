@@ -23,11 +23,11 @@ const formatNumber = (num) =>
   num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 function FeedbackList() {
   return (
-    <div className="bg-gray-200 h-screen flex flex-row p-1">
+    <div className="bg-gray-200 h-screen flex flex-row">
      
-      <div className="flex flex-col w-full mt-6">
+      <div className="flex flex-col w-full mx-auto max-w-6xl">
         <div className="p-4">
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center mt-6">
             <h1 className="font-medium">Feedback</h1>
           </div>
         </div>
