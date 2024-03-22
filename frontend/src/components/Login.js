@@ -67,7 +67,7 @@ const Login = ({ setLoginSuccess }) => {
 
                 <div className="w-full h-full flex flex-col-1">
                   <form onSubmit={handleSubmit} className="w-full h-full grid grid-cols-1 gap-3">
-                    <div className="flex flex-col items-center justify-center gap-2">
+                    <div className="flex flex-col items-center justify-center gap-3">
                       <input
                         type="text"
                         id="identifier"
@@ -96,20 +96,21 @@ const Login = ({ setLoginSuccess }) => {
                       {error && <span className={warning}>{error}</span>}
                     </div>
 
-                    <div className="flex items-center justify-center">
-                      <div className="flex flex-row items-center justify-center">
-                        <ForgotPass />
-                      </div>
-                      <div className="mx-12">
+                    <div className="flex flex-col w-full items-center justify-center gap-3">
+                      
+                      <div className="flex flex-col w-full">
                         <button disabled={isLoading} type="submit" className={button}>
                           Log In
                         </button>
                       </div>
-                      <div className="flex items-center justify-center">
+                      <div className="items-center justify-center font-normal text-sm underline hover:text-azure">
+                        <ForgotPass />
+                      </div>
+                      {/* <div className="flex items-center justify-center">
                         <a href="/forgotpassword" className="items-center justify-center font-normal text-xs underline hover:text-azure">
                           Forgot password?
                         </a>
-                      </div>
+                      </div> */}
                     </div>
                   </form>
                 </div>
