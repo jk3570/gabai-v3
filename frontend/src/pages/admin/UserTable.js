@@ -37,23 +37,26 @@ const UserTable = () => {
     )
   );
 
+  const tableHeader = "px-2 py-1 border-x-2 border-gray-300 text-nowrap text-start h-8"
+  const tableBody = "px-2 border-x-2 border-gray-300 text-wrap text-start h-8"
+
   const offset = currentPage * itemsPerPage;
   const currentPageData = filteredData
     .slice(offset, offset + itemsPerPage)
     .map((user) => (
       <tr key={user._id} className="border-b border-gray-300">
-        <td className="px-4 py-2">{user.firstname}</td>
-        <td className="px-4 py-2">{user.lastname}</td>
-        <td className="px-4 py-2">{user.username}</td>
-        <td className="px-4 py-2">{user.email}</td>
-        <td className="px-4 py-2">{user.gender}</td>
-        <td className="px-4 py-2">{user.birthdate}</td>
-        <td className="px-4 py-2">{user.region}</td>
-        <td className="px-4 py-2">{user.province}</td>
-        <td className="px-4 py-2">{user.city}</td>
-        <td className="px-4 py-2">{user.barangay}</td>
-        <td className="px-4 py-2">{user.role}</td>
-        <td className="px-4 py-2">
+        <td className={tableBody}>{user.firstname}</td>
+        <td className={tableBody}>{user.lastname}</td>
+        <td className={tableBody}>{user.username}</td>
+        <td className={tableBody}>{user.email}</td>
+        <td className={tableBody}>{user.gender}</td>
+        <td className={tableBody}>{user.birthdate}</td>
+        <td className={tableBody}>{user.region}</td>
+        <td className={tableBody}>{user.province}</td>
+        <td className={tableBody}>{user.city}</td>
+        <td className={tableBody}>{user.barangay}</td>
+        <td className={tableBody}>{user.role}</td>
+        <td className={tableBody}>
           <button onClick={() => handleEdit(user)}>Edit</button>
         </td>
       </tr>
@@ -65,35 +68,58 @@ const UserTable = () => {
     setCurrentPage(selectedPage);
   };
 
+
   return (
-    <div>
-      <h2 className="text-xl font-semibold mb-4">User Data Table</h2>
+    <div className="relative z-10 w-full py-[3.875rem] flex flex-col justify-start items-start min-h-screen max-md:p-1">
+      <div id="main-content" className="flex flex-col w-full mx-auto max-w-7xl gap-3">
+      <div className="mt-4">
+        <h1 className="text-2xl font-semibold my-0">User Data Table</h1>
+      </div>
+          {/* search field */}
+          <div className="flex justify-end">
+            <input
+              type="text"
+              placeholder="Search..."
+              value={searchTerm}
+              onChange={handleSearch}
+              className="px-4 py-2 w-[30%] border border-gray-300 rounded-md text-xs"
+            />
+          </div>
 
-      {/* search field */}
-      <input
-        type="text"
-        placeholder="Search..."
-        value={searchTerm}
-        onChange={handleSearch}
-        className="mb-4 px-4 py-2 border border-gray-300 rounded-md"
-      />
+          {/* Pagination */}
+          <div className='flex justify-end mr-5'>
+            <ReactPaginate
+              className="flex flex-row font-medium text-xs gap-5"
+              previousLabel={'<<Previous'}
+              nextLabel={'Next>>'}
+              breakLabel={'...'}
+              pageCount={pageCount}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={5}
+              onPageChange={handlePageClick}
+              containerClassName={'pagination'}
+              activeClassName={'active'}
+            />
+          </div>
 
-      <div className="overflow-x-auto">
-        <table className="table-auto w-full border-collapse border border-gray-300" style={{ margin: '20px' }}>
+      {/* Full Table */}
+      <div className="bg-white h-96 overflow-x-auto">
+      <div className="overflow-x-auto max-w-7xl">
+        <table className="table-auto w-full border-collapse border border-gray-200 text-xs">
           <thead>
             <tr className="bg-gray-200">
-              <th className="px-4 py-2">First name</th>
-              <th className="px-4 py-2">Last name</th>
-              <th className="px-4 py-2">Username</th>
-              <th className="px-4 py-2">Email</th>
-              <th className="px-4 py-2">Gender</th>
-              <th className="px-4 py-2">Birthdate</th>
-              <th className="px-4 py-2">Region</th>
-              <th className="px-4 py-2">Province</th>
-              <th className="px-4 py-2">City</th>
-              <th className="px-4 py-2">Barangay</th>
-              <th className="px-4 py-2">Role</th>
-              <th className="px-4 py-2">Actions</th>
+              <th className={tableHeader}>First name</th>
+              <th className={tableHeader}>Last name</th>
+              <th className={tableHeader}>Username</th>
+              <th className={tableHeader}>Email</th>
+              <th className={tableHeader}>Gender</th>
+              <th className={tableHeader}>Birthdate</th>
+              <th className={tableHeader}>Region</th>
+              <th className={tableHeader}>Province</th>
+              <th className={tableHeader}>City</th>
+              <th className={tableHeader}>Barangay</th>
+              <th className={tableHeader}>Role</th>
+              <th className={tableHeader}>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -112,18 +138,28 @@ const UserTable = () => {
           </tbody>
         </table>
       </div>
-      <p>Total No. of Users: {filteredData.length}</p>
-      <ReactPaginate
-        previousLabel={'Previous'}
-        nextLabel={'Next'}
-        breakLabel={'...'}
-        pageCount={pageCount}
-        marginPagesDisplayed={2}
-        pageRangeDisplayed={5}
-        onPageChange={handlePageClick}
-        containerClassName={'pagination'}
-        activeClassName={'active'}
-      />
+      </div>
+      
+      <div>
+        <p>Total No. of Users: {filteredData.length}</p>
+      </div>
+
+      {/* Pagination */}
+      <div className='justify-center flex'>
+        <ReactPaginate
+          className="flex flex-row font-medium text-xs gap-5"
+          previousLabel={'<<Previous'}
+          nextLabel={'Next>>'}
+          breakLabel={'...'}
+          pageCount={pageCount}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={handlePageClick}
+          containerClassName={'pagination'}
+          activeClassName={'active'}
+        />
+      </div>
+    </div>
     </div>
   );
 };

@@ -25,7 +25,7 @@ function CasesList() {
   return (
     <div className="bg-gray-200 h-screen flex flex-row">
       
-      <div className="flex flex-col w-full">
+      <div className="flex flex-col w-full mx-auto max-w-6xl">
         <div className="p-4">
           <div className="flex justify-between items-center mt-6">
             <h1 className="font-medium item-center">Cases</h1>
