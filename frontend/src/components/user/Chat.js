@@ -4,6 +4,7 @@ import Markdown from 'react-markdown';
 import { HiVideoCamera } from 'react-icons/hi';
 import axios from 'axios';
 import RequestForm from "../RequestForm.js";
+import { BaseURL } from '../../BaseURL'
 
 export const useInputState = () => {
   const [input, setInput] = useState('');
@@ -22,7 +23,7 @@ const ChatComponent = () => {
       setInput('');
 
       // Send message to server
-      axios.post('http://localhost:4000/gab/conversation', { input: input })
+      axios.post(`${BaseURL}/gab/conversation`, { input: input })
         .then(response => {
           const aiMessage = { role: 'assistant', content: response.data.message };
           setMessages(prevMessages => [...prevMessages, aiMessage]);
@@ -37,7 +38,7 @@ const ChatComponent = () => {
   const handleChatEnd = async (conversation) => {
     try {
       // Save conversation to the database
-      await axios.post('http://localhost:4000/gab/new-chat', { title: generateDefaultTitle(), messages: conversation });
+      await axios.post(`${BaseURL}/gab/new-chat`, { title: generateDefaultTitle(), messages: conversation });
     } catch (error) {
       console.error('Error saving conversation:', error);
     }
@@ -90,9 +91,9 @@ const ChatComponent = () => {
             Send
           </button>
 
-          <Link to="/lawyer" className="p-3 rounded-xl bg-azure text-white">
+          {/* <Link to="/lawyer/video-conference" className="p-3 rounded-xl bg-azure text-white">
             <HiVideoCamera className="text-xl" />
-          </Link>
+          </Link> */}
         </form>
       </div>
       <div className="flex justify-center items-center">
