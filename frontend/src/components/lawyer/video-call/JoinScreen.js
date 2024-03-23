@@ -19,11 +19,6 @@ function JoinScreen({ getMeetingAndToken }) {
       if (!meetingInfo || !meetingInfo.participantCount) {
         throw new Error("Meeting information is invalid");
       }
-
-      if (meetingInfo.participantCount >= 2) {
-        alert("The meeting is full. You cannot join.");
-        return;
-      }
     } catch (error) {
       console.error("Error joining meeting:", error);
       alert("Error joining meeting. Please try again.");
@@ -38,7 +33,7 @@ function JoinScreen({ getMeetingAndToken }) {
   return (
     <div>
       <h1 className="text-[2.55rem]">
-        <b>Hello, attorney!</b> {/* Greeting message */}
+        <b>Video Call</b> {/* Greeting message */}
       </h1>
       <br />
       <div className="flex flex-row gap-2">
