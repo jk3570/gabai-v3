@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, React } from "react";
 import { useNavigate } from "react-router-dom";
 import Popup from "reactjs-popup";
 import { IoIosCloseCircleOutline } from "react-icons/io";
@@ -32,6 +32,19 @@ const Login = ({ setLoginSuccess }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await login(identifier, password);
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Prevent form submission
+      const inputs = Array.from(event.target.form.elements);
+      const currentIndex = inputs.indexOf(event.target);
+      const nextIndex = currentIndex + 1;
+
+      if (nextIndex < inputs.length) {
+        inputs[nextIndex].focus();
+      }
+    }
   };
 
   const label = "block font-normal text-sm";
@@ -76,6 +89,7 @@ const Login = ({ setLoginSuccess }) => {
                         onChange={(e) => setIdentifier(e.target.value)}
                         value={identifier}
                         className={input}
+                        onKeyDown={handleKeyDown}
                       />
                       <div className="relative w-full flex items-center">
                         <input
@@ -88,6 +102,7 @@ const Login = ({ setLoginSuccess }) => {
                           }}
                           value={password}
                           className={input}
+                          onKeyDown={handleKeyDown}
                         />
                         <span className="absolute inset-y-0 right-0 flex items-center justify-end mx-5" onClick={handleToggle}>
                           <Icon class="" icon={icon} size={15} />

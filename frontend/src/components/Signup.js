@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useState, useEffect } from "react";
+import { React, useState, useEffect } from "react";
 import {
   regions,
   provinces,
@@ -28,6 +28,19 @@ const Signup = ({ initialAddress }) => {
   const [provinceOptions, setProvinceOptions] = useState([]);
   const [cityOptions, setCityOptions] = useState([]);
   const [barangayOptions, setBarangayOptions] = useState([]);
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Prevent form submission
+      const inputs = Array.from(event.target.form.elements);
+      const currentIndex = inputs.indexOf(event.target);
+      const nextIndex = currentIndex + 1;
+
+      if (nextIndex < inputs.length) {
+        inputs[nextIndex].focus();
+      }
+    }
+  };
 
   const {
     register,
@@ -292,6 +305,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
 
                           })}
                           className={input}
+                          onKeyDown={handleKeyDown}
                         />
                         {errors.firstname &&
                           errors.firstname.type === "required" && (
@@ -319,6 +333,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                             pattern: /^[A-Za-z\s]+$/,
                           })}
                           className={input}
+                          onKeyDown={handleKeyDown}
                         />
                         {errors.lastname && errors.lastname.type === "required" && (
                           <span className={warning}>
@@ -340,6 +355,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                             id="gender"
                             {...register("gender", { required: true })}
                             className={input}
+                            onKeyDown={handleKeyDown}
                           >
                             <option value="">- Select Gender -</option>
                             <option value="Male">Male</option>
@@ -387,6 +403,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                             },
                           })}
                           className={input}
+                          onKeyDown={handleKeyDown}
                         />
                         {errors.birthdate &&
                           errors.birthdate.type === "required" && (
@@ -456,6 +473,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                               id="region"
                               {...register("region", { required: true })}
                               className={input}
+                              onKeyDown={handleKeyDown}
                               value={selectedRegion}
                               onChange={(e) => setSelectedRegion(e.target.value)}
                             >
@@ -486,6 +504,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                               id="province"
                               {...register("province", { required: true })}
                               className={input}
+                              onKeyDown={handleKeyDown}
                               value={selectedProvince}
                               onChange={(e) => setSelectedProvince(e.target.value)}
                             >
@@ -516,6 +535,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                               id="city"
                               {...register("city", { required: true })}
                               className={input}
+                              onKeyDown={handleKeyDown}
                               value={selectedCity}
                               onChange={(e) => setSelectedCity(e.target.value)}
                             >
@@ -543,6 +563,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                               id="barangay"
                               {...register("barangay", { required: true })}
                               className={input}
+                              onKeyDown={handleKeyDown}
                               value={selectedBarangay}
                               onChange={(e) => setSelectedBarangay(e.target.value)}
                             >
@@ -630,6 +651,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                                 pattern: /^(?=.*[a-z])(?=.*\d)[a-z\d]+$/i,
                               })}
                               className={input}
+                              onKeyDown={handleKeyDown}
                             />
                             {errors.username &&
                               errors.username.type === "required" && (
@@ -671,6 +693,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                                   /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, // Regular expression for email validation
                               })}
                               className={input}
+                              onKeyDown={handleKeyDown}
                             />
                             {errors.email && errors.email.type === "required" && (
                               <span className={warning}>
@@ -704,6 +727,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                                     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,24}$/,
                                 })}
                                 className={input}
+                                onKeyDown={handleKeyDown}
                               />
                               <span
                                 class="absolute inset-y-0 right-0 flex items-center justify-end mr-4"
@@ -760,6 +784,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                               }
                             })}
                             className={input}
+                            onKeyDown={handleKeyDown}
                           />
                           {errors.confirmPassword && errors.confirmPassword.type === "required" && (
                             <span className={warning}>Confirm Password is required</span>

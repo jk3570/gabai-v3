@@ -3,7 +3,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 
 //components and pages
-import Sidebar from "../../components/admin/Sidebar.js";
+import Sidebar from "../../components/admin/AdminSidebar.js";
 import AllDemo from "../../components/admin/AllDemo";
 import TotalList from "../../components/admin/TotalList";
 import Tabs from "../../components/admin/Tabs";
@@ -29,10 +29,10 @@ function AdminDashboard() {
         <title>Admin Dashboard - GabAI</title>
       </Helmet>
 
-      <div className="relative z-10 w-full py-[3.875rem] flex flex-col justify-center items-center min-h-screen max-md:p-1">
+      <div className="relative z-10 w-full pt-[3.875rem] flex flex-col justify-start items-center min-h-screen max-md:p-1">
             <div id="main-content" className="flex flex-col w-full mx-auto max-w-5xl">
               {/* Contents */}
-              <div className="mt-2">
+              <div className="mt-0">
                 <h1 className="text-2xl font-semibold">Welcome, {name}!</h1>
               </div>
 
