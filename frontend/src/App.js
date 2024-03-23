@@ -7,9 +7,10 @@ import "animate.css";
 //AuthContext provider
 import { useAuthContext } from "./hooks/useAuthContext";
 
-//Navbars
+//Navbars and Sidebars
 import Navbar from "./components/Navbar";
 import Navbar2 from "./components/Navbar2";
+import ChatSidebar from "./components/ChatSidebar";
 import Sidebar from "./components/admin/Sidebar.js";
 
 //Components routes
@@ -20,7 +21,8 @@ import Signup from "./components/Signup";
 import SignupAdminAndLawyer from "./components/SignupAdminAndLawyer";
 import Chat from "./components/Chat";
 import Profile from "./components/Profile";
-import PageNotFound from "./components/PageNotFound";
+
+// import PageNotFound from "./components/PageNotFound";
 
 //Landing route
 import LandingPage from "./pages/LandingPage";
@@ -47,10 +49,12 @@ const App = () => {
         {user ? <Navbar2/> : null}
         {user ? null : <Navbar />}
         {user ? <Sidebar /> : null}
+        <ChatSidebar />
 
           <Routes>
-            {/* Landing route */}
-            <Route path="/" element={<LandingPage/>} />
+            
+                {/* Landing route */}
+                <Route path="/" element={<LandingPage/>} />
 
                 {/* Search routes */}
                 <Route path="/search" element={<Search />} />
@@ -60,7 +64,8 @@ const App = () => {
                 {user ? null : <Route path="/login" element={<Login />} />}
                 {user ? null : <Route path="/signup" element={<Signup />} />}
                 {user ? <Route path="/profile" element={<Profile />} /> : null}
-                <Route path="/chat" element={<Chat />} />
+                <Route path="/gab/chat" element={<Chat />} />
+                <Route path="/gab/chat/:id" element={<Chat />} />
                 <Route path="/terms" element={<Terms />} />
 
                 {/* Admin routes */}  

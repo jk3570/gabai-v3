@@ -1,17 +1,13 @@
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Markdown from 'react-markdown';
-import { useState, useEffect } from 'react';
 import { HiMiniVideoCamera } from 'react-icons/hi2';
 import ChatHistory from './ChatHistory';
-
-export const useInputState = () => {
-  const [input, setInput] = useState('');
-  return { input, setInput };
-};
+import axios from 'axios';
 
 const ChatComponent = () => {
   const [messages, setMessages] = useState([]);
-  const { input, setInput } = useInputState();
+  const [input, setInput] = useState('');
   const [isSendDisabled, setIsSendDisabled] = useState(true);
 
   const sendMessage = () => {
@@ -19,28 +15,32 @@ const ChatComponent = () => {
       const newMessage = { role: 'user', content: input };
       setMessages(prevMessages => [...prevMessages, newMessage]);
       setInput('');
-  
-      fetch('http://localhost:4000/gab/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ input: input }), // Adjusted to send 'input' property
-      })
+
+      // Send message to server
+      axios.post('http://localhost:4000/gab/conversation', { input: input })
         .then(response => {
-          if (!response.ok) {
-            throw new Error('Server Error: ' + response.statusText);
-          }
-          return response.json();
-        })
-        .then(data => {
-          const aiMessage = { role: 'assistant', content: data.message };
+          const aiMessage = { role: 'assistant', content: response.data.message };
           setMessages(prevMessages => [...prevMessages, aiMessage]);
+          handleChatEnd([...messages, newMessage, aiMessage]); // Save conversation to database
         })
         .catch(error => console.error('Error:', error));
     } else {
       console.error('Error: Empty input');
     }
+  };
+
+  const handleChatEnd = async (conversation) => {
+    try {
+      // Save conversation to the database
+      await axios.post('http://localhost:4000/gab/new-chat', { title: generateDefaultTitle(), messages: conversation });
+    } catch (error) {
+      console.error('Error saving conversation:', error);
+    }
+  };
+
+  const generateDefaultTitle = () => {
+    const currentDate = new Date();
+    return `Chat ${currentDate.toLocaleString()}`;
   };
 
   useEffect(() => {
@@ -49,15 +49,10 @@ const ChatComponent = () => {
 
   return (
     <div className="w-full h-screen relative max-w-4xl px-5 lg:px-0 mx-auto mt-20">
-      <ChatHistory />
-      <div
-        className="
-      h-[80%] overflow-y-scroll flex flex-col gap-2 p-5
-      "
-      >
+      <div className="h-[80%] overflow-y-scroll flex flex-col gap-2 p-5">
         {messages.map((message, index) => (
           <div className="p-5 bg-gray-100 rounded-xl animate__animated" key={index}>
-            <p> <b>{message.role === 'user' ? 'You' : 'Gab'}</b></p>
+            <p><b>{message.role === 'user' ? 'You' : 'Gab'}</b></p>
             <p><Markdown>{message.content}</Markdown></p>
           </div>
         ))}

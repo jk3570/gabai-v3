@@ -77,7 +77,7 @@ const signupUser = async (req, res) => {
     // Create a token
     const token = createToken(user._id);
 
-    //response on local storage
+    // response on local storage
     res.status(200).json({ 
       token,
       role: user.role,
@@ -105,7 +105,7 @@ const signupUser = async (req, res) => {
   };
 
 
-  //update the user profile
+  // update the user profile
   const updateUser = async (req, res) => {
     const { userId } = req.params;
     const userData = req.body;
