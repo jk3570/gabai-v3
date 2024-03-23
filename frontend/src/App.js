@@ -27,8 +27,8 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 
 import SignupAdminAndLawyer from "./components/SignupAdminAndLawyer";
-import Chat from "./components/Chat";
-import Profile from "./components/Profile";
+import ChatComponent from "./components/user/Chat";
+import UserProfile from "./components/user/UserProfile";
 
 // import PageNotFound from "./components/PageNotFound";
 
@@ -80,9 +80,9 @@ const App = () => {
                 {/* Components routes */}
                 {user ? null : <Route path="/login" element={<Login />} />}
                 {user ? null : <Route path="/signup" element={<Signup />} />}
-                {user ? <Route path="/profile" element={<Profile />} /> : null}
-                <Route path="/gab/chat" element={<Chat />} />
-                <Route path="/gab/chat/:id" element={<Chat />} />
+                {user ? <Route path="/profile" element={<UserProfile />} /> : null}
+                <Route path="/gab/chat" element={<ChatComponent />} />
+                <Route path="/gab/chat/:id" element={<ChatComponent />} />
                 <Route path="/terms" element={<Terms />} />
 
                 {/* Lawyer route */}
@@ -94,8 +94,8 @@ const App = () => {
                 {/* Components routes */}
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/chat" element={<Chat />} />
+                <Route path="/profile" element={<UserProfile />} />
+                <Route path="/chat" element={<ChatComponent />} />
                 <Route path="/terms" element={<Terms />} />
 
                 {/* Admin routes */}  
