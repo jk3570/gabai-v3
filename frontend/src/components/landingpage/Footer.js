@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
-import "../css/footer.css";
+import "../../css/footer.css";
 import { FaFacebook, FaPhone, FaMailBulk } from "react-icons/fa";
 
-import Logo from "../img/Logo.png";
-import iconAzure from "../img/iconAzure.svg";
-import paragonLogoSolid from "../img/paragonLogoSolid.svg";
-import uccLogo from "../img/uccLogo.svg";
+import iconAzure from "../../img/iconAzure.svg";
+import paragonLogoSolid from "../../img/paragonLogoSolid.svg";
+import uccLogo from "../../img/uccLogo.svg";
 
 function Footer() {
 
@@ -37,7 +36,7 @@ function Footer() {
         >
 
            {/* Top Part */}
-            <div alt="Footer Content" className="mx-auto w-full py-4 py-0 lg:py-8 max-w-4xl ">
+            <div alt="Footer Content" className="mx-auto w-full py-4 lg:py-8 max-w-4xl ">
                 <div className="md:flex md:justify-between">
                     <div className=" md:mb-0 relative inline-block">
                         <div className="flex flex-row gap-3 mb-5">

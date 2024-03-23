@@ -1,21 +1,20 @@
 //CSS
-import "../css/nav.css";
+import "../../css/nav.css";
 
 //AuthContext provider
-import { useAuthContext } from "../hooks/useAuthContext";
-import Profile from "./Profile";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import Profile from "../user/UserProfile";
 import { useState, useEffect } from "react";
 
 //Images and Icons
 import { Link } from "react-router-dom";
-import Logo from "../img/Logo.png";
-import iconWhite from "../img/iconWhite.svg";
+import iconWhite from "../../img/iconWhite.svg";
 import { BsMoon } from "react-icons/bs";
 import { FaSearch } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 
 // Components
-import Login from "./Login";
+import Login from "../Login";
 
 const toggle = () => {
   var element = document.body;

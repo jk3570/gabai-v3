@@ -2,7 +2,10 @@ import { Link } from 'react-router-dom';
 import Markdown from 'react-markdown';
 import { useState, useEffect } from 'react';
 import { HiMiniVideoCamera } from 'react-icons/hi2';
+
+
 import ChatHistory from './ChatHistory';
+import RequestForm from "../RequestForm.js";
 
 export const useInputState = () => {
   const [input, setInput] = useState('');
@@ -50,6 +53,7 @@ const ChatComponent = () => {
   return (
     <div className="w-full h-screen relative max-w-4xl px-5 lg:px-0 mx-auto mt-20">
       <ChatHistory />
+      
       <div
         className="
       h-[80%] overflow-y-scroll flex flex-col gap-2 p-5
@@ -102,6 +106,7 @@ const ChatComponent = () => {
           All conversation is completely confidential.
         </p>
       </div>
+      <RequestForm />
     </div>
   );
 };

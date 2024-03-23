@@ -1,1 +1,1 @@
-alert("not found")
+/* alert("not found") */
