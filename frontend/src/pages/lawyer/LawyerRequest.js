@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import useUserData from '../../hooks/useUserData';
 import ReactPaginate from 'react-paginate';
 
-const UserTable = () => {
+
+const LawyerRequest = () => {
   const { userData, loading } = useUserData();
   const [currentPage, setCurrentPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
@@ -68,12 +69,13 @@ const UserTable = () => {
     setCurrentPage(selectedPage);
   };
 
-
   return (
     <div className="relative z-10 w-full py-[3.875rem] flex flex-col justify-start items-start min-h-screen max-md:p-1">
       <div id="main-content" className="flex flex-col w-full mx-auto max-w-7xl gap-3">
       <div className="flex flex-row-1 justify-between items-center mt-4">
-        <h1 className="text-2xl font-semibold text-nowrap">User Data Table</h1>
+
+        <h1 className="text-2xl font-semibold text-nowrap">Request Queue</h1>
+        
         {/* search field */}
         <div className="flex flex-row-1 justify-end items-end w-full">
             <div className="w-64 relative">
@@ -166,6 +168,6 @@ const UserTable = () => {
     </div>
     </div>
   );
-};
+}
 
-export default UserTable;
+export default LawyerRequest;
