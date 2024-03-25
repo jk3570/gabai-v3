@@ -54,6 +54,7 @@ import LawyerRequest from "./pages/lawyer/LawyerRequest.js";
 import LawyerSchedule from "./pages/lawyer/LawyerSchedule.js";
 import LawyerArchives from "./components/lawyer/LawyerArchives.js";
 import LawyerVideoCon from "./pages/lawyer/LawyerVideoCon";
+import RequestForm from "./components/RequestForm.js";
 
 
 const App = () => {

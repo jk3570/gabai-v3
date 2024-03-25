@@ -4,6 +4,7 @@ import Markdown from 'react-markdown';
 import { HiVideoCamera } from 'react-icons/hi';
 import axios from 'axios';
 import RequestForm from "../RequestForm.js";
+import { BaseURL } from '../../BaseURL'
 
 import { FaGripLinesVertical } from "react-icons/fa";
 import ChatSidebar from './ChatSidebar.js';
@@ -26,7 +27,7 @@ const ChatComponent = () => {
       setInput('');
 
       // Send message to server
-      axios.post('http://localhost:4000/gab/conversation', { input: input })
+      axios.post(`${BaseURL}/gab/conversation`, { input: input })
         .then(response => {
           const aiMessage = { role: 'assistant', content: response.data.message };
           setMessages(prevMessages => [...prevMessages, aiMessage]);
@@ -41,7 +42,7 @@ const ChatComponent = () => {
   const handleChatEnd = async (conversation) => {
     try {
       // Save conversation to the database
-      await axios.post('http://localhost:4000/gab/new-chat', { title: generateDefaultTitle(), messages: conversation });
+      await axios.post(`${BaseURL}/gab/new-chat`, { title: generateDefaultTitle(), messages: conversation });
     } catch (error) {
       console.error('Error saving conversation:', error);
     }
@@ -104,6 +105,7 @@ const ChatComponent = () => {
                 placeholder="Type your message here"
               />
 
+
               <button
                 type="submit"
                 id="sendBtn"
@@ -127,6 +129,7 @@ const ChatComponent = () => {
             </p>
           </div>
         </div>
+
       </div>
     </div>  
     </div>

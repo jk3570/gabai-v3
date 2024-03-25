@@ -18,7 +18,7 @@ function LawyerDashboard() {
         <>
           <Helmet>
             {/* Title of the Page */}
-            <title>Admin Dashboard - GabAI</title>
+            <title>Admin Dashboard - GabAi</title>
           </Helmet>
 
         <div className="relative z-10 w-full py-[3.875rem] flex flex-col justify-start min-h-screen max-md:p-1">
