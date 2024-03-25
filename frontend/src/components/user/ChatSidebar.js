@@ -37,25 +37,34 @@
       }
     };
 
-    return (
-      <div className="fixed left-0 top-0 bottom-0 w-64 bg-white shadow">
-        <div className="p-4">
-        <br/>
-        <br/>
-        <br/>
-          <h2 className="text-xl font-semibold mb-4">Conversation History</h2>
-                    <button onClick={handleNewChatSubmit} className="mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">
-            New Chat
-          </button> 
-          <ul>
-            {chats.map(chat => (
-              <li key={chat._id}>
-                <Link to={`/gab/chat/${chat._id}`} className="text-blue-600 hover:underline">{chat.title}</Link>
-              </li>
-            ))}
-          </ul>
+    const button = "flex h-10 w-full px-3 py-2 bg-azure text-white rounded-md justify-center items-center text-sm transition-all duration-100 ease-in-out hover:bg-azure-300"
 
+    return (
+      <div className="relative h-screen flex flex-col  w-64 bg-white shadow-xl">
+        
+          <div className="relative px-4 pt-3 pb-2 flex flex-col gap-4 w-full bg-white border-b">
+            <h2 className="text-md font-medium">Conversation History</h2>
+          </div>  
+        <div className="flex flex-col w-full h-[75%] overflow-y-scroll">
+
+          <div className="">
+            <ul>{chats.map(chat => (
+              <div className="w-full p-2 px-4 hover:p-3 hover:px-4 hover:bg-azure-50 hover:bg-opacity-20 cursor-pointer text-sm">                
+                <li key={chat._id}>
+                  <Link to={`/gab/chat/${chat._id}`} className="text-azure">{chat.title}</Link>
+                </li>
+              </div>
+              ))}
+            </ul>
+          </div>
         </div>
+          <div className="relative p-4 h-[8.5rem] flex flex-col gap-4 w-full bg-white border-t bottom-0">
+              <button onClick={handleNewChatSubmit} className={button}>
+              New Chat
+              </button> 
+          </div> 
+
+ 
       </div>
     );
   };
