@@ -42,16 +42,10 @@
     return (
       <div className="relative h-screen flex flex-col  w-64 bg-white shadow-xl">
         
-          <div className="absolute px-4 pt-3 pb-2 flex flex-col gap-4 w-full bg-white border-b">
+          <div className="relative px-4 pt-3 pb-2 flex flex-col gap-4 w-full bg-white border-b">
             <h2 className="text-md font-medium">Conversation History</h2>
           </div>  
-          <div className="absolute p-4 h-[8.5rem] flex flex-col gap-4 w-full bg-white border-t bottom-0">
-              <button onClick={handleNewChatSubmit} className={button}>
-              New Chat
-              </button> 
-          </div> 
-
-        <div className="flex flex-col w-full overflow-y-scroll  pt-[2.5rem] pb-[8.5rem]">
+        <div className="flex flex-col w-full h-[75%] overflow-y-scroll">
 
           <div className="">
             <ul>{chats.map(chat => (
@@ -64,6 +58,11 @@
             </ul>
           </div>
         </div>
+          <div className="relative p-4 h-[8.5rem] flex flex-col gap-4 w-full bg-white border-t bottom-0">
+              <button onClick={handleNewChatSubmit} className={button}>
+              New Chat
+              </button> 
+          </div> 
 
  
       </div>

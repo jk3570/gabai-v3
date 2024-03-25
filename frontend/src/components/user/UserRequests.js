@@ -34,10 +34,10 @@ const UserRequests = () => {
         
       >
         {(close) => (
-          <div className="fixed z-30 top-0 right-0 flex translate-y-[3.3rem] translate-x-[-4rem]">
-            <div className="modal relative max-h-96 w-96 border rounded-2xl bg-white flex flex-col shadow-lg">
+          <div className="fixed z-40 top-0 right-0 flex translate-y-[3.3rem] translate-x-[-4rem]">
+            <div className="modal relative max-h-96 w-96 rounded-2xl bg-white flex flex-col shadow-lg">
 
-              <div className="absolute z-50 bg-white w-full p-3 gap-3 shadow-lg">
+              <div className="relative z-50 bg-white w-full p-3 gap-3 border-b">
                 <div>
                 <Link to="/gab/chat" className={button}>
                     Chat
@@ -46,13 +46,15 @@ const UserRequests = () => {
                 <div className="text-md font-medium mt-3">
                         Your Requests</div>
               </div>
-              
 
-                <div className="relative grid-col gap-3 p-3 pt-[6rem] overflow-y-scroll ">
+              <div className="relative max-h-96 w-96 rounded-b-2xl bg-white flex flex-col overflow-clip">
+                <div className="relative grid-col gap-3 p-3 pt-0 overflow-y-scroll ">
                     <div className="relative w-full h-40 bg-gray-100 text-sm font-normal shadow-md rounded-md my-2"></div>
                     <div className="relative w-full h-40 bg-gray-100 text-sm font-normal shadow-md rounded-md my-2"></div>
                     <div className="relative w-full h-40 bg-gray-100 text-sm font-normal shadow-md rounded-md my-2"></div>
                 </div>
+              </div>
+
             </div> {/*  main modal */}
           </div>
 

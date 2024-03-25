@@ -6,27 +6,10 @@ import lawJust from "../../img/justice.png";
 
 const WorkplaceDiscriminationLaws = () => {
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const background = document.getElementById('backgroundImage');
-      const scrollPosition = window.scrollY;
-      const opacity = 1 - (scrollPosition / window.innerHeight);
-      
-      background.style.opacity = opacity > 0 ? opacity : 0;
-    };
-  
-    window.addEventListener('scroll', handleScroll);
-  
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-  
   return (
     <div
       className="relative z-10 flex flex-col justify-center min-h-screen max-md:p-1"
     >
-          
 
       <div 
       className="flex z-10 flex-row justify-between items-center gap-x-20 max-md:flex-col-reverse"
