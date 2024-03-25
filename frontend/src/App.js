@@ -51,6 +51,7 @@ import LawyerRequest from "./pages/lawyer/LawyerRequest.js";
 import LawyerSchedule from "./pages/lawyer/LawyerSchedule.js";
 import LawyerArchives from "./components/lawyer/LawyerArchives.js";
 import LawyerVideoCon from "./pages/lawyer/LawyerVideoCon";
+import RequestForm from "./components/RequestForm.js";
 
 
 const App = () => {
@@ -58,7 +59,10 @@ const App = () => {
 
   return ( 
     <Router>
+    
       <UserNavbar />
+
+
           <Routes>
             
                 {/* Landing route */}
@@ -75,19 +79,7 @@ const App = () => {
                 <Route path="/gab/chat" element={<ChatComponent />} />
                 <Route path="/gab/chat/:id" element={<ChatComponent />} />
                 <Route path="/terms" element={<Terms />} />
-
-                {/* Lawyer route */}
-                <Route path="/lawyer" element={<LawyerVideoCon />} />
-
-                {/* 404 route */}
-                {/* <Route path="*" element={<PageNotFound />} /> */}
-
-                {/* Components routes */}
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
-                <Route path="/profile" element={<UserProfile />} />
-                <Route path="/chat" element={<ChatComponent />} />
-                <Route path="/terms" element={<Terms />} />
+                <Route path="/request" element={<RequestForm />} />
 
                 {/* Admin routes */}  
                 <Route path="/admin" element={<AdminDashboard />} />
@@ -99,9 +91,13 @@ const App = () => {
 
                 {/* Lawyer route */}
                 <Route path="/lawyer" element={<LawyerDashboard />} />
+                <Route path="/lawyer/video-conference" element={<LawyerVideoCon />} />
                 <Route path="/lawyer/lawyer-request" element={<LawyerRequest />} />
                 <Route path="/lawyer/lawyer-schedule" element={<LawyerSchedule />} />
                 <Route path="/lawyer/lawyer-archive" element={<LawyerArchives />} />
+
+                {/* 404 route */}
+                {/* <Route path="*" element={<PageNotFound />} /> */}
 
 
         </Routes>

@@ -44,7 +44,7 @@ const LawyerVideoCon = () => {
   return (
     <div className=" py-20 px-auto flex justify-center items-center h-screen">
       <Helmet>
-        <title>Video Chat - GabAI</title> {/* Setting document title */}
+        <title>Video Chat - GabAi</title> {/* Setting document title */}
       </Helmet>
       <VideoCon /> {/* Rendering the VideoCon component */}
     </div>
