@@ -81,9 +81,7 @@ const App = () => {
           <Routes>
             
                 {/* Landing route */}
-                {!user || (user.role !== 'admin' && user.role !== 'lawyer' && user.role !== 'user') && (
-                  <Route path="/" element={<LandingPage/>} />
-                )}
+                {user && (user.role === 'admin' || user.role === 'lawyer' || user.role === 'user') ? null : <Route path="/" element={<LandingPage/>} />}
 
 
                 {/* Search routes */}
