@@ -26,13 +26,7 @@ const WorkplaceDiscriminationLaws = () => {
     <div
       className="relative z-10 flex flex-col justify-center min-h-screen max-md:p-1"
     >
-          <div class="fixed w-full h-screen z-0">
-            <img 
-              id="backgroundImage" 
-              className="h-full w-full object-cover transition-opacity duration-200" 
-              src={blob} alt="Background Image">
-            </img>
-          </div>
+          
 
       <div 
       className="flex z-10 flex-row justify-between items-center gap-x-20 max-md:flex-col-reverse"

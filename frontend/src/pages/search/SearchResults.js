@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import axios from "axios";
 
+import backgroundPhoto from "../../img/backgroundPhoto.jpg"
+
 function SearchResults() {
   const location = useLocation();
   const searchResults = location.state?.searchResults || [];
@@ -27,35 +29,35 @@ function SearchResults() {
   };
 
   return (
-    <div className="px-[3rem]">
-      <div className="flex flex-col items-center justify-center py-5">
-        <form onSubmit={handleSearch}>
-          <div className="flex flex-row gap-2">
-            <input
-              type="text"
-              placeholder="Search"
-              className="w-[40rem] border-2 border-black rounded-full p-4"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
+    <div className="pt-[3.875rem]">
+      <div className="absolute z-0 flex w-full h-[3rem] bg-cover bg-[center_bottom_-10rem]" style={{ backgroundImage: `url(${backgroundPhoto})` }}></div>
+      <div className="flex flex-col items-center justify-center py-5 px-[3rem]">
+          <form onSubmit={handleSearch} className="w-full flex drop-shadow-lg">
+            <div className="flex flex-row gap-2 w-full">
+              <input
+                type="text"
+                placeholder="Search here"
+                className="border-2 border-azure-200 w-full flex rounded-full p-4"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
 
-            <button
-              className="ml-[-4rem] text-4xl text-azure z-10"
-              type="submit"
-            >
-              <IoSearchOutline />
-            </button>
-          </div>
-        </form>
+              <button
+                className="ml-[-4rem] text-4xl text-azure z-10"
+                type="submit"
+              >
+                <IoSearchOutline />
+              </button>
+            </div>
+          </form>
       </div>
 
-      <br />
 
-      <div>
+      <div className="px-[3rem] ">
         {" "}
         {/* Search results */}
         <p>Search results for: </p>
-        <br />
+
         <div>
           {" "}
           {/* Search results */}

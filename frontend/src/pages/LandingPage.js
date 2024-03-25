@@ -13,6 +13,8 @@ import Developers from "../components/landingpage/Developers";
 import Faq from "../components/landingpage/Faq";
 import { FaQq } from "react-icons/fa6";
 
+import blob from "../img/Blob.svg";
+
 
 const LandingPage = () => {
   const { user, dispatch } = useAuthContext();
@@ -45,6 +47,21 @@ const LandingPage = () => {
     };
 }, []); // Empty dependency array ensures that this effect runs only once, similar to componentDidMount
 
+useEffect(() => {
+  const handleScroll = () => {
+    const background = document.getElementById('backgroundImage');
+    const scrollPosition = window.scrollY;
+    const opacity = 1 - (scrollPosition / window.innerHeight);
+    
+    background.style.opacity = opacity > 0 ? opacity : 0;
+  };
+
+  window.addEventListener('scroll', handleScroll);
+
+  return () => {
+    window.removeEventListener('scroll', handleScroll);
+  };
+}, []);
 
   return (
     <>
@@ -58,6 +75,13 @@ const LandingPage = () => {
         </svg>
       </div>
 
+      <div class="fixed w-screen h-screen z-0">
+            <img 
+              id="backgroundImage" 
+              className="h-full w-full object-cover transition-opacity duration-200" 
+              src={blob} alt="Background Image">
+            </img>
+      </div>
       
       <div class="w-full relative max-w-4xl px-5 lg:px-0 center mx-auto">
       <section id="home">

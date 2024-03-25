@@ -8,9 +8,6 @@ import "animate.css";
 import { useAuthContext } from "./hooks/useAuthContext";
 
 //Navbars and Sidebars
-
-import ChatSidebar from "./components/ChatSidebar";
-
 import Navbar from "./components/landingpage/Navbar.js";
 import UserNavbar from "./components/user/UserNavbar.js";
 import UserSidebar from "./components/user/UserSidebar.js";
@@ -61,13 +58,7 @@ const App = () => {
 
   return ( 
     <Router>
-
-
-
-        {user ? null : <Navbar />}
-
-        <ChatSidebar />
-
+      <UserNavbar />
           <Routes>
             
                 {/* Landing route */}
@@ -116,7 +107,7 @@ const App = () => {
         </Routes>
       
 
-            {user ? null : <Footer />}
+            {! user ? null : <Footer />}
 
     </Router>
   );
