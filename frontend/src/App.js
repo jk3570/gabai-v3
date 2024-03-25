@@ -38,6 +38,9 @@ import LandingPage from "./pages/LandingPage";
 import SearchResults from "./pages/search/SearchResults";
 import Search from "./pages/search/Search";
 
+//User route
+import UserLandingPage from "./pages/user/UserLanding.js";
+
 //Admin routes
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import UserTable from "./pages/admin/UserTable";
@@ -76,8 +79,23 @@ const App = () => {
                 <Route path="/gab/chat/:id" element={<ChatComponent />} />
                 <Route path="/terms" element={<Terms />} />
 
+                {/* User route */}
+                <Route path="/user/user-landingpage" element={<UserLandingPage />} />
+
                 {/* Lawyer route */}
+                <Route path="/lawyer" element={<LawyerDashboard />} />
+                <Route path="/lawyer/lawyer-request" element={<LawyerRequest />} />
+                <Route path="/lawyer/lawyer-schedule" element={<LawyerSchedule />} />
+                <Route path="/lawyer/lawyer-archive" element={<LawyerArchives />} />
                 <Route path="/lawyer" element={<LawyerVideoCon />} />
+
+                {/* Admin routes */}  
+                <Route path="/admin" element={<AdminDashboard />} />
+                <Route path="/admin/signup-admin-lawyer" element={<SignupAdminAndLawyer />} />
+                <Route path="/admin/user-table" element={<UserTable />} />
+                <Route path="/admin/cases" element={<CasesList />} />
+                <Route path="/admin/feedbacks" element={<FeedbackList />} />
+                <Route path="/admin/admin-archive" element={<AdminArchivedList />} />
 
                 {/* 404 route */}
                 {/* <Route path="*" element={<PageNotFound />} /> */}
@@ -89,19 +107,7 @@ const App = () => {
                 <Route path="/chat" element={<ChatComponent />} />
                 <Route path="/terms" element={<Terms />} />
 
-                {/* Admin routes */}  
-                <Route path="/admin" element={<AdminDashboard />} />
-                <Route path="/admin/signup-admin-lawyer" element={<SignupAdminAndLawyer />} />
-                <Route path="/admin/user-table" element={<UserTable />} />
-                <Route path="/admin/cases" element={<CasesList />} />
-                <Route path="/admin/feedbacks" element={<FeedbackList />} />
-                <Route path="/admin/admin-archive" element={<AdminArchivedList />} />
 
-                {/* Lawyer route */}
-                <Route path="/lawyer" element={<LawyerDashboard />} />
-                <Route path="/lawyer/lawyer-request" element={<LawyerRequest />} />
-                <Route path="/lawyer/lawyer-schedule" element={<LawyerSchedule />} />
-                <Route path="/lawyer/lawyer-archive" element={<LawyerArchives />} />
 
 
         </Routes>
