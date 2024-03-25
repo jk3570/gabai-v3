@@ -28,7 +28,7 @@ const ProfileDropdown = () => {
     const email = "email@email.com";
     const themes = "Themes";
   
-  const options = "flex flex-row justify-between w-full p-1 px-4 hover:bg-azure-50 hover:bg-opacity-20 cursor pointer"
+  const options = "flex flex-row justify-between w-full p-1 px-4 hover:bg-azure-50 hover:bg-opacity-20 cursor-pointer"
   const icon = "text-xl";
   const button = "flex h-10 w-full px-3 py-2 bg-azure text-white rounded-md justify-center items-center text-sm"
 

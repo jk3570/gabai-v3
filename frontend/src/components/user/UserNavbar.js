@@ -95,8 +95,8 @@ return (
   <>
     <nav className="fixed top-0 z-40 bg-white h-[3.875rem] w-full p-[1rem] font-bold border-b-2 border-azure-500">
       <div className="w-full flex justify-between items-center">
-        <div className="flex justify-center items-center gap-2">
-        
+          
+        <div className="flex justify-center items-center gap-2">        
         {/* Brand Logo */}
         <Link to="/#home" onClick={() => scrollToElement("#home")}>
             <button class="group relative z-0 font-bold flex justify-center gap-2 items-center">
