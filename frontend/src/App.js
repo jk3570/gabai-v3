@@ -27,7 +27,7 @@ import SignupAdminAndLawyer from "./components/SignupAdminAndLawyer";
 import ChatComponent from "./components/user/Chat";
 import UserProfile from "./components/user/UserProfile";
 
-// import PageNotFound from "./components/PageNotFound";
+import PageNotFound from "./components/PageNotFound";
 
 
 
@@ -61,51 +61,81 @@ const App = () => {
 
   return ( 
     <Router>
-      <UserNavbar />
+      {/* Navbars */}
+      {user ? ( user.role === 'user' ? (
+            <UserNavbar />
+          ) : user.role === 'admin' ? (
+            <AdminNavbar />
+          ) : user.role === 'lawyer' ? (
+            <LawyerNavbar /> 
+          ) : (
+            <Navbar />
+          )
+        ) : (
+          <Navbar />
+        )}
+
+
+
           <Routes>
             
                 {/* Landing route */}
-                <Route path="/" element={<LandingPage/>} />
+                {!user || (user.role !== 'admin' && user.role !== 'lawyer' && user.role !== 'user') && (
+                  <Route path="/" element={<LandingPage/>} />
+                )}
+
 
                 {/* Search routes */}
                 <Route path="/search" element={<Search />} />
                 <Route path="/search/result" element={<SearchResults />} />
 
                 {/* Components routes */}
-                {user ? null : <Route path="/login" element={<Login />} />}
-                {user ? null : <Route path="/signup" element={<Signup />} />}
-                {user ? <Route path="/profile" element={<UserProfile />} /> : null}
-                <Route path="/gab/chat" element={<ChatComponent />} />
-                <Route path="/gab/chat/:id" element={<ChatComponent />} />
+                {!user && ( <Route path="/login" element={<Login />} />)} {/* Render if any user doesnt exist */}
+
+                {!user ? ( <Route path="/signup" element={<Signup />} />) : user.role ? null : (
+                      <Route path="/signup" element={<Signup />} />)}         {/* Render if any user doesnt exist */}
+
+
+                {user && user.role && ( <Route path="/profile" element={<UserProfile />} />)}
+                
+                        {/* Lawyers and admins cant access */}
+                {(!user || (user.role !== 'admin' && user.role !== 'lawyer')) && (
+                     <Route path="/gab/chat" element={<ChatComponent />} />)}
+                {(!user || (user.role !== 'admin' && user.role !== 'lawyer')) && (
+                      <Route path="/gab/chat/:id" element={<ChatComponent />} />)}                     
                 <Route path="/terms" element={<Terms />} />
 
-                {/* User route */}
-                <Route path="/user/user-landingpage" element={<UserLandingPage />} />
+                {/* User route */} {/* only user can access */}
+                {user && user.role === 'user' && (
+                      <Route path="/user/user-landingpage" element={<UserLandingPage />} />)}
 
-                {/* Lawyer route */}
-                <Route path="/lawyer" element={<LawyerDashboard />} />
-                <Route path="/lawyer/lawyer-request" element={<LawyerRequest />} />
-                <Route path="/lawyer/lawyer-schedule" element={<LawyerSchedule />} />
-                <Route path="/lawyer/lawyer-archive" element={<LawyerArchives />} />
-                <Route path="/lawyer" element={<LawyerVideoCon />} />
+
+                {/* Lawyer route */} {/* only lawyer can access */}
+                {user && user.role === 'lawyer' && (
+                  <>
+                    <Route path="/lawyer" element={<LawyerDashboard />} />
+                    <Route path="/lawyer/lawyer-request" element={<LawyerRequest />} />
+                    <Route path="/lawyer/lawyer-schedule" element={<LawyerSchedule />} />
+                    <Route path="/lawyer/lawyer-archive" element={<LawyerArchives />} />
+                    <Route path="/lawyer" element={<LawyerVideoCon />} />
+                  </>
+                )}
 
                 {/* Admin routes */}  
-                <Route path="/admin" element={<AdminDashboard />} />
-                <Route path="/admin/signup-admin-lawyer" element={<SignupAdminAndLawyer />} />
-                <Route path="/admin/user-table" element={<UserTable />} />
-                <Route path="/admin/cases" element={<CasesList />} />
-                <Route path="/admin/feedbacks" element={<FeedbackList />} />
-                <Route path="/admin/admin-archive" element={<AdminArchivedList />} />
+                {user && user.role === 'admin' && (
+                  <>
+                    <Route path="/admin" element={<AdminDashboard />} />
+                    <Route path="/admin/signup-admin-lawyer" element={<SignupAdminAndLawyer />} />
+                    <Route path="/admin/user-table" element={<UserTable />} />
+                    <Route path="/admin/cases" element={<CasesList />} />
+                    <Route path="/admin/feedbacks" element={<FeedbackList />} />
+                    <Route path="/admin/admin-archive" element={<AdminArchivedList />} />
+                  </>
+                )}
+
 
                 {/* 404 route */}
-                {/* <Route path="*" element={<PageNotFound />} /> */}
-
-                {/* Components routes */}
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
-                <Route path="/profile" element={<UserProfile />} />
-                <Route path="/chat" element={<ChatComponent />} />
-                <Route path="/terms" element={<Terms />} />
+                <Route path="*" element={<PageNotFound />} />
 
 
 
@@ -113,7 +143,8 @@ const App = () => {
         </Routes>
       
 
-            {! user ? null : <Footer />}
+        {user && (user.role === 'admin' || user.role === 'lawyer' || user.role === 'user') ? null : <Footer />}
+
 
     </Router>
   );
