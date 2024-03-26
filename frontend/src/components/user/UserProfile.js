@@ -34,6 +34,19 @@ const UserProfile = () => {
   };
 
   const { user, dispatch } = useAuthContext();
+
+
+  const username = user ? user.username : null;
+  const email = user ? user.email : null;
+  const firstname = user ? user.firstname : null;
+  const lastname = user ? user.lastname : null;
+  const gender = user ? user.gender : null;
+  const birthdate = user ? user.birthdate : null;
+  const region = user ? user.region : null;
+  const city = user ? user.city : null;
+  const province = user ? user.province : null;
+  const barangay = user ? user.barangay : null;
+
 /* 
   const firstname = user ? user.firstname : null;
   const lastname = user ? user.lastname : null;
@@ -79,13 +92,15 @@ const UserProfile = () => {
                         <div className="w-full flex items-center justify-center mt-3 mb-4">
                           <img className="rounded-full overflow-clip w-[7rem] h-[7rem] shadow-md" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin"/>
                         </div>
-                        <h5 className="user-name font-medium text-2xl text-azure">Yuki Hayashi</h5>
-                        <h6 className="user-email text-sm text-gray-500">yuki@Maxwell.com</h6>
-                        <button className="text-xs mt-4 text-gray-800 underline hover:text-azure">change password</button>
+                        <h5 className="user-name font-medium text-2xl text-azure">{firstname} {lastname}</h5>
+                        <h6 className="user-email text-sm text-gray-500">{username}</h6>
+                        <h6 className="user-email text-sm text-gray-500">{email}</h6>
+                        <button className="text-xs mt-4 text-gray-800 underline hover:text-azure">Change password</button>
                       </div>
                       <div className="about grid items-start gap-3 text-center">
-                        <h5 className="text-azure font-medium text-1xl">About</h5>
-                        <p className="text-xs">I'm Yuki. Full Stack Designer I enjoy creating user-centric, delightful and human experiences.</p>
+                          <div className="flex justify-end mt-10">
+                            <button id="submit" name="submit" className={button} onClick={handleLogout}>Logout</button>
+                        </div>
                       </div>
                   </div>
 
@@ -102,11 +117,11 @@ const UserProfile = () => {
                               <div className="grid grid-cols-2 gap-4">
                                 <div>
                                     <label className={label}>First Name</label>
-                                    <input type="text" id="firstName" placeholder="First Name" className={input} onKeyDown={handleKeyDown}/>
+                                    <input type="text" id="firstName" placeholder="First Name" className={input} onKeyDown={handleKeyDown} value={firstname}/>
                                 </div>
                                 <div>
                                     <label className={label}>Last Name</label>
-                                    <input type="text" id="lastName" placeholder="Last Name" className={input} onKeyDown={handleKeyDown}/>
+                                    <input type="text" id="lastName" placeholder="Last Name" className={input} onKeyDown={handleKeyDown} value={lastname}/>
                                 </div>
                               </div>
                               <div className="grid grid-cols-2 gap-4">
@@ -117,6 +132,7 @@ const UserProfile = () => {
                                           id="gender"
                                           className={input}
                                           onKeyDown={handleKeyDown}
+                                          value={gender}
                                         >
                                           <option value="">- Select Gender -</option>
                                           <option value="Male">Male</option>
@@ -130,7 +146,8 @@ const UserProfile = () => {
                                 </div>
                                 <div>
                                     <label className={label}>Birthdate</label>
-                                    <input type="date" id="birthDate" placeholder="DD/MM/YY" className={input} onKeyDown={handleKeyDown}/>
+                                    <input type="date" id="birthDate" placeholder="DD/MM/YY" className={input} onKeyDown={handleKeyDown}
+                                    value={birthdate}/>
                                 </div>
                               </div>
 
@@ -141,25 +158,29 @@ const UserProfile = () => {
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
                                     <label  className={label}>Region</label>
-                                    <input type="text" id="Street" placeholder="Region" className={input} onKeyDown={handleKeyDown}/>
+                                    <input type="text" id="Street" placeholder="Region" className={input} onKeyDown={handleKeyDown}
+                                    value={region}/>
                                 </div>
                                 <div>
                                     <label  className={label}>Province</label>
-                                    <input type="text" id="ciTy" placeholder="Province" className={input} onKeyDown={handleKeyDown}/>
+                                    <input type="text" id="ciTy" placeholder="Province" className={input} onKeyDown={handleKeyDown}
+                                    value={province}/>
                                 </div>
                                 <div>
                                     <label className={label}>City</label>
-                                    <input type="text" id="sTate" placeholder="City" className={input} onKeyDown={handleKeyDown}/>
+                                    <input type="text" id="sTate" placeholder="City" className={input} onKeyDown={handleKeyDown}
+                                    value={city}/>
                                 </div>
                                 <div>
                                     <label className={label}>Barangay</label>
-                                    <input type="text" id="zIp" placeholder="Barangay" className={input} onKeyDown={handleKeyDown}/>
+                                    <input type="text" id="zIp" placeholder="Barangay" className={input} onKeyDown={handleKeyDown}
+                                    value={barangay}/>
                                 </div>
                             </div>
                         </div>
                     </form>
                     <div className="flex justify-end mt-10">
-                        <button id="submit" name="submit" className={button}>Cancel</button>
+                        <button id="submit" name="submit" className={button} >Cancel</button>
                         <button id="submit" name="submit" className={button}>Update</button>
                     </div>
                 </div>  

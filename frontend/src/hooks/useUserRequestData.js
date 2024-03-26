@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 
-const useUserData = () => {
-  const [userData, setUserData] = useState([]);
+const useUserRequestData = () => {
+  const [userRequestData, setUserRequestData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch('http://localhost:4000/user/users'); 
+        const response = await fetch('http://localhost:4000/form/all-requests'); 
         const data = await response.json();
-        setUserData(data);
+        setUserRequestData(data);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -20,7 +20,7 @@ const useUserData = () => {
 
   }, []);
 
-  return { userData, loading };
+  return { userRequestData, loading };
 };
 
-export default useUserData;
+export default useUserRequestData;

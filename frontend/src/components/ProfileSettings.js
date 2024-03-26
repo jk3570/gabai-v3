@@ -1,7 +1,14 @@
 import React from "react";
 import Popup from "reactjs-popup";
 
+//AuthContext provider
+import { useAuthContext } from "../hooks/useAuthContext";
+
+
+
 const profileSettings = () => {
+
+  
   const btnBlue = "bg-azure-500 text-white p-2 w-full rounded-xl";
   const bg =
     "modal h-auto w-[31.25rem] rounded-2xl bg-white flex flex-col justify-center mx-10 p-3";

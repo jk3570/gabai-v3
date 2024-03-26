@@ -27,7 +27,7 @@ const ChatComponent = () => {
       setInput('');
 
       // Send message to server
-      axios.post(`${BaseURL}/gab/conversation`, { input: input })
+      axios.post("http://localhost:4000/gab/conversation", { input: input })
         .then(response => {
           const aiMessage = { role: 'assistant', content: response.data.message };
           setMessages(prevMessages => [...prevMessages, aiMessage]);
@@ -42,7 +42,7 @@ const ChatComponent = () => {
   const handleChatEnd = async (conversation) => {
     try {
       // Save conversation to the database
-      await axios.post(`${BaseURL}/gab/new-chat`, { title: generateDefaultTitle(), messages: conversation });
+      await axios.post("http://localhost:4000/gab/new-chat", { title: generateDefaultTitle(), messages: conversation });
     } catch (error) {
       console.error('Error saving conversation:', error);
     }

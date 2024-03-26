@@ -11,6 +11,7 @@ function ParticipantView(props) {
   // Memoized video stream based on webcam status
   const videoStream = useMemo(() => {
     if (webcamOn && webcamStream) {
+
       // If webcam is on and stream exists
       const mediaStream = new MediaStream(); // Creating a new MediaStream object
       mediaStream.addTrack(webcamStream.track); // Adding webcam track to the stream
@@ -21,8 +22,10 @@ function ParticipantView(props) {
   // Effect to handle mic stream and playback
   useEffect(() => {
     if (micRef.current) {
+
       // Checking if the micRef has been initialized
       if (micOn && micStream) {
+        
         // If mic is on and micStream exists
         const mediaStream = new MediaStream(); // Creating a new MediaStream object
         mediaStream.addTrack(micStream.track); // Adding mic track to the stream

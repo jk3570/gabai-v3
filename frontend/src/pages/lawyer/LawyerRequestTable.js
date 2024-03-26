@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import useUserRequestData from '../../hooks/useUserRequestData';
 import ReactPaginate from 'react-paginate';
 import Popup from 'reactjs-popup';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
@@ -6,7 +7,6 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from "../../hooks/useAuthContext";
-import useAcceptedRequest from '../../hooks/useAcceptedRequest';
 
 const LawyerRequestTable = () => {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ const LawyerRequestTable = () => {
   const lname = user ? user.lastname : null;
   const lawyername = `${fname} ${lname}`;
 
-    const { requestData, loading } = useAcceptedRequest();
+  const { userRequestData, loading } = useUserRequestData();
   const [currentPage, setCurrentPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
   const [formData, setFormData] = useState({
@@ -56,11 +56,11 @@ const LawyerRequestTable = () => {
       email: user.email,
       address: user.address,
       summary: user.summary,
-      time: user.time,
-      date: user.date,
-      lawyername: user.lawyername,
+      time: formData.time,
+      date: formData.date,
+      lawyername: lawyername,
     };
-    const response = await axios.post('http://localhost:4000/accept/get-all-request', formDataFromUser);
+    const response = await axios.post('http://localhost:4000/accept/confirm', formDataFromUser);
 
     if (response.status === 201) {
       alert('Request accepted successfully');
@@ -73,7 +73,7 @@ const LawyerRequestTable = () => {
   }
 };
 
-  const filteredData = requestData.filter((user) =>
+  const filteredData = userRequestData.filter((user) =>
     Object.values(user).some((field) =>
       field && field.toString().toLowerCase().includes(searchTerm.toLowerCase())
     )
@@ -92,11 +92,35 @@ const LawyerRequestTable = () => {
         <td className={tableBody}>{user.email}</td>
         <td className={tableBody}>{user.address}</td>
         <td className={tableBody}>{user.summary}</td>
-        <td className={tableBody}>{user.time}</td>
-        <td className={tableBody}>{user.date}</td>
-        <td className={tableBody}>{user.lawyername}</td>
         <td className={tableBody}>
-              <button className={button}>Join</button>
+          <Popup
+            trigger={<button className={button}>Accept</button>}
+            modal
+          >
+            {close => (
+              <div className="modal relative h-auto w-[90%] sm:w-[70%] md:w-[60%] lg:w-[50%] xl:w-[40%] rounded-2xl bg-white flex flex-col justify-center items-center pt-7 py-10 p-6">
+                <div className="w-full max-w-md bg-white rounded-lg">
+                  <div className="w-full h-full grid grid-cols-1 gap-2">
+                    <div className="flex flex-col justify-center">
+                      <h1 className="font-bold text-3xl m-0">Schedule online consultation</h1>
+                      <p className={label}>Set <span className="text-azure font-medium">time</span> and <span className="text-azure font-medium">meeting</span></p>
+                    </div>
+                    <form onSubmit={(event) => { event.preventDefault(); handleSubmit(event, user); }} className="flex flex-col gap-2">
+                      <input type="date" className={input} placeholder="Date" onChange={(e) => setFormData({ ...formData, date: e.target.value })} />
+                      <input type="time" className={input} placeholder="Time" onChange={(e) => setFormData({ ...formData, time: e.target.value })} />
+                      <button type="submit" className={button}>Submit</button>
+                      <Link to="/lawyer/lawyer-request">
+                        <button type="button" className={cancelButton}>Cancel</button>
+                      </Link>
+                    </form>
+                  </div>
+                </div>
+                <button className="absolute top-2 right-2" onClick={close}>
+                  <IoIosCloseCircleOutline size={24} />
+                </button>
+              </div>
+            )}
+          </Popup>
         </td>
       </tr>
     ));
@@ -111,7 +135,7 @@ const LawyerRequestTable = () => {
     <div className="relative z-10 w-full py-[3.875rem] flex flex-col justify-start items-start min-h-screen max-md:p-1">
       <div id="main-content" className="flex flex-col w-full mx-auto max-w-7xl gap-3">
         <div className="flex flex-row-1 justify-between items-center mt-4">
-          <h1 className="text-2xl font-semibold text-nowrap">Lawyer Schedule</h1>
+          <h1 className="text-2xl font-semibold text-nowrap">Request Queue</h1>
         </div>
         
         <div className="bg-white h-96 overflow-x-auto">
@@ -124,9 +148,6 @@ const LawyerRequestTable = () => {
                   <th className={tableHeader}>Email</th>
                   <th className={tableHeader}>Address</th>
                   <th className={tableHeader}>Case Summary</th>
-                  <th className={tableHeader}>Time</th>
-                  <th className={tableHeader}>Date</th>
-                  <th className={tableHeader}>Lawyer name</th>
                   <th className={tableHeader}>Action</th>
                 </tr>
               </thead>

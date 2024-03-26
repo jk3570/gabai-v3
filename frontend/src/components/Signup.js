@@ -213,15 +213,16 @@ const Signup = ({ initialAddress }) => {
       selectedBarangayName,
       data.email,
       data.password
-    );
-  };
+    )
 
-  const notify = () => {
     toast.success("Account has been created successfully!", {
       position: "top-center",
       duration: 1000,
     });
+
   };
+
+
 
 useEffect(() => {
   // Check if form fields are not empty
@@ -797,7 +798,9 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                         <div className="w-full justfy-between flex gap-2">
                           <a href="#" className={button} onClick={prevStep}> {"<"} Previous</a>
 
-                          <button type="submit" className={button} disabled={!isFormValid || error || isLoading || passwordMatchError} onClick={!errors ? undefined : notify}>
+                          <button type="submit" className={button} disabled={!isFormValid || error || isLoading || passwordMatchError} >
+
+                          {/* onClick={!errors ? undefined : notify}> */}
                             Sign Up!
                           </button>
                         </div>

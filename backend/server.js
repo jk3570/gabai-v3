@@ -2,12 +2,18 @@
 const fs = require('fs');
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors'); // Import the cors module
+const cors = require('cors');
+const path = require('path');
+
+// import routes
 const userRoutes = require('./routes/user');
 const chatRoutes = require('./routes/chat');
+const formRoutes = require('./routes/request');
+const acceptRoutes = require('./routes/accept');
+
 const OpenAI = require('openai');
+
 require('dotenv').config();
-const path = require('path');
 
 const port = process.env.PORT || 4000;
 
@@ -22,7 +28,9 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 
 // routes
+app.use('/accept', acceptRoutes);
 app.use('/gab', chatRoutes);
+app.use('/form', formRoutes);
 app.use('/user', userRoutes);
 
 

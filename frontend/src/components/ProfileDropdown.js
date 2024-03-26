@@ -14,19 +14,19 @@ import { IoMdArrowDropdownCircle } from "react-icons/io";
 
 const ProfileDropdown = () => {
 
-/*     const handleLogout = () => {
+const handleLogout = () => {
     // Remove user from local storage
     localStorage.removeItem("user");
     // Dispatch logout action
     dispatch({ type: "LOGOUT" });
-  }; */
+  };
 
-/*   const { user, dispatch } = useAuthContext(); */
+const { user, dispatch } = useAuthContext();
 
-    const firstName = "Firstname";
-    const lasttName = "Lastname";
-    const email = "email@email.com";
-    const themes = "Themes";
+  const email = user ? user.email : null;
+  const firstname = user ? user.firstname : null;
+  const lastname = user ? user.lastname : null;
+  const themes = "Themes";
   
   const options = "flex flex-row justify-between w-full p-1 px-4 hover:bg-azure-50 hover:bg-opacity-20 cursor-pointer"
   const icon = "text-xl";
@@ -49,10 +49,11 @@ const ProfileDropdown = () => {
 
                 <div className="w-full h-full flex flex-col text-sm font-normal">
                     <div className="flex w-full p-1 px-4 text-base">
-                        {firstName} {lasttName}
+                      { firstname } { lastname }
                     </div>
+
                     <div className="flex w-full p-1 px-4 font-medium">
-                        {email}
+                        { email }
                     </div>
                     <div className="w-full p-[0.5rem] px-4">
                         <div className="border-t-2"></div>
@@ -72,7 +73,7 @@ const ProfileDropdown = () => {
                         <div className="border-t-2"></div>
                     </div >
                     <div className={options}>
-                        <button className={button}>Logout</button>
+                        <button className={button} onClick={handleLogout}>Logout</button>
                     </div>
                 </div>
             </div> {/*  main modal */}
