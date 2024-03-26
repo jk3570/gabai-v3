@@ -10,6 +10,7 @@
 /frontend/node_modules
 /backend/.env
 /frontend/.env
+
 # /frontend/.pnp
 # /frontend.pnp.js
 

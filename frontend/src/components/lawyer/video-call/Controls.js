@@ -1,11 +1,7 @@
 import React, { useState } from "react";
-
 import { useParticipant, useMeeting } from "@videosdk.live/react-sdk";
-
 import { MdCallEnd } from "react-icons/md";
-
 import { IoIosMic, IoIosMicOff } from "react-icons/io";
-
 import { HiMiniVideoCamera, HiMiniVideoCameraSlash } from "react-icons/hi2";
 
 const leaveBtnStyle =

@@ -105,7 +105,7 @@ const LawyerRequestTable = () => {
 
   const handlePageClick = ({ selected: selectedPage }) => {
     setCurrentPage(selectedPage);
-  };
+  };  
 
   return (
     <div className="relative z-10 w-full py-[3.875rem] flex flex-col justify-start items-start min-h-screen max-md:p-1">

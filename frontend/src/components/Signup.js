@@ -215,7 +215,7 @@ const Signup = ({ initialAddress }) => {
       data.password
     )
 
-    toast.success("Account has been created successfully!", {
+      toast.success("Account has been created successfully!", {
       position: "top-center",
       duration: 1000,
     });

@@ -33,7 +33,7 @@ const acceptSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
-    lawyername: {
+  lawyername: {
     type: String,
     required: true,
   },
