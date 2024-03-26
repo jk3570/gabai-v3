@@ -92,11 +92,11 @@ const App = () => {
                 {/* Components routes */}
                 {!user ?  <Route path="/login" element={<Login />} /> : null } {/* Render if any user doesnt exist */}
 
-                {!user ? ( <Route path="/signup" element={<Signup />} />) : user.role ? null : (
-                      <Route path="/signup" element={<Signup />} />)}         {/* Render if any user doesnt exist */}
+                {!user ? <Route path="/signup" element={<Signup />} /> : null }
 
 
                 {user && user.role && ( <Route path="/profile" element={<UserProfile />} />)}
+                {user && user.role && ( <Route path="/request" element={<RequestForm />} />)}
                 
                         {/* Lawyers and admins cant access */}
                 {(!user || (user.role !== 'admin' && user.role !== 'lawyer')) && (
