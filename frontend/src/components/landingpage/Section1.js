@@ -34,7 +34,7 @@ const WorkplaceDiscriminationLaws = () => {
               max-md:mx-1
             "
           >
-            A guide against
+            Your Ai guide against
             <br />
             workplace discrimination.
           </h1>
@@ -47,10 +47,10 @@ const WorkplaceDiscriminationLaws = () => {
 
           <div className="flex max-md:justify-center">
             
-            <div className="group h-25 w-60">
+            <div className="group relative h-25 w-full">
              <a href="/gab/chat">
               <button                
-              className="group px-3 z-30 py-2 bg-azure rounded-lg hover:scale-[1.1] max-md:w-32 lg:w-60 text-white relative after:-z-20 after:absolute after:h-1 after:w-1 after:bg-azure-300 after:left-5 overflow-hidden after:bottom-0 after:translate-y-full after:rounded-md after:hover:scale-[300] after:hover:transition-all after:hover:duration-700 after:transition-all after:duration-700 transition-all duration-600 text-2xl"
+              className="group px-3 z-30 py-2 bg-azure rounded-lg hover:scale-[1.1] w-full text-white relative after:-z-20 after:absolute after:h-1 after:w-1 after:bg-azure-300 after:left-5 overflow-hidden after:bottom-0 after:translate-y-full after:rounded-md after:hover:scale-[300] after:hover:transition-all after:hover:duration-700 after:transition-all after:duration-700 transition-all duration-600 text-2xl"
               >
                 Talk with Gab! 
               </button>

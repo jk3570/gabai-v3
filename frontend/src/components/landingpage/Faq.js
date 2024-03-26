@@ -46,7 +46,7 @@ const Faq = () => {
     // Add more FAQ items here
   ];
 
-  const box = "border-2 border-azure-500 p-3 rounded-xl my-1";
+  const box = "border-2 border-azure-500 p-3 rounded-xl my-1 bg-white";
 
   return (
     <div className="relative z-10 mt-20 flex flex-col gap-y-2 justify-center items-center">

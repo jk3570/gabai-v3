@@ -4,7 +4,6 @@ import Helmet from "react-helmet";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 // Components
-import Search from "./search/Search";
 import Section1 from "../components/landingpage/Section1";
 import Section2 from "../components/landingpage/Section2";
 import Section3 from "../components/landingpage/Section3";
@@ -83,10 +82,10 @@ useEffect(() => {
             </img>
       </div>
       
-      <div class="w-full relative max-w-4xl px-5 lg:px-0 center mx-auto">
-      <section id="home">
+      <div className="w-full relative max-w-4xl px-5 lg:px-0 center mx-auto">
+        <section id="home">
           {/* 1st section of landing page */}
-         { !user ? <Section1 /> : <Search /> }
+         <Section1 />
         </section>
 
         <section id="about">
