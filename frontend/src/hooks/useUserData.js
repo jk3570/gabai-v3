@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { BaseURL } from '../BaseURL'
 
 const useUserData = () => {
   const [userData, setUserData] = useState([]);
@@ -7,7 +8,7 @@ const useUserData = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch('http://localhost:4000/user/users'); 
+        const response = await fetch(`${BaseURL}/user/users`); 
         const data = await response.json();
         setUserData(data);
         setLoading(false);

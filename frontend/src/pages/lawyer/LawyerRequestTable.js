@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { BaseURL } from '../../BaseURL'
 
 const LawyerRequestTable = () => {
   const navigate = useNavigate();
@@ -60,7 +61,7 @@ const LawyerRequestTable = () => {
       date: formData.date,
       lawyername: lawyername,
     };
-    const response = await axios.post('http://localhost:4000/accept/confirm', formDataFromUser);
+    const response = await axios.post(`${BaseURL}/accept/confirm`, formDataFromUser);
 
     if (response.status === 201) {
       alert('Request accepted successfully');

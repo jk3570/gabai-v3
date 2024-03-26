@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { BaseURL } from '../BaseURL'
 
 const useAcceptedRequest = () => {
   const [requestData, setRequestData] = useState([]);
@@ -7,7 +8,7 @@ const useAcceptedRequest = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch('http://localhost:4000/accept/get-all-requests'); 
+        const response = await fetch(`${BaseURL}/accept/get-all-requests`); 
         const data = await response.json();
         setRequestData(data);
         setLoading(false);
