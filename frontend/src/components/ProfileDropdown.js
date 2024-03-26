@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 //AuthContext provider
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useNavigate } from "react-router-dom"
 
 
 import UserProfile from "./user/UserProfile.js";
@@ -14,11 +15,14 @@ import { IoMdArrowDropdownCircle } from "react-icons/io";
 
 const ProfileDropdown = () => {
 
+const navigate = useNavigate()
+
 const handleLogout = () => {
     // Remove user from local storage
     localStorage.removeItem("user");
     // Dispatch logout action
     dispatch({ type: "LOGOUT" });
+    navigate('/')
   };
 
 const { user, dispatch } = useAuthContext();
