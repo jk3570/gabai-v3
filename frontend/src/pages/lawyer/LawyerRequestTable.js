@@ -38,6 +38,7 @@ const LawyerRequestTable = () => {
   const cancelButton = "flex h-10 px-3 py-2 bg-white text-azure border border-azure rounded-md justify-center items-center w-full text-sm";
   const label = "block font-normal text-sm";
 
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -61,7 +62,7 @@ const LawyerRequestTable = () => {
       date: formData.date,
       lawyername: lawyername,
     };
-    const response = await axios.post(`${BaseURL}/accept/confirm`, formDataFromUser);
+    const response = await axios.post(`http://localhost:4000/accept/confirm`, formDataFromUser);
 
     if (response.status === 201) {
       alert('Request accepted successfully');

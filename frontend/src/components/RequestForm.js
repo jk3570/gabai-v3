@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from "../hooks/useAuthContext";
+import { BaseURL } from "../BaseURL";
 
 const RequestForm = () => {
     const navigate = useNavigate();
@@ -32,7 +33,7 @@ const RequestForm = () => {
     const handleSubmit = async e => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:4000/form/request', {userid, firstname, lastname, email, address, summary});
+            await axios.post(`http://localhost:4000/form/request`, {userid, firstname, lastname, email, address, summary});
             alert('Data inserted successfully');
             navigate('/gab/chat');
         } catch (error) {

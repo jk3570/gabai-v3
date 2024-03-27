@@ -61,7 +61,7 @@ const LawyerRequestTable = () => {
       date: user.date,
       lawyername: user.lawyername,
     };
-    const response = await axios.post(`${BaseURL}/accept/get-all-request`, formDataFromUser);
+    const response = await axios.post(`http://localhost:4000/accept/get-all-request`, formDataFromUser);
 
     if (response.status === 201) {
       alert('Request accepted successfully');

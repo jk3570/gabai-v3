@@ -4,149 +4,109 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./css/App.css";
 import "animate.css";
 
-//AuthContext provider
+// AuthContext provider
 import { useAuthContext } from "./hooks/useAuthContext";
 
-//Navbars and Sidebars
-import Navbar from "./components/landingpage/Navbar.js";
-import UserNavbar from "./components/user/UserNavbar.js";
-import UserSidebar from "./components/user/UserSidebar.js";
-import AdminNavbar from "./components/admin/AdminNavbar.js";
-import AdminSidebar from "./components/admin/AdminSidebar.js";
-import LawyerNavbar from "./components/lawyer/LawyerNavbar.js";
-import LawyerSidebar from "./pages/lawyer/LawyerSidebar.js";
+// Navbars and Sidebars
+import Navbar from "./components/landingpage/Navbar";
+import UserNavbar from "./components/user/UserNavbar";
+import UserSidebar from "./components/user/UserSidebar";
+import AdminNavbar from "./components/admin/AdminNavbar";
+import AdminSidebar from "./components/admin/AdminSidebar";
+import LawyerNavbar from "./components/lawyer/LawyerNavbar";
+import LawyerSidebar from "./pages/lawyer/LawyerSidebar";
 
-
-//Components routes
-import Footer from "./components/landingpage/Footer.js";
+// Components routes
+import Footer from "./components/landingpage/Footer";
 import Terms from "./components/Terms";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-
 import SignupAdminAndLawyer from "./components/SignupAdminAndLawyer";
 import ChatComponent from "./components/user/Chat";
 import UserProfile from "./components/user/UserProfile";
-
 import PageNotFound from "./components/PageNotFound";
 
-
-
-//Landing route
+// Landing route
 import LandingPage from "./pages/LandingPage";
 
-//Search routes
+// Search routes
 import SearchResults from "./pages/search/SearchResults";
 import Search from "./pages/search/Search";
 
-//User route
-import UserLandingPage from "./pages/user/UserLanding.js";
+// User route
+import UserLandingPage from "./pages/user/UserLanding";
 
-//Admin routes
+// Admin routes
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import UserTable from "./pages/admin/UserTable";
 import CasesList from "./pages/admin/CasesList";
 import FeedbackList from "./pages/admin/FeedbackList";
 import AdminArchivedList from "./pages/admin/AdminArchivedList";
 
-//Lawyer routes
-import LawyerDashboard from "./pages/lawyer/LawyerDashboard.js";
-import LawyerRequestTable from "./pages/lawyer/LawyerRequestTable.js";
-import LawyerSchedule from "./pages/lawyer/LawyerSchedule.js";
-// import LawyerSetSchedule from "./pages/lawyer/LawyerSetSchedule.js";
-import LawyerArchives from "./components/lawyer/LawyerArchives.js";
+// Lawyer routes
+import LawyerDashboard from "./pages/lawyer/LawyerDashboard";
+import LawyerRequestTable from "./pages/lawyer/LawyerRequestTable";
+import LawyerSchedule from "./pages/lawyer/LawyerSchedule";
+import LawyerArchives from "./components/lawyer/LawyerArchives";
 import LawyerVideoCon from "./pages/lawyer/LawyerVideoCon";
-import RequestForm from "./components/RequestForm.js";
-
+import RequestForm from "./components/RequestForm";
 
 const App = () => {
   const { user, dispatch } = useAuthContext();
 
-  return ( 
+  return (
     <Router>
-      {/* Navbars */}
-      {user ? ( user.role === 'user' ? (
-            <UserNavbar />
-          ) : user.role === 'admin' ? (
-            <AdminNavbar />
-          ) : user.role === 'lawyer' ? (
+      <Navbar />
+        <UserNavbar /> 
+          <AdminNavbar /> 
             <LawyerNavbar /> 
-          ) : (
-            <Navbar />
-          )
-        ) : (
-          <Navbar />
-        )}
+                    
 
+         
 
+      <Routes>
 
-          <Routes>
-            
-                {/* Landing route */}
-                {user && (user.role === 'admin' || user.role === 'lawyer' || user.role === 'user') ? null : <Route path="/" element={<LandingPage/>} />}
+        {/* Landing route */}
+        <Route path="/" element={<LandingPage />} />
 
+        {/* Search routes */}
+        <Route path="/search" element={<Search />} />
+        <Route path="/search/result" element={<SearchResults />} />
 
-                {/* Search routes */}
-                <Route path="/search" element={<Search />} />
-                <Route path="/search/result" element={<SearchResults />} />
+        {/* Components routes */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/profile" element={<UserProfile />} />
+        <Route path="/request" element={<RequestForm />} />
 
-                {/* Components routes */}
-                {!user ?  <Route path="/login" element={<Login />} /> : null } {/* Render if any user doesnt exist */}
+        {/* Lawyers and admins can't access */}
+        <Route path="/gab/chat" element={<ChatComponent />} />
+        <Route path="/gab/chat/:id" element={<ChatComponent />} />
+        <Route path="/terms" element={<Terms />} />
 
-                {!user ? <Route path="/signup" element={<Signup />} /> : null }
+        {/* User route */}
+        <Route path="/user-landingpage" element={<UserLandingPage />} />
 
+        {/* Lawyer route */}
+        <Route path="/lawyer" element={<LawyerDashboard />} />
+        <Route path="/lawyer/lawyer-request" element={<LawyerRequestTable />} />
+        <Route path="/lawyer/lawyer-schedule" element={<LawyerSchedule />} />
+        <Route path="/lawyer/lawyer-archive" element={<LawyerArchives />} />
+        <Route path="/lawyer" element={<LawyerVideoCon />} />
 
-                {user && user.role && ( <Route path="/profile" element={<UserProfile />} />)}
-                {user && user.role && ( <Route path="/request" element={<RequestForm />} />)}
-                
-                        {/* Lawyers and admins cant access */}
-                {(!user || (user.role !== 'admin' && user.role !== 'lawyer')) && (
-                     <Route path="/gab/chat" element={<ChatComponent />} />)}
-                {(!user || (user.role !== 'admin' && user.role !== 'lawyer')) && (
-                      <Route path="/gab/chat/:id" element={<ChatComponent />} />)}                     
-                <Route path="/terms" element={<Terms />} />
+        {/* Admin routes */}
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin/signup-admin-lawyer" element={<SignupAdminAndLawyer />} />
+        <Route path="/admin/user-table" element={<UserTable />} />
+        <Route path="/admin/cases" element={<CasesList />} />
+        <Route path="/admin/feedbacks" element={<FeedbackList />} />
+        <Route path="/admin/admin-archive" element={<AdminArchivedList />} />
 
-                {/* User route */} {/* only user can access */}
-                {user && user.role === 'user' && (
-                      <Route path="/user/user-landingpage" element={<UserLandingPage />} />)}
+        {/* 404 route */}
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
 
-
-                {/* Lawyer route */} {/* only lawyer can access */}
-                {user && user.role === 'lawyer' && (
-                  <>
-                    <Route path="/lawyer" element={<LawyerDashboard />} />
-                    <Route path="/lawyer/lawyer-request" element={<LawyerRequestTable />} />
-                    <Route path="/lawyer/lawyer-schedule" element={<LawyerSchedule />} />
-                    <Route path="/lawyer/lawyer-archive" element={<LawyerArchives />} />
-                    <Route path="/lawyer" element={<LawyerVideoCon />} />
-                {/* <Route path="/lawyer/lawyer-set-schedule" element={<LawyerSetSchedule />} /> */}
-                  </>
-                )}
-
-                {/* Admin routes */}  
-                {user && user.role === 'admin' && (
-                  <>
-                    <Route path="/admin" element={<AdminDashboard />} />
-                    <Route path="/admin/signup-admin-lawyer" element={<SignupAdminAndLawyer />} />
-                    <Route path="/admin/user-table" element={<UserTable />} />
-                    <Route path="/admin/cases" element={<CasesList />} />
-                    <Route path="/admin/feedbacks" element={<FeedbackList />} />
-                    <Route path="/admin/admin-archive" element={<AdminArchivedList />} />
-                  </>
-                )}
-
-
-                {/* 404 route */}
-                <Route path="*" element={<PageNotFound />} />
-
-
-
-
-        </Routes>
-      
-
-        {user && (user.role === 'admin' || user.role === 'lawyer' || user.role === 'user') ? null : <Footer />}
-
-
+      <Footer />
     </Router>
   );
 };
