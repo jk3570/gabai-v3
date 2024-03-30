@@ -40,9 +40,9 @@
     const button = "flex h-10 w-full px-3 py-2 bg-azure text-white rounded-md justify-center items-center text-sm transition-all duration-100 ease-in-out hover:bg-azure-300"
 
     return (
-      <div className="relative h-screen flex flex-col  w-64 bg-white shadow-xl">
+      <div className="relative h-screen flex flex-col  w-64 bg-bkg shadow-xl text-content border-r border-gray-600 border-opacity-30">
         
-          <div className="relative px-4 pt-3 pb-2 flex flex-col gap-4 w-full bg-white border-b">
+          <div className="relative px-4 pt-3 pb-2 flex flex-col gap-4 w-full bg-bkg border-b border-gray-600 border-opacity-30 text-content">
             <h2 className="text-md font-medium">Conversation History</h2>
           </div>  
         <div className="flex flex-col w-full h-[75%] overflow-y-scroll">
@@ -58,7 +58,7 @@
             </ul>
           </div>
         </div>
-          <div className="relative p-4 h-[8.5rem] flex flex-col gap-4 w-full bg-white border-t bottom-0">
+          <div className="relative p-4 h-[8.5rem] flex flex-col gap-4 w-full bg-bkg border-t border-gray-600 border-opacity-30 bottom-0">
               <button onClick={handleNewChatSubmit} className={button}>
               New Chat
               </button> 

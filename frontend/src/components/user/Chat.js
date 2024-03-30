@@ -66,11 +66,11 @@ const ChatComponent = () => {
   return (
     <div className="relative z-10 w-full h-screen flex flex-row justify-start items-start">
       {/* "relative z-10 w-full min-h-screen flex flex-col justify-start items-center px-5 lg:px-0 pt-[3.875rem]" */}
-    <div className="flex flex-row w-full h-screen pt-[3.875rem]">
+    <div className="flex flex-row w-full h-screen pt-[3.875rem] bg-bkg">
         
         <div
           id="chat-history"
-          className={`transition-all overflow-hidden w-${sidebarOpen ? '0' : '64'} h-full bg-white z-50 shadow-lg left-0 top-0`}
+          className={`transition-all overflow-hidden w-${sidebarOpen ? '0' : '64'} h-full bg-bkg z-50 shadow-lg left-0 top-0`}
           style={{ width: sidebarOpen ? '0px' : '256px' }}
         >
           <ChatSidebar />
@@ -82,7 +82,7 @@ const ChatComponent = () => {
       <div id="chat-content" className="flex flex-col w-full h-full mx-auto max-w-4xl justify-between">
         <div className="h-full overflow-y-auto flex flex-col gap-2 p-5">
           {messages.map((message, index) => (
-            <div className="p-5 bg-gray-100 rounded-xl animate__animated" key={index}>
+            <div className="p-5 bg-gray-400 bg-opacity-20 rounded-xl animate__animated text-content" key={index}>
               <p><b>{message.role === 'user' ? 'You' : 'Gab'}</b></p>
               <p><Markdown>{message.content}</Markdown></p>
             </div>
@@ -101,7 +101,7 @@ const ChatComponent = () => {
                 type="text"
                 value={input}
                 onChange={e => setInput(e.target.value)}
-                className="p-3 border-2 border-black rounded-full w-full"
+                className="p-3 border-2 border-gray-500 border-opacity-50 rounded-full w-full bg-bkg"
                 placeholder="Type your message here"
               />
 
@@ -125,7 +125,7 @@ const ChatComponent = () => {
           </div>
           <div className="flex justify-center items-center pb-3">
             <p className="text-gray-400 text-xs">
-              All conversation is completely confidential.
+              All conversations are completely confidential.
             </p>
           </div>
         </div>

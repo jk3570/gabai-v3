@@ -10,7 +10,7 @@ const Counter = () => {
   const feedbackCount = 0;
 
   const totalNoStyle =
-    "flex flex-row bg-gray-200 rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl h-auto w-[35%] text-1xl p-5 justify-between items-center border-azure-500";
+    "flex flex-row bg-gray-400 bg-opacity-30 rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl h-auto w-[35%] text-1xl p-5 justify-between items-center border-azure-500";
 
   return (
     <div className="flex flex-row gap-3 mx-auto justify-center shrink self-center w-full">

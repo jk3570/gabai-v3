@@ -23,20 +23,20 @@ const UserRequests = () => {
             >
                 {(close) => (
                     <div className="fixed z-40 top-0 right-0 flex translate-y-[3.3rem] translate-x-[-4rem]">
-                        <div className="modal relative max-h-96 w-96 rounded-2xl bg-white flex flex-col shadow-lg">
-                            <div className="relative z-50 bg-white w-full p-3 gap-3 border-b">
+                        <div className="modal relative max-h-96 w-96 rounded-2xl bg-bkg flex flex-col shadow-lg">
+                            <div className="relative z-50 bg-bkg w-full p-3 gap-3 border-b">
                                 <div>
                                     <Link to="/gab/chat" className={button}>Chat</Link>
                                 </div>
-                                <div className="text-md font-medium mt-3">Your Requests</div>
+                                <div className="text-md font-medium mt-3 text-content">Your Requests</div>
                             </div>
-                            <div className="relative max-h-96 w-96 rounded-b-2xl bg-white flex flex-col overflow-clip">
+                            <div className="relative max-h-96 w-96 rounded-b-2xl bg-bkg flex flex-col overflow-clip">
                                 <div className="relative grid-col gap-3 p-3 pt-0 overflow-y-scroll">
                                     {loading ? (
                                         <div>Loading...</div>
                                     ) : (
                                         requestData.map((user) => (
-                                            <div key={user._id} className="relative w-full h-40 bg-gray-100 text-sm font-normal shadow-md rounded-md my-2">
+                                            <div key={user._id} className="relative w-full h-40 bg-gray-400 bg-opacity-30 text-sm font-normal shadow-md rounded-md my-2">
                                                 <p>Name: {user.firstname} {user.lastname}</p>
                                                 <p>Email: {user.email}</p>
                                                 <br/>

@@ -6,11 +6,12 @@ function Section2() {
   return (
     <div
         className="
-            relative z-20  bg-gray-100
+            relative z-20 bg-azure-100 bg-opacity-20
             rounded-lg
             flex flex-row justify-around items-center px-[3rem]
             max-md:flex-col
-            max-md:px-2">
+            max-md:px-2
+            ">
       <div className="flex justify-center items-center shrink-0">
         <img
           src={sec2}

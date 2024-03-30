@@ -3,7 +3,7 @@ import React from "react";
 
 const Section4 = () => {
   return (
-    <div className="relative z-10 bg-gray-100
+    <div className="relative z-10 bg-azure-200 bg-opacity-20
     rounded-lg mt-20 
     flex flex-row justify-around items-center px-[3rem] py-20
     max-md:flex-col

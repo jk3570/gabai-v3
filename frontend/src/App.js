@@ -56,10 +56,10 @@ const App = () => {
 
   return (
     <Router>
-      <Navbar />
+      {/* <Navbar /> */}
         <UserNavbar /> 
-          <AdminNavbar /> 
-            <LawyerNavbar /> 
+          {/* <AdminNavbar /> */} 
+            {/* <LawyerNavbar /> */} 
                     
 
          

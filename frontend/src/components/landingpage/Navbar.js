@@ -9,19 +9,31 @@ import { useState, useEffect } from "react";
 //Images and Icons
 import { Link } from "react-router-dom";
 import iconWhite from "../../img/iconWhite.svg";
-import { BsMoon } from "react-icons/bs";
+import { BsMoon, BsSun  } from "react-icons/bs";
 import { FaSearch } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 
 // Components
 import Login from "../Login";
+import { dark } from "@mui/material/styles/createPalette";
 
-const toggle = () => {
-  var element = document.body;
-  element.classList.toggle("dark-mode");
-};
 
 function Navbar() {
+
+  const [theme, setTheme] = useState('light');
+
+  const toggleTheme = () => {
+      const newTheme = theme === 'light' ? 'dark' : 'light';
+      setTheme(newTheme);
+      document.documentElement.setAttribute('data-theme', newTheme);
+  };
+
+  useEffect(() => {
+    // Set initial theme
+    document.documentElement.setAttribute('data-theme', 'light');
+  }, []);
+
+
   const { user, dispatch } = useAuthContext();
   const location = useLocation();
 
@@ -92,7 +104,7 @@ function Navbar() {
     <>
       {/* Navigation Bar  */}
       <nav
-        className={`fixed top-0 z-50 bg-white h-[3.875rem] w-full font-bold border-b-2 border-azure-500 transition-all duration-300 ${navbarHeight}`}
+        className={`fixed top-0 z-50 bg-bkg text-content h-[3.875rem] w-full font-bold border-b-2 border-azure-500 transition-all duration-300 ${navbarHeight}`}
       >
         <div className="w-full max-w-4xl flex justify-between items-center">
           {/* Brand Logo */}
@@ -111,9 +123,11 @@ function Navbar() {
           </Link>
 
           {/* Search Bar */}
-          <div className="flex flex-row items-center text-md gap-x-5">
+          <div className="flex flex-row items-center text-md gap-x-5 text-label">
             <div className="nav mr-10">
-              <nav className="flex flex-row items-center gap-x-10 list-none ">
+
+              {/* Scroll navigate */}
+              <nav className="flex flex-row items-center gap-x-10 list-none text-label">
                 <li className="hover:scale-[1.1] transition-all duration-100 ease-in-out">
                   <Link to="/#home" onClick={() => scrollToElement("#home")}>
                     Home
@@ -154,10 +168,9 @@ function Navbar() {
             </Link>
 
             {/* Toggle night mode */}
-            <BsMoon
-              className="text-2xl hover:scale-[1.1] transition-all duration-200 ease-in-out"
-              onClick={toggle}
-            />
+            <button onClick={toggleTheme} className="text-2xl hover:scale-[1.1] transition-all duration-200 ease-in-out p-1">
+              {theme === 'light' ? <BsMoon /> : <BsSun />}
+            </button>
 
             {/* Login Btn */}
             <Login />

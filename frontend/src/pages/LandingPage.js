@@ -63,7 +63,7 @@ useEffect(() => {
 }, []);
 
   return (
-    <>
+    <div className="bg-bkg text-content">
       <Helmet>
         <title>Home | GabAi</title>
       </Helmet>
@@ -116,7 +116,7 @@ useEffect(() => {
       {/* 
       Logout button */}
       {/* {user && <button onClick={handleLogout}>Logout</button>} */}
-    </>
+    </div>
   );
 }
 

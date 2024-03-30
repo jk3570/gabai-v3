@@ -36,7 +36,7 @@ function Search() {
   };
 
   return (
-    <div className="h-screen w-full">
+    <div className="h-screen w-full bg-bkg">
         <Helmet>
           <title>Search - GabAI</title>
         </Helmet>
@@ -61,7 +61,7 @@ function Search() {
               <input
                 type="text"
                 placeholder="Search here"
-                className="border-2 border-azure-200 w-full flex rounded-full p-4"
+                className="border-2 border-azure-200 w-full flex rounded-full p-4 bg-bkg"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />

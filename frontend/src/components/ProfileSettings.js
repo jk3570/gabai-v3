@@ -24,7 +24,7 @@ const profileSettings = () => {
       >
         {(close) => (
           <div>
-            <div className="modal h-auto w-[31.25rem] rounded-2xl bg-white flex flex-col justify-center p-3">
+            <div className="modal h-auto w-[31.25rem] rounded-2xl bg-bkg flex flex-col justify-center p-3">
               <center>
                 <div>
                   <h2 className="font-bold">Account Profile</h2>
