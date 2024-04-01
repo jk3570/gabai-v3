@@ -737,7 +737,7 @@ const Signup = ({ initialAddress }) => {
                               minLength: 8,
                               maxLength: 24,
                               pattern:
-                                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,24}$/,
+                                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,24}$/,
                             })}
                             className={input}
                             onKeyDown={handleKeyDown}

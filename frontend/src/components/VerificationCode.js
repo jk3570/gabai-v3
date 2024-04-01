@@ -5,7 +5,7 @@ const button =
 
 const VerCode = () => {
   return (
-    <Popup trigger={"Sign up!"} modal nested>
+    <Popup trigger={<p>Sign Up!</p>} modal nested>
       <div className="modal relative h-auto w-[70%] sm:w-[55%] md:w-[50%] lg:w-[45%] xl:w-[35%] rounded-2xl bg-white flex flex-col pt-7 py-10 p-3">
         <div>
           <h1>Enter Verification Code</h1>
