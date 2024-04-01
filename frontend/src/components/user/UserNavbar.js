@@ -31,7 +31,7 @@ function UserNavbar() {
 
 return (
   <>
-    <nav className="fixed top-0 z-40 bg-bkg h-[3.5rem] w-full p-[0.9rem] pb-2 font-bold border-b-2 border-azure text-label">
+    <nav className="fixed top-0 z-40 bg-bkg h-[3.875rem] w-full p-[0.9rem] font-bold border-b-2 border-azure text-label">
     <div className="w-full flex">
 
       <div className="flex flex-col w-full gap-2">
