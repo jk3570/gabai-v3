@@ -138,10 +138,13 @@ const Login = ({ setLoginSuccess }) => {
                         >
                           Log In
                         </button>
-                        <GoogleLogin
-                          onSuccess={responseMessage}
-                          onError={errorMessage}
-                        />
+                        <br />
+                        <div className="w-full text-center">
+                          <GoogleLogin
+                            onSuccess={responseMessage}
+                            onError={errorMessage}
+                          />
+                        </div>
                       </div>
                       <div className="items-center justify-center font-normal text-sm underline hover:text-azure">
                         <ForgotPass />
