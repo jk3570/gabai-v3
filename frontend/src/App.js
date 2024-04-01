@@ -61,8 +61,8 @@ const App = () => {
   return (
     <Router>
 
-      {/* <Navbar /> */}
-        <UserNavbar /> 
+      <Navbar />
+        {/* <UserNavbar />  */}
           {/* <AdminNavbar /> */} 
             {/* <LawyerNavbar />  */}
                     
