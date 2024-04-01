@@ -57,9 +57,9 @@ const App = () => {
   return (
     <Router>
       {/* <Navbar /> */}
-        {/* <UserNavbar /> */} 
+        <UserNavbar /> 
           {/* <AdminNavbar /> */} 
-            <LawyerNavbar /> 
+            {/* <LawyerNavbar />  */}
                     
 
          
