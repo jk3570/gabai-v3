@@ -52,7 +52,7 @@ const AdminSidebar = () => {
             </div>
 
             {/* Navigation Area */}
-            <nav className="flex flex-col items-start text-content font-normal gap-2">
+            <nav className="flex flex-col items-start text-content font-normal gap-2 mt-2">
                 <div className={navList}>
                 <Link
                     to="/admin"

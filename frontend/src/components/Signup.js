@@ -254,13 +254,14 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
   return (
     <Popup
       trigger={
-        <Link to="#signup" className="text-azure">
+        <div className="flex w-full h-full justify-center items-center"><Link to="#signup">
           Sign up here
-        </Link>
+        </Link></div>
       }
       modal
     >
       {(close) => (
+          <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 backdrop-filter backdrop-blur-lg bg-opacity-25 bg-black ">
             <form className="signup" id="signup" onSubmit={handleSubmit(onSubmit)}>
               {step === 1 && (
                 <>
@@ -815,6 +816,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                 <span className={warning}>Passwords do not match</span>
               )}
             </form>
+          </div>  
       )}
     </Popup>
   );

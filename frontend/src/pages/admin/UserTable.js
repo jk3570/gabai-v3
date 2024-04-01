@@ -70,7 +70,7 @@ const UserTable = () => {
 
 
   return (
-    <div className="relative z-10 w-full py-[3.875rem] flex flex-col justify-start items-start min-h-screen max-md:p-1">
+    <div className="relative z-10 w-full py-[3.875rem] bg-bkg text-content flex flex-col justify-start items-start min-h-screen max-md:p-1">
       <div id="main-content" className="flex flex-col w-full mx-auto max-w-7xl gap-3">
       <div className="flex flex-row-1 justify-between items-center mt-4">
         <h1 className="text-2xl font-semibold text-nowrap">User Data Table</h1>
@@ -82,7 +82,7 @@ const UserTable = () => {
                 placeholder="Search..."
                 value={searchTerm}
                 onChange={handleSearch}
-                className="relative px-4 py-2 w-full border border-gray-300 rounded-md text-xs"
+                className="relative px-4 py-2 w-full border border-gray-300 bg-azure-200 bg-opacity-20 rounded-md text-xs"
               />
               <span className="absolute inset-y-0 right-0 flex items-center justify-end mx-5">
               <svg
@@ -107,11 +107,11 @@ const UserTable = () => {
           
 
       {/* Full Table */}
-      <div className="bg-white h-96 overflow-x-auto">
+      <div className="bg-bkg h-96 overflow-x-auto">
       <div className="overflow-x-auto max-w-7xl">
-        <table className="table-auto w-full border-collapse border border-gray-200 text-xs">
+        <table className="table-auto w-full border-collapse border border-gray-200 text-xs bg-bkg">
           <thead>
-            <tr className="bg-gray-200">
+            <tr className="bg-azure-200 bg-opacity-20 ">
               <th className={tableHeader}>First name</th>
               <th className={tableHeader}>Last name</th>
               <th className={tableHeader}>Username</th>

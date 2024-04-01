@@ -57,9 +57,9 @@ const App = () => {
   return (
     <Router>
       {/* <Navbar /> */}
-        <UserNavbar /> 
+        {/* <UserNavbar /> */} 
           {/* <AdminNavbar /> */} 
-            {/* <LawyerNavbar /> */} 
+            <LawyerNavbar /> 
                     
 
          
@@ -92,7 +92,7 @@ const App = () => {
         <Route path="/lawyer/lawyer-request" element={<LawyerRequestTable />} />
         <Route path="/lawyer/lawyer-schedule" element={<LawyerSchedule />} />
         <Route path="/lawyer/lawyer-archive" element={<LawyerArchives />} />
-        <Route path="/lawyer" element={<LawyerVideoCon />} />
+        <Route path="/lawyer/video" element={<LawyerVideoCon />} />
 
         {/* Admin routes */}
         <Route path="/admin" element={<AdminDashboard />} />

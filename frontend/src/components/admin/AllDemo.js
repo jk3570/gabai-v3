@@ -41,7 +41,7 @@ function AllDemo() {
         </div>
       <div className="flex flex-col w-full h-auto rounded-xl">     
         {/* TODO: Graph */}
-        <div id="center" className="flex flex-col w-full bg-bkg p-2 border-azure rounded-b-xl text-content">
+        <div id="center" className="flex flex-col w-full bg-white bg-opacity-50 p-2 border-azure rounded-b-xl text-content">
           {currentPage === "gender" && <GenderDemo />}
           {currentPage === "location" && <LocationDemo />}
           {currentPage === "age" && <AgeDemo />}

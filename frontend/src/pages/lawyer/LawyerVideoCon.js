@@ -42,7 +42,7 @@ const VideoCon = () => {
 // Component for lawyer's video conference page
 const LawyerVideoCon = () => {
   return (
-    <div className=" py-20 px-auto flex justify-center items-center h-screen">
+    <div className=" py-20 px-auto flex justify-center items-center h-screen bg-bkg text-content">
       <Helmet>
         <title>Video Chat - GabAi</title> {/* Setting document title */}
       </Helmet>

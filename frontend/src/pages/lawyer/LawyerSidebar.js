@@ -26,7 +26,7 @@ const LawyerSidebar = () => {
       <>
         <Popup
           trigger={
-            <button className="relative z-50 justify-center items-center text-azure-500 text-3xl cursor-pointer">
+            <button className="relative z-50 justify-center items-center text-3xl cursor-pointer text-label">
             <IoMenuSharp />
             </button>
           }
@@ -38,12 +38,12 @@ const LawyerSidebar = () => {
             <div className="fixed top-0 left-0 flex -translate-y-[0.1rem]">
               {/* "fixed z-50 top-0 left-0 flex w-full h-full items-center justify-center" */}
               <div id="sidebar" 
-                className="modal fixed z-40 h-screen w-[320px] border bg-white flex flex-col transition duration-200 shadow-lg">
+                className="modal fixed z-40 h-screen w-[320px] border bg-bkg flex flex-col transition duration-200 shadow-lg">
 
             {/* Top area */}
-            <div className="text-black text-2xl">
+            <div className="text-content text-2xl">
             <div className="relative z-50 flex left-0 h-[3.875rem] w-[320px] border-b-2 border-white hover:bg-azure-50 hover:bg-opacity-20 p-[1rem]">
-                <button className="relative z-50 justify-center items-center font-bold text-azure-500 text-3xl cursor-pointer tracking-tighter leading-none">
+                <button className="relative z-50 justify-center items-center font-bold text-label text-3xl cursor-pointer tracking-tighter leading-none">
                 <IoCloseSharp 
                 className="text-3xl cursor-pointer"
                 onClick={() => close()}/>
@@ -51,7 +51,7 @@ const LawyerSidebar = () => {
             </div>
 
             {/* Navigation Area */}
-            <nav className="flex flex-col items-start text-black font-normal">
+            <nav className="flex flex-col items-start text-content font-normal gap-2 mt-2">
                 <div className={navList}>
                 <Link
                     to="/lawyer"

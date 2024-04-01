@@ -70,7 +70,7 @@ const LawyerArchives = () => {
   };
 
   return (
-    <div className="relative z-10 w-full py-[3.875rem] flex flex-col justify-start items-start min-h-screen max-md:p-1">
+    <div className="relative z-10 w-full py-[3.875rem] flex flex-col justify-start items-start min-h-screen max-md:p-1 bg-bkg text-content">
       <div id="main-content" className="flex flex-col w-full mx-auto max-w-7xl gap-3">
       <div className="flex flex-row-1 justify-between items-center mt-4">
 
@@ -84,7 +84,7 @@ const LawyerArchives = () => {
                 placeholder="Search..."
                 value={searchTerm}
                 onChange={handleSearch}
-                className="relative px-4 py-2 w-full border border-gray-300 rounded-md text-xs"
+                className="relative px-4 py-2 w-full border bg-azure-200 bg-opacity-20 border-gray-300 rounded-md text-xs"
               />
               <span className="absolute inset-y-0 right-0 flex items-center justify-end mx-5">
               <svg
@@ -109,11 +109,11 @@ const LawyerArchives = () => {
           
 
       {/* Full Table */}
-      <div className="bg-white h-96 overflow-x-auto">
+      <div className="bg-bkg h-96 overflow-x-auto">
       <div className="overflow-x-auto max-w-7xl">
         <table className="table-auto w-full border-collapse border border-gray-200 text-xs">
           <thead>
-            <tr className="bg-gray-200">
+            <tr className="bg-azure-200 bg-opacity-20 ">
               <th className={tableHeader}>First name</th>
               <th className={tableHeader}>Last name</th>
               <th className={tableHeader}>Username</th>

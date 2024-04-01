@@ -29,7 +29,7 @@ function AdminNavbar() {
   const location = useLocation();
 return (
   <>
-    <nav className="fixed top-0 z-40 bg-bkg h-[3.875rem] w-full p-[1rem] font-bold border-b-2 border-azure-500 gap-10 text-label">
+    <nav className="fixed top-0 z-40 h-[3.875rem] w-full p-[1rem] font-bold border-b-2 border-azure-500 gap-10 bg-bkg text-label">
     <AdminSidebar />
       <div className="w-full flex justify-between items-center">
         <div className="flex justify-center items-center gap-2">

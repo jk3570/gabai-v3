@@ -29,7 +29,7 @@ function SearchResults() {
   };
 
   return (
-    <div className="pt-[3.875rem]">
+    <div className="pt-[3.875rem] bg-bkg text-content">
       <div className="absolute z-0 flex w-full h-[3rem] bg-cover bg-[center_bottom_-10rem]" style={{ backgroundImage: `url(${backgroundPhoto})` }}></div>
       <div className="flex flex-col items-center justify-center py-5 px-[3rem]">
           <form onSubmit={handleSearch} className="w-full flex drop-shadow-lg">
@@ -37,13 +37,13 @@ function SearchResults() {
               <input
                 type="text"
                 placeholder="Search here"
-                className="border-2 border-azure-200 w-full flex rounded-full p-4"
+                className="border-2 border-azure-200 w-full flex rounded-full p-4 bg-bkg text-content"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
 
               <button
-                className="ml-[-4rem] text-4xl text-azure z-10"
+                className="ml-[-4rem] text-4xl text-label z-10"
                 type="submit"
               >
                 <IoSearchOutline />
@@ -64,10 +64,10 @@ function SearchResults() {
           {searchResults.map((result, index) => (
             <div
               key={index}
-              className="bg-gray-100 p-10 rounded-xl mt-5 mx-20 max-md:mx-1"
+              className="bg-gray-400 bg-opacity-40 text-content p-10 rounded-xl mt-5 mx-20 max-md:mx-1"
             >
               <a href={result.link} target="_blank">
-                <h1 className="text-2xl text-azure">{result.title}</h1>
+                <h1 className="text-2xl text-label">{result.title}</h1>
                 <a
                   href={result.link}
                   target="_blank"
