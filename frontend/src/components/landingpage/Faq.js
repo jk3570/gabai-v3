@@ -46,7 +46,7 @@ const Faq = () => {
     // Add more FAQ items here
   ];
 
-  const box = "border-2 border-azure-500 p-3 rounded-xl my-1 bg-white";
+  const box = "border-2 border-azure-500 p-3 rounded-xl my-1 bg-azure-200 bg-opacity-20";
 
   return (
     <div className="relative z-10 mt-20 flex flex-col gap-y-2 justify-center items-center">
@@ -57,8 +57,8 @@ const Faq = () => {
         <div key={index} className={box}>
           <div onClick={() => toggleDesc(index)}>
             <div className="flex justify-between items-center">
-              <h2 className="font-semibold text-azure ml-3 mb-2 mt-2 text-xl">{faq.question}</h2>
-              <div className="font-bold">
+              <h2 className="font-semibold text-label ml-3 mb-2 mt-2 text-xl">{faq.question}</h2>
+              <div className="font-bold text-label">
                 {showDescriptions[index] ? <FaChevronUp /> : <FaChevronDown />}
               </div>
             </div>

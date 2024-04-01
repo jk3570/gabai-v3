@@ -111,17 +111,17 @@ const LawyerRequestTable = () => {
   };  
 
   return (
-    <div className="relative z-10 w-full py-[3.875rem] flex flex-col justify-start items-start min-h-screen max-md:p-1">
+    <div className="relative z-10 w-full py-[3.875rem] flex flex-col justify-start items-start min-h-screen max-md:p-1 bg-bkg text-content">
       <div id="main-content" className="flex flex-col w-full mx-auto max-w-7xl gap-3">
         <div className="flex flex-row-1 justify-between items-center mt-4">
           <h1 className="text-2xl font-semibold text-nowrap">Lawyer Schedule</h1>
         </div>
         
-        <div className="bg-white h-96 overflow-x-auto">
+        <div className="bg-bkg h-96 overflow-x-auto">
           <div className="overflow-x-auto max-w-7xl">
             <table className="table-auto w-full border-collapse border border-gray-200 text-xs">
               <thead>
-                <tr className="bg-gray-200">
+                <tr className="bg-azure-200 bg-opacity-20 ">
                   <th className={tableHeader}>First name</th>
                   <th className={tableHeader}>Last name</th>
                   <th className={tableHeader}>Email</th>

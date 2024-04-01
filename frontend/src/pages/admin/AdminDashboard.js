@@ -29,7 +29,7 @@ function AdminDashboard() {
         <title>Admin Dashboard - GabAI</title>
       </Helmet>
 
-      <div className="relative z-10 w-full pt-[3.875rem] flex flex-col justify-start items-center min-h-screen max-md:p-1">
+      <div className="relative z-10 w-full pt-[3.875rem] flex flex-col justify-start items-center min-h-screen max-md:p-1 bg-bkg text-content">
             <div id="main-content" className="flex flex-col w-full mx-auto max-w-5xl">
               {/* Contents */}
               <div className="mt-0">

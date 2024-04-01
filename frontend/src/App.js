@@ -60,14 +60,13 @@ const App = () => {
 
   return (
     <Router>
-    <UserNavbar /> 
-      {/* <Navbar /> */}
-        {/* 
-          <AdminNavbar /> 
-            <LawyerNavbar />  */}
-                    
 
-         
+      {/* <Navbar /> */}
+        {/* <UserNavbar /> */} 
+          {/* <AdminNavbar /> */} 
+            <LawyerNavbar /> 
+
+ 
 
       <Routes>
 
@@ -101,6 +100,7 @@ const App = () => {
         <Route path="/lawyer/video-conference/:id" element={<LawyerVideoCon />} />
         
         {/* <Route path="/lawyer/join" element={<JoinScreen />} /> */}
+
 
         {/* Admin routes */}
         <Route path="/admin" element={<AdminDashboard />} />

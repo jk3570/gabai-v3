@@ -3,7 +3,7 @@ import "../../css/nav.css";
 
 //AuthContext provider
 import { useAuthContext } from "../../hooks/useAuthContext.js";
-import Profile from "../user/UserProfile.js";
+import ProfileDropdown from "../ProfileDropdown.js";
 import { useState, useEffect } from "react";
 
 //Images and Icons
@@ -29,7 +29,7 @@ function AdminNavbar() {
   const location = useLocation();
 return (
   <>
-    <nav className="fixed top-0 z-40 bg-white h-[3.875rem] w-full p-[1rem] font-bold border-b-2 border-azure-500 gap-10">
+    <nav className="fixed top-0 z-40 h-[3.875rem] w-full p-[1rem] font-bold border-b-2 border-azure-500 gap-10 bg-bkg text-label">
     <AdminSidebar />
       <div className="w-full flex justify-between items-center">
         <div className="flex justify-center items-center gap-2">
@@ -49,14 +49,8 @@ return (
               <FaSearch className="text-2xl hover:scale-[1.1] transition-all duration-200 ease-in-out" />
             </Link>
 
-            {/* Toggle night mode */}
-            <BsMoon
-              className="text-2xl hover:scale-[1.1] transition-all duration-200 ease-in-out"
-              onClick={toggle}
-            />
-
-            {/* Profile Btn */}
-            <Profile />
+              {/* Profile Btn */}
+              <ProfileDropdown />
         </div>
       </div>
     </nav>

@@ -4,6 +4,31 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --color-bkg: 210deg 40% 98%;
+    --color-label: 210deg 50% 40%;
+    --color-content: 217deg 32% 17%;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-bkg: 217deg 32% 17%;    
+      --color-label: 210deg 50% 40%;
+      --color-content: 0deg 0% 96%;
+    }
+  }
+  :root[data-theme="light"] {
+    --color-bkg: 210deg 40% 98%;
+    --color-label: 210deg 50% 40%;
+    --color-content: 217deg 32% 17%;
+  }
+  :root[data-theme="dark"] {
+    --color-bkg: 217deg 32% 17%;
+    --color-label: 208deg 48% 94%;
+    --color-content: 0deg 0% 96%;
+  }
+}
+
 *{
     font-family: 'Roboto', sans-serif;
 }

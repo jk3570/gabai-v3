@@ -1,4 +1,5 @@
 import lawJust from "../../img/justice.png";
+import { Link } from "react-router-dom";
 
 
 const UserSection1 = () => {
@@ -51,13 +52,13 @@ const UserSection1 = () => {
           <div className="flex justify-center">
             
             <div className="group relative h-25 w-full">
-             <a href="/gab/chat">
+             <Link to ="/gab/chat">
               <button                
               className="group relative w-full px-3 z-30 py-2 bg-azure rounded-lg hover:scale-[1.1] text-white after:-z-20 after:absolute after:h-1 after:w-1 after:bg-azure-300 after:left-5 overflow-hidden after:bottom-0  after:translate-y-full after:rounded-md after:hover:scale-[300] after:hover:transition-all after:hover:duration-700 after:transition-all after:duration-700 transition-all duration-600 text-2xl"
               >
-                Let's about it! 
+                Let's talk about it! 
               </button>
-              </a>
+              </Link>
               <span className="absolute z-0 left-6 translate-y-8 w-6 h-6 bg-azure rotate-45 overflow-self-visible"></span>
             </div>
             

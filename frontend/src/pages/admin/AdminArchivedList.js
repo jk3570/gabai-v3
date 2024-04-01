@@ -69,101 +69,101 @@ const AdminArchivedList = () => {
     };
 
     return (
-        <div className="relative z-10 w-full py-[3.875rem] flex flex-col justify-start items-start min-h-screen max-md:p-1">
-        <div id="main-content" className="flex flex-col w-full mx-auto max-w-7xl gap-3">
-        <div className="flex flex-row-1 justify-between items-center mt-4">
-          <h1 className="text-2xl font-semibold text-nowrap">Archives</h1>
-          {/* search field */}
-          <div className="flex flex-row-1 justify-end items-end w-full">
-              <div className="w-64 relative">
-                <input
-                  type="text"
-                  placeholder="Search..."
-                  value={searchTerm}
-                  onChange={handleSearch}
-                  className="relative px-4 py-2 w-full border border-gray-300 rounded-md text-xs"
-                />
-                <span className="absolute inset-y-0 right-0 flex items-center justify-end mx-5">
-                <svg
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                  className="items-center p-1 h-[1.5rem] w-[1.5rem]"
-                  >
-                  <path
-                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                    stroke-width="2"
-                    stroke-linejoin="round"
-                    stroke-linecap="round"
-                    stroke="currentColor"
-                  ></path>
-                </svg>
-                </span> 
-              </div>
-          </div>
+      <div className="relative z-10 w-full py-[3.875rem] bg-bkg text-content flex flex-col justify-start items-start min-h-screen max-md:p-1">
+      <div id="main-content" className="flex flex-col w-full mx-auto max-w-7xl gap-3">
+      <div className="flex flex-row-1 justify-between items-center mt-4">
+        <h1 className="text-2xl font-semibold text-nowrap">User Data Table</h1>
+        {/* search field */}
+        <div className="flex flex-row-1 justify-end items-end w-full">
+            <div className="w-64 relative">
+              <input
+                type="text"
+                placeholder="Search..."
+                value={searchTerm}
+                onChange={handleSearch}
+                className="relative px-4 py-2 w-full border border-gray-300 bg-azure-200 bg-opacity-20 rounded-md text-xs"
+              />
+              <span className="absolute inset-y-0 right-0 flex items-center justify-end mx-5">
+              <svg
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                className="items-center p-1 h-[1.5rem] w-[1.5rem]"
+                >
+                <path
+                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                  stroke="currentColor"
+                ></path>
+              </svg>
+              </span> 
+            </div>
         </div>
-            
-  
-        {/* Full Table */}
-        <div className="bg-white h-96 overflow-x-auto">
-        <div className="overflow-x-auto max-w-7xl">
-          <table className="table-auto w-full border-collapse border border-gray-200 text-xs">
-            <thead>
-              <tr className="bg-gray-200">
-                <th className={tableHeader}>First name</th>
-                <th className={tableHeader}>Last name</th>
-                <th className={tableHeader}>Username</th>
-                <th className={tableHeader}>Email</th>
-                <th className={tableHeader}>Gender</th>
-                <th className={tableHeader}>Birthdate</th>
-                <th className={tableHeader}>Region</th>
-                <th className={tableHeader}>Province</th>
-                <th className={tableHeader}>City</th>
-                <th className={tableHeader}>Barangay</th>
-                <th className={tableHeader}>Role</th>
-                <th className={tableHeader}>Actions</th>
+      </div>
+          
+
+      {/* Full Table */}
+      <div className="bg-bkg h-96 overflow-x-auto">
+      <div className="overflow-x-auto max-w-7xl">
+        <table className="table-auto w-full border-collapse border border-gray-200 text-xs bg-bkg">
+          <thead>
+            <tr className="bg-azure-200 bg-opacity-20 ">
+              <th className={tableHeader}>First name</th>
+              <th className={tableHeader}>Last name</th>
+              <th className={tableHeader}>Username</th>
+              <th className={tableHeader}>Email</th>
+              <th className={tableHeader}>Gender</th>
+              <th className={tableHeader}>Birthdate</th>
+              <th className={tableHeader}>Region</th>
+              <th className={tableHeader}>Province</th>
+              <th className={tableHeader}>City</th>
+              <th className={tableHeader}>Barangay</th>
+              <th className={tableHeader}>Role</th>
+              <th className={tableHeader}>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {currentPageData}
+            {editing && editingUser && (
+              <tr>
+                <td colSpan="11">
+                  <form onSubmit={handleSubmit}>
+                    {/* Inputs for editing user data */}
+                    {/* Example input: <input type="text" value={editingUser.firstname} onChange={(e) => setEditingUser({...editingUser, firstname: e.target.value})} /> */}
+                    <button type="submit">Save</button>
+                  </form>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {currentPageData}
-              {editing && editingUser && (
-                <tr>
-                  <td colSpan="11">
-                    <form onSubmit={handleSubmit}>
-                      {/* Inputs for editing user data */}
-                      {/* Example input: <input type="text" value={editingUser.firstname} onChange={(e) => setEditingUser({...editingUser, firstname: e.target.value})} /> */}
-                      <button type="submit">Save</button>
-                    </form>
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-        </div>
-        
-        <div>
-          <p>Total No. of Users: {filteredData.length}</p>
-        </div>
-  
-        {/* Pagination */}
-        <div className='justify-center flex'>
-          <ReactPaginate
-            className="flex flex-row font-medium text-xs gap-5"
-            previousLabel={'<<Previous'}
-            nextLabel={'Next>>'}
-            breakLabel={'...'}
-            pageCount={pageCount}
-            marginPagesDisplayed={2}
-            pageRangeDisplayed={5}
-            onPageChange={handlePageClick}
-            containerClassName={'pagination'}
-            activeClassName={'active'}
-          />
-        </div>
+            )}
+          </tbody>
+        </table>
       </div>
       </div>
+      
+      <div>
+        <p>Total No. of Users: {filteredData.length}</p>
+      </div>
+
+      {/* Pagination */}
+      <div className='justify-center flex'>
+        <ReactPaginate
+          className="flex flex-row font-medium text-xs gap-5"
+          previousLabel={'<<Previous'}
+          nextLabel={'Next>>'}
+          breakLabel={'...'}
+          pageCount={pageCount}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={handlePageClick}
+          containerClassName={'pagination'}
+          activeClassName={'active'}
+        />
+      </div>
+    </div>
+    </div>
     )
 };
 

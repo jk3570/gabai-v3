@@ -1,6 +1,5 @@
 import React, { useState} from "react";
 import Popup from "reactjs-popup";
-/* import ProfileSettings from "../ProfileSettings"; */
 import { Link } from "react-router-dom";
 
 //AuthContext provider
@@ -9,7 +8,7 @@ import { useNavigate } from "react-router-dom"
 
 
 import UserProfile from "./user/UserProfile.js";
-import { IoMdArrowDropdownCircle } from "react-icons/io";
+import ThemesDropdown from "./ThemesDropdown.js";
 
 
 
@@ -30,7 +29,6 @@ const { user, dispatch } = useAuthContext();
   const email = user ? user.email : null;
   const firstname = user ? user.firstname : null;
   const lastname = user ? user.lastname : null;
-  const themes = "Themes";
   
   const options = "flex flex-row justify-between w-full p-1 px-4 hover:bg-azure-50 hover:bg-opacity-20 cursor-pointer"
   const icon = "text-xl";
@@ -49,9 +47,9 @@ const { user, dispatch } = useAuthContext();
       >
         {(close) => (
           <div className="fixed z-50 top-0 right-0 flex translate-y-[3.3rem] translate-x-[-1rem]">
-            <div className="modal relative h-auto w-64 border rounded-2xl bg-white flex flex-col py-3 shadow-lg">
+            <div className="modal relative h-auto w-64 border rounded-2xl bg-bkg flex flex-col py-3 shadow-lg">
 
-                <div className="w-full h-full flex flex-col text-sm font-normal">
+                <div className="w-full h-full flex flex-col text-sm font-normal text-content">
                     <div className="flex w-full p-1 px-4 text-base">
                       { firstname } { lastname }
                     </div>
@@ -63,8 +61,7 @@ const { user, dispatch } = useAuthContext();
                         <div className="border-t-2"></div>
                     </div>
                     <div className={options}>
-                        {themes}
-                        <IoMdArrowDropdownCircle className={icon}/>
+                        <ThemesDropdown />
                     </div>
                     <div className="w-full p-[0.5rem] px-4">
                         <div className="border-t-2"></div>

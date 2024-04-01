@@ -11,6 +11,7 @@ import Section3 from "../../components/landingpage/Section3";
 import Developers from "../../components/landingpage/Developers";
 import Faq from "../../components/landingpage/Faq";
 import Search from "../search/Search";
+import Footer from "../../components/landingpage/Footer";
 
 import blob from "../../img/Blob.svg";
 import lawJust from "../../img/justice.png";
@@ -26,7 +27,7 @@ const UserLandingPage = () => {
     const page = "";
     const pageContent = "w-full h-full relative max-w-4xl px-5 center mx-auto";
 
-    const pageNav = "px-2 py-2 pb-3 hover:bg-azure-300 hover:bg-opacity-50 focus:border-b-2 hover:-translate-y-1";
+    const pageNav = "px-2 py-2 pb-3 text-label hover:bg-azure-300 hover:bg-opacity-50 focus:border-b-2 hover:-translate-y-1";
     const pageNavText = "transition-all duration-100 ease-in-out";
 
     return (
@@ -37,9 +38,9 @@ const UserLandingPage = () => {
 
         {/* <div> */}
                 {/* Page Links */}
-                <div id = "navbar-second" className="fixed z-50 translate-y-[3.3rem] flex flex-col w-full gap-2 bg-white border-b-2 border-azure font-bold">
-                    <div className="nav flex flex-row items-center ml-5">
-                            <nav className="flex flex-row items-center gap-3 list-none text-sm">
+                <div id = "navbar-second" className="fixed z-50 w-full translate-y-[3.3rem] gap-2 bg-bkg border-b-2 border-azure font-bold flex justify-center items-center">
+                    <div className="nav w-full justify-between items-center max-w-3xl">
+                            <nav className="flex list-none text-sm items-center">
 
                             <Link onClick={() => handleNavClick("home")}>
                                 <div className={pageNav}>
@@ -100,9 +101,9 @@ const UserLandingPage = () => {
 
 
 
-            <div className="w-full h-screen flex flex-col items-center overflow-x-hidden overflow-y-hidden pt-[5.9rem]">
+            <div className="w-full h-screen bg-bkg flex flex-col items-center overflow-x-hidden overflow-y-hidden pt-[5.9rem]">
                 <div className="flex w-full h-full overflow-x-hidden overflow-y-scroll ">
-                    <div className="h-full w-full flex justify-center items-top">
+                    <div className="h-full w-full flex justify-center items-top bg-bkg text-content">
                         <section id="home" style={{ display: activeSection === "home" ? "block" : "none" }}>
                         <div className="w-full h-full relative flex justify-center items-center mx-auto">
                             <UserSection1 />

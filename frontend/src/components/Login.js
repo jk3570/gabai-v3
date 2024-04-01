@@ -47,10 +47,10 @@ const Login = ({ setLoginSuccess }) => {
     }
   };
 
-  const label = "block font-normal text-sm";
+  const label = "block font-normal text-sm flex flex-row";
   const warning = "block font-normal text-sm text-red-500 error mt-1";
   const input =
-    "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-xs ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
+    "flex h-10 w-full rounded-md border border-input bg-bkg px-3 py-2 text-xs ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
   const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-center items-center w-full text-sm";
 
   return (
@@ -65,7 +65,7 @@ const Login = ({ setLoginSuccess }) => {
     >
       {(close) => (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 backdrop-filter backdrop-blur-lg bg-opacity-25 bg-black ">
-          <div className="modal relative h-auto w-[70%] sm:w-[55%] md:w-[50%] lg:w-[45%] xl:w-[35%] rounded-2xl bg-white flex flex-col pt-7 py-10 p-3">
+          <div className="modal relative h-auto w-[70%] sm:w-[55%] md:w-[50%] lg:w-[45%] xl:w-[35%] rounded-2xl bg-bkg text-content flex flex-col pt-7 py-10 p-3">
             <div className="absolute flex align-center p-1 inset-y-0 right-0">
               <IoIosCloseCircleOutline className="text-3xl cursor-pointer" onClick={() => close()} />
             </div>
@@ -126,9 +126,9 @@ const Login = ({ setLoginSuccess }) => {
                     </div>
                   </form>
                 </div>
-                <div className="flex items-center justify-center">
+                <div className="flex items-center justify-center text-content">
                   <p className={label}>
-                    Don't have an account? <Signup />
+                    Don't have an account? <span className="text-azure underline ml-2"><Signup /></span>
                     {/* <SignupAdminAndLawyer /> */}
                   </p>
                 </div>
