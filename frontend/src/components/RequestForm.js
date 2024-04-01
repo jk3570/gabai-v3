@@ -34,7 +34,7 @@ const RequestForm = () => {
         e.preventDefault();
         try {
             await axios.post(`http://localhost:4000/form/request`, {userid, firstname, lastname, email, address, summary});
-            alert('Data inserted successfully');
+            alert('Request sent successfully');
             navigate('/gab/chat');
         } catch (error) {
             console.error(error);

@@ -4,8 +4,8 @@ import React, { useState } from "react";
 const btnStyle = "p-2 rounded-xl bg-azure text-white"; // Button style
 const inputStyle = "border-2 rounded-xl p-2 w-[15rem]"; // Input field style
 
-function JoinScreen({ generateMeetingId, params }) {
-  const [meetingId, setMeetingId] = useState(params); // State for storing meeting ID
+function JoinScreen({ generateMeetingId }) {
+  const [meetingId, setMeetingId] = useState(); // State for storing meeting ID
 
   // Function to handle joining a meeting
   const onJoinClick = async () => {
@@ -32,17 +32,16 @@ function JoinScreen({ generateMeetingId, params }) {
   return (
     <div>
       <h1 className="text-[2.55rem]">
-        <b>Hello, attorney!</b> {/* Greeting message */}
-        <b>{params}</b> {/* Greeting message */}
+        <b>Reminder: Before joining the video conference. Please be professional...</b> {/* Greeting message */}
       </h1>
       <br />
       <div className="flex flex-row gap-2">
         {/* Flex container for input field and buttons */}
         <input
           type="text"
-          readOnly
+          // readOnly
           className={inputStyle} // Applying input field style
-          value={params} // Set input value to state value
+          value={meetingId} // Set input value to state value
           onChange={(e) => {
             setMeetingId(e.target.value); // Updating meetingId state with entered value
           }}
@@ -57,7 +56,6 @@ function JoinScreen({ generateMeetingId, params }) {
             {/* Join button */}
             Join
           </button>
-          {/* <b>{meetingId}</b> Greeting message */}
           {/* {" or "} Text separator
           <button onClick={onCreateClick} className={btnStyle}>
             Create Meeting button

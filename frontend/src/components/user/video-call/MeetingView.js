@@ -2,16 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useParticipant, useMeeting } from "@videosdk.live/react-sdk";
 import ParticipantView from "./ParticipantView";
 import Controls from "./Controls";
-// import { useParams } from "react-router-dom"
 
 const btnStyle = "p-2 rounded-xl bg-azure text-white w-[20em]";
 
-function MeetingView(props ) {
-
-// const params = useParams(); // Get all parameters from the URL
-// const { id } = params; // Destructure the id property from params
-// // console.log(id); // This will log the value of id
-
+function MeetingView(props) {
   const [joined, setJoined] = useState(null);
   const [mediaStream, setMediaStream] = useState(null);
 
@@ -56,7 +50,6 @@ function MeetingView(props ) {
       <div>
         <div className="container">
           <div>
-          {/* <p>{params}</p> */}
             <div className="top-[5rem] left-0 absolute p-4 bg-gray-300 w-screen">
               {/* <h3>Meeting Id: {props.meetingId}</h3>
                <h3>Meeting Id: {props.myId}</h3> */}
@@ -80,9 +73,8 @@ function MeetingView(props ) {
                 </div>
                 <div className="flex flex-row gap-2">
                   <button onClick={joinMeeting} className={btnStyle}>
-                    Joinf 
+                    Join
                   </button>{" "}
-                  {/* <p> {params}</p> */}
                 </div>
               </div>
             )}

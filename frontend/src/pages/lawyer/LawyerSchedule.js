@@ -13,11 +13,11 @@ const LawyerRequestTable = () => {
   const navigate = useNavigate();
   const { user, dispatch } = useAuthContext();
 
-  const fname = user ? user.firstname : null;
-  const lname = user ? user.lastname : null;
-  const lawyername = `${fname} ${lname}`;
+  // const fname = user ? user.firstname : null;
+  // const lname = user ? user.lastname : null;
+  // const lawyername = `${fname} ${lname}`;
 
-    const { requestData, loading } = useAcceptedRequest();
+  const { requestData, loading } = useAcceptedRequest();
   const [currentPage, setCurrentPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
   const [formData, setFormData] = useState({
@@ -64,7 +64,7 @@ const LawyerRequestTable = () => {
     const response = await axios.post(`http://localhost:4000/accept/get-all-request`, formDataFromUser);
 
     if (response.status === 201) {
-      alert('Request accepted successfully');
+      alert('Schedule created successfully');
       navigate('/lawyer/lawyer-request');
     } else {
       alert('Failed to accept request');
@@ -97,7 +97,9 @@ const LawyerRequestTable = () => {
         <td className={tableBody}>{user.date}</td>
         <td className={tableBody}>{user.lawyername}</td>
         <td className={tableBody}>
-              <button className={button}>Join</button>
+          <button className={button}>
+            <Link to={`/lawyer/video-conference/${user.meetingId}`}>Join</Link>
+          </button>
         </td>
       </tr>
     ));
