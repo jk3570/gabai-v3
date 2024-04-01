@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 
 import "./css/App.css";
 import "animate.css";
@@ -35,6 +36,7 @@ import Search from "./pages/search/Search";
 
 // User route
 import UserLandingPage from "./pages/user/UserLanding";
+import UserVideoCon from "./pages/user/UserVideoCon";
 
 // Admin routes
 import AdminDashboard from "./pages/admin/AdminDashboard";
@@ -49,20 +51,22 @@ import LawyerRequestTable from "./pages/lawyer/LawyerRequestTable";
 import LawyerSchedule from "./pages/lawyer/LawyerSchedule";
 import LawyerArchives from "./components/lawyer/LawyerArchives";
 import LawyerVideoCon from "./pages/lawyer/LawyerVideoCon";
+// import JoinScreen from "../src/components/lawyer/video-call/JoinScreen";
 import RequestForm from "./components/RequestForm";
 
 const App = () => {
   const { user, dispatch } = useAuthContext();
 
+
   return (
     <Router>
+
       {/* <Navbar /> */}
         {/* <UserNavbar /> */} 
           {/* <AdminNavbar /> */} 
             <LawyerNavbar /> 
-                    
 
-         
+ 
 
       <Routes>
 
@@ -86,13 +90,17 @@ const App = () => {
 
         {/* User route */}
         <Route path="/user-landingpage" element={<UserLandingPage />} />
+        <Route path="/user/video-conference/:id" element={<UserVideoCon />} />
 
         {/* Lawyer route */}
         <Route path="/lawyer" element={<LawyerDashboard />} />
         <Route path="/lawyer/lawyer-request" element={<LawyerRequestTable />} />
         <Route path="/lawyer/lawyer-schedule" element={<LawyerSchedule />} />
         <Route path="/lawyer/lawyer-archive" element={<LawyerArchives />} />
-        <Route path="/lawyer/video" element={<LawyerVideoCon />} />
+        <Route path="/lawyer/video-conference/:id" element={<LawyerVideoCon />} />
+        
+        {/* <Route path="/lawyer/join" element={<JoinScreen />} /> */}
+
 
         {/* Admin routes */}
         <Route path="/admin" element={<AdminDashboard />} />

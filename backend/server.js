@@ -32,7 +32,7 @@ app.use('/accept', acceptRoutes);
 app.use('/gab', chatRoutes);
 app.use('/form', formRoutes);
 app.use('/user', userRoutes);
-
+  
 
 // Wildcard route to serve the index.html file for all routes
 app.get('*', (req, res) => {

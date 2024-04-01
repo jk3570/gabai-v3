@@ -44,7 +44,9 @@ const UserRequests = () => {
                                                 <p>Date: {user.date}</p>
                                                 <p>Time: {user.time}</p>
                                                 <p>Lawyer Name: {user.lawyername}</p>
-                                                 <button className={join}>Join</button>
+                                                      <button className={button}>
+                                                        <Link to={`/user/video-conference/${user.meetingId}`}>Join</Link>
+                                                    </button>
                                                 <p></p>
 
                                             </div>

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import JoinScreen from "../../components/lawyer/video-call/JoinScreen"; // Importing JoinScreen component for joining a meeting
-import MeetingView from "../../components/lawyer/video-call/MeetingView"; // Importing MeetingView component for displaying meeting view
+import JoinScreen from "../../components/user/video-call/JoinScreen"; // Importing JoinScreen component for joining a meeting
+import MeetingView from "../../components/user/video-call/MeetingView"; // Importing MeetingView component for displaying meeting view
 import { MeetingProvider } from "@videosdk.live/react-sdk"; // Importing MeetingProvider from videosdk for managing meeting state
 import { authToken, createMeeting } from "../../API"; // Importing functions for authentication and meeting creation
 import { Helmet } from "react-helmet"; // Importing Helmet for managing document head metadata
+
 import { useParams } from "react-router-dom"
 
 
@@ -43,6 +44,9 @@ const { id } = params; // Destructure the id property from params
       setMeetingId(meetingId);
       setMyId(meetingId);
     };
+  
+
+
 
   // Function to handle leaving a meeting
   const onMeetingLeave = () => {
@@ -66,17 +70,12 @@ const { id } = params; // Destructure the id property from params
   ) : (
     <div>
     
-        <JoinScreen generateMeetingId={generateMeetingId} params={params} myId={myId} meetingId={id} />
-        <button onClick={onCreateClick}>
-          {/* Create Meeting button */}
-          Create Meeeeting
-        </button>
-        <p>this is the id: {params}</p>
-
+        <JoinScreen generateMeetingId={generateMeetingId} myId={myId} params={params} meetingId={id} />
+        {/* <button onClick={onCreateClick}>
+          Create Meeting button
+          Create Meeting
+        </button> */}
     </div>
-    
-     
-  
 
 
     
@@ -85,11 +84,11 @@ const { id } = params; // Destructure the id property from params
 };
 
 // Component for lawyer's video conference page
-const LawyerVideoCon = () => {
+const UserVideoCon = () => {
 
   
   return (
-    <div className=" py-20 px-auto flex justify-center items-center h-screen bg-bkg text-content">
+    <div className=" py-20 px-auto flex justify-center items-center h-screen">
       <Helmet>
         <title>Video Chat - GabAi</title> {/* Setting document title */}
       </Helmet>
@@ -100,4 +99,4 @@ const LawyerVideoCon = () => {
   );
 };
 
-export default LawyerVideoCon; // Exporting LawyerVideoCon component
+export default UserVideoCon; // Exporting LawyerVideoCon component
