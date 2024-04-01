@@ -31,7 +31,7 @@ const ThemesDropdown = () => {
             nested
         >
             {(close) => (
-                <div className="fixed z-50 top-0 right-0 flex translate-y-[8rem] translate-x-[-2rem]">
+                <div className="fixed z-50 top-0 right-0 flex translate-y-[11rem] translate-x-[-2rem]">
                     <div className="modal w-52 h-auto bg-bkg rounded-md justify-between items-center border drop-shadow-lg text-xs text-content font-medium py-1">
 
                         <button onClick={setLightTheme} className="flex flex-row justify-between w-full p-1 px-4 hover:bg-azure-50 hover:bg-opacity-20 cursor-pointer">
