@@ -1,16 +1,16 @@
+// chatRoute.js
+
 const express = require('express');
-
-const { startChat, getAllChats, newChat } = require('../controllers/chatController');
-
+const { makeChat, getConversationTitles, getConversationMessages } = require('../controllers/chatController');
 const router = express.Router();
 
-// start a chat
-router.post('/conversation', startChat)
+// Create a new chat
+router.post('/conversation', makeChat);
 
-// get all chats
-router.get('/all-chat', getAllChats) 
+// Fetch all conversation titles
+router.get('/conversations', getConversationTitles);
 
-// new chat
-router.post('/new-chat', newChat)
+// Fetch messages for a specific conversation
+router.get('/conversation/:conversationId', getConversationMessages);
 
 module.exports = router;

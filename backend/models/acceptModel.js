@@ -37,6 +37,10 @@ const acceptSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  meetingId: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model('Accept', acceptSchema);

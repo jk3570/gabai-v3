@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useUserRequestData from '../../hooks/useUserRequestData';
 import ReactPaginate from 'react-paginate';
 import Popup from 'reactjs-popup';
@@ -9,13 +9,24 @@ import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { BaseURL } from '../../BaseURL'
 
+import JoinScreen from "../../components/lawyer/video-call/JoinScreen";
+import MeetingView from "../../components/lawyer/video-call/MeetingView";
+import { MeetingProvider } from "@videosdk.live/react-sdk";
+import { authToken, createMeeting } from "../../API";
+import { Helmet } from "react-helmet";
+
 const LawyerRequestTable = () => {
   const navigate = useNavigate();
   const { user, dispatch } = useAuthContext();
+  const [isMeetingIdGenerated, setIsMeetingIdGenerated] = useState(false);
+  const [isDateTimeFilled, setIsDateTimeFilled] = useState(false);
 
   const fname = user ? user.firstname : null;
   const lname = user ? user.lastname : null;
   const lawyername = `${fname} ${lname}`;
+
+  const [meetingId, setMeetingId] = useState(null);
+  const [myId, setMyId] = useState(null);
 
   const { userRequestData, loading } = useUserRequestData();
   const [currentPage, setCurrentPage] = useState(0);
@@ -30,6 +41,7 @@ const LawyerRequestTable = () => {
     time: '',
     date: '',
     lawyername: '',
+    meetingId: '',
   });
   const itemsPerPage = 10; 
 
@@ -37,7 +49,6 @@ const LawyerRequestTable = () => {
   const button = "flex h-5 px-1 py-1 bg-azure text-white rounded-md justify-center items-center w-full text-xs";
   const cancelButton = "flex h-10 px-3 py-2 bg-white text-azure border border-azure rounded-md justify-center items-center w-full text-sm";
   const label = "block font-normal text-sm";
-
 
   if (loading) {
     return <div>Loading...</div>;
@@ -48,32 +59,57 @@ const LawyerRequestTable = () => {
     setCurrentPage(0); 
   };
 
- const handleSubmit = async (event, user) => {
-  event.preventDefault();
-  try {
-    const formDataFromUser = {
-      userid: user.userid,
-      firstname: user.firstname,
-      lastname: user.lastname,
-      email: user.email,
-      address: user.address,
-      summary: user.summary,
-      time: formData.time,
-      date: formData.date,
-      lawyername: lawyername,
-    };
-    const response = await axios.post(`http://localhost:4000/accept/confirm`, formDataFromUser);
+  const generateMeetingId = async () => {
+    const newMeetingId = await createMeeting({ token: authToken });
+    return newMeetingId;
+  };
 
-    if (response.status === 201) {
-      alert('Request accepted successfully');
-      navigate('/lawyer/lawyer-request');
-    } else {
-      alert('Failed to accept request');
+  const onCreateClick = async () => {
+    const meetingId = await generateMeetingId();
+    setMeetingId(meetingId);
+    setMyId(meetingId);
+    setIsMeetingIdGenerated(true);
+  };
+
+  const handleSubmit = async (event, user) => {
+    event.preventDefault();
+
+    try {
+      const formDataFromUser = {
+        userid: user.userid,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        email: user.email,
+        address: user.address,
+        summary: user.summary,
+        time: formData.time,
+        date: formData.date,
+        lawyername: lawyername,
+        meetingId: meetingId,
+      };
+      
+      const response = await axios.post(`http://localhost:4000/accept/confirm`, formDataFromUser);
+
+      if (response.status === 201) {
+        alert('Request accepted successfully');
+        navigate('/lawyer/lawyer-request');
+      } else {
+        alert('Failed to accept request');
+      }
+    } catch (error) {
+      console.error(error);
     }
-  } catch (error) {
-    console.error(error);
-  }
-};
+  };
+
+  const handleDateChange = (e) => {
+    setFormData({ ...formData, date: e.target.value });
+    setIsDateTimeFilled(!!e.target.value && !!formData.time);
+  };
+
+  const handleTimeChange = (e) => {
+    setFormData({ ...formData, time: e.target.value });
+    setIsDateTimeFilled(!!e.target.value && !!formData.date);
+  };
 
   const filteredData = userRequestData.filter((user) =>
     Object.values(user).some((field) =>
@@ -96,7 +132,7 @@ const LawyerRequestTable = () => {
         <td className={tableBody}>{user.summary}</td>
         <td className={tableBody}>
           <Popup
-            trigger={<button className={button}>Accept</button>}
+            trigger={<button className={button} onClick={onCreateClick}>Accept</button>}
             modal
           >
             {close => (
@@ -108,9 +144,10 @@ const LawyerRequestTable = () => {
                       <p className={label}>Set <span className="text-azure font-medium">time</span> and <span className="text-azure font-medium">meeting</span></p>
                     </div>
                     <form onSubmit={(event) => { event.preventDefault(); handleSubmit(event, user); }} className="flex flex-col gap-2">
-                      <input type="date" className={input} placeholder="Date" onChange={(e) => setFormData({ ...formData, date: e.target.value })} />
-                      <input type="time" className={input} placeholder="Time" onChange={(e) => setFormData({ ...formData, time: e.target.value })} />
-                      <button type="submit" className={button}>Submit</button>
+                      <button onClick={onCreateClick} className={button}>Generate Meeting ID</button>
+                      <input type="date" className={input} placeholder="Date" onChange={handleDateChange} />
+                      <input type="time" className={input} placeholder="Time" onChange={handleTimeChange} /> 
+                      <button type="submit" disabled={!isMeetingIdGenerated || !isDateTimeFilled} className={button}>Submit</button>
                       <Link to="/lawyer/lawyer-request">
                         <button type="button" className={cancelButton}>Cancel</button>
                       </Link>
@@ -128,7 +165,6 @@ const LawyerRequestTable = () => {
     ));
 
   const pageCount = Math.ceil(filteredData.length / itemsPerPage);
-
   const handlePageClick = ({ selected: selectedPage }) => {
     setCurrentPage(selectedPage);
   };
@@ -159,10 +195,14 @@ const LawyerRequestTable = () => {
             </table>
           </div>
         </div>
-        
+         {/* <VideoCon />  */}
         <div>
           <p>Total No. of Requests: {filteredData.length}</p>
+                    <p>{meetingId}</p>
+                    <p>{myId}</p>
+
         </div>
+        
 
         <div className='justify-center flex'>
           <ReactPaginate
