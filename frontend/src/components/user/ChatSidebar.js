@@ -1,3 +1,4 @@
+
 // ChatSidebar.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -22,10 +23,8 @@ const ChatSidebar = ({ handleNewChat, handleConversationClick, conversationTitle
       <div className="relative px-4 pt-3 pb-2 flex flex-col gap-4 w-full bg-white border-b">
         <h2 className="text-md font-medium">Conversation History</h2>
       </div>  
-      <div className="relative p-4 h-[8.5rem] flex flex-col gap-4 w-full bg-white border-t bottom-0">
-        <button className="flex h-10 w-full px-3 py-2 bg-azure text-white rounded-md justify-center items-center text-sm transition-all duration-100 ease-in-out hover:bg-azure-300" onClick={handleNewChat}>
-          New Chat
-        </button> 
+
+      <div className="flex flex-col w-full h-[80%] pt-2 overflow-y-scroll overflow-x-clip bg-black">
         <ul>
           {conversationTitles.slice().reverse().map(conversation => ( // Reverse the order of conversationTitles
             <li key={conversation._id} className="flex h-10 w-full px-3 py-2 bg-white text-azure rounded-md justify-center items-center text-sm transition-all duration-100 ease-in-out hover:bg-azure-100 cursor-pointer" onClick={() => handleConversationClick(conversation._id)}>
