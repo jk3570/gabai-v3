@@ -106,7 +106,7 @@ const ChatComponent = () => {
                     e.preventDefault();
                     sendMessage();
                   }}
-                  className="flex flex-row gap-1 bottom-0 w-full py-2"
+                  className="flex flex-row gap-1 bottom-0 w-full py-2 bg-black"
                 >
                   <input
                     type="text"
