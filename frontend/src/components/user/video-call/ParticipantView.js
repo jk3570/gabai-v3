@@ -48,7 +48,7 @@ function ParticipantView(props) {
   }, [webcamOn]);
 
   return (
-    <div className="flex flex-row justify-center items-center">
+    <div className="flex flex-row justify-center items-center w-full">
       <audio ref={micRef} autoPlay playsInline muted={isLocal} />{" "}
       {/* Audio element for mic playback */}
       <div>

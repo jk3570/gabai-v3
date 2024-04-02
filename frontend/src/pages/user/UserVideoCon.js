@@ -88,7 +88,7 @@ const UserVideoCon = () => {
 
   
   return (
-    <div className=" py-20 px-auto flex justify-center items-center h-screen">
+    <div className="px-auto flex justify-center items-center h-screen bg-bkg text-content">
       <Helmet>
         <title>Video Chat - GabAi</title> {/* Setting document title */}
       </Helmet>

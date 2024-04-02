@@ -112,7 +112,7 @@ const ChatComponent = () => {
                     type="text"
                     value={input}
                     onChange={e => setInput(e.target.value)}
-                    className="p-3 border-2 border-gray-500 border-opacity-50 rounded-full w-full bg-bkg"
+                    className="p-3 border-2 border-gray-500 border-opacity-50 rounded-full w-full bg-bkg text-content"
                     placeholder="Type your message here"
                   />
                   <button
