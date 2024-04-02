@@ -56,7 +56,7 @@ const UserProfile = () => {
   /* Text Hierarchy */
   const label = "block font-normal text-sm"
   const input = "flex h-10 w-full rounded-md border border-input bg-bkg bg-opacity-50 px-3 py-2 text-xs ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-  const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-center items-center w-[12rem] ml-2 text-sm"
+  const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-center items-center w-full text-sm hover:bg-azure-300"
   const icon = "text-xl";
 
   return (
@@ -76,7 +76,7 @@ const UserProfile = () => {
       >
         {(close) => (
           <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 backdrop-filter backdrop-blur-lg bg-opacity-25 bg-black ">
-            <div className="modal relative h-[80%] w-[80%] rounded-2xl bg-bkg flex flex-col pt-1 p-2">
+            <div className="modal relative h-[80%] w-[80%] rounded-2xl bg-bkg text-content flex flex-col pt-1 p-2">
                       <div className="absolute flex align-center p-1 inset-y-0 right-0">
                         <IoIosCloseCircleOutline
                           className="text-3xl cursor-pointer"
@@ -87,7 +87,7 @@ const UserProfile = () => {
 
                 {/* General Details */}
                 <div className="w-[30%] h-full flex shadow-xl rounded-xl p-5 text-content ">
-                  <div className="text-center">
+                  <div className="flex flex-col w-full justify-start items-center text-center">
                       <div className="grid items-start mb-7">
                         <div className="w-full flex items-center justify-center mt-3 mb-4">
                           <img className="rounded-full overflow-clip w-[7rem] h-[7rem] shadow-md" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin"/>
@@ -97,8 +97,8 @@ const UserProfile = () => {
                         <h6 className="user-email text-sm text-gray-500">{email}</h6>
                         <button className="text-xs mt-4 text-label text-opacicty-50 underline hover:text-azure">Change password</button>
                       </div>
-                      <div className="about grid items-start gap-3 text-center">
-                          <div className="flex justify-end mt-10">
+                      <div className="about flex w-full items-start gap-3 text-center">
+                          <div className="flex justify-end mt-10 w-full">
                             <button id="submit" name="submit" className={button} onClick={handleLogout}>Logout</button>
                         </div>
                       </div>
@@ -110,6 +110,7 @@ const UserProfile = () => {
                 {/* More Details */}
                 <div className="w-full h-full rounded-xl p-5 text-content ">
                 <div className="card-body mt-8">
+
                     <form className="grid grid-cols-1 gap-4">
                         <div>
                             <h6 className="mb-2 text-primary text-label font-medium text-1xl">Personal Details</h6>
@@ -153,6 +154,7 @@ const UserProfile = () => {
 
                             </div>
                         </div>
+
                         <div>
                             <h6 className="mb-2 text-primary text-label font-medium text-1xl">Address</h6>
                             <div className="grid grid-cols-2 gap-4">
@@ -178,11 +180,16 @@ const UserProfile = () => {
                                 </div>
                             </div>
                         </div>
+
                     </form>
+
                     <div className="flex justify-end mt-10">
+                      <div className="flex w-[70%] gap-2">
                         <button id="submit" name="submit" className={button} >Cancel</button>
                         <button id="submit" name="submit" className={button}>Update</button>
+                      </div>
                     </div>
+
                 </div>  
 
                 </div>

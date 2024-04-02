@@ -2,16 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useParticipant, useMeeting } from "@videosdk.live/react-sdk";
 import ParticipantView from "./ParticipantView";
 import Controls from "./Controls";
-// import { useParams } from "react-router-dom"
 
-const btnStyle = "p-2 rounded-xl bg-azure text-white w-[20em]";
+const btnStyle = "p-3 rounded-xl bg-azure text-white w-full flex justify-center items-center";
 
-function MeetingView(props ) {
-
-// const params = useParams(); // Get all parameters from the URL
-// const { id } = params; // Destructure the id property from params
-// // console.log(id); // This will log the value of id
-
+function MeetingView(props) {
   const [joined, setJoined] = useState(null);
   const [mediaStream, setMediaStream] = useState(null);
 
@@ -56,8 +50,7 @@ function MeetingView(props ) {
       <div>
         <div className="container">
           <div>
-          {/* <p>{params}</p> */}
-            <div className="top-[5rem] left-0 absolute p-4 bg-gray-300 w-screen">
+            <div className="top-[5rem] left-0 absolute bg-bkg w-screen justify-center items-center">
               {/* <h3>Meeting Id: {props.meetingId}</h3>
                <h3>Meeting Id: {props.myId}</h3> */}
             </div>
@@ -73,22 +66,27 @@ function MeetingView(props ) {
             ) : joined && joined === "JOINING" ? (
               <p>Joining the meeting...</p>
             ) : (
-              <div>
-               <b>Reminder: Before joining the video conference. Please be professional...</b>
+              <div className="flex flex-col gap-3">
+
+               <p className="w-[480px] text-sm text-center">
+               Just a friendly reminder about your meeting today. Please ensure all necessary things are prepared and accessible. Thank you!
+              </p>
+
                 <div className="flex flex-row gap-2">
                   <ParticipantView />
                 </div>
-                <div className="flex flex-row gap-2">
+
+                <div className="flex flex-row gap-2 w-full">
                   <button onClick={joinMeeting} className={btnStyle}>
-                    Joinf 
+                    Join
                   </button>{" "}
-                  {/* <p> {params}</p> */}
                 </div>
+
               </div>
             )}
           </div>
 
-          <div className="bottom-0 left-0 flex items-center justify-center absolute bg-gray-300 w-screen h-16">
+          <div className="bottom-0 left-0 flex items-center justify-center absolute bg-gray-400 bg-opacity-60 w-screen h-24">
             {" "}
             <Controls
               className=""

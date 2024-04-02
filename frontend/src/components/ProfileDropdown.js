@@ -32,7 +32,7 @@ const { user, dispatch } = useAuthContext();
   
   const options = "flex flex-row justify-between w-full p-1 px-4 hover:bg-azure-50 hover:bg-opacity-20 cursor-pointer"
   const icon = "text-xl";
-  const button = "flex h-10 w-full px-3 py-2 bg-azure text-white rounded-md justify-center items-center text-sm"
+  const button = "flex h-10 w-full px-3 py-2 bg-azure text-white rounded-md justify-center items-center text-sm hover:bg-azure-300"
 
   return (
     <>
@@ -47,7 +47,7 @@ const { user, dispatch } = useAuthContext();
       >
         {(close) => (
           <div className="fixed z-50 top-0 right-0 flex translate-y-[3.3rem] translate-x-[-1rem]">
-            <div className="modal relative h-auto w-64 border rounded-2xl bg-bkg flex flex-col py-3 shadow-lg">
+            <div className="modal relative h-auto w-64 border rounded-2xl bg-bkg flex flex-col py-3 shadow-lg border-opacity-20 border-gray-400">
 
                 <div className="w-full h-full flex flex-col text-sm font-normal text-content">
                     <div className="flex w-full p-1 px-4 text-base">
@@ -58,22 +58,22 @@ const { user, dispatch } = useAuthContext();
                         { email }
                     </div>
                     <div className="w-full p-[0.5rem] px-4">
-                        <div className="border-t-2"></div>
+                        <div className="border-t-2 border-opacity-20 border-gray-400"></div>
                     </div>
                     <div className={options}>
                         <ThemesDropdown />
                     </div>
                     <div className="w-full p-[0.5rem] px-4">
-                        <div className="border-t-2"></div>
+                        <div className="border-t-2 border-opacity-20 border-gray-400"></div>
                     </div>
                     <div>
                         <UserProfile />
                         
                     </div>
                     <div className="w-full p-[0.5rem] px-4">
-                        <div className="border-t-2"></div>
+                        <div className="border-t-2 border-opacity-20 border-gray-400"></div>
                     </div >
-                    <div className={options}>
+                    <div className="flex flex-row justify-between w-full p-1 px-4">
                         <button className={button} onClick={handleLogout}>Logout</button>
                     </div>
                 </div>
