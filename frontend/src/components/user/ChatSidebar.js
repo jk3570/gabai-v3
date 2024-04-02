@@ -24,7 +24,7 @@ const ChatSidebar = ({ handleNewChat, handleConversationClick, conversationTitle
         <h2 className="text-md font-medium">Conversation History</h2>
       </div>  
 
-      <div className="flex flex-col w-full h-[80%] pt-2 overflow-y-scroll overflow-x-clip">
+      <div className="flex flex-col w-full h-[80%] pt-2 overflow-y-scroll overflow-x-clip bg-black">
         <ul>
           {conversationTitles.slice().reverse().map(conversation => ( // Reverse the order of conversationTitles
             <li key={conversation._id} className="flex h-fit w-full px-5 py-2 bg-bkg text-content text-opacity-70 justify-start items-center text-sm transition-all duration-100 ease-in-out hover:bg-azure-100 hover:bg-opacity-50 hover:translate-x-2 cursor-pointer" onClick={() => handleConversationClick(conversation._id)}>
