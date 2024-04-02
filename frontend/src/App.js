@@ -57,20 +57,15 @@ import RequestForm from "./components/RequestForm";
 const App = () => {
   const { user, dispatch } = useAuthContext();
 
-
   return (
     <Router>
 
-      <Navbar />
-        {/* <UserNavbar />  */}
+      {/* <Navbar /> */}
+        <UserNavbar /> 
           {/* <AdminNavbar /> */} 
             {/* <LawyerNavbar />  */}
                     
-
- 
-
       <Routes>
-
         {/* Landing route */}
         <Route path="/" element={<LandingPage />} />
 

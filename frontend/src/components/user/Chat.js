@@ -2,17 +2,22 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaGripLinesVertical } from "react-icons/fa";
 import { BsSend } from "react-icons/bs";
-import Markdown from 'markdown-to-jsx'; // Assuming you have a Markdown component
+import Markdown from 'markdown-to-jsx';
+import { Link } from 'react-router-dom';
+
 
 import ChatSidebar from './ChatSidebar';
+import RequestForm from '../RequestForm';
 
-const ChatComponent = () => {
+const ChatComponent = () => { 
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isSendDisabled, setIsSendDisabled] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [conversationId, setConversationId] = useState('');
   const [conversationTitles, setConversationTitles] = useState([]);
+  const [summary, setSummary] = useState('');
+
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -56,6 +61,15 @@ const ChatComponent = () => {
           if (!conversationId) {
             setConversationId(response.data.conversationId);
           }
+
+          // Set the summary received from the backend
+          setSummary(response.data.summary);
+
+          console.log(typeof(summary))
+
+          // Log the summary to verify if it's passed correctly
+          console.log("Summary:", response.data.summary);
+
         })
         .catch(error => console.error('Error:', error));
     } else {
@@ -131,8 +145,11 @@ const ChatComponent = () => {
                 <p className="text-gray-400 text-xs">
                   All conversations are completely confidential.
                 </p>
+                     
+             
+              <Link to="/request" className="text-azure font-bold cursor-pointer ml-1"></Link>
               </div>
-            </div>
+            </div>      
           </div>
         </div>
       </div>

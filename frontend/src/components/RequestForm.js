@@ -7,7 +7,9 @@ import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from "../hooks/useAuthContext";
 import { BaseURL } from "../BaseURL";
 
-const RequestForm = () => {
+
+const RequestForm = ({ summary }) => {
+     console.log("Summary in RequestForm component:", summary);
     const navigate = useNavigate();
 
     const { user, dispatch } = useAuthContext();
@@ -21,8 +23,6 @@ const RequestForm = () => {
     const city = user ? user.city : null;
     const barangay = user ? user.barangay : null;
     const address = `${region}, ${province}, ${city}, ${barangay}`;
-    const summary = address;
-
 
     const input = "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-xs ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
     const summaryStyle = "flex h-52 w-full rounded-md border bg-gray rounded-md px-3 py-2 text-xs ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
@@ -64,7 +64,7 @@ const RequestForm = () => {
                                 name="summary"
                                 className={summaryStyle}
                                 placeholder="Case Summary"
-                                value={address}
+                                value={summary} // Make sure summary is passed correctly here
                                 readOnly
                             ></textarea>
                             <button type="submit" className={button}>

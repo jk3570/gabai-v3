@@ -8,9 +8,6 @@ import { Link } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { IoMdSettings } from "react-icons/io";
 
-
-
-
 const UserProfile = () => {
 
   const handleKeyDown = (event) => {
