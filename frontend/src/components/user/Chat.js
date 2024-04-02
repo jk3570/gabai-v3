@@ -74,7 +74,7 @@ const ChatComponent = () => {
   return (
     <div className="relative z-10 w-full h-screen flex flex-row justify-start items-start">
       <div className="flex flex-row w-full h-screen pt-[3.875rem] bg-bkg">
-
+        <div className="flex flex-row w-full h-screen pt-[3.875rem]">
           <div
             id="chat-history"
             className={`transition-all overflow-hidden w-${sidebarOpen ? '0' : '64'} h-full bg-bkg z-50 shadow-lg left-0 top-0`}
@@ -86,10 +86,9 @@ const ChatComponent = () => {
               conversationTitles={conversationTitles} 
             />
           </div>
-          <div className="flex h-full items-center justify-center cursor-pointer" onClick={toggleSidebar}>
+          <div className="flex h-full items-center" onClick={toggleSidebar}>
             <FaGripLinesVertical className="text-azure text-2xl" />
           </div>
-
           <div id="chat-content" className="flex flex-col w-full h-full mx-auto max-w-4xl justify-between">
             <div className="h-full overflow-y-auto flex flex-col gap-2 p-5">
               {messages.map((message, index) => (
@@ -135,6 +134,7 @@ const ChatComponent = () => {
               </div>
             </div>
           </div>
+        </div>
       </div>
     </div>
   );
