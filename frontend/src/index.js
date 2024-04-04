@@ -5,6 +5,7 @@ import "./css/index.css";
 import App from "./App";
 import { AuthContextProvider } from "./contexts/AuthContext";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -19,3 +20,5 @@ root.render(
     </AuthContextProvider>
   </GoogleOAuthProvider>
 );
+
+serviceWorkerRegistration.register();
