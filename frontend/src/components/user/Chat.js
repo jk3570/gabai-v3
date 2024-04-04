@@ -3,10 +3,12 @@ import axios from 'axios';
 import { FaGripLinesVertical } from "react-icons/fa";
 import { BsSend } from "react-icons/bs";
 import Markdown from 'markdown-to-jsx'; // Assuming you have a Markdown component
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 import ChatSidebar from './ChatSidebar';
 
 const ChatComponent = () => {
+  const { user, dispatch } = useAuthContext();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isSendDisabled, setIsSendDisabled] = useState(true);
@@ -75,20 +77,23 @@ const ChatComponent = () => {
     <div className="relative z-10 w-full h-screen flex flex-row justify-start items-start">
       <div className="flex flex-row w-full h-screen pt-[3.875rem] bg-bkg">
 
-          <div
-            id="chat-history"
-            className={`transition-all overflow-hidden w-${sidebarOpen ? '0' : '64'} h-full bg-bkg z-50 shadow-lg left-0 top-0`}
-            style={{ width: sidebarOpen ? '0px' : '256px' }}
-          >
-            <ChatSidebar
-              handleNewChat={handleNewChat}
-              handleConversationClick={handleConversationClick}
-              conversationTitles={conversationTitles} 
-            />
-          </div>
+      {user ? 
+        <div
+          id="chat-history"
+          className={`transition-all overflow-hidden w-${sidebarOpen ? '0' : '64'} h-full bg-bkg z-50 shadow-lg left-0 top-0`}
+          style={{ width: sidebarOpen ? '0px' : '256px' }}
+        >
+          <ChatSidebar
+            handleNewChat={handleNewChat}
+            handleConversationClick={handleConversationClick}
+            conversationTitles={conversationTitles} 
+          />
+        </div> : null}
+      
+        {user ?
           <div className="flex h-full items-center justify-center cursor-pointer" onClick={toggleSidebar}>
-            <FaGripLinesVertical className="text-azure text-2xl" />
-          </div>
+            <FaGripLinesVertical className="text-label text-2xl" />
+        </div> : null}
 
           <div id="chat-content" className="flex flex-col w-full h-full mx-auto max-w-4xl justify-between">
             <div className="h-full overflow-y-auto flex flex-col gap-2 p-5">
@@ -106,7 +111,7 @@ const ChatComponent = () => {
                     e.preventDefault();
                     sendMessage();
                   }}
-                  className="flex flex-row gap-1 bottom-0 w-full py-2 bg-black"
+                  className="flex flex-row gap-1 bottom-0 w-full py-2"
                 >
                   <input
                     type="text"
