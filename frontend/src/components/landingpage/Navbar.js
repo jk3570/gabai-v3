@@ -108,7 +108,7 @@ function Navbar() {
       >
         <div className="w-full max-w-4xl flex justify-between items-center">
           {/* Brand Logo */}
-          <Link to="/#home" onClick={() => scrollToElement("#home")}>
+          <Link to="/" onClick={() => scrollToElement("#home")}>
             <button
               class="group relative z-10 w-12 hover:w-44 h-12 hover:bg-azure-500 bg-azure-500 rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl text-neutral-50 font-bold flex justify-start gap-1 items-center pl-0.5
                 duration-700 before:duration-700 before:hover:500

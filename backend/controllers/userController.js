@@ -35,7 +35,6 @@ const loginUser = async (req, res) => {
       region: user.region,
       barangay: user.barangay,
       city: user.city,
-    
     });
     //user: user.email
   } catch (error) {

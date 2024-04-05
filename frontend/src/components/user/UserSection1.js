@@ -11,7 +11,7 @@ const UserSection1 = () => {
         <div class="fixed w-screen h-screen z-0 overflow-clip">
                 <img 
                 id="backgroundImage" 
-                className="absolute scale-[75%] translate-x-[10rem] -translate-y-[38rem] opacity-20" 
+                className="absolute scale-[75%] translate-x-[10rem] -translate-y-[15rem] opacity-20" 
                 src={lawJust} alt="Background Image">
                 </img>
         </div>
