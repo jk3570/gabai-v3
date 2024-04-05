@@ -23,6 +23,7 @@ const LawyerRequestTable = () => {
 
   const fname = user ? user.firstname : null;
   const lname = user ? user.lastname : null;
+  const lawyeremail  = user ? user.email : null;
   const lawyername = `${fname} ${lname}`;
 
   const [meetingId, setMeetingId] = useState(null);
@@ -33,6 +34,8 @@ const LawyerRequestTable = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [formData, setFormData] = useState({
     userid: '',
+    lawyeremail: lawyeremail,
+    lawyeruserid: '',
     firstname: '',
     lastname: '',
     email: '',
@@ -40,7 +43,7 @@ const LawyerRequestTable = () => {
     summary: '',
     time: '',
     date: '',
-    lawyername: '',
+    lawyername: lawyername,
     meetingId: '',
   });
   const itemsPerPage = 10; 
@@ -77,6 +80,7 @@ const LawyerRequestTable = () => {
     try {
       const formDataFromUser = {
         userid: user.userid,
+        lawyeremail: lawyeremail,
         firstname: user.firstname,
         lastname: user.lastname,
         email: user.email,
@@ -124,7 +128,7 @@ const LawyerRequestTable = () => {
   const currentPageData = filteredData
     .slice(offset, offset + itemsPerPage)
     .map((user) => (
-      <tr key={user.userid} className="border-b border-gray-300">
+      <tr key={user._id} className="border-b border-gray-300">
         <td className={tableBody}>{user.firstname}</td>
         <td className={tableBody}>{user.lastname}</td>
         <td className={tableBody}>{user.email}</td>

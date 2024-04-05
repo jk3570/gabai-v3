@@ -5,6 +5,10 @@ const acceptSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  lawyeremail: {
+    type: String,
+    required: true,
+  },
   firstname: {
     type: String,
     required: true,

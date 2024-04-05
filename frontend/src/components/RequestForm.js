@@ -1,28 +1,19 @@
 import React, { useState } from "react";
-import Popup from "reactjs-popup";
-import { IoIosCloseCircleOutline } from "react-icons/io";
-import { Link } from "react-router-dom";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from "../hooks/useAuthContext";
-import { BaseURL } from "../BaseURL";
 
-
-const RequestForm = ({ summary }) => {
-     console.log("Summary in RequestForm component:", summary);
-    const navigate = useNavigate();
-
-    const { user, dispatch } = useAuthContext();
-
-    const userid = user ? user.userid : null;
-    const firstname = user ? user.firstname : null;
-    const lastname = user ? user.lastname : null;
-    const email = user ? user.email : null;
-    const region = user ? user.region : null;
-    const province = user ? user.province : null;
-    const city = user ? user.city : null;
-    const barangay = user ? user.barangay : null;
-    const address = `${region}, ${province}, ${city}, ${barangay}`;
+const RequestForm = ({ summary, onClose }) => {
+    const { user } = useAuthContext();
+    const [userid, setUserId] = useState(user ? user.userid : '');
+    const [firstname, setFirstname] = useState(user ? user.firstname : '');
+    const [lastname, setLastname] = useState(user ? user.lastname : '');
+    const [email, setEmail] = useState(user ? user.email : '');
+    const [region, setRegion] = useState(user ? user.region : '');
+    const [province, setProvince] = useState(user ? user.province : '');
+    const [city, setCity] = useState(user ? user.city : '');
+    const [barangay, setBarangay] = useState(user ? user.barangay : '');
+    const [address, setAddress] = useState(`${region}, ${province}, ${city}, ${barangay}`);
+    const [isLoading, setIsLoading] = useState(false);
 
     const input = "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-xs ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
     const summaryStyle = "flex h-52 w-full rounded-md border bg-gray rounded-md px-3 py-2 text-xs ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
@@ -32,51 +23,50 @@ const RequestForm = ({ summary }) => {
 
     const handleSubmit = async e => {
         e.preventDefault();
+        setIsLoading(true);
         try {
-            await axios.post(`http://localhost:4000/form/request`, {userid, firstname, lastname, email, address, summary});
+            await axios.post(`http://localhost:4000/form/request`, { userid, firstname, lastname, email, address, summary });
+            setIsLoading(false);
             alert('Request sent successfully');
-            navigate('/gab/chat');
+            onClose(); // Close the modal
         } catch (error) {
+            setIsLoading(false);
             console.error(error);
             alert('Failed to insert data');
         }
     };
 
     return (
-        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 backdrop-filter backdrop-blur-lg bg-opacity-25 bg-black">
-            <div className="modal relative h-auto w-[70%] sm:w-[55%] md:w-[50%] lg:w-[45%] xl:w-[35%] rounded-2xl bg-white flex flex-col justify-center items-center pt-7 py-10 p-6">
-                <div className="w-full max-w-md bg-white rounded-lg">
-                    <div className="w-full h-full grid grid-cols-1 gap-2">
-                        <div className="flex flex-col justify-center">
-                            <h1 className="font-bold text-3xl m-0">
-                                Request Form
-                            </h1>
-                            <p className={label}>Request <span className="text-azure font-medium">online meeting</span> to a lawyer</p>
-                        </div>
-                        <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-                            <div className="flex flex-row-1 gap-2">
-                                <input type="text" className={input} placeholder="First Name" value={firstname} readOnly />
-                                <input type="text" className={input} placeholder="Last Name" value={lastname} readOnly />
-                            </div>
-                            <input type="email" className={input} placeholder="Email" value={email} readOnly />
-                            <input type="text" className={input} placeholder="Address" value={address} readOnly />
-                            <textarea
-                                name="summary"
-                                className={summaryStyle}
-                                placeholder="Case Summary"
-                                value={summary} // Make sure summary is passed correctly here
-                                readOnly
-                            ></textarea>
-                            <button type="submit" className={button}>
-                                Submit
-                            </button>
-                            <Link to="/gab/chat">
-                                <button type="button" className={cancelButton}>
-                                    Cancel
-                                </button>
-                            </Link>
-                        </form>
+        <div className="modal relative h-auto w-[70%] sm:w-[55%] md:w-[50%] lg:w-[45%] xl:w-[35%] rounded-2xl bg-white flex flex-col justify-center items-center pt-7 py-10 p-6">
+            <div className="w-full max-w-md bg-white rounded-lg">
+                <div className="w-full h-full grid grid-cols-1 gap-2">
+                    <div className="flex flex-col justify-center">
+                        <h1 className="font-bold text-3xl m-0">
+                            Request Form
+                        </h1>
+                        <p className={label}>Request <span className="text-azure font-medium">online meeting</span> to a lawyer</p>
                     </div>
+                    <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+                        <div className="flex flex-row-1 gap-2">
+                            <input type="text" className={input} placeholder="First Name" value={firstname} onChange={e => setFirstname(e.target.value)} readOnly />
+                            <input type="text" className={input} placeholder="Last Name" value={lastname} onChange={e => setLastname(e.target.value)} readOnly />
+                        </div>
+                        <input type="email" className={input} placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} readOnly />
+                        <input type="text" className={input} placeholder="Address" value={address} readOnly />
+                        <textarea
+                            name="summary"
+                            className={summaryStyle}
+                            placeholder="Case Summary"
+                            value={summary}
+                            readOnly
+                        ></textarea>
+                        <button type="submit" className={button} disabled={isLoading}>
+                            {isLoading ? 'Submitting...' : 'Submit'}
+                        </button>
+                        <button type="button" className={cancelButton} onClick={onClose}>
+                            Cancel
+                        </button>
+                    </form> 
                 </div>
             </div>
         </div>

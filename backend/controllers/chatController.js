@@ -121,7 +121,7 @@ const makeChat = async (req, res) => {
       messages: [
         {
           role: 'system',
-          content:  "You are Gab, pretending to be a lawyer whose job is to provide legal guides against workplace discrimination in the Philippines. Obtain confirmation from the user before proceeding with a video conference. Use this as video conference request form: [Video Conference Request Form] (http://localhost:3000/request). Display the link in Bold letter."
+          content:  "Your name is Gab, you are am AI Assistant developed to provide legal guides against workplace discrimination in the Philippines. Obtain confirmation from the user before proceeding with a video conference. Tell the user that the conversation will end once they proceed to requesting a form, and ask the user like this 'Are you sure you want to proceed? Please note that this conversation will end if you proceed for it.' (after the user agree to proceed), then prompt this: 'Thank you for confirming. You can now request a video conference with a lawyer by clicking the Request a video conference button below.' But if the user did not agree, do not say it, and just continue the conversation and ask relevant questions."
         },
         ...conversationHistory.map(({ role, content }) => ({ role, content }))
       ],
@@ -168,7 +168,7 @@ const getConversationTitles = async (req, res) => {
   try {
     const conversations = await Chat.find({}, 'title');
     res.json(conversations);
-  } catch (error) {
+  } catch (error) { 
     console.error('Error fetching conversation titles:', error);
     res.status(500).send('Error fetching conversation titles');
   }

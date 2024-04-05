@@ -60,11 +60,11 @@ const App = () => {
   return (
     <Router>
 
-      {/* <Navbar /> */}
-        <UserNavbar /> 
+      <Navbar />
+        {/* <UserNavbar />  */}
           {/* <AdminNavbar /> */} 
             {/* <LawyerNavbar />  */}
-                    
+ 
       <Routes>
         {/* Landing route */}
         <Route path="/" element={<LandingPage />} />
@@ -77,7 +77,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/profile" element={<UserProfile />} />
-        <Route path="/request" element={<RequestForm />} />
+        {/* <Route path="/request" element={<RequestForm />} /> */}
 
         {/* Lawyers and admins can't access */}
         <Route path="/gab/chat" element={<ChatComponent />} />

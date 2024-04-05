@@ -17,7 +17,18 @@ import { Icon } from "react-icons-kit";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
 
+
+
 const Signup = ({ initialAddress }) => {
+
+
+  const notify = () =>
+    toast.success("Account has been created successfully!", {
+        position: "top-center",
+        duration: 2000,
+    });
+
+
   const [role, setRole] = useState("user");
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedProvince, setSelectedProvince] = useState("");
@@ -215,10 +226,7 @@ const Signup = ({ initialAddress }) => {
       data.password
     )
 
-      toast.success("Account has been created successfully!", {
-      position: "top-center",
-      duration: 1000,
-    });
+      
 
   };
 
@@ -617,7 +625,13 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
               {step === 3 && (
                 <>
                   <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 ">
-                    `{" "}
+                    <div>
+                      <Toaster
+                          position="top-center"
+                        />
+                    </div>
+
+
                     <div className="modal relative h-auto w-[72%] sm:w-[57%] md:w-[52%] lg:w-[47%] xl:w-[37%] 2xl:w-[40%] rounded-2xl bg-white flex flex-col pt-7 py-10 p-3">
 
                       <div className="w-full h-full flex flex-col-1 justify-center px-4">
@@ -799,9 +813,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                         <div className="w-full justfy-between flex gap-2">
                           <a href="#" className={button} onClick={prevStep}> {"<"} Previous</a>
 
-                          <button type="submit" className={button} disabled={!isFormValid || error || isLoading || passwordMatchError} >
-
-                          {/* onClick={!errors ? undefined : notify}> */}
+                          <button type="submit" className={button} disabled={!isFormValid || isLoading || passwordMatchError}  onClick={errors ? undefined : notify}>
                             Sign Up!
                           </button>
                         </div>

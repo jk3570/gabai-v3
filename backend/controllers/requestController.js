@@ -22,7 +22,7 @@ const requestForm = async (req, res) => {
     }
 };
 
-// get all the users
+// get all the request
 const getAllRequest = async (req, res) => {
   try {
     const users = await Request.find();
