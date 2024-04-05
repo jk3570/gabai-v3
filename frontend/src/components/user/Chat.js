@@ -105,7 +105,7 @@ const ChatComponent = () => {
               ))}
             </div>
             <div className="relative items-center">
-              <div>
+              <div className="flex flex-row justify-center items-center">
                 <form
                   onSubmit={e => {
                     e.preventDefault();
@@ -120,18 +120,18 @@ const ChatComponent = () => {
                     className="p-3 border-2 border-gray-500 border-opacity-50 rounded-full w-full bg-bkg text-content"
                     placeholder="Type your message here"
                   />
+                </form>
                   <button
                     type="submit"
                     id="sendBtn"
                     disabled={isSendDisabled}
                     className={
                       isSendDisabled
-                        ? 'absolute pb-1 pl-1 p-2 text-center text-2xl justify-center mx-2 mt-1 rounded-full bg-gray-400 text-white right-0'
-                        : 'absolute pb-1 pl-1 p-2 text-center text-2xl justify-center mx-2 mt-1 rounded-full bg-azure-500 text-white right-0'
+                        ? 'relative pb-1 pl-1 p-2 text-center text-2xl justify-center ml-2 my-2 rounded-full bg-gray-400 text-white right-0'
+                        : 'relative pb-1 pl-1 p-2 text-center text-2xl justify-center ml-2 my-2 rounded-full bg-azure-500 text-white right-0'
                     }>
                     <BsSend className="h-[1em] w-[1em]"/>
                   </button>
-                </form>
               </div>
               <div className="flex justify-center items-center pb-3">
                 <p className="text-gray-400 text-xs">

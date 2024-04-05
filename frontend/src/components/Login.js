@@ -1,4 +1,4 @@
-import { useState, React } from "react";
+import { useState, useEffect, React } from "react";
 import { useNavigate } from "react-router-dom";
 import Popup from "reactjs-popup";
 import { IoIosCloseCircleOutline } from "react-icons/io";
@@ -9,8 +9,11 @@ import { Icon } from "react-icons-kit";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
 import SignupAdminAndLawyer from "./SignupAdminAndLawyer";
+import { useAuthContext } from "../hooks/useAuthContext";
+
 
 const Login = ({ setLoginSuccess }) => {
+  const { user } = useAuthContext();
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [type, setType] = useState("password");
@@ -31,8 +34,35 @@ const Login = ({ setLoginSuccess }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     await login(identifier, password);
+    navigate("/home")
+    console.log(`error: ${error}`)
+    console.log(`user: ${user}`)
+
   };
+
+  useEffect(() => {
+    if (error) {
+      switch (error) {
+        case "All fields are required":
+          navigate("/");
+          break;
+        case "Incorrect username or email":
+          navigate("/");
+          break;
+        default:
+          navigate("/");
+          break;
+      }
+    } else if (!error) {
+      navigate("/home");
+    }
+  }, [error]);
+  
+ 
+
+  
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {

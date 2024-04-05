@@ -29,6 +29,7 @@ import PageNotFound from "./components/PageNotFound";
 
 // Landing route
 import LandingPage from "./pages/LandingPage";
+import Home from "./pages/Home";
 
 // Search routes
 import SearchResults from "./pages/search/SearchResults";
@@ -60,7 +61,6 @@ const App = () => {
 
   return (
     <Router>
-            {/* <LawyerNavbar />  */}
                     
       {user ? ( user.role === 'user' ? (<UserNavbar />) 
               : user.role === 'lawyer' ? (<LawyerNavbar />) 
@@ -70,13 +70,16 @@ const App = () => {
  
 
       <Routes>
+       <Route path="/home" element={<Home />} />
+      
+
       {user ? ( user.role === 'user' ? (<Route path="/user-landingpage" element={<UserLandingPage />} />) 
               : user.role === 'lawyer' ? (<Route path="/lawyer" element={<LawyerDashboard />} />) 
               : user.role === 'admin' ? (<Route path="/admin" element={<AdminDashboard />} />) 
               : (<Route path="/" element={<LandingPage />} />)) : (<Route path="/" element={<LandingPage />} />)}       
 
         {/* Landing route */}
-        {/* {user ? null : <Route path="/" element={<LandingPage />} />} */}
+        {user ? null : <Route path="/" element={<LandingPage />} />}
 
         {/* Search routes */}
         <Route path="/search" element={<Search />} />
@@ -122,7 +125,7 @@ const App = () => {
         
 
         {/* 404 route */}
-        <Route path="*" element={<PageNotFound />} />
+        {/* <Route path="*" element={<PageNotFound />} /> */}
       </Routes>
 
       {user ? null : <Footer />}
