@@ -45,8 +45,8 @@ const LawyerRequestTable = () => {
   });
   const itemsPerPage = 10; 
 
-  const input = "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-xs ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
-  const button = "flex h-5 px-1 py-1 bg-azure text-white rounded-md justify-center items-center w-full text-xs";
+  const input = "flex h-10 w-full rounded-md border border-input bg-gray-400 bg-opacity-20 px-3 py-2 text-xs ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
+  const button = "flex h-10 px-1 py-1 bg-azure text-white rounded-md justify-center items-center w-full text-xs";
   const cancelButton = "flex h-10 px-3 py-2 bg-white text-azure border border-azure rounded-md justify-center items-center w-full text-sm";
   const label = "block font-normal text-sm";
 
@@ -69,6 +69,7 @@ const LawyerRequestTable = () => {
     setMeetingId(meetingId);
     setMyId(meetingId);
     setIsMeetingIdGenerated(true);
+    alert("Meeting ID Generated")
   };
 
   const handleSubmit = async (event, user) => {
@@ -136,7 +137,7 @@ const LawyerRequestTable = () => {
             modal
           >
             {close => (
-              <div className="modal relative h-auto w-[90%] sm:w-[70%] md:w-[60%] lg:w-[50%] xl:w-[40%] rounded-2xl bg-bkg flex flex-col justify-center items-center pt-7 py-10 p-6 text-content">
+              <div className="modal relative h-auto w-96 rounded-2xl bg-bkg flex flex-col justify-center items-center pt-7 py-10 p-6 text-content border border-gray-200 border-opacity-20 drop-shadow-lg">
                 <div className="w-full max-w-md bg-bkg rounded-lg">
                   <div className="w-full h-full grid grid-cols-1 gap-2">
                     <div className="flex flex-col justify-center">
@@ -149,7 +150,7 @@ const LawyerRequestTable = () => {
                       <input type="time" className={input} placeholder="Time" onChange={handleTimeChange} /> 
                       <button type="submit" disabled={!isMeetingIdGenerated || !isDateTimeFilled} className={button}>Submit</button>
                       <Link to="/lawyer/lawyer-request">
-                        <button type="button" className={cancelButton}>Cancel</button>
+                        <button type="button" className={cancelButton} onClick={close}>Cancel</button>
                       </Link>
                     </form>
                   </div>
@@ -198,8 +199,8 @@ const LawyerRequestTable = () => {
          {/* <VideoCon />  */}
         <div>
           <p>Total No. of Requests: {filteredData.length}</p>
-                    <p>{meetingId}</p>
-                    <p>{myId}</p>
+                    {/* <p>{meetingId}</p>
+                    <p>{myId}</p> */}
 
         </div>
         
