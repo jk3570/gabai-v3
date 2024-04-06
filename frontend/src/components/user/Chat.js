@@ -110,7 +110,7 @@ const ChatComponent = () => {
             <FaGripLinesVertical className="text-label text-2xl" />
         </div> : null}
 
-
+ 
           <div id="chat-content" className="flex flex-col w-full h-full mx-auto max-w-4xl justify-between">
             <div className="h-full overflow-y-auto flex flex-col gap-2 p-5">
               {messages.map((message, index) => (
@@ -123,7 +123,7 @@ const ChatComponent = () => {
               <div className="relative items-center">
                 <div className="flex flex-row justify-center items-center"> 
                   {showRequestButton && !requestMeetingClicked ? (
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => setShowRequestForm(true) || setRequestMeetingClicked(true)}>Request a video conference</button>
+                    <button className="flex h-10 w-[50%] px-3 py-2 bg-azure text-white rounded-md justify-center items-center text-sm transition-all duration-100 ease-in-out hover:bg-azure-300 my-5" onClick={() => setShowRequestForm(true) || setRequestMeetingClicked(true)}>Request a video conference</button>
                   ) : (
                     <>
                       {inputVisible && (
@@ -154,13 +154,13 @@ const ChatComponent = () => {
                               </button>
                         </form>
                       )}
-                    </>
-                  )}
-                </div>
                 <div className="flex justify-center items-center pb-3">
                   <p className="text-gray-400 text-xs">
                     All conversations are completely confidential.
                   </p>
+                </div>
+                    </>
+                  )}
                 </div>
                 {showRequestForm && <RequestForm summary={summary} onClose={() => { setShowRequestForm(false); setRequestMeetingClicked(false); }} />}
           </div>
