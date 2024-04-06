@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useAuthContext } from "../hooks/useAuthContext";
+import Popup from "reactjs-popup";
 
 const RequestForm = ({ summary, onClose }) => {
     const { user } = useAuthContext();
@@ -37,7 +38,8 @@ const RequestForm = ({ summary, onClose }) => {
     };
 
     return (
-        <div className="modal relative h-auto w-[70%] sm:w-[55%] md:w-[50%] lg:w-[45%] xl:w-[35%] rounded-2xl bg-white flex flex-col justify-center items-center pt-7 py-10 p-6">
+    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 backdrop-filter backdrop-blur-lg bg-opacity-5 bg-black pt-[3.875rem]">
+        <div className="modal relative z-50 h-auto w-[70%] sm:w-[55%] md:w-[50%] lg:w-[45%] xl:w-[35%] rounded-2xl bg-white flex flex-col justify-center items-center pt-7 py-10 p-6">
             <div className="w-full max-w-md bg-white rounded-lg">
                 <div className="w-full h-full grid grid-cols-1 gap-2">
                     <div className="flex flex-col justify-center">
@@ -70,6 +72,7 @@ const RequestForm = ({ summary, onClose }) => {
                 </div>
             </div>
         </div>
+    </div>
     );
 };
 

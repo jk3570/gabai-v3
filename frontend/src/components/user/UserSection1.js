@@ -8,7 +8,7 @@ const UserSection1 = () => {
     <div
       className="relative flex flex-col justify-center items-center h-full w-screen"
     >
-        <div class="fixed w-screen h-screen z-0 overflow-clip">
+        <div class="absolute w-screen h-screen z-0 overflow-clip">
                 <img 
                 id="backgroundImage" 
                 className="absolute scale-[75%] translate-x-[10rem] -translate-y-[15rem] opacity-20" 
