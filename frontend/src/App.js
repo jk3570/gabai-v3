@@ -30,6 +30,7 @@ import PageNotFound from "./components/PageNotFound";
 // Landing route
 import LandingPage from "./pages/LandingPage";
 import Home from "./pages/Home";
+import SuccessPage from "./pages/SuccessPage";
 
 // Search routes
 import SearchResults from "./pages/search/SearchResults";
@@ -70,6 +71,7 @@ const App = () => {
       <Routes>
         <Route path="/home" element={<Home />} />
         
+        <Route path="/verify/success" element={<SuccessPage />} />
 
         {user ? ( user.role === 'user' ? (<Route path="/user-landingpage" element={<UserLandingPage />} />) 
                 : user.role === 'lawyer' ? (<Route path="/lawyer" element={<LawyerDashboard />} />) 
@@ -86,8 +88,8 @@ const App = () => {
           {/* Components routes */}
 
 
-          {user ? null : <Route path="/login" element={<Login />} />}
-          {user ? null : <Route path="/signup" element={<Signup />} />}
+          {user ? null : <Route path="/#login" element={<Login />} />}
+          {user ? null : <Route path="/#signup" element={<Signup />} />}
           {user ? <Route path="/profile" element={<UserProfile />} /> : null}
           <Route path="/request" element={<RequestForm />} />
 

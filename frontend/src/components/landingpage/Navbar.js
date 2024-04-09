@@ -161,6 +161,12 @@ function Navbar() {
                 </li>
               </nav>
             </div>
+
+            <Link to="/verify/success">
+                <div className="flex items-center justify-center p-1">
+                  <FaSearch className="text-2xl text-red-500 hover:scale-[1.1] transition-all duration-200 ease-in-out" />
+                </div>
+              </Link>
             
             {/* Search Icon */}
             <Link to="/search">
@@ -173,7 +179,10 @@ function Navbar() {
             </button>
 
             {/* Login Btn */}
-            <Login />
+            <Link to="/#login" className="rounded-xl bg-azure-500 text-white hover:scale-[1.1] transition-all duration-100 ease-in-out relative z-10 after:absolute after:-z-20  after:h-1 after:w-1 after:bg-azure-300 after:left-5 overflow-hidden after:bottom-0 after:translate-y-full after:rounded-md after:hover:scale-[50] after:hover:transition-all after:hover:duration-650 after:transition-all after:duration-300">
+              <Login />
+            </Link>
+
           </div>
         </div>
       </nav>
