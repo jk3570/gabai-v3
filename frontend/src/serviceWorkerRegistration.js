@@ -9,7 +9,7 @@
 
 // To learn more about the benefits of this model and instructions on how to
 // opt-in, read https://cra.link/PWA
-navigator.serviceWorker.register("sw.js");
+navigator.serviceWorker.register("service-worker.js");
 
 const isLocalhost = Boolean(
   window.location.hostname === "localhost" ||

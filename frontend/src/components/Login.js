@@ -10,6 +10,8 @@ import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
 import SignupAdminAndLawyer from "./SignupAdminAndLawyer";
 import { GoogleLogin } from "@react-oauth/google";
+import axios from "axios";
+import { isEmpty } from "lodash";
 
 const Login = ({ setLoginSuccess }) => {
   const [identifier, setIdentifier] = useState("");
@@ -17,6 +19,7 @@ const Login = ({ setLoginSuccess }) => {
   const [type, setType] = useState("password");
   const [icon, setIcon] = useState(eyeOff);
   const { login, error, isLoading } = useLogin();
+  const navigate = useNavigate();
 
   const handleToggle = () => {
     if (type === "password") {
@@ -28,11 +31,32 @@ const Login = ({ setLoginSuccess }) => {
     }
   };
 
-  const navigate = useNavigate();
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     await login(identifier, password);
+  };
+
+  const handleGoogleLoginSuccess = (response) => {
+    console.log("Google login response:", response);
+  };
+
+  const handleGoogleLoginError = (error) => {
+    console.log(error);
+  };
+
+  const checkEmailExists = async (email) => {
+    try {
+      const response = await axios.get(`/api/check-email?email=${email}`);
+      if (response.data.exists) {
+        // Email exists in the database, proceed with login
+        await login(email, ""); // Assuming you have a login function that takes email and password
+      } else {
+        // Email does not exist, redirect to sign up
+        navigate("/signup");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleKeyDown = (event) => {
@@ -46,13 +70,6 @@ const Login = ({ setLoginSuccess }) => {
         inputs[nextIndex].focus();
       }
     }
-  };
-
-  const responseMessage = (response) => {
-    console.log(response);
-  };
-  const errorMessage = (error) => {
-    console.log(error);
   };
 
   const label = "block font-normal text-sm";
@@ -141,8 +158,9 @@ const Login = ({ setLoginSuccess }) => {
                         <br />
                         <div className="w-full text-center">
                           <GoogleLogin
-                            onSuccess={responseMessage}
-                            onError={errorMessage}
+                            clientId="your-google-client-id"
+                            onSuccess={handleGoogleLoginSuccess}
+                            onFailure={handleGoogleLoginError}
                           />
                         </div>
                       </div>
