@@ -20,8 +20,7 @@ const ChatSidebar = ({ handleNewChat, handleConversationClick, conversationTitle
 
   return (
     <div className="relative h-screen flex flex-col w-64 bg-bkg text-content shadow-xl border-r border-gray-400 border-opacity-10">
-
-      <div className="relative px-4 pt-3 pb-2 flex flex-col gap-4 w-full bg-bkg border-b border-gray-400 border-opacity-50 justify-center items-center">
+      <div className="relative px-4 pt-3 pb-2 flex flex-col gap-4 w-full bg-bkg border-b border-gray-400 border-opacity-50">
         <h2 className="text-md font-medium">Conversation History</h2>
       </div>  
 

@@ -30,6 +30,7 @@ import PageNotFound from "./components/PageNotFound";
 // Landing route
 import LandingPage from "./pages/LandingPage";
 import Home from "./pages/Home";
+// import SuccessPage from "./pages/SuccessPage";
 
 // Search routes
 import SearchResults from "./pages/search/SearchResults";
@@ -55,7 +56,7 @@ import LawyerVideoCon from "./pages/lawyer/LawyerVideoCon";
 // import JoinScreen from "../src/components/lawyer/video-call/JoinScreen";
 import RequestForm from "./components/RequestForm";
 import VerificationPage from "./components/VerificationPage";
-import SuccessPage from "./components/SuccessPage";
+// import SuccessPage from "./components/SuccessPage";
 
 const App = () => {
   const { user, dispatch } = useAuthContext();
@@ -70,10 +71,13 @@ const App = () => {
               : (<Navbar />)) : (<Navbar />)}
 
       <Routes>
-        {/* <Route path="/verify/:token" element={<VerificationPage />} /> */}
         <Route path="/home" element={<Home />} />
+        {/* <Route path="/verify/success" element={<SuccessPage />} /> */}
 
-        <Route path="/success" element={<SuccessPage />} />
+
+
+        {/* <Route path="/verify/:token" element={<VerificationPage />} /> */}
+
         
         {user ? ( user.role === 'user' ? (<Route path="/user-landingpage" element={<UserLandingPage />} />) 
                 : user.role === 'lawyer' ? (<Route path="/lawyer" element={<LawyerDashboard />} />) 

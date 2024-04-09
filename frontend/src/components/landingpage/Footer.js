@@ -25,7 +25,7 @@ function Footer() {
     const content = "text-xs my-2 max-sm:text-center text-content text-opacity-70";
 
   return (
-    <div className="relative z-10 flex justify-center pt-10 bg-bkg">
+    <div className="relative z-10 flex justify-center bg-bkg">
         {/* <div className="h-auto w-full bg-black"> */}
         <footer className="h-auto w-full flex flex-row justify-center gap-10 p-2 bg-azure-300 bg-opacity-20 text-content
             max-md:flex-col
@@ -113,8 +113,7 @@ function Footer() {
                     <ul>
                         <li class={content}><a href="#" className="hover:underline">Privacy</a></li>
                         <li class={content}><a href="#" className="hover:underline">Terms</a></li>
-                        <li class={content}><a href="#" className="hover:underline">User</a></li>
-                        <li class={content}><a href="#" className="hover:underline">Agreement</a></li>
+                        <li class={content}><a href="#" className="hover:underline">User Agreement</a></li>
                     </ul>
                     </div>
 

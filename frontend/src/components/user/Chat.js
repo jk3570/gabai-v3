@@ -113,7 +113,7 @@ const ChatComponent = () => {
             <FaGripLinesVertical className="text-label text-2xl" />
         </div> : null}
 
-
+ 
           <div id="chat-content" className="flex flex-col w-full h-full mx-auto max-w-4xl justify-between">
             <div className="h-full overflow-y-auto flex flex-col gap-2 p-5">
               {messages.map((message, index) => (

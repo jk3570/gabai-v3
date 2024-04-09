@@ -10,6 +10,7 @@ import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
 import SignupAdminAndLawyer from "./SignupAdminAndLawyer";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { Link } from "react-router-dom";
 
 
 const Login = ({ setLoginSuccess }) => {
@@ -36,13 +37,28 @@ const Login = ({ setLoginSuccess }) => {
     e.preventDefault();
 
     await login(identifier, password);
-    navigate("/home")
+    if (error) {
+      switch (error) {
+        case "All fields are required":
+          navigate("/#login");
+          break;
+        case "Incorrect username or email":
+          navigate("/#login");
+          break;
+        default:
+          navigate("/#login");
+          break;
+      }
+    } else if (!error) {
+      navigate("/home");
+    }
+
     console.log(`error: ${error}`)
     console.log(`user: ${user}`)
 
   };
 
-  useEffect(() => {
+/*   useEffect(() => {
     if (error) {
       switch (error) {
         case "All fields are required":
@@ -59,7 +75,7 @@ const Login = ({ setLoginSuccess }) => {
       navigate("/home");
     }
   }, [error]);
-  
+   */
  
 
   
@@ -86,9 +102,9 @@ const Login = ({ setLoginSuccess }) => {
   return (
     <Popup
       trigger={
-        <button className="rounded-xl p-4 py-1.5 bg-azure-500 text-white hover:scale-[1.1] transition-all duration-100 ease-in-out relative z-10 after:absolute after:-z-20  after:h-1 after:w-1 after:bg-azure-300 after:left-5 overflow-hidden after:bottom-0 after:translate-y-full after:rounded-md after:hover:scale-[50] after:hover:transition-all after:hover:duration-650 after:transition-all after:duration-300">
+        <div className="flex w-full h-full p-4 py-1.5 ">
           Log in
-        </button>
+        </div>
       }
       modal
       nested
@@ -96,9 +112,9 @@ const Login = ({ setLoginSuccess }) => {
       {(close) => (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 backdrop-filter backdrop-blur-lg bg-opacity-25 bg-black ">
           <div className="modal relative h-auto w-[70%] sm:w-[55%] md:w-[50%] lg:w-[45%] xl:w-[35%] rounded-2xl bg-bkg text-content flex flex-col pt-7 py-10 p-3">
-            <div className="absolute flex align-center p-1 inset-y-0 right-0">
+            <Link to="/" className="absolute flex align-center p-1 inset-y-0 right-0">
               <IoIosCloseCircleOutline className="text-3xl cursor-pointer" onClick={() => close()} />
-            </div>
+            </Link>
             <div className="w-full h-full flex flex-col-1 justify-center px-4">
               <div className="w-full h-full grid grid-cols-1 gap-4">
                 <div className="flex flex-col items-center justify-center">
@@ -158,7 +174,7 @@ const Login = ({ setLoginSuccess }) => {
                 </div>
                 <div className="flex items-center justify-center text-content">
                   <p className={label}>
-                    Don't have an account? <span className="text-azure underline ml-2"><Signup /></span>
+                    Don't have an account? <Link to="/#signup" className="text-azure underline ml-2"><Signup /></Link>
                     {/* <SignupAdminAndLawyer /> */}
                   </p>
                 </div>

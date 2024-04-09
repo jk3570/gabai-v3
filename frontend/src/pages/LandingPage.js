@@ -82,7 +82,7 @@ useEffect(() => {
             </img>
       </div>
       
-      <div className="w-full relative max-w-4xl px-5 lg:px-0 center mx-auto">
+      <div className="w-full relative max-w-4xl px-5 lg:px-0 center mx-auto pb-10">
         <section id="home">
           {/* 1st section of landing page */}
          <Section1 />
