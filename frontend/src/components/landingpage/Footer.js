@@ -124,7 +124,7 @@ function Footer() {
                     <ul>
                         <li class={content}>
                         <a href="https://clients.ncr.dole.gov.ph/home/" target="_blank" className="hover:underline">
-                            Department of Labor and Deployment</a>
+                            Department of Labor and Employment</a>
                         </li>
                         <li class={content}>
                         <a href="https://www.foi.gov.ph/requests?agency=NLRCom" target="_blank" className="hover:underline">

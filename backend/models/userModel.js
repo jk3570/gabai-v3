@@ -1,6 +1,9 @@
-const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
-const validator = require('validator')
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const validator = require('validator');
+require('dotenv').config();
+const jwt = require('jsonwebtoken');
+// const nodemailer = require('nodemailer');
 
 const Schema = mongoose.Schema
 
@@ -57,6 +60,13 @@ const userSchema = new Schema({
     type: String,
     required: true
   }
+  // isVerified: {
+  //   type: Boolean,
+  //   required: true
+  // },
+  // verificationToken: {
+  //   type: String
+  // }
 
 })
 
@@ -76,7 +86,7 @@ userSchema.statics.signup = async function(
   password) {
   
   // Validation of all fields
-  if (!role || !username || !firstname || !lastname || !gender || !birthdate || !region || !city || !email || !password ) {
+  if (!role || !username || !firstname || !lastname || !gender || !birthdate || !region || !province || !city || !barangay || !email || !password) {
     throw Error('All fields are required')
   }
   if (!validator.isEmail(email)) {
@@ -102,6 +112,10 @@ userSchema.statics.signup = async function(
   //hashing all the users data
   const passwordHash = await bcrypt.hash(password, salt)
 
+      // Generate verification token
+    const token = jwt.sign({ email }, process.env.SECRET, { expiresIn: '24h' });
+
+
   // Inserting data to database
   const user = await this.create({ 
     role,
@@ -115,8 +129,55 @@ userSchema.statics.signup = async function(
     city,
     barangay,
     email,
-    password: passwordHash
+    password: passwordHash,
+    // verificationToken: token, 
+    // isVerified: false 
     })
+
+  //    const transporter = nodemailer.createTransport({
+  //     service: 'gmail',
+  //     host: 'smtp.gmail.com',
+  //     port: 587,
+  //     secure: false,
+  //     auth: {
+  //       user: process.env.EMAIL_USER,
+  //       pass: process.env.EMAIL_PASS
+  //     }
+  //   });
+
+  //  const mailOptions = {
+  //   from: process.env.EMAIL_USER,
+  //   to: email,
+  //   subject: 'Email Verification',
+  //   html: `
+  //     <p>Hello, ${email} </p>
+  //     <p>
+  //       Thank you for signing up! To complete your registration and start using our platform, please verify your email address by clicking the link below:
+  //     </p>
+  //     <p>
+  //       <a href="http://localhost:3000/verify/${token}">Verify Email</a>
+  //     </p>
+  //     <p>
+  //       If you didn't sign up for our service, you can safely ignore this email.
+  //     </p>
+  //     <p>
+  //       Best regards,<br>
+  //       The PARAGON Team
+  //     </p>
+  //   `
+  // };
+
+
+  //   transporter.sendMail(mailOptions, (error, info) => {
+  //     if (error) {
+  //       console.log(error);
+  //       return res.status(500).json({ message: 'Failed to send verification email' });
+  //     }
+  //     console.log('Email sent: ' + info.response);
+  //     console.log('Verification email sent');
+  //     res.status(200).json({ message: 'Verification email sent' });
+
+  //   });
 
   return user
 }

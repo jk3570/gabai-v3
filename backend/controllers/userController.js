@@ -35,7 +35,7 @@ const loginUser = async (req, res) => {
       region: user.region,
       barangay: user.barangay,
       city: user.city,
-    });
+        });
     //user: user.email
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -120,7 +120,7 @@ const signupUser = async (req, res) => {
   };
 
 
-  // update the user profile
+  // update the user pro  file
   const updateUser = async (req, res) => {
     const { userId } = req.params;
     const userData = req.body;
@@ -131,7 +131,7 @@ const signupUser = async (req, res) => {
       console.error('Error:', error);
       res.status(500).json({ error: 'Internal Server Error' });
     }
-  };
+  };  
 
 
 module.exports = { signupUser, loginUser, getAllUsers, updateUser};

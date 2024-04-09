@@ -4,6 +4,7 @@ import { BaseURL } from '../BaseURL'
 
 export const useSignup = () => {
   const [error, setError] = useState(null)
+  // const [message, setMessage] = useState('')
   const [isLoading, setIsLoading] = useState(null)
   const { dispatch } = useAuthContext()
 
@@ -55,6 +56,7 @@ export const useSignup = () => {
 
       // update loading state
       setIsLoading(false)
+      // setMessage('Verification has been sent to your email address.')
     }
   }
 

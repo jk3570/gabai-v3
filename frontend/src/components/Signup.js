@@ -16,18 +16,18 @@ import Login from "./Login";
 import { Icon } from "react-icons-kit";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
-
+import { useNavigate } from "react-router-dom"
 
 
 const Signup = ({ initialAddress }) => {
 
-
-  const notify = () =>
-    toast.success("Account has been created successfully!", {
-        position: "top-center",
-        duration: 2000,
-    });
-
+const navigate = useNavigate();
+  // const notify = () =>
+  //   toast.success("Account has been created successfully!", {
+  //       position: "top-center",
+  //       duration: 2000,
+  //   });
+  const [message, setMessage] = useState('');
 
   const [role, setRole] = useState("user");
   const [selectedRegion, setSelectedRegion] = useState("");
@@ -183,6 +183,7 @@ const Signup = ({ initialAddress }) => {
   };
 
   const onSubmit = async (data) => {
+    
     console.log("Form Data:", data); // Log the form data
     if (data.password !== data.confirmPassword) {
       setPasswordMatchError(true);
@@ -211,23 +212,20 @@ const Signup = ({ initialAddress }) => {
         ?.brgy_name || "";
 
     // Call signup function with converted address names
-    await signup(
-      role,
-      data.username,
-      data.firstname,
-      data.lastname,
-      data.gender,
-      data.birthdate,
-      selectedRegionName,
-      selectedProvinceName,
-      selectedCityName,
-      selectedBarangayName,
-      data.email,
-      data.password
-    )
-
-      
-
+     await signup(
+        role,
+        data.username,
+        data.firstname,
+        data.lastname,
+        data.gender,
+        data.birthdate,
+        selectedRegionName,
+        selectedProvinceName,
+        selectedCityName,
+        selectedBarangayName,
+        data.email,
+        data.password
+      )
   };
 
 
@@ -625,11 +623,11 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
               {step === 3 && (
                 <>
                   <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 ">
-                    <div>
+                    {/* <div>
                       <Toaster
                           position="top-center"
                         />
-                    </div>
+                    </div> */}
 
 
                     <div className="modal relative h-auto w-[72%] sm:w-[57%] md:w-[52%] lg:w-[47%] xl:w-[37%] 2xl:w-[40%] rounded-2xl bg-white flex flex-col pt-7 py-10 p-3">
@@ -652,6 +650,8 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                         <div className="bg-gray-200 rounded-lg h-2 w-full">
                           <div className="bg-azure-200 rounded-lg h-2 w-full"></div>
                         </div>
+
+                         {/* {message && <div>{message}</div>} */}
 
                        {/*  Username */}
                           <div className="flex flex-col">
@@ -813,7 +813,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                         <div className="w-full justfy-between flex gap-2">
                           <a href="#" className={button} onClick={prevStep}> {"<"} Previous</a>
 
-                          <button type="submit" className={button} disabled={!isFormValid || isLoading || passwordMatchError}  onClick={errors ? undefined : notify}>
+                          <button type="submit" className={button}  >
                             Sign Up!
                           </button>
                         </div>

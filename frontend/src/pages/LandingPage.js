@@ -52,7 +52,7 @@ useEffect(() => {
     const scrollPosition = window.scrollY;
     const opacity = 1 - (scrollPosition / window.innerHeight);
     
-    background.style.opacity = opacity > 0 ? opacity : 0;
+    // background.style.opacity = opacity > 0 ? opacity : 0;
   };
 
   window.addEventListener('scroll', handleScroll);

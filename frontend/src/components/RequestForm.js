@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { BaseURL } from '../BaseURL'
 
 const RequestForm = ({ summary, onClose }) => {
     const { user } = useAuthContext();
@@ -25,7 +26,7 @@ const RequestForm = ({ summary, onClose }) => {
         e.preventDefault();
         setIsLoading(true);
         try {
-            await axios.post(`http://localhost:4000/form/request`, { userid, firstname, lastname, email, address, summary });
+            await axios.post(`${BaseURL}/form/request`, { userid, firstname, lastname, email, address, summary });
             setIsLoading(false);
             alert('Request sent successfully');
             onClose(); // Close the modal

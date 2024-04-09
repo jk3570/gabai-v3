@@ -54,10 +54,11 @@ import LawyerArchives from "./components/lawyer/LawyerArchives";
 import LawyerVideoCon from "./pages/lawyer/LawyerVideoCon";
 // import JoinScreen from "../src/components/lawyer/video-call/JoinScreen";
 import RequestForm from "./components/RequestForm";
+import VerificationPage from "./components/VerificationPage";
+import SuccessPage from "./components/SuccessPage";
 
 const App = () => {
   const { user, dispatch } = useAuthContext();
-
   /* console.log("Userahahha:", user); // Log the value of user for debugging */
 
   return (
@@ -67,10 +68,13 @@ const App = () => {
               : user.role === 'lawyer' ? (<LawyerNavbar />) 
               : user.role === 'admin' ? (<AdminNavbar />) 
               : (<Navbar />)) : (<Navbar />)}
-      <Routes>
-        <Route path="/home" element={<Home />} />
-        
 
+      <Routes>
+        {/* <Route path="/verify/:token" element={<VerificationPage />} /> */}
+        <Route path="/home" element={<Home />} />
+
+        <Route path="/success" element={<SuccessPage />} />
+        
         {user ? ( user.role === 'user' ? (<Route path="/user-landingpage" element={<UserLandingPage />} />) 
                 : user.role === 'lawyer' ? (<Route path="/lawyer" element={<LawyerDashboard />} />) 
                 : user.role === 'admin' ? (<Route path="/admin" element={<AdminDashboard />} />) 
@@ -86,8 +90,8 @@ const App = () => {
           {/* Components routes */}
 
 
-          {user ? null : <Route path="/login" element={<Login />} />}
-          {user ? null : <Route path="/signup" element={<Signup />} />}
+          {user ? null : <Route path="/#login" element={<Login />} />}
+          {user ? null : <Route path="/#signup" element={<Signup />} />}
           {user ? <Route path="/profile" element={<UserProfile />} /> : null}
           <Route path="/request" element={<RequestForm />} />
 
