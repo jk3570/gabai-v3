@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "../../css/footer.css";
+import InstallBtn from "../../components/InstallButton";
 import { FaFacebook, FaPhone, FaMailBulk } from "react-icons/fa";
 
 import iconAzure from "../../img/iconAzure.svg";
@@ -33,8 +34,8 @@ function Footer() {
             "
         >
 
-           {/* Top Part */}
             <div alt="Footer Content" className="mx-auto w-full py-4 lg:py-8 max-w-4xl ">
+           {/* Top Part */}
                 <div className="md:flex md:justify-between">
                     <div className=" md:mb-0 relative inline-block">
                         <div className="flex flex-row gap-3 mb-5">
@@ -69,11 +70,14 @@ function Footer() {
                         <div className="text-xl text-label text-bold opacity-70 font-medium">
                             GabAi
                         </div>
-                        <div className="text-xs text-content text-opacity-70 w-[18rem] pr-[3rem]">
+                        <div className="text-xs text-content text-opacity-70 w-[18rem] pr-[3rem] mb-5">
                         Your web application for comprehensive legal guides against workplace discrimination in the Philippines.
                         </div>
-                    </div>
-                    
+
+                        <div>
+                        <InstallBtn />
+                        </div>   
+                    </div>                 
                     
 
                 {/* Links */}
@@ -134,8 +138,8 @@ function Footer() {
                             Official Gazette of the Philippines</a>
                         </li>
                     </ul>
-                    </div>
 
+                    </div>
                 </div>
             </div>
 

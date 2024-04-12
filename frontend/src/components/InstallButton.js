@@ -31,7 +31,7 @@ const InstallBtn = () => {
       {deferredPrompt && (
         <button
           onClick={handleInstallClick}
-          className="bg-azure p-2  rounded-lg flex flex-row items-center justify-center gap-2 text-white w-[10rem]"
+          className="w-48 p-2 gap-2 justify-center items-center flex bg-azure text-white rounded-md text-sm hover:bg-azure-300"
         >
           <MdOutlineInstallDesktop></MdOutlineInstallDesktop>
           Install App
