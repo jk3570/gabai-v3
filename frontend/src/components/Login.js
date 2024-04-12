@@ -52,7 +52,7 @@ const Login = ({ setLoginSuccess }) => {
         await login(email, ""); // Assuming you have a login function that takes email and password
       } else {
         // Email does not exist, redirect to sign up
-        navigate("/signup");
+        navigate("/Signup");
       }
     } catch (error) {
       console.log(error);
