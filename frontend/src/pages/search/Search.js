@@ -12,8 +12,10 @@ import Helmet from "react-helmet";
 import { IoSearchOutline } from "react-icons/io5";
 
 // images
-import iconWhite from "../../img/iconWhite.svg";
+import iconAzure from "../../img/iconAzure.svg";
 import backgroundPhoto from "../../img/backgroundPhoto.jpg"
+import lawJust from "../../img/lawJust.png";
+import Blob from "../../img/Blob.svg"
 
 function Search() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -40,19 +42,33 @@ function Search() {
         <Helmet>
           <title>Search - GabAI</title>
         </Helmet>
-    <div className="h-[80%] bg-cover bg-[center_bottom_-5rem]" style={{ backgroundImage: `url(${backgroundPhoto})` }}>
-      <div className="bg-black opacity-20 absolute z-0 w-full h-[80%]"></div>
+    <div className="h-screen bg-cover">
+      <div class="fixed w-screen h-screen z-0">
+                <img 
+                id="backgroundImage" 
+                className="h-full w-full object-cover transition-opacity duration-200" 
+                src={Blob} alt="Background Image">
+                </img>
+      </div>
+      {/* <div class="absolute w-screen h-screen z-0 overflow-clip">
+                <img 
+                id="backgroundImage" 
+                className="absolute scale-[75%] translate-x-[10rem] -translate-y-[15rem] opacity-20" 
+                src={lawJust} alt="Background Image">
+                </img>
+        </div> */}
+      
     
-    <div className="relative z-30 w-full h-full max-w-4xl px-5 lg:px-0 center mx-auto flex justify-center items-center" >
+    <div className="relative z-40 w-full h-full max-w-4xl px-5 lg:px-0 center mx-auto flex justify-center items-center" >
       <div className="flex flex-col w-full items-center">
 
 
         <div className=" flex flex-col w-full items-center gap-4">
-          <div className="flex flex-row text-white text-7xl items-center font-medium gap-5">
-            <img src={iconWhite} alt="Logo" style={{ height: "80px" }} /> GabAi
+          <div className="flex flex-row text-azure text-7xl items-center font-medium gap-5">
+            <img src={iconAzure} alt="Logo" style={{ height: "80px" }} /> GabAi
           </div>
 
-          <p className="text-md text-white">
+          <p className="text-md text-label">
             Navigate the legal landscape of workplace discrimination
           </p>
 

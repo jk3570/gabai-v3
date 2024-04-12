@@ -135,9 +135,11 @@ const App = () => {
 
           {/* 404 route */}
           {/* <Route path="*" element={<PageNotFound />} /> */}
+
+          {user ? null : <Route path="/Footer" element={<Footer />} />}
       </Routes>
 
-      {user ? null : <Footer />}
+      
     </Router>
   );
 };

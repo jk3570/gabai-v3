@@ -93,7 +93,7 @@ const Login = ({ setLoginSuccess }) => {
     }
   };
 
-  const label = "block font-normal text-sm flex flex-row";
+  const label = "block font-normal text-sm flex-row";
   const warning = "block font-normal text-sm text-red-500 error mt-1";
   const input =
     "flex h-10 w-full rounded-md border border-input bg-bkg px-3 py-2 text-xs ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
@@ -102,7 +102,7 @@ const Login = ({ setLoginSuccess }) => {
   return (
     <Popup
       trigger={
-        <div className="flex w-full h-full p-4 py-1.5 ">
+        <div className="flex w-full h-full items-center justify-center">
           Log in
         </div>
       }
@@ -112,7 +112,7 @@ const Login = ({ setLoginSuccess }) => {
       {(close) => (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 backdrop-filter backdrop-blur-lg bg-opacity-25 bg-black ">
           <div className="modal relative h-auto w-[70%] sm:w-[55%] md:w-[50%] lg:w-[45%] xl:w-[35%] rounded-2xl bg-bkg text-content flex flex-col pt-7 py-10 p-3">
-            <Link to="/" className="absolute flex align-center p-1 inset-y-0 right-0">
+            <Link to="#" className="absolute flex align-center p-1 inset-y-0 right-0">
               <IoIosCloseCircleOutline className="text-3xl cursor-pointer" onClick={() => close()} />
             </Link>
             <div className="w-full h-full flex flex-col-1 justify-center px-4">
@@ -174,7 +174,7 @@ const Login = ({ setLoginSuccess }) => {
                 </div>
                 <div className="flex items-center justify-center text-content">
                   <p className={label}>
-                    Don't have an account? <Link to="/#signup" className="text-azure underline ml-2"><Signup /></Link>
+                    Don't have an account? <Link to="/#signup" className="text-azure hover:underline ml-2"><Signup /></Link>
                     {/* <SignupAdminAndLawyer /> */}
                   </p>
                 </div>
