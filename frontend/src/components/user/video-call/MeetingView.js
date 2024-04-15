@@ -48,25 +48,20 @@ function MeetingView(props) {
   return (
     <>
       <div>
-        <div className="container">
-          <div>
-            <div className="top-[5rem] left-0 absolute bg-bkg w-screen justify-center items-center">
-              {/* <h3>Meeting Id: {props.meetingId}</h3>
-               <h3>Meeting Id: {props.myId}</h3> */}
-            </div>
+        <div className="container flex w-screen h-screen justify-center items-center">
+          <div className="flex w-full h-[70%] bg-bkg justify-center items-center">
             {joined && joined === "JOINED" ? (
-              <div className="flex flex-row gap-2 justify-center items-center">
+              <div className="flex w-full h-full gap-2 justify-center items-center">
                 {mediaStream && <div />}
                 {[...participants.keys()].map((participantId) => (
-                  <div key={participantId} className="flex flex-row gap-2">
+                  <div key={participantId} className="flex flex-row w-full h-full gap-2">
                     <ParticipantView participantId={participantId} />
                   </div>
                 ))}
               </div>
             ) : joined && joined === "JOINING" ? (
               <p>Joining the meeting...</p>
-            ) : (
-              <div className="flex flex-col gap-3">
+            ) : (<div className="flex flex-col gap-3">
 
                <p className="w-[480px] text-sm text-center">
                 Just a quick reminder about your meeting with the lawyer today. Please ensure you have all necessary things prepared. Thank you!
@@ -86,6 +81,7 @@ function MeetingView(props) {
             )}
           </div>
 
+           {/*  Controls */}
           <div className="bottom-0 left-0 flex items-center justify-center absolute bg-gray-400 bg-opacity-60 w-screen h-24">
             {" "}
             <Controls

@@ -111,12 +111,14 @@ const App = () => {
           {user && user.role === 'user' ? <Route path="/user/home" element={<UserLandingPageSuccess />} /> : null}
           {user && user.role === 'user' ? <Route path="/user/video-conference/:id" element={<UserVideoCon />} /> : null}
 
+
           {/* Lawyer route */}
           {user && user.role === 'lawyer' ? <Route path="/lawyer" element={<LawyerDashboard />} /> : null}
           {user && user.role === 'lawyer' ? <Route path="/lawyer/lawyer-request" element={<LawyerRequestTable />} /> : null}
           {user && user.role === 'lawyer' ? <Route path="/lawyer/lawyer-schedule" element={<LawyerSchedule />} /> : null}
           {user && user.role === 'lawyer' ? <Route path="/lawyer/lawyer-archive" element={<LawyerArchives />} /> : null}
           {user && user.role === 'lawyer' ? <Route path="/lawyer/video-conference/:id" element={<LawyerVideoCon />} /> : null}
+
           
           {/* <Route path="/lawyer/join" element={<JoinScreen />} /> */}
 
@@ -131,9 +133,11 @@ const App = () => {
           
           {/* 404 route */}
           {/* <Route path="*" element={<PageNotFound />} /> */}
+
+          {user ? null : <Route path="/Footer" element={<Footer />} />}
       </Routes>
 
-      {user ? null : <Footer />}
+      
     </Router>
   );
 };
