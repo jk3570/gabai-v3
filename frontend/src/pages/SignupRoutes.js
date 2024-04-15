@@ -12,7 +12,8 @@ const Home = () => {
         if (user) {
             switch (myrole) {
                 case "user":
-                    navigate("/user-landingpage");
+                    // navigate("/user-landingpage");
+                    navigate("/user/home");
                     break;
                 case "lawyer":
                     navigate("/lawyer");
@@ -21,7 +22,7 @@ const Home = () => {
                     navigate("/admin");
                     break;
                 default:
-                    navigate("/asd");
+                    navigate("/");
                     break;
             }
         } else  {

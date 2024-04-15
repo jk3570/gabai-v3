@@ -161,12 +161,6 @@ function Navbar() {
                 </li>
               </nav>
             </div>
-
-            <Link to="/verify/success">
-                <div className="flex items-center justify-center p-1">
-                  <FaSearch className="text-2xl text-red-500 hover:scale-[1.1] transition-all duration-200 ease-in-out" />
-                </div>
-              </Link>
             
             {/* Search Icon */}
             <Link to="/search">

@@ -8,6 +8,8 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import ChatSidebar from './ChatSidebar';
 import { BaseURL } from "../../BaseURL"
 
+
+
 const ChatComponent = () => {
   const { user, dispatch } = useAuthContext();
   const [messages, setMessages] = useState([]);
@@ -34,7 +36,7 @@ const ChatComponent = () => {
   };
 
   const fetchConversationTitles = () => {
-    axios.get(`${BaseURL}/gab/conversations`)
+    axios.get(`http://localhost:4000/gab/conversations`)
       .then(response => {
         setConversationTitles(response.data);
       })
@@ -42,7 +44,7 @@ const ChatComponent = () => {
   };
 
   const handleConversationClick = (conversationId) => {
-    axios.get(`${BaseURL}/gab/conversation/${conversationId}`)
+    axios.get(`http://localhost:4000/gab/conversation/${conversationId}`)
       .then(response => {
         setMessages(response.data.messages);
         setConversationId(conversationId);
@@ -56,7 +58,7 @@ const ChatComponent = () => {
       setMessages(prevMessages => [...prevMessages, newMessage]);
       setInput('');
 
-      axios.post(`${BaseURL}/gab/conversation`, { input: input, conversationId: conversationId })
+      axios.post(`http://localhost:4000/gab/conversation`, { input: input, conversationId: conversationId })
         .then(response => {
           const aiMessage = { role: 'assistant', content: response.data.message };
           setMessages(prevMessages => [...prevMessages, aiMessage]);

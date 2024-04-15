@@ -19,7 +19,7 @@ const Login = ({ setLoginSuccess }) => {
   const [password, setPassword] = useState("");
   const [type, setType] = useState("password");
   const [icon, setIcon] = useState(eyeOff);
-  const { login, error, isLoading } = useLogin();
+  let { login, error, isLoading } = useLogin();
 
   const handleToggle = () => {
     if (type === "password") {
@@ -33,30 +33,33 @@ const Login = ({ setLoginSuccess }) => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+    const handleSubmit = async (e) => { 
+      e.preventDefault();
 
-    await login(identifier, password);
-    if (error) {
-      switch (error) {
-        case "All fields are required":
-          navigate("/#login");
-          break;
-        case "Incorrect username or email":
-          navigate("/#login");
-          break;
-        default:
-          navigate("/#login");
-          break;
+      await login(identifier, password);
+      if (error) {
+        switch (error) {
+          case "All fields are required":
+            navigate("/login-routes");
+            error = !error
+            break;
+          case "Incorrect username or email":
+            navigate("/login-routes");
+            error = !error
+            break;
+          default:
+            navigate("/login-routes");
+            error = !error
+            break;
+        }
+      } else if (!error || error === false || error === null) {
+        navigate("/login-routes");
       }
-    } else if (!error) {
-      navigate("/home");
-    }
 
-    console.log(`error: ${error}`)
-    console.log(`user: ${user}`)
+      console.log(`error: ${error}`)
+      console.log(`user: ${user}`)
 
-  };
+    };
 
 /*   useEffect(() => {
     if (error) {

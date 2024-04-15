@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import useUserData from '../../hooks/useUserData';
 import ReactPaginate from 'react-paginate';
+import { Link } from "react-router-dom";
+import CreateAccount from "../../components/CreateAccount"
 
 const UserTable = () => {
   const { userData, loading } = useUserData();
@@ -56,9 +58,9 @@ const UserTable = () => {
         <td className={tableBody}>{user.city}</td>
         <td className={tableBody}>{user.barangay}</td>
         <td className={tableBody}>{user.role}</td>
-        <td className={tableBody}>
+        {/* <td className={tableBody}>
           <button onClick={() => handleEdit(user)}>Edit</button>
-        </td>
+        </td> */}
       </tr>
     ));
 
@@ -73,9 +75,14 @@ const UserTable = () => {
     <div className="relative z-10 w-full py-[3.875rem] bg-bkg text-content flex flex-col justify-start items-start min-h-screen max-md:p-1">
       <div id="main-content" className="flex flex-col w-full mx-auto max-w-7xl gap-3">
       <div className="flex flex-row-1 justify-between items-center mt-4">
-        <h1 className="text-2xl font-semibold text-nowrap">User Data Table</h1>
+        <h1 className="text-2xl font-semibold text-nowrap">User List</h1>
         {/* search field */}
         <div className="flex flex-row-1 justify-end items-end w-full">
+          <div>
+                    <p>
+                    <Link to="/#create-account" className="text-azure underline ml-2"><CreateAccount /></Link>
+                    </p>
+          </div>
             <div className="w-64 relative">
               <input
                 type="text"
@@ -123,22 +130,11 @@ const UserTable = () => {
               <th className={tableHeader}>City</th>
               <th className={tableHeader}>Barangay</th>
               <th className={tableHeader}>Role</th>
-              <th className={tableHeader}>Actions</th>
+              {/* <th className={tableHeader}>Actions</th> */}
             </tr>
           </thead>
           <tbody>
             {currentPageData}
-            {editing && editingUser && (
-              <tr>
-                <td colSpan="11">
-                  <form onSubmit={handleSubmit}>
-                    {/* Inputs for editing user data */}
-                    {/* Example input: <input type="text" value={editingUser.firstname} onChange={(e) => setEditingUser({...editingUser, firstname: e.target.value})} /> */}
-                    <button type="submit">Save</button>
-                  </form>
-                </td>
-              </tr>
-            )}
           </tbody>
         </table>
       </div>

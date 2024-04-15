@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-
 import "./css/App.css";
 import "animate.css";
 
@@ -22,6 +21,7 @@ import Footer from "./components/landingpage/Footer";
 import Terms from "./components/Terms";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import CreateAccount from "./components/CreateAccount";
 import SignupAdminAndLawyer from "./components/SignupAdminAndLawyer";
 import ChatComponent from "./components/user/Chat";
 import UserProfile from "./components/user/UserProfile";
@@ -29,7 +29,8 @@ import PageNotFound from "./components/PageNotFound";
 
 // Landing route
 import LandingPage from "./pages/LandingPage";
-import Home from "./pages/Home";
+import SignupRoutes from "./pages/SignupRoutes";
+import LoginRoutes from "./pages/LoginRoutes";
 // import SuccessPage from "./pages/SuccessPage";
 
 // Search routes
@@ -38,6 +39,7 @@ import Search from "./pages/search/Search";
 
 // User route
 import UserLandingPage from "./pages/user/UserLanding";
+import UserLandingPageSuccess from "./pages/user/UserLandingSuccess";
 import UserVideoCon from "./pages/user/UserVideoCon";
 
 // Admin routes
@@ -56,30 +58,26 @@ import LawyerVideoCon from "./pages/lawyer/LawyerVideoCon";
 // import JoinScreen from "../src/components/lawyer/video-call/JoinScreen";
 import RequestForm from "./components/RequestForm";
 import VerificationPage from "./components/VerificationPage";
-// import SuccessPage from "./components/SuccessPage";
 
 const App = () => {
   const { user, dispatch } = useAuthContext();
   /* console.log("Userahahha:", user); // Log the value of user for debugging */
 
   return (
-    <Router>
-                    
+    <Router>           
       {user ? ( user.role === 'user' ? (<UserNavbar />) 
               : user.role === 'lawyer' ? (<LawyerNavbar />) 
               : user.role === 'admin' ? (<AdminNavbar />) 
               : (<Navbar />)) : (<Navbar />)}
 
-      <Routes>
-        <Route path="/home" element={<Home />} />
+      <Routes>  
+        <Route path="/login-routes" element={<LoginRoutes />} />
+        <Route path="/signup-routes" element={<SignupRoutes />} />
         {/* <Route path="/verify/success" element={<SuccessPage />} /> */}
-
-
 
         {/* <Route path="/verify/:token" element={<VerificationPage />} /> */}
 
-        
-        {user ? ( user.role === 'user' ? (<Route path="/user-landingpage" element={<UserLandingPage />} />) 
+        {user ? ( user.role === 'user' ? (<Route path="/user" element={<UserLandingPage />} />) 
                 : user.role === 'lawyer' ? (<Route path="/lawyer" element={<LawyerDashboard />} />) 
                 : user.role === 'admin' ? (<Route path="/admin" element={<AdminDashboard />} />) 
                 : (<Route path="/" element={<LandingPage />} />)) : (<Route path="/" element={<LandingPage />} />)}       
@@ -93,12 +91,11 @@ const App = () => {
 
           {/* Components routes */}
 
-
           {user ? null : <Route path="/#login" element={<Login />} />}
           {user ? null : <Route path="/#signup" element={<Signup />} />}
+
           {user ? <Route path="/profile" element={<UserProfile />} /> : null}
           <Route path="/request" element={<RequestForm />} />
-
 
           {/* <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
@@ -110,7 +107,8 @@ const App = () => {
           <Route path="/terms" element={<Terms />} />
 
           {/* User route */}
-          {user && user.role === 'user' ? <Route path="/user-landingpage" element={<UserLandingPage />} /> : null}
+          {user && user.role === 'user' ? <Route path="/user" element={<UserLandingPage />} /> : null}
+          {user && user.role === 'user' ? <Route path="/user/home" element={<UserLandingPageSuccess />} /> : null}
           {user && user.role === 'user' ? <Route path="/user/video-conference/:id" element={<UserVideoCon />} /> : null}
 
           {/* Lawyer route */}
@@ -120,9 +118,7 @@ const App = () => {
           {user && user.role === 'lawyer' ? <Route path="/lawyer/lawyer-archive" element={<LawyerArchives />} /> : null}
           {user && user.role === 'lawyer' ? <Route path="/lawyer/video-conference/:id" element={<LawyerVideoCon />} /> : null}
           
-          
           {/* <Route path="/lawyer/join" element={<JoinScreen />} /> */}
-
 
           {/* Admin routes */}
           <Route path="/admin" element={<AdminDashboard />} />
@@ -131,8 +127,8 @@ const App = () => {
           {user && user.role === 'admin' ? <Route path="/admin/cases" element={<CasesList />} /> : null}        
           {user && user.role === 'admin' ? <Route path="/admin/feedbacks" element={<FeedbackList />} /> : null}
           {user && user.role === 'admin' ? <Route path="/admin/admin-archive" element={<AdminArchivedList />} /> : null}
+          {user && user.role === 'admin' ? <Route path="/admin/create-account" element={<CreateAccount />} /> : null}
           
-
           {/* 404 route */}
           {/* <Route path="*" element={<PageNotFound />} /> */}
       </Routes>
