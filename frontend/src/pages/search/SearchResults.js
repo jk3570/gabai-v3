@@ -29,7 +29,7 @@ function SearchResults() {
   };
 
   return (
-    <div className="pt-[3.875rem] bg-bkg text-content">
+    <div className="pt-[3.875rem] bg-bkg text-content h-screen">
       <div className="absolute z-0 flex w-full h-[3rem] bg-cover"></div>
       <div className="flex flex-col items-center justify-center py-5 px-[3rem]">
           <form onSubmit={handleSearch} className="w-full flex drop-shadow-lg">
