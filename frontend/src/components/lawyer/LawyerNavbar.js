@@ -35,12 +35,12 @@ return (
         
 
         {/* Brand Logo */}
-        <button class="group relative z-0 font-bold flex justify-center gap-2 items-center">
+        <Link to="/lawyer" class="group relative z-0 font-bold flex justify-center gap-2 items-center">
           <img src={iconAzure} alt="Logo" class="" style={{ height: "30px" }} />
               <span class="inline-flex  text-azure-500 transform text-3xl font-bold pt-1">
                 GabAi
               </span>
-        </button>
+        </Link>
         </div>
 
         <div className="flex flex-row items-center text-md gap-x-5">

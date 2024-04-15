@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { useParticipant } from "@videosdk.live/react-sdk"; // Importing a custom hook to manage participant streams
+import { useParticipant,  useMeeting } from "@videosdk.live/react-sdk"; // Importing a custom hook to manage participant streams
 import ReactPlayer from "react-player"; // Importing ReactPlayer component for video playback
 
 function ParticipantView(props) {
@@ -47,20 +47,30 @@ function ParticipantView(props) {
     // This effect will run whenever webcamOn changes, ensuring the component re-renders
   }, [webcamOn]);
 
+  //Active Speaker Indication
+  const {
+    /** Methods */
+  } = useMeeting({
+    onSpeakerChanged: (activeSpeakerId) => {
+      console.log("Active Speaker participantId", activeSpeakerId);
+    },
+  });
+
+  
+
   return (
-    <div className="flex flex-row justify-center items-center w-full">
+    <div className="flex flex-row justify-center items-center w-full h-full">
       <audio ref={micRef} autoPlay playsInline muted={isLocal} />{" "}
       {/* Audio element for mic playback */}
-      <div>
+      <div className="flex justify-center items-center w-full h-full">
         {/* Conditionally render ReactPlayer or gray background based on webcam status */}
         {webcamOn ? ( // If webcam is on
           <div
-            style={{ position: "relative", width: "100%", height: "100%" }}
-            className="bg-gray-700 rounded-xl z-0"
+            className="relative py-5 bg-gray-700 rounded-xl overflow-clip z-0"
           >
             <ReactPlayer
               style={{ zIndex: "999" }}
-              className="rounded-xl flex"
+              className="rounded-xl flex h-full justify-center items-center"
               playsinline
               pip={false}
               light={false}
@@ -68,8 +78,6 @@ function ParticipantView(props) {
               muted={true}
               playing={true}
               url={videoStream} // Passing the constructed video stream as URL
-              height={"320px"}
-              width={"480px"}
               onError={(err) => {
                 console.log(err, "participant video error");
               }} // Handling ReactPlayer errors
@@ -77,7 +85,7 @@ function ParticipantView(props) {
           </div>
         ) : (
           // If webcam is off
-          <div className=" bg-gray-700 rounded-xl w-[480px] h-[320px] z-0" /> // Displaying a gray background
+          <div className=" relative w-full h-full bg-gray-700 rounded-xl overflow-clip z-0" /> // Displaying a gray background
         )}
       </div>
     </div>

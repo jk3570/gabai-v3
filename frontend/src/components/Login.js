@@ -12,7 +12,6 @@ import SignupAdminAndLawyer from "./SignupAdminAndLawyer";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Link } from "react-router-dom";
 
-
 const Login = ({ setLoginSuccess }) => {
   const { user } = useAuthContext();
   const [identifier, setIdentifier] = useState("");
@@ -30,6 +29,7 @@ const Login = ({ setLoginSuccess }) => {
       setType("password");
     }
   };
+
 
   const navigate = useNavigate();
 
@@ -52,6 +52,7 @@ const Login = ({ setLoginSuccess }) => {
     } else if (!error) {
       navigate("/home");
     }
+
 
     console.log(`error: ${error}`)
     console.log(`user: ${user}`)
@@ -92,6 +93,8 @@ const Login = ({ setLoginSuccess }) => {
       }
     }
   };
+
+  
 
   const label = "block font-normal text-sm flex-row";
   const warning = "block font-normal text-sm text-red-500 error mt-1";
@@ -165,7 +168,7 @@ const Login = ({ setLoginSuccess }) => {
                           Log In
                         </button>
                       </div>
-                      <div className="items-center justify-center font-normal text-sm underline hover:text-azure">
+                      <div className="items-center justify-center font-normal text-sm hover:underline text-azure">
                         <ForgotPass />
                       </div>
                       {/* Testing */}
@@ -174,7 +177,7 @@ const Login = ({ setLoginSuccess }) => {
                 </div>
                 <div className="flex items-center justify-center text-content">
                   <p className={label}>
-                    Don't have an account? <Link to="/#signup" className="text-azure hover:underline ml-2"><Signup /></Link>
+                    Don't have an account? <Link to="/#signup" className="inline-block text-azure hover:underline"><Signup /></Link>
                     {/* <SignupAdminAndLawyer /> */}
                   </p>
                 </div>

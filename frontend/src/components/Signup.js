@@ -263,7 +263,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
     <Popup
       trigger={
         <Link to="#signup" className="flex w-full h-full items-center justify-center">
-          Sign up
+        Sign up
         </Link>
       }
       modal
@@ -292,7 +292,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                           <p className="block font-normal text-sm">
                             Register now for a richer, more empowered journey!
                           </p>
-                          <br />
+                          
                         </div>
                       
                       <span className="font-medium justify-center flex text-azure">
@@ -312,7 +312,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                           placeholder="Juan"
                           {...register("firstname", {
                             required: true,
-                            pattern: /^[A-Za-z\s]+$/,
+                            pattern: /^[A-Za-zñÑ\s]+$/,
 
                           })}
                           className={input}
@@ -341,7 +341,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                           placeholder="Dela Cruz"
                           {...register("lastname", {
                             required: true,
-                            pattern: /^[A-Za-z\s]+$/,
+                            pattern: /^[A-Za-zñÑ\s]+$/,
                           })}
                           className={input}
                           onKeyDown={handleKeyDown}
@@ -470,7 +470,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                           <p className="block font-normal text-sm">
                             Register now for a richer, more empowered journey!
                           </p>
-                          <br />
+                          
                         </div>
                         <span className="font-medium justify-center flex text-azure">
                               Address Information 
@@ -654,7 +654,6 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                           <p className="block font-normal text-sm">
                             Register now for a richer, more empowered journey!
                           </p>
-                          <br />
                         </div>
 
                         <span className="font-medium justify-center flex text-azure">
@@ -676,8 +675,8 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                               {...register("username", {
                                 required: true,
                                 minLength: 6,
-                                maxLength: 12,
-                                pattern: /^(?=.*[a-z])(?=.*\d)[a-z\d]+$/i,
+                                maxLength: 24,
+                                pattern: /^(?=.*[a-z\d.])(?=.*\d)[a-z\d]+$/i,
                               })}
                               className={input}
                               onKeyDown={handleKeyDown}
@@ -704,7 +703,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                               errors.username.type === "pattern" && (
                                 <span className={warning}>
                                   Username must contain only lowercase letters{" "}
-                                  <br /> and at least one number
+                                   and at least one number
                                 </span>
                               )}
                        </div>
@@ -791,9 +790,9 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                             {errors.password &&
                               errors.password.type === "pattern" && (
                                 <span className={warning}>
-                                  Password must contain at least one number, <br />
+                                  Password must contain at least one number, 
                                   one capital letter, one small letter, and one{" "}
-                                  <br /> special character
+                                   special character
                                 </span>
                               )}
                           </div>
