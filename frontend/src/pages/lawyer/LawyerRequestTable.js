@@ -93,7 +93,7 @@ const LawyerRequestTable = () => {
         meetingId: meetingId,
       };
       
-      const response = await axios.post(`http://localhost:4000/accept/confirm`, formDataFromUser);
+      const response = await axios.post(`${BaseURL}/accept/confirm`, formDataFromUser);
 
       if (response.status === 201) {
         alert('Request accepted successfully');

@@ -9,7 +9,9 @@ import ChatSidebar from './ChatSidebar';
 import { BaseURL } from "../../BaseURL"
 
 const ChatComponent = () => {
-  const { user = { userid: 'guest' } } = useAuthContext();
+  const { user } = useAuthContext();
+
+  const userid = user?.userid || 'guest';
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isSendDisabled, setIsSendDisabled] = useState(true);
@@ -34,7 +36,7 @@ const ChatComponent = () => {
   };
 
   const fetchConversationTitles = () => {
-    axios.get(`http://localhost:4000/gab/conversations/${user.userid}`)
+    axios.get(`${BaseURL}/gab/conversations/${userid}`)
       .then(response => {
         setConversationTitles(response.data);
       })
@@ -42,7 +44,7 @@ const ChatComponent = () => {
   };
 
   const handleConversationClick = (conversationId) => {
-    axios.get(`http://localhost:4000/gab/conversation/${conversationId}`)
+    axios.get(`${BaseURL}/gab/conversation/${conversationId}`)
       .then(response => {
         setMessages(response.data.messages);
         setConversationId(conversationId);
@@ -56,7 +58,7 @@ const ChatComponent = () => {
       setMessages(prevMessages => [...prevMessages, newMessage]);
       setInput('');
 
-      axios.post(`http://localhost:4000/gab/conversation`, { input, conversationId, userid: user.userid })
+      axios.post(`${BaseURL}/gab/conversation`, { input, conversationId, userid: userid})
         .then(response => {
           const aiMessage = { role: 'assistant', content: response.data.message };
           setMessages(prevMessages => [...prevMessages, aiMessage]);
@@ -173,6 +175,7 @@ const ChatComponent = () => {
                 </>
               )}
             </div>
+           
             {showRequestForm && <RequestForm summary={summary} onClose={() => { setShowRequestForm(false); setRequestMeetingClicked(false); }} />}
           </div>
         </div>

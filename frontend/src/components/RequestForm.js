@@ -68,7 +68,7 @@ const RequestForm = ({ summary, onClose }) => {
     const successNotif = () => toast.success('Request sent successfully!');
     const failNotif = () => toast.error('Failed to insert data');
 
-    const [isChecked, setIsChecked] = useState(false);
+    const [isChecked, setIsChecked] = useState(true);
         
     useEffect(() => {
         // Function to check if the checkbox is checked
@@ -77,7 +77,7 @@ const RequestForm = ({ summary, onClose }) => {
             if (checkbox.checked) {
                 setIsChecked(true);
             } else {
-                setIsChecked(false);
+                setIsChecked(true);
             }
         };
     
@@ -129,7 +129,6 @@ const RequestForm = ({ summary, onClose }) => {
                 <ul>
                     <li>Your name</li>
                     <li>Contact information (email address, phone number)</li>
-                    <li>Details related to your legal matter or inquiry</li>
                 </ul>
             </p>
 
@@ -162,7 +161,7 @@ const RequestForm = ({ summary, onClose }) => {
             <h3>7. Your Rights:</h3>
             <p>You have the right to:
                 <ul>
-                    <li>Access your personal information and request a copy of it</li>
+                    <li>Access your personal information</li>
                     <li>Correct any inaccuracies in your personal information</li>
                     <li>Request the deletion of your personal information, subject to certain exceptions</li>
                 </ul>
@@ -175,7 +174,7 @@ const RequestForm = ({ summary, onClose }) => {
 
             <p>This Privacy Notice may be updated from time to time. We encourage you to review it periodically for any changes.</p>
 
-            <p>Last updated: April 19, 2024</p>
+            <p>Last updated: April 22, 2024</p>
             </div>
         </div>
 
