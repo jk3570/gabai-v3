@@ -18,7 +18,7 @@ const profileSettings = () => {
   return (
     <>
       <Popup
-        trigger={<button className="bg-azure-500 text-white p-2 w-full rounded-xl">Edit Profile</button>}
+        trigger={<button className="bg-azure-500 text-white p-2 w-full rounded-xl">View Profile</button>}
         modal
         nested
       >

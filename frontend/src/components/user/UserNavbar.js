@@ -48,7 +48,7 @@ return (
       {/* Sidebar of Burger */}
       <div className={`fixed z-40 top-0 left-0 flex w-${sidebarOpen ? 'full' : '0'} h-${sidebarOpen ? 'screen' : '0'} transition-all  -translate-y-[0.1rem]`} onClick={toggleSidebar}>
         <div 
-          className={`transition-all overflow-hidden ${sidebarOpen ? 'w-[330px]' : 'w-0'} transition-all h-full bg-bkg z-50 shadow-lg left-0 top-0`} onClick={toggleSidebar}>
+          className={`transition-all overflow-hidden ${sidebarOpen ? 'w-screen' : 'w-0'} transition-all h-full bg-bkg z-50 shadow-lg left-0 top-0`} onClick={toggleSidebar}>
         <UserBurgerMenu />
         </div>         
       </div>

@@ -12,7 +12,7 @@ function LawyerDashboard() {
 
     const cardTitle = "text-1xl font-semibold";
     const totalNoStyle =
-    "flex flex-row bg-azure-200 bg-opacity-20 rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl h-auto w-[35%] text-1xl p-5 justify-start items-center border-azure-500 gap-5 hover:scale-[1.04]";
+    "flex flex-row bg-azure-200 bg-opacity-20 rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl h-auto w-full text-1xl p-5 justify-start items-center border-azure-500 gap-5 hover:scale-[1.04]";
 
     return (
         <>
@@ -28,7 +28,7 @@ function LawyerDashboard() {
                 <h1 className="text-2xl font-semibold">Welcome, {name}!</h1>
               </div>
 
-              <div className="flex flex-row gap-5 mx-auto justify-center shrink self-center w-full">
+              <div className="flex md:flex-row flex-col gap-5 mx-auto justify-center shrink self-center w-full p-4">
                 
                 <Link to="/lawyer/lawyer-request" className={totalNoStyle}>
                     {/* User Count */}

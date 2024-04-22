@@ -61,7 +61,7 @@ const UserProfile = () => {
       <Popup
         trigger={
                 <div className="flex flex-row justify-between items-center w-full p-1 px-4 hover:bg-azure-50 hover:bg-opacity-20 cursor-pointer font-semibold leading-none ">
-                  Edit Profile
+                  View Profile
                   <IoMdSettings className={icon}/>
                 </div>
 /*           <button className="bg-gray-300 rounded-full h-[2rem] w-[2rem] flex items-center justify-center">
