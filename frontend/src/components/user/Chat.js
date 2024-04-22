@@ -8,7 +8,7 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import ChatSidebar from './ChatSidebar';
 import { BaseURL } from "../../BaseURL"
 
-const ChatComponent = () => {
+const ChatComponent = ({ summary }) => {
   const { user } = useAuthContext();
 
   const userid = user?.userid || 'guest';
@@ -18,7 +18,6 @@ const ChatComponent = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [conversationId, setConversationId] = useState('');
   const [conversationTitles, setConversationTitles] = useState([]);
-  const [summary, setSummary] = useState('No relevant summary has been detected in the conversation.');
   const [showRequestForm, setShowRequestForm] = useState(false);
   const [requestMeetingClicked, setRequestMeetingClicked] = useState(false);
   const [showRequestButton, setShowRequestButton] = useState(false);
@@ -66,8 +65,6 @@ const ChatComponent = () => {
           if (!conversationId) {
             setConversationId(response.data.conversationId);
           }
-
-          setSummary(response.data.summary);
 
           if (response.data.message.includes("Thank you for confirming. You can now request a video conference")) {
             setShowRequestButton(true);
