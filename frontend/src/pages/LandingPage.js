@@ -14,6 +14,7 @@ import { FaQq } from "react-icons/fa6";
 import Footer from "../components/landingpage/Footer.js";
 
 import blob from "../img/Blob.svg";
+import lawJust from "../img/justice.png";
 
 
 const LandingPage = () => {
@@ -50,10 +51,12 @@ const LandingPage = () => {
 useEffect(() => {
   const handleScroll = () => {
     const background = document.getElementById('backgroundImage');
+    const background2 = document.getElementById('backgroundImage2');
     const scrollPosition = window.scrollY;
     const opacity = 1 - (scrollPosition / window.innerHeight);
     
     background.style.opacity = opacity > 0 ? opacity : 0;
+    background2.style.opacity = opacity > 0 ? opacity : 0;
   };
 
   window.addEventListener('scroll', handleScroll);
@@ -64,12 +67,12 @@ useEffect(() => {
 }, []);
 
   return (
-    <div className="bg-bkg text-content">
+    <div className="bg-bkg text-content overflow-x-hidden">
       <Helmet>
         <title>Home | GabAi</title>
       </Helmet>
 
-      <div id="scrollFadeDiv" className="fixed z-50 bottom-10 left-1/2 transform -translate-x-1/20 animate-bounce duration-10 opacity-100 transition-opacity">
+      <div id="scrollFadeDiv" className="fixed z-40 bottom-10 left-1/2 transform -translate-x-1/20 animate-bounce duration-10 opacity-100 transition-opacity">
         <svg stroke="#336699" fill="#336699" strokeWidth="0" viewBox="0 0 1024 1024" height="30" width="30" xmlns="http://www.w3.org/2000/svg">
           <path d="M862 465.3h-81c-4.6 0-9 2-12.1 5.5L550 723.1V160c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v563.1L255.1 470.8c-3-3.5-7.4-5.5-12.1-5.5h-81c-6.8 0-10.5 8.1-6 13.2L487.9 861a31.96 31.96 0 0 0 48.3 0L868 478.5c4.5-5.2.8-13.2-6-13.2z"></path>
         </svg>
@@ -82,8 +85,16 @@ useEffect(() => {
               src={blob} alt="Background Image">
             </img>
       </div>
+
+      <div class="md:block hidden fixed w-screen h-screen z-0  opacity-20 overflow-x-hidden overflow-y-hidden">
+                <img 
+                id="backgroundImage2" 
+                className="absolute scale-[165%] translate-x-[17rem] translate-y-[10rem]" 
+                src={lawJust} alt="Background Image">
+                </img>
+      </div>
       
-      <div className="w-full relative max-w-4xl px-5 lg:px-0 center mx-auto pb-10">
+      <div className="w-full relative max-w-4xl px-8 md:px-5 lg:px-0 center mx-auto pb-10">
         <section id="home">
           {/* 1st section of landing page */}
          <Section1 />

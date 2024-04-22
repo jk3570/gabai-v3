@@ -11,7 +11,7 @@ import { MdManageSearch, MdOutlineScreenshot, MdOutlineScreenshotMonitor } from 
 
 function Section3() {
   const card =
-    "w-[32%] h-[15rem] flex flex-col justify-center items-center landing-section shadow-lg rounded-lg transition-transform transform-gpu bg-azure-50 bg-opacity-20";
+    "w-full h-full flex flex-col justify-center items-center landing-section shadow-lg rounded-lg transition-transform transform-gpu bg-azure-50 bg-opacity-20 py-10";
   const cardIcon =
     "h-[4rem] w-[4rem] object-cover text-center rounded-full mb-3 text-6xl text-label";
   const cardTitle = "font-bold mb-2 text-xl text-label";
@@ -27,7 +27,7 @@ function Section3() {
       </h1>
 
 
-      <div className="flex flex-row justify-between items-center max-md:flex-col w-full relative max-w-4xl lg:px-0 center">
+      <div className="flex md:flex-row justify-between items-center flex-col w-full relative max-w-4xl lg:px-0 center gap-4">
         {/* Conversational AI */}  
         <div className={card}>
           <div className="flex justify-center items-center">

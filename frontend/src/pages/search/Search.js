@@ -59,7 +59,7 @@ function Search() {
         </div> */}
       
     
-    <div className="relative z-40 w-full h-full max-w-4xl px-5 lg:px-0 center mx-auto flex justify-center items-center" >
+    <div className="relative z-30 w-full h-full max-w-4xl px-5 lg:px-0 center mx-auto flex justify-center items-center" >
       <div className="flex flex-col w-full items-center">
 
 
@@ -68,7 +68,7 @@ function Search() {
             <img src={iconAzure} alt="Logo" style={{ height: "80px" }} /> GabAi
           </div>
 
-          <p className="text-md text-label">
+          <p className="text-md text-label text-center">
             Navigate the legal landscape of workplace discrimination
           </p>
 

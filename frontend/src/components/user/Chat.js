@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { FaGripLinesVertical } from "react-icons/fa";
 import { BsSend } from "react-icons/bs";
@@ -91,6 +91,13 @@ const ChatComponent = () => {
     fetchConversationTitles();
   }, []);
 
+const chatContentRef = useRef(null);
+
+useEffect(() => {
+  // Scrolls to the bottom of the chat container
+  chatContentRef.current.scrollTop = chatContentRef.current.scrollHeight;
+}, [messages]); // Re-runs when messages change
+
   return (
     <div className="relative z-10 w-full h-screen flex flex-row justify-start items-start">
       <div className="flex flex-row w-full h-screen bg-bkg">
@@ -98,8 +105,7 @@ const ChatComponent = () => {
       {/* Chat History Sidebar */}
         <div
           id="chat-history"
-          className={`transition-all overflow-hidden w-${sidebarOpen ? '0' : '64'} h-full bg-bkg z-50 shadow-lg left-0 top-0`}
-          style={{ width: sidebarOpen ? '0px' : '256px' }}
+          className={`transition-all overflow-hidden ${sidebarOpen ? 'w-0' : 'w-full md:w-64'} h-full bg-bkg z-50 shadow-lg left-0 top-0`}
         >
           <ChatSidebar
             handleNewChat={handleNewChat}
@@ -111,14 +117,14 @@ const ChatComponent = () => {
         </div>
       
       {/* Toggle Sidebar  */} 
-          <div className="flex h-full items-center justify-center cursor-pointer" onClick={toggleSidebar}>
+          <div className="relative z-50 flex h-full items-center justify-center cursor-pointer bg-bkg" onClick={toggleSidebar}>
             <FaGripLinesVertical className="text-label text-2xl" />
         </div>
 
 
       {/* Chat Conversation */}
-          <div id="chat-content" className="flex flex-col w-full h-full mx-auto max-w-4xl justify-between pt-[3.875rem]">
-            <div className="h-full overflow-y-auto flex flex-col gap-2 p-5 pt-7">
+          <div id="chat-content" className={`flex flex-col h-full ${sidebarOpen ? 'w-full' : 'w-0 md:w-full'} mx-auto max-w-4xl justify-between pt-[3.875rem]`}>
+            <div ref={chatContentRef} className="h-full overflow-y-auto flex flex-col gap-2 p-5 pt-7">
               {messages.map((message, index) => (
                 <div className="p-5 bg-gray-400 bg-opacity-20 rounded-xl animate__animated text-content" key={index}>
                   <p><b>{message.role === 'user' ? 'You' : 'Gab'}</b></p>
@@ -138,7 +144,7 @@ const ChatComponent = () => {
                             e.preventDefault();
                             sendMessage();
                           }}
-                          className="flex flex-row gap-1 bottom-0 w-full py-2"
+                          className="flex flex-row gap-1 bottom-0 w-full py-2 px-2"
                         >
                           <input
                             type="text"
