@@ -12,25 +12,25 @@ import NewChatPopup from '../NewChatPopup';
 
 const ChatSidebar = ({ handleNewChat, handleConversationClick, conversationTitles }) => {
   // No need for conversations state since we're using conversationTitles passed from props
+  const { user, dispatch } = useAuthContext();
+  const userid = user?.userid || 'guest';
 
-  useEffect(() => {
+ useEffect(() => {
     // Fetch conversation titles from the server
-    axios.get(`${BaseURL}/gab/conversations`)
+    axios.get(`http://localhost:4000/gab/conversations/${userid}`)
       .then(response => {
-        console.log("Fetched conversations:", response.data);
-        // No need to set conversations state here
       })
-      .catch(error => console.error('Error fetching conversations:', error));
+      .catch(error => console.error('Error fetching conversation titles:', error));
   }, []);
 
   console.log("Conversation Titles:", conversationTitles); // Check the value of conversationTitles
 
-  const { user, dispatch } = useAuthContext();
+  
 
   return (
     <div className="flex flex-col justify-between h-screen bg-bkg text-content shadow-xl border-r border-gray-400 border-opacity-10 pt-[3.875rem]">
 
-{/* Conversation History */}
+{/* Conversation History */}  
     {user ?
     <div className="relative flex flex-col h-[88%] w-64 ">
       <div className="relative px-4 pt-3 pb-2 flex flex-col gap-4 w-full bg-bkg border-b border-gray-400 border-opacity-50">
@@ -48,7 +48,7 @@ const ChatSidebar = ({ handleNewChat, handleConversationClick, conversationTitle
       </div>
     </div> : <div className="relative p-4 flex flex-col gap-2 w-full bg-bkg border-t border-gray-400 border-opacity-50 pt-7">
           <h2 className="text-base leading-none font-semibold text-label">Sign up or log in</h2>
-          <p className="text-xs leading-tight text-content text-opacity-60">Save your chat history, share chats, and personalize your experience</p>
+          <p className="text-xs leading-tight text-content text-opacity-60">Save your <b>chat history </b>and request a <b>video conference </b>with a lawyer.</p>
 
           <Link to="/#signup" className="relative flex h-10 w-full px-3 py-2 bg-azure text-white rounded-md justify-center items-center text-sm transition-all duration-100 ease-in-out hover:bg-azure-300">
             <Signup />

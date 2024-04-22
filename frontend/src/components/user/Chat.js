@@ -24,6 +24,14 @@ const ChatComponent = () => {
   const [showRequestButton, setShowRequestButton] = useState(false);
   const [inputVisible, setInputVisible] = useState(true); // State to control input visibility
 
+
+  let userid = user ? user.userid : null;
+  if (!userid) {
+    // If user is not available, use a default value
+    userid = 'guest';
+  }
+
+
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
@@ -36,7 +44,7 @@ const ChatComponent = () => {
   };
 
   const fetchConversationTitles = () => {
-    axios.get(`http://localhost:4000/gab/conversations`)
+   axios.get(`http://localhost:4000/gab/conversations/${userid}`)
       .then(response => {
         setConversationTitles(response.data);
       })
@@ -58,7 +66,7 @@ const ChatComponent = () => {
       setMessages(prevMessages => [...prevMessages, newMessage]);
       setInput('');
 
-      axios.post(`http://localhost:4000/gab/conversation`, { input: input, conversationId: conversationId })
+      axios.post(`http://localhost:4000/gab/conversation`, { input: input, conversationId: conversationId, userid: userid })
         .then(response => {
           const aiMessage = { role: 'assistant', content: response.data.message };
           setMessages(prevMessages => [...prevMessages, aiMessage]);
@@ -129,51 +137,58 @@ const ChatComponent = () => {
               <div className="relative items-center">
                 <div className="flex flex-col justify-center items-center"> 
                   {showRequestButton && !requestMeetingClicked ? (
-                    <button className="flex h-10 w-[50%] px-3 py-2 bg-azure text-white rounded-md justify-center items-center text-sm transition-all duration-100 ease-in-out hover:bg-azure-300 my-5" onClick={() => setShowRequestForm(true) || setRequestMeetingClicked(true)}>Request a video conference</button>
+                    <>
+                      <button className="flex h-10 w-[50%] px-3 py-2 bg-azure text-white rounded-md justify-center items-center text-sm transition-all duration-100 ease-in-out hover:bg-azure-300" onClick={() => setShowRequestForm(true) || setRequestMeetingClicked(true)}>Request a video conference</button>
+                    <button className="flex h-10 w-[50%] px-3 py-2 bg-white border border-azure text-azure rounded-md justify-center items-center text-sm transition-all duration-100 ease-in-out my-2" onClick={() => {
+                    setInputVisible(true); // Show the input field
+                    setShowRequestButton(false); // Hide the buttons
+                  }}>Continue the conversation</button>
+                    </>
                   ) : (
                     <>
-                      {inputVisible && (
-                        <form
-                          onSubmit={e => {
-                            e.preventDefault();
-                            sendMessage();
-                          }}
-                          className="flex flex-row gap-1 bottom-0 w-full py-2"
-                        >
-                          <input
-                            type="text"
-                            value={input}
-                            onChange={e => setInput(e.target.value)}
-                            className="p-3 border-2 border-gray-500 border-opacity-50 rounded-full w-full bg-bkg text-content"
-                            placeholder="Type your message here"
-                          />
-                            <button
-                                type="submit"
-                                id="sendBtn"
-                                disabled={isSendDisabled}
-                                className={
-                                  isSendDisabled
-                                    ? 'relative pb-1 pl-1 p-2 text-center text-2xl justify-center ml-2 my-2 rounded-full bg-gray-400 text-white right-0'
-                                    : 'relative pb-1 pl-1 p-2 text-center text-2xl justify-center ml-2 my-2 rounded-full bg-azure-500 text-white right-0'
-                                }>
-                                <BsSend className="h-[1em] w-[1em]"/>
-                              </button>
-                        </form>
-                      )}
-                <div className="flex justify-center items-center pb-3">
-                  <p className="text-gray-400 text-xs">
-                    All conversations are completely confidential.
-                  </p>
-                </div>
-                    </>
-                  )}
-                </div>
-                {showRequestForm && <RequestForm summary={summary} onClose={() => { setShowRequestForm(false); setRequestMeetingClicked(false); }} />}
+      {inputVisible && (
+        <form
+          onSubmit={e => {
+            e.preventDefault();
+            sendMessage();
+          }}
+          className="flex flex-row gap-1 bottom-0 w-full py-2"
+        >
+          <input
+            type="text"
+            value={input}
+            onChange={e => setInput(e.target.value)}
+            className="p-3 border-2 border-gray-500 border-opacity-50 rounded-full w-full bg-bkg text-content"
+            placeholder="Type your message here"
+          />
+          <button
+            type="submit"
+            id="sendBtn"
+            disabled={isSendDisabled}
+            className={
+              isSendDisabled
+                ? 'relative pb-1 pl-1 p-2 text-center text-2xl justify-center ml-2 my-2 rounded-full bg-gray-400 text-white right-0'
+                : 'relative pb-1 pl-1 p-2 text-center text-2xl justify-center ml-2 my-2 rounded-full bg-azure-500 text-white right-0'
+            }>
+            <BsSend className="h-[1em] w-[1em]"/>
+          </button>
+        </form>
+      )}
+      <div className="flex justify-center items-center pb-3">
+        <p className="text-gray-400 text-xs">
+          All conversations are completely confidential.
+        </p>
+      </div>
+    </>
+  )}
+
+                  </div>
+                  {showRequestForm && <RequestForm summary={summary} onClose={() => { setShowRequestForm(false); setRequestMeetingClicked(false); }} />}
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  };
 
-export default ChatComponent;
+  export default ChatComponent;

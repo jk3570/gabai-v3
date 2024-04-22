@@ -11,6 +11,7 @@ const chatRoutes = require('./routes/chat');
 const formRoutes = require('./routes/request');
 const acceptRoutes = require('./routes/accept');
 const verifyRoutes = require('./routes/verify');
+const feedbackRoutes = require('./routes/feedback');
 
 const OpenAI = require('openai');
 
@@ -34,6 +35,7 @@ app.use('/gab', chatRoutes);
 app.use('/form', formRoutes);
 app.use('/user', userRoutes);
 app.use('/account', verifyRoutes);
+app.use('/feedback', feedbackRoutes);
   
 
 // Wildcard route to serve the index.html file for all routes

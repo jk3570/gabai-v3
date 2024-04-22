@@ -8,7 +8,7 @@ const router = express.Router();
 router.post('/conversation', makeChat);
 
 // Fetch all conversation titles
-router.get('/conversations', getConversationTitles);
+router.get('/conversations/:userid', getConversationTitles);
 
 // Fetch messages for a specific conversation
 router.get('/conversation/:conversationId', getConversationMessages);
