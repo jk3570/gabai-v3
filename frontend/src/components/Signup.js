@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useState, useEffect } from "react";
+import { React, useState, useEffect } from "react";
 import {
   regions,
   provinces,
@@ -16,8 +16,21 @@ import Login from "./Login";
 import { Icon } from "react-icons-kit";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
+import { useNavigate } from "react-router-dom"
+
 
 const Signup = ({ initialAddress }) => {
+
+
+
+const navigate = useNavigate();
+  // const notify = () =>
+  //   toast.success("Account has been created successfully!", {
+  //       position: "top-center",
+  //       duration: 2000,
+  //   });
+  const [message, setMessage] = useState('');
+
   const [role, setRole] = useState("user");
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedProvince, setSelectedProvince] = useState("");
@@ -28,6 +41,19 @@ const Signup = ({ initialAddress }) => {
   const [provinceOptions, setProvinceOptions] = useState([]);
   const [cityOptions, setCityOptions] = useState([]);
   const [barangayOptions, setBarangayOptions] = useState([]);
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Prevent form submission
+      const inputs = Array.from(event.target.form.elements);
+      const currentIndex = inputs.indexOf(event.target);
+      const nextIndex = currentIndex + 1;
+
+      if (nextIndex < inputs.length) {
+        inputs[nextIndex].focus();
+      }
+    }
+  };
 
   const {
     register,
@@ -159,6 +185,7 @@ const Signup = ({ initialAddress }) => {
   };
 
   const onSubmit = async (data) => {
+    
     console.log("Form Data:", data); // Log the form data
     if (data.password !== data.confirmPassword) {
       setPasswordMatchError(true);
@@ -186,29 +213,30 @@ const Signup = ({ initialAddress }) => {
       barangayOptions.find((barangay) => barangay.brgy_code === data.barangay)
         ?.brgy_name || "";
 
+
     // Call signup function with converted address names
     await signup(
-      role,
-      data.username,
-      data.firstname,
-      data.lastname,
-      data.gender,
-      data.birthdate,
-      selectedRegionName,
-      selectedProvinceName,
-      selectedCityName,
-      selectedBarangayName,
-      data.email,
-      data.password
-    );
+        role,
+        data.username,
+        data.firstname,
+        data.lastname,
+        data.gender,
+        data.birthdate,
+        selectedRegionName,
+        selectedProvinceName,
+        selectedCityName,
+        selectedBarangayName,
+        data.email,
+        data.password
+      )
+    
+      navigate('/signup-routes')
+
   };
 
-  const notify = () => {
-    toast.success("Account has been created successfully!", {
-      position: "top-center",
-      duration: 1000,
-    });
-  };
+
+
+  
 
 useEffect(() => {
   // Check if form fields are not empty
@@ -240,24 +268,26 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
   return (
     <Popup
       trigger={
-        <Link to="#signup" className="text-azure">
-          Sign up here
+        <Link to="#signup" className="flex w-full h-full items-center justify-center">
+        Sign up
         </Link>
       }
       modal
     >
       {(close) => (
+          <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 backdrop-filter backdrop-blur-lg bg-opacity-25 bg-black">
             <form className="signup" id="signup" onSubmit={handleSubmit(onSubmit)}>
+
               {step === 1 && (
                 <>
                   <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 ">
                     `{" "}
                     <div className="modal relative h-auto w-[72%] sm:w-[57%] md:w-[52%] lg:w-[47%] xl:w-[37%] 2xl:w-[40%] rounded-2xl bg-white flex flex-col pt-7 py-10 p-3">
-                      <div className="absolute flex align-center p-1 inset-y-0 right-0">
+                      <Link to="#" className="absolute flex align-center p-1 inset-y-0 right-0">
                         <IoIosCloseCircleOutline
                           className="text-3xl cursor-pointer"
                           onClick={() => close()}/>
-                      </div>
+                      </Link>
 
                       <div className="w-full h-full flex flex-col-1 justify-center px-4">
                       <div className="w-full h-full grid grid-cols-1 gap-4">
@@ -268,7 +298,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                           <p className="block font-normal text-sm">
                             Register now for a richer, more empowered journey!
                           </p>
-                          <br />
+                          
                         </div>
                       
                       <span className="font-medium justify-center flex text-azure">
@@ -288,10 +318,11 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                           placeholder="Juan"
                           {...register("firstname", {
                             required: true,
-                            pattern: /^[A-Za-z\s]+$/,
+                            pattern: /^[A-Za-zñÑ\s]+$/,
 
                           })}
                           className={input}
+                          onKeyDown={handleKeyDown}
                         />
                         {errors.firstname &&
                           errors.firstname.type === "required" && (
@@ -316,9 +347,10 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                           placeholder="Dela Cruz"
                           {...register("lastname", {
                             required: true,
-                            pattern: /^[A-Za-z\s]+$/,
+                            pattern: /^[A-Za-zñÑ\s]+$/,
                           })}
                           className={input}
+                          onKeyDown={handleKeyDown}
                         />
                         {errors.lastname && errors.lastname.type === "required" && (
                           <span className={warning}>
@@ -340,6 +372,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                             id="gender"
                             {...register("gender", { required: true })}
                             className={input}
+                            onKeyDown={handleKeyDown}
                           >
                             <option value="">- Select Gender -</option>
                             <option value="Male">Male</option>
@@ -387,6 +420,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                             },
                           })}
                           className={input}
+                          onKeyDown={handleKeyDown}
                         />
                         {errors.birthdate &&
                           errors.birthdate.type === "required" && (
@@ -427,6 +461,11 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                   <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 ">
                     `{" "}
                     <div className="modal relative h-auto w-[72%] sm:w-[57%] md:w-[52%] lg:w-[47%] xl:w-[37%] 2xl:w-[40%] rounded-2xl bg-white flex flex-col pt-7 py-10 p-3">
+                    <Link to="#" className="absolute flex align-center p-1 inset-y-0 right-0">
+                        <IoIosCloseCircleOutline
+                          className="text-3xl cursor-pointer"
+                          onClick={() => close()}/>
+                      </Link>
 
                       <div className="w-full h-full flex flex-col-1 justify-center px-4">
                       <div className="w-full h-full grid grid-cols-1 gap-4">
@@ -437,7 +476,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                           <p className="block font-normal text-sm">
                             Register now for a richer, more empowered journey!
                           </p>
-                          <br />
+                          
                         </div>
                         <span className="font-medium justify-center flex text-azure">
                               Address Information 
@@ -456,6 +495,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                               id="region"
                               {...register("region", { required: true })}
                               className={input}
+                              onKeyDown={handleKeyDown}
                               value={selectedRegion}
                               onChange={(e) => setSelectedRegion(e.target.value)}
                             >
@@ -486,6 +526,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                               id="province"
                               {...register("province", { required: true })}
                               className={input}
+                              onKeyDown={handleKeyDown}
                               value={selectedProvince}
                               onChange={(e) => setSelectedProvince(e.target.value)}
                             >
@@ -516,6 +557,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                               id="city"
                               {...register("city", { required: true })}
                               className={input}
+                              onKeyDown={handleKeyDown}
                               value={selectedCity}
                               onChange={(e) => setSelectedCity(e.target.value)}
                             >
@@ -543,6 +585,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                               id="barangay"
                               {...register("barangay", { required: true })}
                               className={input}
+                              onKeyDown={handleKeyDown}
                               value={selectedBarangay}
                               onChange={(e) => setSelectedBarangay(e.target.value)}
                             >
@@ -594,8 +637,19 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
               {step === 3 && (
                 <>
                   <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 ">
-                    `{" "}
+                    {/* <div>
+                      <Toaster
+                          position="top-center"
+                        />
+                    </div> */}
+
+
                     <div className="modal relative h-auto w-[72%] sm:w-[57%] md:w-[52%] lg:w-[47%] xl:w-[37%] 2xl:w-[40%] rounded-2xl bg-white flex flex-col pt-7 py-10 p-3">
+                    <Link to="#" className="absolute flex align-center p-1 inset-y-0 right-0">
+                        <IoIosCloseCircleOutline
+                          className="text-3xl cursor-pointer"
+                          onClick={() => close()}/>
+                      </Link>
 
                       <div className="w-full h-full flex flex-col-1 justify-center px-4">
                       <div className="w-full h-full grid grid-cols-1 gap-4">
@@ -606,7 +660,6 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                           <p className="block font-normal text-sm">
                             Register now for a richer, more empowered journey!
                           </p>
-                          <br />
                         </div>
 
                         <span className="font-medium justify-center flex text-azure">
@@ -615,6 +668,8 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                         <div className="bg-gray-200 rounded-lg h-2 w-full">
                           <div className="bg-azure-200 rounded-lg h-2 w-full"></div>
                         </div>
+
+                         {/* {message && <div>{message}</div>} */}
 
                        {/*  Username */}
                           <div className="flex flex-col">
@@ -626,10 +681,11 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                               {...register("username", {
                                 required: true,
                                 minLength: 6,
-                                maxLength: 12,
-                                pattern: /^(?=.*[a-z])(?=.*\d)[a-z\d]+$/i,
+                                maxLength: 24,
+                                pattern: /^(?=.*[a-z\d.])(?=.*\d)[a-z\d]+$/i,
                               })}
                               className={input}
+                              onKeyDown={handleKeyDown}
                             />
                             {errors.username &&
                               errors.username.type === "required" && (
@@ -653,7 +709,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                               errors.username.type === "pattern" && (
                                 <span className={warning}>
                                   Username must contain only lowercase letters{" "}
-                                  <br /> and at least one number
+                                   and at least one number
                                 </span>
                               )}
                        </div>
@@ -671,6 +727,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                                   /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, // Regular expression for email validation
                               })}
                               className={input}
+                              onKeyDown={handleKeyDown}
                             />
                             {errors.email && errors.email.type === "required" && (
                               <span className={warning}>
@@ -704,6 +761,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                                     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,24}$/,
                                 })}
                                 className={input}
+                                onKeyDown={handleKeyDown}
                               />
                               <span
                                 class="absolute inset-y-0 right-0 flex items-center justify-end mr-4"
@@ -738,9 +796,9 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                             {errors.password &&
                               errors.password.type === "pattern" && (
                                 <span className={warning}>
-                                  Password must contain at least one number, <br />
+                                  Password must contain at least one number, 
                                   one capital letter, one small letter, and one{" "}
-                                  <br /> special character
+                                   special character
                                 </span>
                               )}
                           </div>
@@ -760,6 +818,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                               }
                             })}
                             className={input}
+                            onKeyDown={handleKeyDown}
                           />
                           {errors.confirmPassword && errors.confirmPassword.type === "required" && (
                             <span className={warning}>Confirm Password is required</span>
@@ -772,7 +831,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                         <div className="w-full justfy-between flex gap-2">
                           <a href="#" className={button} onClick={prevStep}> {"<"} Previous</a>
 
-                          <button type="submit" className={button} disabled={!isFormValid || error || isLoading || passwordMatchError} onClick={!errors ? undefined : notify}>
+                          <button type="submit" className={button} >
                             Sign Up!
                           </button>
                         </div>
@@ -782,11 +841,13 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                     </div>
                 </>
               )}
+              
 
               {passwordMatchError && (
                 <span className={warning}>Passwords do not match</span>
               )}
             </form>
+          </div>  
       )}
     </Popup>
   );

@@ -4,7 +4,6 @@ import Helmet from "react-helmet";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 // Components
-import Search from "./search/Search";
 import Section1 from "../components/landingpage/Section1";
 import Section2 from "../components/landingpage/Section2";
 import Section3 from "../components/landingpage/Section3";
@@ -12,6 +11,9 @@ import Section4 from "../components/landingpage/Section4";
 import Developers from "../components/landingpage/Developers";
 import Faq from "../components/landingpage/Faq";
 import { FaQq } from "react-icons/fa6";
+import Footer from "../components/landingpage/Footer.js";
+
+import blob from "../img/Blob.svg";
 
 
 const LandingPage = () => {
@@ -45,9 +47,24 @@ const LandingPage = () => {
     };
 }, []); // Empty dependency array ensures that this effect runs only once, similar to componentDidMount
 
+useEffect(() => {
+  const handleScroll = () => {
+    const background = document.getElementById('backgroundImage');
+    const scrollPosition = window.scrollY;
+    const opacity = 1 - (scrollPosition / window.innerHeight);
+    
+    background.style.opacity = opacity > 0 ? opacity : 0;
+  };
+
+  window.addEventListener('scroll', handleScroll);
+
+  return () => {
+    window.removeEventListener('scroll', handleScroll);
+  };
+}, []);
 
   return (
-    <>
+    <div className="bg-bkg text-content">
       <Helmet>
         <title>Home | GabAi</title>
       </Helmet>
@@ -58,11 +75,18 @@ const LandingPage = () => {
         </svg>
       </div>
 
+      <div class="fixed w-screen h-screen z-0">
+            <img 
+              id="backgroundImage" 
+              className="h-full w-full object-cover transition-opacity duration-200" 
+              src={blob} alt="Background Image">
+            </img>
+      </div>
       
-      <div class="w-full relative max-w-4xl px-5 lg:px-0 center mx-auto">
-      <section id="home">
+      <div className="w-full relative max-w-4xl px-5 lg:px-0 center mx-auto pb-10">
+        <section id="home">
           {/* 1st section of landing page */}
-         { !user ? <Section1 /> : <Search /> }
+         <Section1 />
         </section>
 
         <section id="about">
@@ -90,10 +114,12 @@ const LandingPage = () => {
           <Section4 />
         </section>
       </div>
-      {/* 
-      Logout button */}
-      {/* {user && <button onClick={handleLogout}>Logout</button>} */}
-    </>
+      
+        <section id="footer">
+          {/* Footer */}
+          <Footer />
+        </section>
+    </div>
   );
 }
 

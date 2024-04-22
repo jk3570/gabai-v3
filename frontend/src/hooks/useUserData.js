@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { BaseURL } from '../BaseURL'
 
 const useUserData = () => {
   const [userData, setUserData] = useState([]);
@@ -7,7 +8,7 @@ const useUserData = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch('/user/users'); // Assuming your backend serves user data at '/api/users' endpoint
+        const response = await fetch(`http://localhost:4000/user/users`); 
         const data = await response.json();
         setUserData(data);
         setLoading(false);
@@ -17,9 +18,6 @@ const useUserData = () => {
     }
 
     fetchData();
-
-    // No cleanup needed for fetch requests
-    // If you have any cleanup code, you can add it here
 
   }, []);
 

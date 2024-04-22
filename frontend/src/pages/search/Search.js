@@ -12,7 +12,10 @@ import Helmet from "react-helmet";
 import { IoSearchOutline } from "react-icons/io5";
 
 // images
-import Logo from "../../img/Logo.png";
+import iconAzure from "../../img/iconAzure.svg";
+import backgroundPhoto from "../../img/backgroundPhoto.jpg"
+import lawJust from "../../img/lawJust.png";
+import Blob from "../../img/Blob.svg"
 
 function Search() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -35,43 +38,64 @@ function Search() {
   };
 
   return (
-    <div className="w-full h-screen max-w-4xl px-5 lg:px-0 center mx-auto flex justify-center items-center">
-      <div className="flex flex-col justify-between items-center ">
+    <div className="h-screen w-full bg-bkg">
         <Helmet>
           <title>Search - GabAI</title>
         </Helmet>
-
-        <h1 className="">
-          <img src={Logo} alt="Logo" style={{ height: "80px" }} />
-        </h1>
-
-        <br />
-
-        <p className="text-md">
-          Navigate the legal landscape of workplace discrimination
-        </p>
-
-        <br />
-
-        <form onSubmit={handleSearch}>
-          <div className="flex flex-row gap-2">
-            <input
-              type="text"
-              placeholder="Search here"
-              className="w-[50rem] border-2 border-black rounded-full p-4 max-md:w-[30rem]"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-
-            <button
-              className="ml-[-4rem] text-4xl text-azure z-10"
-              type="submit"
-            >
-              <IoSearchOutline />
-            </button>
-          </div>
-        </form>
+    <div className="h-screen bg-cover">
+      <div class="fixed w-screen h-screen z-0">
+                <img 
+                id="backgroundImage" 
+                className="h-full w-full object-cover transition-opacity duration-200" 
+                src={Blob} alt="Background Image">
+                </img>
       </div>
+      {/* <div class="absolute w-screen h-screen z-0 overflow-clip">
+                <img 
+                id="backgroundImage" 
+                className="absolute scale-[75%] translate-x-[10rem] -translate-y-[15rem] opacity-20" 
+                src={lawJust} alt="Background Image">
+                </img>
+        </div> */}
+      
+    
+    <div className="relative z-40 w-full h-full max-w-4xl px-5 lg:px-0 center mx-auto flex justify-center items-center" >
+      <div className="flex flex-col w-full items-center">
+
+
+        <div className=" flex flex-col w-full items-center gap-4">
+          <div className="flex flex-row text-azure text-7xl items-center font-medium gap-5">
+            <img src={iconAzure} alt="Logo" style={{ height: "80px" }} /> GabAi
+          </div>
+
+          <p className="text-md text-label">
+            Navigate the legal landscape of workplace discrimination
+          </p>
+
+          <form onSubmit={handleSearch} className="w-full flex drop-shadow-lg">
+            <div className="flex flex-row gap-2 w-full">
+              <input
+                type="text"
+                placeholder="Search here"
+                className="border-2 border-azure-200 w-full flex rounded-full p-4 bg-bkg text-content"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+
+              <button
+                className="ml-[-4rem] text-4xl text-label z-10"
+                type="submit"
+              >
+                <IoSearchOutline />
+              </button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div> 
+
+    </div>
     </div>
   );
 }

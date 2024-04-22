@@ -22,13 +22,20 @@ const loginUser = async (req, res) => {
     //Response on local storage
     res.status(200).json({ 
       token,
+      userid: user._id,
       role: user.role,
       email: user.email,
       username: user.username,
       firstname: user.firstname,
       lastname: user.lastname,
-    
-    });
+      age: user.age,
+      gender: user.gender,
+      birthdate: user.birthdate,
+      province: user.province,
+      region: user.region,
+      barangay: user.barangay,
+      city: user.city,
+        });
     //user: user.email
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -77,14 +84,22 @@ const signupUser = async (req, res) => {
     // Create a token
     const token = createToken(user._id);
 
-    //response on local storage
+    // response on local storage
     res.status(200).json({ 
       token,
+      userid: user._id,
       role: user.role,
       email: user.email,
       username: user.username,
       firstname: user.firstname,
       lastname: user.lastname,
+      age: user.age,
+      gender: user.gender,
+      region: user.region,
+      birthdate: user.birthdate,
+      province: user.province,
+      barangay: user.barangay,
+      city: user.city,
     });
 
     //user: user.email
@@ -105,7 +120,7 @@ const signupUser = async (req, res) => {
   };
 
 
-  //update the user profile
+  // update the user pro  file
   const updateUser = async (req, res) => {
     const { userId } = req.params;
     const userData = req.body;
@@ -116,7 +131,7 @@ const signupUser = async (req, res) => {
       console.error('Error:', error);
       res.status(500).json({ error: 'Internal Server Error' });
     }
-  };
+  };  
 
 
-module.exports = { signupUser, loginUser, getAllUsers, updateUser };
+module.exports = { signupUser, loginUser, getAllUsers, updateUser};

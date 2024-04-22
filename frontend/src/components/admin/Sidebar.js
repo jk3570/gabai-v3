@@ -71,7 +71,7 @@ function Sidebar() {
             </li>
             <li>
               <Link
-                to="/admin/users"
+                to="/admin/user-table"
                 className={text}
               >
                 <FaUsers className={icon} />

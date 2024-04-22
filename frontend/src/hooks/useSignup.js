@@ -4,6 +4,7 @@ import { BaseURL } from '../BaseURL'
 
 export const useSignup = () => {
   const [error, setError] = useState(null)
+  // const [message, setMessage] = useState('')
   const [isLoading, setIsLoading] = useState(null)
   const { dispatch } = useAuthContext()
 
@@ -23,7 +24,7 @@ export const useSignup = () => {
     setIsLoading(true)
     setError(null)
 
-    const response = await fetch(`${BaseURL}/user/signup`, {
+    const response = await fetch(`http://localhost:4000/user/signup`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ 
@@ -55,6 +56,7 @@ export const useSignup = () => {
 
       // update loading state
       setIsLoading(false)
+      // setMessage('Verification has been sent to your email address.')
     }
   }
 

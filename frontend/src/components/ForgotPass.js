@@ -1,87 +1,82 @@
-import React, { useState } from "react";
+import { useState, useRef } from "react";
 import Popup from "reactjs-popup";
 import { IoIosCloseCircleOutline } from "react-icons/io";
+import emailjs from "@emailjs/browser";
+import axios from "axios";
 
 const ForgotPass = () => {
   const [email, setEmail] = useState("");
-  const [resetCode, setResetCode] = useState("");
-  const [step, setStep] = useState(1); // 1 for entering email, 2 for entering reset code
+  const [isEmailValid, setIsEmailValid] = useState(false);
 
-  const sendResetEmail = () => {
-    // Placeholder function for sending reset password email
-    console.log("Reset email sent to:", email);
-    // Update step to show the reset code input field
-    setStep(2);
+  const form = useRef();
+
+  const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setEmail(value);
+    setIsEmailValid(emailRegex.test(value));
   };
 
-  const confirmResetCode = () => {
-    // Placeholder function for confirming reset code
-    console.log("Reset code confirmed:", resetCode);
-    // Here you would add logic to verify the reset code
-    // and then proceed with resetting the password
-    // For simplicity, let's just close the popup after code confirmation
-    closePopup();
-  };
+  const sendEmail = (e) => {
+    e.preventDefault();
 
-  const closePopup = () => {
-    // Function to close the popup
-    // You can implement this according to your popup library
+    if (!email || !isEmailValid) {
+      alert("Please enter a valid email");
+      return;
+    }
+
+    axios
+      .post("http://localhost:4000/pass-reset/forgot-password", { email })
+      .then((response) => {
+        console.log("SUCCESS!", response.data);
+        alert("Reset password link sent to your email!");
+      })
+      .catch((error) => {
+        console.log("FAILED...", error.response.data);
+        alert("Failed to send reset password link. Please try again.");
+      });
   };
 
   return (
-    <Popup trigger={<a href="#"> Forgot Password</a>} modal nested>
+    <Popup trigger={<button> Forgot Password?</button>} modal nested>
       {(close) => (
         <div className="modal h-[23rem] w-[31.00rem] rounded-2xl bg-white flex flex-col mx-10 self-center justify-center">
           <div className="flex flex-row align-center justify-end p-1">
             <IoIosCloseCircleOutline
               className="text-3xl cursor-pointer"
-              onClick={() => close()}
+              onClick={close}
             />
           </div>
-          <span className="text-center">
+          <span className="items-center justify-center font-normal text-xs underline">
             <h1>Forgot Password</h1>
           </span>
           <br />
-          <div className="flex flex-col mx-2 gap-2">
-            {/* Step 1: Enter Email */}
-            {step === 1 && (
-              <div className="flex flex-row gap-2 ">
-                <input
-                  type="text"
-                  placeholder="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-[25rem] border-2 border-black rounded-xl p-2"
-                />
-                <button
-                  className="w-[20%] bg-azure-500 text-white font-bold rounded-xl p-2"
-                  onClick={sendResetEmail}
-                >
-                  Send
-                </button>
-              </div>
-            )}
+          <form
+            ref={form}
+            onSubmit={sendEmail}
+            className="flex flex-col mx-2 gap-2"
+          >
+            <div className="flex flex-row gap-2 ">
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                name="user_email"
+                onChange={handleChange}
+                className="w-[25rem] border-2 border-black rounded-xl p-2"
+              />
 
-            {/* Step 2: Enter Reset Code */}
-
-            {step === 2 && (
-              <div className="flex flex-row gap-2">
-                <input
-                  type="text"
-                  placeholder="Enter Code"
-                  value={resetCode}
-                  onChange={(e) => setResetCode(e.target.value)}
-                  className="w-[25rem] border-2 border-black rounded-xl p-2"
-                />
-                <button
-                  className="w-[20%] bg-azure-500 text-white font-bold rounded-xl p-2"
-                  onClick={confirmResetCode}
-                >
-                  Confirm
-                </button>
-              </div>
-            )}
-          </div>
+              <button onClick={sendEmail} disabled={!email || !isEmailValid}>
+                Send
+              </button>
+            </div>
+            <span
+              className={isEmailValid ? "invisible" : "visible text-red-500"}
+            >
+              Please enter a valid email
+            </span>
+          </form>
         </div>
       )}
     </Popup>

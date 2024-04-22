@@ -4,8 +4,8 @@ import React, { useState } from "react";
 const btnStyle = "p-2 rounded-xl bg-azure text-white"; // Button style
 const inputStyle = "border-2 rounded-xl p-2 w-[15rem]"; // Input field style
 
-function JoinScreen({ getMeetingAndToken }) {
-  const [meetingId, setMeetingId] = useState(null); // State for storing meeting ID
+function JoinScreen({ generateMeetingId, params }) {
+  const [meetingId, setMeetingId] = useState(params); // State for storing meeting ID
 
   // Function to handle joining a meeting
   const onJoinClick = async () => {
@@ -15,34 +15,34 @@ function JoinScreen({ getMeetingAndToken }) {
     }
 
     try {
-      const meetingInfo = await getMeetingAndToken(meetingId);
-      if (!meetingInfo || !meetingInfo.participantCount) {
-        throw new Error("Meeting information is invalid");
-      }
+      await generateMeetingId(meetingId);
+      console.log(meetingId);
     } catch (error) {
       console.error("Error joining meeting:", error);
       alert("Error joining meeting. Please try again.");
     }
   };
-  // Function to handle creating a meeting
-  const onCreateClick = async () => {
-    // Implement your logic for creating a meeting
-    await getMeetingAndToken(meetingId);
-  };
+
+  // // Function to handle creating a meeting
+  // const onCreateClick = async () => {
+  //   // Implement your logic for creating a meeting
+  //   await getMeetingAndToken(meetingId);
+  // };
 
   return (
     <div>
       <h1 className="text-[2.55rem]">
-        <b>Video Call</b> {/* Greeting message */}
+        <b>Hello, attorney!</b> {/* Greeting message */}
+        <b>{params}</b> {/* Greeting message */}
       </h1>
       <br />
       <div className="flex flex-row gap-2">
         {/* Flex container for input field and buttons */}
         <input
           type="text"
+          readOnly
           className={inputStyle} // Applying input field style
-          placeholder="Enter Meeting ID" // Placeholder text
-          value={meetingId} // Set input value to state value
+          value={params} // Set input value to state value
           onChange={(e) => {
             setMeetingId(e.target.value); // Updating meetingId state with entered value
           }}
@@ -57,11 +57,12 @@ function JoinScreen({ getMeetingAndToken }) {
             {/* Join button */}
             Join
           </button>
-          {" or "} {/* Text separator */}
+          {/* <b>{meetingId}</b> Greeting message */}
+          {/* {" or "} Text separator
           <button onClick={onCreateClick} className={btnStyle}>
-            {/* Create Meeting button */}
+            Create Meeting button
             Create Meeting
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

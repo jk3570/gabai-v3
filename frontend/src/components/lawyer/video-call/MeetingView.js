@@ -3,12 +3,11 @@ import { useParticipant, useMeeting } from "@videosdk.live/react-sdk";
 import ParticipantView from "./ParticipantView";
 import Controls from "./Controls";
 
-const btnStyle = "p-2 rounded-xl bg-azure text-white w-[20em]";
+const btnStyle = "p-3 rounded-xl bg-azure text-white w-full flex justify-center items-center";
 
 function MeetingView(props) {
   const [joined, setJoined] = useState(null);
   const [mediaStream, setMediaStream] = useState(null);
-  const [participantCount, setParticipantCount] = useState(0);
 
   const { join, participants, toggleWebcam, toggleMic } = useMeeting({
     onMeetingJoined: () => {
@@ -41,16 +40,7 @@ function MeetingView(props) {
     };
   }, []);
 
-  useEffect(() => {
-    setParticipantCount(participants.size);
-  }, [participants]);
-
   const joinMeeting = () => {
-    if (participantCount >= 2) {
-      alert("The meeting is full. You cannot join.");
-      return; // Prevent further execution
-    }
-
     setJoined("JOINING"); // Update joined state to indicate joining
     join(); // Call the join function from the useMeeting hook
   };
@@ -60,11 +50,12 @@ function MeetingView(props) {
       <div>
         <div className="container">
           <div>
-            <div className="top-[5rem] left-0 absolute p-4 bg-gray-300 w-screen">
-              <h3>Meeting Id: {props.meetingId}</h3>
+            <div className="top-[5rem] left-0 absolute bg-bkg w-screen justify-center items-center">
+              {/* <h3>Meeting Id: {props.meetingId}</h3>
+               <h3>Meeting Id: {props.myId}</h3> */}
             </div>
             {joined && joined === "JOINED" ? (
-              <div className="flex flex-row max-md:flex-col gap-2 justify-center items-center">
+              <div className="flex flex-row gap-2 justify-center items-center">
                 {mediaStream && <div />}
                 {[...participants.keys()].map((participantId) => (
                   <div key={participantId} className="flex flex-row gap-2">
@@ -75,20 +66,27 @@ function MeetingView(props) {
             ) : joined && joined === "JOINING" ? (
               <p>Joining the meeting...</p>
             ) : (
-              <div>
+              <div className="flex flex-col gap-3">
+
+               <p className="w-[480px] text-sm text-center">
+               Just a friendly reminder about your meeting today. Please ensure all necessary things are prepared and accessible. Thank you!
+              </p>
+
                 <div className="flex flex-row gap-2">
                   <ParticipantView />
                 </div>
-                <div className="flex flex-row gap-2">
+
+                <div className="flex flex-row gap-2 w-full">
                   <button onClick={joinMeeting} className={btnStyle}>
                     Join
                   </button>{" "}
                 </div>
+
               </div>
             )}
           </div>
 
-          <div className="bottom-0 left-0 flex items-center justify-center absolute bg-gray-300 w-screen h-16">
+          <div className="bottom-0 left-0 flex items-center justify-center absolute bg-gray-400 bg-opacity-60 w-screen h-24">
             {" "}
             <Controls
               className=""

@@ -1,6 +1,14 @@
+import React from "react";
 import Popup from "reactjs-popup";
 
+//AuthContext provider
+import { useAuthContext } from "../hooks/useAuthContext";
+
+
+
 const profileSettings = () => {
+
+  
   const btnBlue = "bg-azure-500 text-white p-2 w-full rounded-xl";
   const bg =
     "modal h-auto w-[31.25rem] rounded-2xl bg-white flex flex-col justify-center mx-10 p-3";
@@ -10,13 +18,13 @@ const profileSettings = () => {
   return (
     <>
       <Popup
-        trigger={<button className={btnBlue}>Edit Profile</button>}
+        trigger={<button className="bg-azure-500 text-white p-2 w-full rounded-xl">Edit Profile</button>}
         modal
         nested
       >
         {(close) => (
           <div>
-            <div className={bg}>
+            <div className="modal h-auto w-[31.25rem] rounded-2xl bg-bkg flex flex-col justify-center p-3">
               <center>
                 <div>
                   <h2 className="font-bold">Account Profile</h2>
