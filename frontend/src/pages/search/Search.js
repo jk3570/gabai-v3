@@ -69,7 +69,7 @@ function Search() {
           </div>
 
           <p className="text-md text-label text-center">
-            Navigate the legal landscape of workplace discrimination
+            Navigate the legal landscape of laws about workplace discrimination
           </p>
 
           <form onSubmit={handleSearch} className="w-full flex drop-shadow-lg">

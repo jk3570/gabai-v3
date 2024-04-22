@@ -7,8 +7,17 @@ import Feedback from "./Feedback";
 import iconAzure from "../../img/iconAzure.svg";
 import paragonLogoSolid from "../../img/paragonLogoSolid.svg";
 import uccLogo from "../../img/uccLogo.svg";
+import { useNavigate } from 'react-router-dom'
+import React, { useState } from 'react';
+import axios from 'axios';
+
+
+
 
 function Footer() {
+
+   
+
 
     function scrollToElement(id) {
         const element = document.querySelector(id);

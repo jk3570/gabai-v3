@@ -133,5 +133,15 @@ const signupUser = async (req, res) => {
     }
   };  
 
+// Define route to get total count
+const totalUsers = async (req, res) => {
+  try {
+    const totalUsers = await User.countDocuments();
+    res.json({ totalUsers });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
 
-module.exports = { signupUser, loginUser, getAllUsers, updateUser};
+module.exports = { signupUser, loginUser, getAllUsers, updateUser, totalUsers};
