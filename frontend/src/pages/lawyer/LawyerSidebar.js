@@ -37,6 +37,8 @@ const LawyerSidebar = () => {
           {(close) => (
             <div className="fixed top-0 left-0 flex -translate-y-[0.1rem]">
               {/* "fixed z-50 top-0 left-0 flex w-full h-full items-center justify-center" */}
+              
+            {/*  main modal */}  
               <div id="sidebar" 
                 className="modal fixed z-40 h-screen w-[320px] border bg-bkg flex flex-col transition duration-200 shadow-lg">
 

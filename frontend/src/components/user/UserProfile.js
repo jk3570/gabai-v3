@@ -80,10 +80,10 @@ const UserProfile = () => {
                           onClick={() => close()}/>
                       </div>
               
-              <div className="w-full h-full flex flex-col-2 gap-4 text-opacity-60">
+              <div className="w-full h-full flex flex-col md:flex-row gap-4 text-opacity-60 overflow-y-scroll md:overflow-y-clip no-scrollbar">
 
                 {/* General Details */}
-                <div className="w-[30%] h-full flex shadow-xl rounded-xl p-5 text-content ">
+                <div className="w-full md:w-[30%] h-full flex shadow-md rounded-xl p-5 text-content ">
                   <div className="flex flex-col w-full justify-start items-center text-center">
                       <div className="grid items-start mb-7">
                         <div className="w-full flex items-center justify-center mt-3 mb-4">
@@ -92,10 +92,10 @@ const UserProfile = () => {
                         <h5 className="user-name font-medium text-2xl text-label">{firstname} {lastname}</h5>
                         <h6 className="user-email text-sm text-gray-500">{username}</h6>
                         <h6 className="user-email text-sm text-gray-500">{email}</h6>
-                        <button className="text-xs mt-4 text-label text-opacicty-50 underline hover:text-azure">Change password</button>
+                        {/* <button className="text-xs mt-4 text-label text-opacicty-50 underline hover:text-azure">Change password</button> */}
                       </div>
                       <div className="about flex w-full items-start gap-3 text-center">
-                          <div className="flex justify-end mt-10 w-full">
+                          <div className="flex justify-end md:mt-10 w-full">
                             <button id="submit" name="submit" className={button} onClick={handleLogout}>Logout</button>
                         </div>
                       </div>
