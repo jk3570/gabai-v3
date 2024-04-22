@@ -6,6 +6,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { BaseURL } from '../BaseURL'
 
 const RequestForm = ({ summary, onClose }) => {
+        const [formSummary, setFormSummary] = useState(summary);
         const [isChecked, setIsChecked] = useState(false);
         const [firstModalOpen, setFirstModalOpen] = useState(true);
         const [secondModalOpen, setSecondModalOpen] = useState(false);
@@ -37,6 +38,7 @@ const RequestForm = ({ summary, onClose }) => {
     const [address, setAddress] = useState(`${region}, ${province}, ${city}, ${barangay}`);
     const [isLoading, setIsLoading] = useState(false);
 
+
     const input = "flex h-10 w-full rounded-md border border-input bg-gray-400 bg-opacity-20 px-3 py-2 text-xs text-content ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
     const summaryStyle = "flex h-52 w-full rounded-md border bg-gray-400 bg-opacity-20 rounded-md px-3 py-2 text-xs  text-content ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
     const button = "flex h-10 px-3 py-2 bg-azure text-white border border-azure rounded-md justify-center items-center w-full text-sm";
@@ -50,7 +52,7 @@ const RequestForm = ({ summary, onClose }) => {
         e.preventDefault();
         setIsLoading(true);
         try {
-            await axios.post(`${BaseURL}/form/request`, { userid, firstname, lastname, email, address, summary });
+            await axios.post(`${BaseURL}/form/request`, { userid, firstname, lastname, email, address, summary: formSummary });
             setIsLoading(false);
             successNotif();
             /* alert('Request sent successfully'); */
@@ -110,7 +112,7 @@ const RequestForm = ({ summary, onClose }) => {
                         Continue
                     </button> ) : (
                     <div className="flex h-10 px-3 py-2  bg-gray-400 opacity-4  0 text-gray-700 border border-azure rounded-md justify-center items-center w-full text-sm" >
-                        Continue
+                        Continue    
                     </div>
                     )}
         </div>
@@ -138,7 +140,8 @@ const RequestForm = ({ summary, onClose }) => {
                             name="summary"
                             className={summaryStyle}
                             placeholder="Case Summary"
-                            value={summary}
+                            value={formSummary} // Use formSummary here
+                            onChange={e => setFormSummary(e.target.value)} // Update formSummary state on change
                             readOnly
                         ></textarea>
                         <button type="submit" className={button} disabled={isLoading}>
