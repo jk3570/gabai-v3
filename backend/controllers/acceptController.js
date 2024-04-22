@@ -25,10 +25,23 @@ const acceptRequest = async (req, res) => {
 // Function to handle fetching all data
 const getAllRequest = async (req, res) => {
     try {
-        // Fetch all data from the database
-        const allData = await Accept.find();
-        // Send the fetched data as the response
-        res.status(200).json(allData);
+    // Retrieve the userid from the request parameters
+    const { userid } = req.params;
+    const requests = await Accept.find({userid:userid});
+    res.status(200).json(requests);
+  } catch (error) {
+    console.error('Error fetching requests:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+
+// Function to handle fetching all data
+const getAllRequestLawyer = async (req, res) => {
+    try {
+    const { email } = req.params;
+    const requests = await Accept.find({lawyeremail:email});
+    res.status(200).json(requests);
     } catch (error) {
         console.error(error);
         // Send an error response if something goes wrong
@@ -36,4 +49,4 @@ const getAllRequest = async (req, res) => {
     }
 };
 
-module.exports = { acceptRequest, getAllRequest };
+module.exports = { acceptRequest, getAllRequest, getAllRequestLawyer };

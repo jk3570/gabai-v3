@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
-import { BaseURL } from '../BaseURL'
+import { BaseURL } from '../BaseURL';
 
-const useAcceptedRequest = () => {
+const useAcceptedRequest = (userid) => { // Accept userid as a parameter
   const [requestData, setRequestData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(`http://localhost:4000/accept/get-all-requests`); 
+        const response = await fetch(`http://localhost:4000/accept/get-all-requests/${userid}`); // Include userid in the URL
         const data = await response.json();
         setRequestData(data);
         setLoading(false);
@@ -19,7 +19,7 @@ const useAcceptedRequest = () => {
 
     fetchData();
 
-  }, []);
+  }, [userid]); // Add userid to the dependency array to re-fetch data when it changes
 
   return { requestData, loading };
 };

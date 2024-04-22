@@ -1,108 +1,57 @@
-import React, { useState } from 'react';
+// Frontend: LawyerRequestTable.js
+
+import React, { useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
-import Popup from 'reactjs-popup';
-import { IoIosCloseCircleOutline } from 'react-icons/io';
-import { Link } from 'react-router-dom'; 
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; 
 import { useAuthContext } from "../../hooks/useAuthContext";
 import useAcceptedRequest from '../../hooks/useAcceptedRequest';
-import { BaseURL } from '../../BaseURL'
 
-const LawyerRequestTable = () => {
+const LawyerSchedule = () => {
   const navigate = useNavigate();
-  const { user, dispatch } = useAuthContext();
-
-  // const fname = user ? user.firstname : null;
-  // const lname = user ? user.lastname : null;
-  // const lawyername = `${fname} ${lname}`;
-
-  const { requestData, loading } = useAcceptedRequest();
+  const { user } = useAuthContext();
+  const [requestData, setRequestData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
-  const [formData, setFormData] = useState({
-    userid: '',
-    firstname: '',
-    lastname: '',
-    email: '',
-    address: '',
-    summary: '',
-    time: '',
-    date: '',
-    lawyername: '',
-  });
   const itemsPerPage = 10; 
 
-  const input = "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-xs ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
-  const button = "flex h-5 px-1 py-1 bg-azure text-white rounded-md justify-center items-center w-full text-xs";
-  const cancelButton = "flex h-10 px-3 py-2 bg-white text-azure border border-azure rounded-md justify-center items-center w-full text-sm";
-  const label = "block font-normal text-sm";
+  const email = user.email;
+
+  useEffect(() => {
+    async function fetchRequests() {
+      try {
+        const response = await fetch (`http://localhost:4000/accept/get-all-requests-lawyer/${email}`);
+        //  console.log("Response Data:", response.data); 
+        const data = await response.json();
+        //  console.log("User email:", user.email); 
+        setRequestData(data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching requests:', error);
+      }
+    };
+
+    fetchRequests();  
+  }, [email]);
+
+
+
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  const handleSearch = (event) => {
-    setSearchTerm(event.target.value);
-    setCurrentPage(0); 
-  };
-
- const handleSubmit = async (event, user) => {
-  event.preventDefault();
-  try {
-    const formDataFromUser = {
-      userid: user.userid,
-      firstname: user.firstname,
-      lastname: user.lastname,
-      email: user.email,
-      address: user.address,
-      summary: user.summary,
-      time: user.time,
-      date: user.date,
-      lawyername: user.lawyername,
-    };
-    const response = await axios.post(`http://localhost:4000/accept/get-all-request`, formDataFromUser);
-
-    if (response.status === 201) {
-      alert('Schedule created successfully');
-      navigate('/lawyer/lawyer-request');
-    } else {
-      alert('Failed to accept request');
-    }
-  } catch (error) {
-    console.error(error);
-  }
-};
-
+  // Filtered data based on search term
   const filteredData = requestData.filter((user) =>
     Object.values(user).some((field) =>
       field && field.toString().toLowerCase().includes(searchTerm.toLowerCase())
     )
   );
 
-  const tableHeader = "px-2 py-1 border-x-2 border-gray-300 text-nowrap text-start h-8";
-  const tableBody = "px-2 border-x-2 border-gray-300 text-wrap text-start h-8";
-
+  // Pagination logic
   const offset = currentPage * itemsPerPage;
-  const currentPageData = filteredData
-    .slice(offset, offset + itemsPerPage)
-    .map((user) => (
-      <tr key={user.userid} className="border-b border-gray-300">
-        <td className={tableBody}>{user.firstname}</td>
-        <td className={tableBody}>{user.lastname}</td>
-        <td className={tableBody}>{user.email}</td>
-        <td className={tableBody}>{user.address}</td>
-        <td className={tableBody}>{user.summary}</td>
-        <td className={tableBody}>{user.time}</td>
-        <td className={tableBody}>{user.date}</td>
-        <td className={tableBody}>{user.lawyername}</td>
-        <td className={tableBody}>
-          <button className={button}>
-            <Link to={`/lawyer/video-conference/${user.meetingId}`}>Join</Link>
-          </button>
-        </td>
-      </tr>
-    ));
+  const currentPageData = filteredData.slice(offset, offset + itemsPerPage);
 
   const pageCount = Math.ceil(filteredData.length / itemsPerPage);
 
@@ -122,19 +71,44 @@ const LawyerRequestTable = () => {
             <table className="table-auto w-full border-collapse border border-gray-200 text-xs">
               <thead>
                 <tr className="bg-azure-200 bg-opacity-20 ">
-                  <th className={tableHeader}>First name</th>
-                  <th className={tableHeader}>Last name</th>
-                  <th className={tableHeader}>Email</th>
-                  <th className={tableHeader}>Address</th>
-                  <th className={tableHeader}>Case Summary</th>
-                  <th className={tableHeader}>Time</th>
-                  <th className={tableHeader}>Date</th>
-                  <th className={tableHeader}>Lawyer name</th>
-                  <th className={tableHeader}>Action</th>
+                  <th className="px-2 py-1 border-x-2 border-gray-300 text-nowrap text-start h-8">First name</th>
+                  <th className="px-2 py-1 border-x-2 border-gray-300 text-nowrap text-start h-8">Last name</th>
+                  <th className="px-2 py-1 border-x-2 border-gray-300 text-nowrap text-start h-8">Email</th>
+                  <th className="px-2 py-1 border-x-2 border-gray-300 text-nowrap text-start h-8">Address</th>
+                  <th className="px-2 py-1 border-x-2 border-gray-300 text-nowrap text-start h-8">Case Summary</th>
+                  <th className="px-2 py-1 border-x-2 border-gray-300 text-nowrap text-start h-8">Time</th>
+                  <th className="px-2 py-1 border-x-2 border-gray-300 text-nowrap text-start h-8">Date</th>
+                  <th className="px-2 py-1 border-x-2 border-gray-300 text-nowrap text-start h-8">Lawyer name</th>
+                  <th className="px-2 py-1 border-x-2 border-gray-300 text-nowrap text-start h-8">Action</th>
                 </tr>
               </thead>
               <tbody>
-                {currentPageData}
+                {currentPageData.map((user) => (
+                  <tr key={user.userid} className="border-b border-gray-300">
+                    <td className="px-2 border-x-2 border-gray-300 text-wrap text-start h-8">{user.firstname}</td>
+                    <td className="px-2 border-x-2 border-gray-300 text-wrap text-start h-8">{user.lastname}</td>
+                    <td className="px-2 border-x-2 border-gray-300 text-wrap text-start h-8">{user.email}</td>
+                    <td className="px-2 border-x-2 border-gray-300 text-wrap text-start h-8">{user.address}</td>
+                    <td className="px-2 border-x-2 border-gray-300 text-wrap text-start h-8">{user.summary}</td>
+                    <td className="px-2 border-x-2 border-gray-300 text-wrap text-start h-8">{user.time}</td>
+                    <td className="px-2 border-x-2 border-gray-300 text-wrap text-start h-8">{user.date}</td>
+                    <td className="px-2 border-x-2 border-gray-300 text-wrap text-start h-8">{user.lawyername}</td>
+                    <td className="px-2 border-x-2 border-gray-300 text-wrap text-start h-8">
+                      <div className='flex flex-row gap-2'>
+                      
+                                            <button className="flex h-5 px-1 py-1 bg-azure text-white rounded-md justify-center items-center w-full text-xs">
+                        <Link to={`/lawyer/video-conference/${user.meetingId}`}>Join</Link>
+                      </button>
+                      <button className="flex h-5 px-1 py-1 bg-white border border-azure text-azure rounded-md justify-center items-center w-full text-xs">
+                        <Link to={`/lawyer/archive/`}>Done</Link>
+                      </button>
+                      
+                      </div>
+
+
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
@@ -146,7 +120,7 @@ const LawyerRequestTable = () => {
 
         <div className='justify-center flex'>
           <ReactPaginate
-                        className="flex flex-row font-medium text-xs gap-5"
+            className="flex flex-row font-medium text-xs gap-5"
             previousLabel={'<<Previous'}
             nextLabel={'Next>>'}
             breakLabel={'...'}
@@ -163,4 +137,4 @@ const LawyerRequestTable = () => {
   );
 }
 
-export default LawyerRequestTable;
+export default LawyerSchedule;

@@ -3,9 +3,14 @@ import Popup from "reactjs-popup";
 import { Link } from "react-router-dom";
 import { HiOutlineQueueList } from "react-icons/hi2";
 import useAcceptedRequest from '../../hooks/useAcceptedRequest';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 const UserRequests = () => {
-    const { requestData, loading } = useAcceptedRequest();
+    const { user, dispatch } = useAuthContext();
+    const { requestData, loading } = useAcceptedRequest(user.userid); // Pass userid to the hook
+
+    console.log("requestData:", requestData);
+    console.log("loading:", loading);
 
     const button = "flex h-10 w-full px-3 py-2 bg-azure text-white rounded-md justify-center items-center text-sm hover:bg-azure-300";
     const join = "flex h-5 w-full px-2 py-1 bg-azure text-white rounded-md justify-center items-center text-sm hover:bg-azure-300 hover:scale-[1.02] hover:text-base";
@@ -77,32 +82,6 @@ const UserRequests = () => {
                                             </div>
                                         </div>
                                     </div>
-
-
-
-                                        {/* <div>
-                                            <p>Name: {user.firstname} {user.lastname}</p>
-                                            <p>Email: {user.email}</p>
-                                        </div> */}
-
-                                        {/* <div>
-                                            <h3><b>Schedule</b></h3>
-                                                <div className="flex flex-row justify-between">
-                                                <p>Date: {user.date}</p>
-                                                <p>Time: {user.time}</p>
-                                                </div>
-
-                                            <p>Lawyer Name: {user.lawyername}</p>
-                                        </div>
-                                        
-                                        <div className="w-[50%] justify-end">
-                                            <button className={button}>
-                                            <Link to={`/user/video-conference/${user.meetingId}`}>Join</Link>
-                                            </button>
-                                        </div> */}
-                                            
-
-
                                     </div>
                                     ))
                                 )}
