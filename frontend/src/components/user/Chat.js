@@ -18,7 +18,7 @@ const ChatComponent = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [conversationId, setConversationId] = useState('');
   const [conversationTitles, setConversationTitles] = useState([]);
-  const [summary, setSummary] = useState('');
+  const [summary, setSummary] = useState('No relevant summary has been detected in the conversation.');
   const [showRequestForm, setShowRequestForm] = useState(false);
   const [requestMeetingClicked, setRequestMeetingClicked] = useState(false);
   const [showRequestButton, setShowRequestButton] = useState(false);
