@@ -9,7 +9,7 @@ const Section4 = () => {
     max-md:flex-col
     max-md:px-2
     ">
-      <div className="relative z-10 flex flex-col gap-y-2 justify-center items-center">
+      <div className="relative z-10 flex flex-col gap-y-2 justify-center items-center px-5">
       <center>
         <h1 className="text-4xl font-bold my-4">
         Let's stop <span className="text-azure">discrimination!</span>
@@ -17,16 +17,16 @@ const Section4 = () => {
         </center>
         
         <p className="text-1xl text-center
-        max-md:text-center mb-4">
+        max-md:text-center mb-4 px-6 md:px-0">
           GabAi helps you and the many others to shout their voices and be
           heard.
         </p>
        
-        <button className="group z-30 bg-azure rounded-lg hover:scale-[1.1] max-md:w-32 lg:w-60 text-white 
+        <button className="group z-30 bg-azure rounded-lg hover:scale-[1.1] w-full md:w-32 lg:w-60 text-white
         relative after:-z-20 after:absolute after:h-1 after:w-1 after:bg-azure-300 after:left-30 overflow-hidden after:bottom-0 after:translate-y-full after:rounded-md after:hover:scale-[200] after:hover:transition-all after:hover:duration-700 after:transition-all after:duration-300 transition-all duration-600 text-2xl
         "> <div className="flex w-full h-full px-3 py-2"><Signup /></div> 
         </button>
-        <span className="absolute z-10 translate-x-[4rem] translate-y-[5.2rem] w-6 h-6 bg-azure rotate-45"></span>
+        <span className="absolute z-10 translate-x-[4rem] translate-y-[7.8rem] md:translate-y-[5.2rem] w-6 h-6 bg-azure rotate-45"></span>
       </div>
     </div>
   );

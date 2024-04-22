@@ -15,12 +15,12 @@ const Developers = () => {
   const devPos = "text-center text-sm max-md:text-center";
   return (
     <>
-      <div className="relative z-10 mt-20 mb-[9rem] flex flex-col gap-y-2 justify-center items-center text-center ">
+      <div className="relative z-10 mt-20  flex flex-col gap-y-2 justify-center items-center text-center ">
         
-            <div class="absolute z-0 inset-0 w-full px-[8rem] pb-[8rem]">
+            <div class="absolute z-0 inset-0 flex justify-center items-center md:pt-20 w-full h-full  px-0 pb-[8rem]">
               <img 
                 id="paragonLogo" 
-                className="object-cover opacity-20" 
+                className="object-cover opacity-20 flex justify-center items-center w-[260%] max-md:h-full md:w-[65%]" 
                 src={paragon} alt="Paragon Logo">
               </img>
             </div>

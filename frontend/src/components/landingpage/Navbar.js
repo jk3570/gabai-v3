@@ -12,6 +12,9 @@ import iconWhite from "../../img/iconWhite.svg";
 import { BsMoon, BsSun  } from "react-icons/bs";
 import { FaSearch } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { IoCloseSharp } from "react-icons/io5";
+import BurgerMenu from "./BurgerMenu";
 
 // Components
 import Login from "../Login";
@@ -78,6 +81,11 @@ function Navbar() {
   }
 
   const [navbarHeight, setNavbarHeight] = useState("py-10"); // Initial navbar padding
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -104,11 +112,20 @@ function Navbar() {
     <>
       {/* Navigation Bar  */}
       <nav
-        className={`fixed top-0 z-50 bg-bkg text-content h-[3.875rem] w-full font-bold border-b-2 border-azure-500 transition-all duration-300 ${navbarHeight}`}
+        className={`fixed top-0 z-50 bg-bkg text-content h-[3.875rem] w-screen md:w-full font-bold border-b-2 border-azure-500 transition-all duration-300 md:${navbarHeight}`}
       >
-        <div className="w-full max-w-4xl flex justify-between items-center">
+
+      {/* Sidebar of Burger */}
+      <div className={`fixed z-40 top-0 left-0 flex w-${sidebarOpen ? 'full' : '0'} h-${sidebarOpen ? 'screen' : '0'} transition-all  -translate-y-[0.1rem]`} onClick={toggleSidebar}>
+        <div 
+          className={`transition-all overflow-hidden w-${sidebarOpen ? '64' : '0'} transition-all h-full bg-bkg z-50 shadow-lg left-0 top-0`} onClick={toggleSidebar}>
+        <BurgerMenu />
+        </div>         
+      </div>
+    
+        <div className="w-full max-w-4xl flex justify-between items-center px-3">
           {/* Brand Logo */}
-          <Link to="/" onClick={() => scrollToElement("#home")}>
+          <Link to="/" onClick={() => scrollToElement("#home")} className="hidden md:block">
             <button
               class="group relative z-10 w-12 hover:w-44 h-12 hover:bg-azure-500 bg-azure-500 rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl text-neutral-50 font-bold flex justify-start gap-1 items-center pl-0.5
                 duration-700 before:duration-700 before:hover:500
@@ -122,12 +139,19 @@ function Navbar() {
             </button>
           </Link>
 
+          {/* Burger Menu */}
+          <div className="flex z-50 text-label items-center justify-center text-2xl hover:scale-[1.1] transition-all duration-200 ease-in-out md:hidden" onClick={toggleSidebar}>
+          {sidebarOpen ? 
+          <IoCloseSharp className="text-3xl"/> : 
+          <GiHamburgerMenu/>}
+          </div>
+
           {/* Search Bar */}
-          <div className="flex flex-row items-center text-md gap-x-5 text-label">
+          <div className="flex flex-row items-center text-md gap-x-2 md:gap-x-5 text-label px-1">
             <div className="nav mr-10">
 
               {/* Scroll navigate */}
-              <nav className="flex flex-row items-center gap-x-10 list-none text-label">
+              <nav className="flex-row items-center gap-x-10 list-none text-label hidden md:flex">
                 <li className="hover:scale-[1.1] transition-all duration-100 ease-in-out">
                   <Link to="/#home" onClick={() => scrollToElement("#home")}>
                     Home
@@ -161,19 +185,19 @@ function Navbar() {
                 </li>
               </nav>
             </div>
-            
-            {/* Search Icon */}
-            <Link to="/search">
-              <FaSearch className="text-2xl hover:scale-[1.1] transition-all duration-200 ease-in-out" />
-            </Link>
 
             {/* Toggle night mode */}
             <button onClick={toggleTheme} className="text-2xl hover:scale-[1.1] transition-all duration-200 ease-in-out p-1">
               {theme === 'light' ? <BsMoon /> : <BsSun />}
             </button>
 
+            {/* Search Icon */}
+            <Link to="/search">
+              <FaSearch className="text-2xl hover:scale-[1.1] transition-all duration-200 ease-in-out" />
+            </Link>
+
             {/* Login Btn */}
-            <Link to="/#login" className="rounded-xl bg-azure-500 p-4 py-1.5 text-white hover:scale-[1.1] transition-all duration-100 ease-in-out relative z-10 after:absolute after:-z-20  after:h-1 after:w-1 after:bg-azure-300 after:left-5 overflow-hidden after:bottom-0 after:translate-y-full after:rounded-md after:hover:scale-[50] after:hover:transition-all after:hover:duration-650 after:transition-all after:duration-300">
+            <Link to="/#login" className="rounded-xl bg-azure-500 p-4 py-1.5 text-white hover:scale-[1.1] transition-all duration-100 ease-in-out relative z-10 after:absolute after:-z-20  after:h-1 after:w-1 after:bg-azure-300 after:left-5 overflow-hidden after:bottom-0 after:translate-y-full after:rounded-md after:hover:scale-[50] after:hover:transition-all after:hover:duration-650 after:transition-all after:duration-300 hidden md:block">
               <Login />
             </Link>
 

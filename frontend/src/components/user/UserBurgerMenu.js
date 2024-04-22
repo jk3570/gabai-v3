@@ -1,42 +1,44 @@
 import React from "react";
-import Popup from "reactjs-popup";
 import { Link } from "react-router-dom";
+import { FaSearch } from "react-icons/fa";
 import { HiOutlineQueueList } from "react-icons/hi2";
-import useAcceptedRequest from '../../hooks/useAcceptedRequest';
-import { useAuthContext } from '../../hooks/useAuthContext';
+import useAcceptedRequest from "../../hooks/useAcceptedRequest";
 
-const UserRequests = () => {
-    const { user, dispatch } = useAuthContext();
-    const { requestData, loading } = useAcceptedRequest(user.userid); // Pass userid to the hook
-
-    console.log("requestData:", requestData);
-    console.log("loading:", loading);
-
+const UserBurgerMenu = () => {
+    
+    const { requestData, loading } = useAcceptedRequest();
+    
     const button = "flex h-10 w-full px-3 py-2 bg-azure text-white rounded-md justify-center items-center text-sm hover:bg-azure-300";
     const join = "flex h-5 w-full px-2 py-1 bg-azure text-white rounded-md justify-center items-center text-sm hover:bg-azure-300 hover:scale-[1.02] hover:text-base";
 
-    return (
-        <>
-            <Popup
-                trigger={
-                    <button className="flex items-center justify-center">
-                        <HiOutlineQueueList className="text-3xl hover:scale-[1.1] transition-all duration-200 ease-in-out"/>
-                    </button>
-                }
-                modal
-                nested
-            >
-                {(close) => (
-                    <div className="fixed z-40 top-0 right-0 flex translate-y-[3.3rem] translate-x-[-4rem]">
-                    <div className="modal relative max-h-96 w-96 rounded-2xl bg-bkg flex flex-col shadow-lg border border-gray-400 border-opacity-20">
 
-                    <div className="relative z-50 bg-bkg w-full p-3 gap-3 border-b border-opacity-20 border-gray-400">
+    const navList = "p-5 py-2 w-full hover:bg-azure-50 hover:bg-opacity-20"
+
+    return( 
+        <div  id="sidebar" 
+              className="relative z-40 h-screen border bg-bkg text-content flex flex-col transition duration-200 shadow-lg">
+            <div className="text-content text-2xl">
+    
+            {/* Top area */}
+              <div className="relative z-50 flex justify-between left-0 h-[3.875rem] w-full border-b-2 border-white bg-azure-50 bg-opacity-10 p-[0.9rem] pl-1">
+              <div></div>
+              {/* Search Icon */}
+              <Link to="/search">
+                <div className="flex items-center justify-center p-1 text-label">
+                  <FaSearch className="text-2xl hover:scale-[1.1] transition-all duration-200 ease-in-out" />
+                </div>
+              </Link>
+
+              </div>
+  
+              <div className="flex flex-col justify-start h-full w-full">
+              <div className="relative z-50 bg-bkg w-full p-3 gap-3 border-b border-opacity-20 border-gray-400">
                         <div className="text-md font-medium text-label">
                             Your Requests
                         </div>
                     </div>
 
-                    <div className="relative max-h-96 w-96 rounded-b-2xl bg-bkg flex flex-col overflow-clip">
+                    <div className="relative h-[33rem] w-full bg-bkg flex flex-col overflow-clip">
                             <div className="relative flex flex-col gap-5 p-3 overflow-y-scroll border-r border-gray-400 border-opacity-20">
                                 {loading ? (
                                     <div>Loading...</div>
@@ -82,17 +84,43 @@ const UserRequests = () => {
                                             </div>
                                         </div>
                                     </div>
+
+
+
+                                        {/* <div>
+                                            <p>Name: {user.firstname} {user.lastname}</p>
+                                            <p>Email: {user.email}</p>
+                                        </div> */}
+
+                                        {/* <div>
+                                            <h3><b>Schedule</b></h3>
+                                                <div className="flex flex-row justify-between">
+                                                <p>Date: {user.date}</p>
+                                                <p>Time: {user.time}</p>
+                                                </div>
+
+                                            <p>Lawyer Name: {user.lawyername}</p>
+                                        </div>
+                                        
+                                        <div className="w-[50%] justify-end">
+                                            <button className={button}>
+                                            <Link to={`/user/video-conference/${user.meetingId}`}>Join</Link>
+                                            </button>
+                                        </div> */}
+                                            
+
+
                                     </div>
                                     ))
                                 )}
                             </div>
                     </div>
-                        </div>
-                    </div>
-                )}
-            </Popup>
-        </>
+              </div>
+
+            </div>
+          </div>
     );
 };
 
-export default UserRequests;
+export default UserBurgerMenu;
+

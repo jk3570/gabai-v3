@@ -16,12 +16,12 @@ function Section2() {
         <img
           src={sec2}
           alt="law "
-          className="flex-shrink-0 resize-none w-[15rem] h-[15rem] rounded-full my-8"
+          className="flex-shrink-0 resize-none w-[10rem] h-[10rem] md:w-[15rem] md:h-[15rem] rounded-full my-8 mb-0 md:mb-8"
         />
       </div>
       <div className="px-5 max-md:hidden">{/* Just to give them space*/}</div>
       <div className="p-0">
-        <h1 className=" text-4xl font-bold mb-4 max-md:text-center">
+        <h1 className=" text-4xl font-bold my-4 max-md:text-center">
           About 
           <span className="text-white pl-2 pr-2.5 text-3xl font-medium bg-azure ml-2 rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl">
             GabAi</span>
@@ -29,7 +29,7 @@ function Section2() {
         
         <p
           className="text-justify text-1xl
-        max-md:text-center"
+        max-md:text-center mb-6 px-6 md:px-0"
         >
           Welcome to GabAi, your go-to web application for comprehensive legal
           guides against workplace discrimination in the Philippines. Empower
