@@ -6,6 +6,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom'; 
 import { useAuthContext } from "../../hooks/useAuthContext";
 import useAcceptedRequest from '../../hooks/useAcceptedRequest';
+import { BaseURL } from "../../BaseURL"
 
 const LawyerSchedule = () => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const LawyerSchedule = () => {
   useEffect(() => {
     async function fetchRequests() {
       try {
-        const response = await fetch (`http://localhost:4000/accept/get-all-requests-lawyer/${email}`);
+        const response = await fetch (`${BaseURL}/accept/get-all-requests-lawyer/${email}`);
         //  console.log("Response Data:", response.data); 
         const data = await response.json();
         //  console.log("User email:", user.email); 

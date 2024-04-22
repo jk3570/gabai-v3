@@ -26,5 +26,15 @@ const getAllFeedbacks = async (req, res) => {
   }
 };
 
+const totalFeedbacks = async (req, res) => {
+  try {
+    const totalFeedbacks = await Feedback.countDocuments();
+    res.json({ totalFeedbacks });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
 
-module.exports = { createFeedback, getAllFeedbacks };
+
+module.exports = { createFeedback, getAllFeedbacks, totalFeedbacks };
