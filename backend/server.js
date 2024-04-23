@@ -12,6 +12,7 @@ const formRoutes = require('./routes/request');
 const acceptRoutes = require('./routes/accept');
 const verifyRoutes = require('./routes/verify');
 const feedbackRoutes = require('./routes/feedback');
+const resetpasswordRoutes = require('./routes/pass-reset');
 
 const OpenAI = require('openai');
 
@@ -36,6 +37,9 @@ app.use('/form', formRoutes);
 app.use('/user', userRoutes);
 app.use('/account', verifyRoutes);
 app.use('/feedback', feedbackRoutes);
+app.use('/reset', resetpasswordRoutes);
+
+
   
 
 // Wildcard route to serve the index.html file for all routes

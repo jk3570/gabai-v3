@@ -5,7 +5,7 @@ const { createFeedback, getAllFeedbacks, totalFeedbacks} = require("../controlle
 
 const router = express.Router();
 
-//get all request for user
+//get all counts
 router.get('/get-all-feedbacks', getAllFeedbacks);
 
 router.get('/total', totalFeedbacks);

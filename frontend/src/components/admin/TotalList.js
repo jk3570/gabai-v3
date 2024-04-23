@@ -10,9 +10,9 @@ const Counter = () => {
 
   const [totalUsers, setTotalUsers] = useState(0);
   const [totalFeedbacks, setTotalFeedbacks] = useState(0);
-  // const [totalCases, setTotalCases] = useState(0);
-  const [totalCases, setTotalCases] = useState("1");
+  const [totalCases, setTotalCases] = useState(0);
 
+//total users
   useEffect(() => {
     axios.get(`${BaseURL}/user/total`)
       .then(response => {
@@ -23,16 +23,7 @@ const Counter = () => {
       });
   }, []);
 
-  useEffect(() => {
-    axios.get(`${BaseURL}/accept/total`)
-      .then(response => {
-        setTotalCases(response.data.totalCases);
-      })
-      .catch(error => {
-        console.error('Error fetching total count:', error);
-      });
-  }, []);
-
+//total feedbacks
   useEffect(() => {
     axios.get(`${BaseURL}/feedback/total`)
       .then(response => {
@@ -43,15 +34,17 @@ const Counter = () => {
       });
   }, []);
 
-    useEffect(() => {
-    axios.get(`${BaseURL}/accept/totalFeedbacks`)
+//total cases
+  useEffect(() => {
+    axios.get(`${BaseURL}/form/total`)
       .then(response => {
-        setTotalFeedbacks(response.data.totalFeedbacks);
+        setTotalCases(response.data.totalCases);
       })
       .catch(error => {
         console.error('Error fetching total count:', error);
       });
   }, []);
+
 
   const totalNoStyle =
     "flex flex-row bg-gray-400 bg-opacity-30 rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl h-auto w-[35%] text-1xl p-5 justify-between items-center border-azure-500";

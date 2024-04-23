@@ -81,30 +81,7 @@ const UserProfile = () => {
                       </div>
               
               <div className="w-full h-full flex flex-col md:flex-row gap-4 text-opacity-60 overflow-y-scroll md:overflow-y-clip no-scrollbar">
-
-                {/* General Details */}
-                <div className="w-full md:w-[30%] h-full flex shadow-md rounded-xl p-5 text-content ">
-                  <div className="flex flex-col w-full justify-start items-center text-center">
-                      <div className="grid items-start mb-7">
-                        <div className="w-full flex items-center justify-center mt-3 mb-4">
-                          <img className="rounded-full overflow-clip w-[7rem] h-[7rem] shadow-md" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin"/>
-                        </div>
-                        <h5 className="user-name font-medium text-2xl text-label">{firstname} {lastname}</h5>
-                        <h6 className="user-email text-sm text-gray-500">{username}</h6>
-                        <h6 className="user-email text-sm text-gray-500">{email}</h6>
-                        {/* <button className="text-xs mt-4 text-label text-opacicty-50 underline hover:text-azure">Change password</button> */}
-                      </div>
-                      <div className="about flex w-full items-start gap-3 text-center">
-                          <div className="flex justify-end md:mt-10 w-full">
-                            <button id="submit" name="submit" className={button} onClick={handleLogout}>Logout</button>
-                        </div>
-                      </div>
-                  </div>
-
-                </div>
-                
-
-                {/* More Details */}
+                {/* Details */}
                 <div className="w-full h-full rounded-xl p-5 text-content ">
                 <div className="card-body mt-8">
 
@@ -113,6 +90,14 @@ const UserProfile = () => {
                             <h6 className="mb-2 text-primary text-label font-medium text-1xl">Personal Details</h6>
                             <div className="grid grid-cols-1 gap-4">
                               <div className="grid grid-cols-2 gap-4">
+                                 <div>
+                                    <label className={label}>Username</label>
+                                    <input type="text" id="firstName" placeholder="Username" className={input} onKeyDown={handleKeyDown} value={username}/>
+                                </div>
+                                 <div>
+                                    <label className={label}>Email</label>
+                                    <input type="text" id="firstName" placeholder="Email" className={input} onKeyDown={handleKeyDown} value={email}/>
+                                </div>
                                 <div>
                                     <label className={label}>First Name</label>
                                     <input type="text" id="firstName" placeholder="First Name" className={input} onKeyDown={handleKeyDown} value={firstname}/>
@@ -144,7 +129,7 @@ const UserProfile = () => {
                                 </div>
                                 <div>
                                     <label className={label}>Birthdate</label>
-                                    <input type="date" id="birthDate" placeholder="DD/MM/YY" className={input} onKeyDown={handleKeyDown}
+                                    <input type="text" id="birthDate" placeholder="DD/MM/YY" className={input} onKeyDown={handleKeyDown}
                                     value={birthdate}/>
                                 </div>
                               </div>
@@ -182,8 +167,7 @@ const UserProfile = () => {
 
                     <div className="flex justify-end mt-10">
                       <div className="flex w-[70%] gap-2">
-                        <button id="submit" name="submit" className={button} >Cancel</button>
-                        <button id="submit" name="submit" className={button}>Update</button>
+                         <button id="submit" name="submit" className={button} onClick={handleLogout}>Logout</button>
                       </div>
                     </div>
 

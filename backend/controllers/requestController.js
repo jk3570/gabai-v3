@@ -1,8 +1,7 @@
 const { validationResult } = require('express-validator');
-
 const Request = require('../models/requestModel');
 
-// insert request
+// Insert request
 const requestForm = async (req, res) => {
     // Check for validation errors
     const errors = validationResult(req);
@@ -13,7 +12,9 @@ const requestForm = async (req, res) => {
     console.log("Request Body:", req.body);
 
     try {
-        const newData = new Request(req.body);
+        // Extract the fields you want to save
+        const { field1, field2, field3 } = req.body;
+        const newData = new Request({ field1, field2, field3 });
         await newData.save();
         res.status(201).json({ message: 'Data inserted successfully' });
     } catch (error) {
@@ -22,17 +23,26 @@ const requestForm = async (req, res) => {
     }
 };
 
-// get all the request
+// Get all requests
 const getAllRequest = async (req, res) => {
-  try {
-    const users = await Request.find();
-    res.status(200).json(users);
-  } catch (error) {
-    console.error('Error fetching request:', error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
+    try {
+        const requests = await Request.find();
+        res.status(200).json(requests);
+    } catch (error) {
+        console.error('Error fetching requests:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 };
 
+// Get total number of cases
+const totalCases = async (req, res) => {
+    try {
+        const totalCases = await Request.countDocuments();
+        res.json({ totalCases });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Server error' });
+    }
+};
 
-
-module.exports = { requestForm, getAllRequest };
+module.exports = { requestForm, getAllRequest, totalCases };
