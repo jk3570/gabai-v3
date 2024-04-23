@@ -126,9 +126,9 @@ function Footer() {
                         <b className={title}>Legal</b>
                         <br />
                         <ul>
-                            <li class={content}><a href="#" className="hover:underline">Privacy</a></li>
-                            <li class={content}><a href="#" className="hover:underline">Terms</a></li>
-                            <li class={content}><a href="#" className="hover:underline">User Agreement</a></li>
+                            <li class={content}><Link to="/privacy-policy" className="hover:underline">Privacy</Link></li>
+                            <li class={content}><Link to="/terms-and-condition" className="hover:underline">Terms</Link></li>
+                            <li class={content}><Link to="#" className="hover:underline">User Agreement</Link></li>
                         </ul>
                         </div>
 

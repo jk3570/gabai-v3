@@ -68,9 +68,7 @@ useEffect(() => {
 
   return (
     <div className="bg-bkg text-content overflow-x-hidden">
-      <Helmet>
-        <title>Home | GabAi</title>
-      </Helmet>
+       
 
       <div id="scrollFadeDiv" className="fixed z-40 bottom-10 left-1/2 transform -translate-x-1/20 animate-bounce duration-10 opacity-100 transition-opacity">
         <svg stroke="#336699" fill="#336699" strokeWidth="0" viewBox="0 0 1024 1024" height="30" width="30" xmlns="http://www.w3.org/2000/svg">

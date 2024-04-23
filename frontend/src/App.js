@@ -18,7 +18,6 @@ import LawyerSidebar from "./pages/lawyer/LawyerSidebar";
 
 // Components routes
 import Footer from "./components/landingpage/Footer";
-import Terms from "./components/Terms";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import ResetPassword from  "./pages/PasswordReset/ResetPassword";
@@ -37,6 +36,10 @@ import LoginRoutes from "./pages/LoginRoutes";
 // Search routes
 import SearchResults from "./pages/search/SearchResults";
 import Search from "./pages/search/Search";
+
+// Pages routes
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsAndCondition from "./pages/TermsAndCondition";
 
 // User route
 import UserLandingPage from "./pages/user/UserLanding";
@@ -106,7 +109,6 @@ const App = () => {
           {/* Lawyers and admins can't access */}
           <Route path="/gab/chat" element={<ChatComponent />} />
           <Route path="/gab/chat/:id" element={<ChatComponent />} />
-          <Route path="/terms" element={<Terms />} />
 
           {/* User route */}
           {user && user.role === 'user' ? <Route path="/user" element={<UserLandingPage />} /> : null}
@@ -136,7 +138,9 @@ const App = () => {
           {/* 404 route */}
           {/* <Route path="*" element={<PageNotFound />} /> */}
 
-          {user ? null : <Route path="/Footer" element={<Footer />} />}
+          {user ? null : <Route path="/footer" element={<Footer />} />}
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-and-condition" element={<TermsAndCondition />} />
       </Routes>
 
       
