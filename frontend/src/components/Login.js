@@ -122,7 +122,7 @@ const Login = ({ setLoginSuccess }) => {
             </Link>
             <div className="w-full h-full flex flex-col-1 justify-center px-4">
               <div className="w-full h-full grid grid-cols-1 gap-4">
-                <div className="flex flex-col items-center justify-center">
+                <div className="flex flex-col items-center justify-center text-center">
                   <h1 className="font-bold text-3xl m-0">
                     Log in to <span className="text-azure">GabAi</span>
                   </h1>
