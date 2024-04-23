@@ -124,6 +124,7 @@ const LawyerRequestTable = () => {
 
   const tableHeader = "px-2 py-1 border-x-2 border-gray-300 text-nowrap text-start h-8";
   const tableBody = "px-2 border-x-2 border-gray-300 text-wrap text-start h-8";
+  const tableBodyLong = "px-2 border-x-2 border-gray-300 text-wrap text-start h-8 overflow-y-scroll";
 
   const offset = currentPage * itemsPerPage;
   const currentPageData = filteredData
