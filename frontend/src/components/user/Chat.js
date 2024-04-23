@@ -175,8 +175,8 @@ const ChatComponent = () => {
                 </>
               )}
             </div>
-           
             {showRequestForm && <RequestForm summary={summary} onClose={() => { setShowRequestForm(false); setRequestMeetingClicked(false); }} />}
+            
           </div>
         </div>
       </div>

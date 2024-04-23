@@ -6,29 +6,11 @@ import toast, { Toaster } from 'react-hot-toast';
 import { BaseURL } from '../BaseURL'
 
 const RequestForm = ({ summary, onClose }) => {
+        const [formSummary, setFormSummary] = useState(summary);
+        const [isChecked, setIsChecked] = useState(false);
         const [firstModalOpen, setFirstModalOpen] = useState(true);
         const [secondModalOpen, setSecondModalOpen] = useState(false);
         const contentRef = useRef(null);
-
-  useEffect(() => {
-    const contentDiv = contentRef.current;
-    const handleScroll = () => {
-      if (
-        contentDiv.scrollTop + contentDiv.clientHeight >=
-        contentDiv.scrollHeight
-      ) {
-        setIsChecked(true);
-      } else {
-        setIsChecked(false);
-      }
-    };
-
-    contentDiv.addEventListener('scroll', handleScroll);
-
-    return () => {
-      contentDiv.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
 
         const openSecondModal = () => {
           setFirstModalOpen(false);
@@ -41,11 +23,8 @@ const RequestForm = ({ summary, onClose }) => {
         };
 
         const handleCheckboxChange = () => {
-            // Do nothing if the checkbox is already checked
-            if (!isChecked) {
-              setIsChecked(true);
-            }
-          };
+            setIsChecked(!isChecked);
+        };
           
     const { user } = useAuthContext();
     const [userid, setUserId] = useState(user ? user.userid : '');
@@ -59,44 +38,21 @@ const RequestForm = ({ summary, onClose }) => {
     const [address, setAddress] = useState(`${region}, ${province}, ${city}, ${barangay}`);
     const [isLoading, setIsLoading] = useState(false);
 
+
     const input = "flex h-10 w-full rounded-md border border-input bg-gray-400 bg-opacity-20 px-3 py-2 text-xs text-content ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
     const summaryStyle = "flex h-52 w-full rounded-md border bg-gray-400 bg-opacity-20 rounded-md px-3 py-2 text-xs  text-content ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
-    const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-center items-center w-full text-sm";
+    const button = "flex h-10 px-3 py-2 bg-azure text-white border border-azure rounded-md justify-center items-center w-full text-sm";
     const cancelButton = "flex h-10 px-3 py-2  bg-gray-400 bg-opacity-20 text-label border border-azure rounded-md justify-center items-center w-full text-sm";
     const label = "block font-normal text-sm";
 
     const successNotif = () => toast.success('Request sent successfully!');
     const failNotif = () => toast.error('Failed to insert data');
 
-    const [isChecked, setIsChecked] = useState(true);
-        
-    useEffect(() => {
-        // Function to check if the checkbox is checked
-        const handleCheckboxChange = () => {
-            const checkbox = document.getElementById('agree-checkbox');
-            if (checkbox.checked) {
-                setIsChecked(true);
-            } else {
-                setIsChecked(true);
-            }
-        };
-    
-        // Attach event listener to the checkbox
-        const checkbox = document.getElementById('agree-checkbox');
-        checkbox.addEventListener('change', handleCheckboxChange);
-    
-        // Clean up function to remove event listener
-        return () => {
-            checkbox.removeEventListener('change', handleCheckboxChange);
-        };
-    }, []); // Empty dependency array to run effect only once
-
-
     const handleSubmit = async e => {
         e.preventDefault();
         setIsLoading(true);
         try {
-            await axios.post(`${BaseURL}/form/request`, { userid, firstname, lastname, email, address, summary });
+            await axios.post(`${BaseURL}/form/request`, { userid, firstname, lastname, email, address, summary: formSummary });
             setIsLoading(false);
             successNotif();
             /* alert('Request sent successfully'); */
@@ -116,73 +72,36 @@ const RequestForm = ({ summary, onClose }) => {
 
         {/* First Modal */}
         {firstModalOpen && (
-        <div id="privacy-notice-modal" className="modal absolute z-50 h-[80%] w-[70%] sm:w-[55%] md:w-[50%] lg:w-[45%] xl:w-[35%] rounded-2xl bg-bkg text-content flex flex-col justify-center items-center p-5 gap-3"> 
-        <h1 className="my-0">Privacy Notice</h1>
-
-        <div ref={contentRef} className="h-full overflow-y-scroll">
-            <div id="privacy-notice" className=" text-xs leading-normal">
-            <h2 className="font-bold">Submission of Request Form for Lawyer Meeting</h2>
-            <p>We respect your privacy and are committed to protecting your personal information. This Privacy Notice outlines the information we collect when you submit a request form for a lawyer meeting and how we use, disclose, and protect that information.</p>
-
-            <h3>1. Information We Collect:</h3>
-            <p>When you submit a request form for a lawyer meeting, we may collect the following personal information:
-                <ul>
-                    <li>Your name</li>
-                    <li>Contact information (email address, phone number)</li>
+        <div id="privacy-notice-modal" className="modal absolute z-50 h-[80%] w-[70%] sm:w-[55%] md:w-[50%] lg:w-[45%] xl:w-[35%] rounded-2xl bg-bkg text-content flex flex-col justify-center items-center p-5 gap-2"> 
+        <h1 className="my-0 text-2xl font-bold">Privacy Notice</h1>
+        <div className="flex w-full border-b-2 border-gray"></div>
+        <div ref={contentRef} className="h-full overflow-y-scroll no-scrollbar">
+            <div id="privacy-notice" className=" text-sm leading-normal flex flex-col gap-2 text-justify">
+                <p className="mb-4"><div className="inline-block w-8"></div>We take the privacy of our users seriously and are committed to protecting your personal information. This privacy notice outlines how GabAi collects, uses, and safeguards your data in full compliance with the <i>Data Privacy Act of 2012</i> and <i>National Privacy Commission.</i> By using GabAi, you consent to the practices described below.</p>
+                <div>
+                    <h2 className="font-bold">Personal Information We Collect and How We Use It</h2>
+                <p><div className="inline-block w-8"></div>GabAi collects the following types of personal information, and each type is used for specific purposes:</p>
+                </div>
+                
+                <ul className="flex flex-col gap-2">
+                    <li><div className="inline-block w-8"></div><strong>Name:</strong> We collect your name for identity verification and to create a personalized experience. Your name helps us distinguish you from other individuals and ensures that our legal services are provided to the correct person. It also allows us to address you directly, fostering a sense of connection and enhancing your experience.</li>
+                    <li><div className="inline-block w-8"></div><strong>Address:</strong> We collect your address for jurisdiction verification. Understanding your geographical location is essential as it helps our lawyers identify and adhere to the relevant laws and regulations governing your specific location. This information can be crucial in addressing jurisdictional issues and providing you with accurate legal advice.</li>
+                    <li><div className="inline-block w-8"></div><strong>Email:</strong> Your email address is our primary means of communication. We use it to send notifications, appointment reminders, follow-up messages, and any relevant documentation or agreements. Email communication ensures timely updates and efficient coordination before, during, and after your legal consultations.</li>
+                    <li><div className="inline-block w-8"></div><strong>Case Summary:</strong> Providing a summary of your legal case helps our lawyers prepare for consultations and offer targeted legal advice. It enables us to conduct preliminary research, address your specific concerns, and ensure an efficient and effective consultation process. Additionally, your case summary allows us to identify any potential conflicts of interest and handle your confidential information with the utmost integrity, in line with our confidentiality obligations.</li>
                 </ul>
-            </p>
-
-            <h3>2. How We Use Your Information:</h3>
-            <p>We may use the information collected for the following purposes:
-                <ul>
-                    <li>To schedule and confirm your lawyer meeting appointment</li>
-                    <li>To communicate with you regarding your legal matter or inquiry</li>
-                    <li>To provide you with legal services, if applicable</li>
-                </ul>
-            </p>
-
-            <h3>3. Disclosure of Your Information:</h3>
-            <p>We may disclose your personal information to:
-                <ul>
-                    <li>Lawyers and legal professionals within our firm involved in handling your request</li>
-                    <li>Third-party service providers who assist us in scheduling appointments or providing legal services</li>
-                </ul>
-            </p>
-
-            <h3>4. Your Consent:</h3>
-            <p>By submitting the request form for a lawyer meeting, you consent to the collection, use, and disclosure of your personal information as described in this Privacy Notice.</p>
-
-            <h3>5. Data Security:</h3>
-            <p>We take reasonable steps to protect your personal information from unauthorized access, use, or disclosure. However, please be aware that no method of transmission over the internet or electronic storage is 100% secure.</p>
-
-            <h3>6. Retention of Your Information:</h3>
-            <p>We will retain your personal information for as long as necessary to fulfill the purposes outlined in this Privacy Notice or as required by law.</p>
-
-            <h3>7. Your Rights:</h3>
-            <p>You have the right to:
-                <ul>
-                    <li>Access your personal information</li>
-                    <li>Correct any inaccuracies in your personal information</li>
-                    <li>Request the deletion of your personal information, subject to certain exceptions</li>
-                </ul>
-            </p>
-
-            <h3>8. Contact Us:</h3>
-            <p>If you have any questions or concerns about this Privacy Notice or our privacy practices, please contact us at [insert contact information].</p>
-
-            <p>By submitting the request form for a lawyer meeting, you acknowledge that you have read and understood this Privacy Notice and agree to the collection, use, and disclosure of your personal information as described herein.</p>
-
-            <p>This Privacy Notice may be updated from time to time. We encourage you to review it periodically for any changes.</p>
-
-            <p>Last updated: April 22, 2024</p>
+                
+                <div>   
+                <p><div className="inline-block w-8"></div>By checking the box and using GabAi, you consent to the collection, processing, and storage of your personal information as described in this privacy notice. Your data will be handled securely and confidentially, adhering to the Data Privacy Act of 2012 and the guidelines set by the National Privacy Commission.</p>
+                </div>
             </div>
+
         </div>
 
         <div class="flex items-center mt-6 text-content">
             <input  type="checkbox" 
                     id="agree-checkbox" 
                     class="h-4 w-4 focus:ring-azure-500 border-gray-300 rounded-full" 
-                    disabled={!isChecked}
+                    /* disabled={!isChecked} */
                     checked={isChecked}
                     onChange={handleCheckboxChange}
                     />
@@ -193,7 +112,7 @@ const RequestForm = ({ summary, onClose }) => {
                         Continue
                     </button> ) : (
                     <div className="flex h-10 px-3 py-2  bg-gray-400 opacity-4  0 text-gray-700 border border-azure rounded-md justify-center items-center w-full text-sm" >
-                        Continue
+                        Continue    
                     </div>
                     )}
         </div>
@@ -221,7 +140,8 @@ const RequestForm = ({ summary, onClose }) => {
                             name="summary"
                             className={summaryStyle}
                             placeholder="Case Summary"
-                            value={summary}
+                            value={formSummary} // Use formSummary here
+                            onChange={e => setFormSummary(e.target.value)} // Update formSummary state on change
                             readOnly
                         ></textarea>
                         <button type="submit" className={button} disabled={isLoading}>
