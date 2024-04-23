@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
 const emailjs = require("@emailjs/nodejs");
-const { baseURL } = require("./baseURL");
+const { baseURL } = require("./routes/baseURL");
+const router = express.Router(); // Create a router object
 
 // import routes
 const userRoutes = require('./routes/user');
@@ -31,15 +32,6 @@ app.use(express.json());
 
 // Serve static files
 app.use(express.static(path.join(__dirname, '../frontend/build')));
-
-// routes
-app.use('/accept', acceptRoutes);
-app.use('/gab', chatRoutes);
-app.use('/form', formRoutes);
-app.use('/user', userRoutes);
-app.use('/account', verifyRoutes);
-app.use('/feedback', feedbackRoutes);
-app.use('/reset', resetpasswordRoutes);
 
 const serviceID = process.env.SERVICE_ID;
 const templateID = process.env.TEMPLATE_ID;
@@ -125,6 +117,17 @@ router.get("/reset/:id", async (req, res) => {
     res.status(500).send("Failed to fetch user email");
   }
 });
+
+// routes
+app.use('/accept', acceptRoutes);
+app.use('/gab', chatRoutes);
+app.use('/form', formRoutes);
+app.use('/user', userRoutes);
+app.use('/account', verifyRoutes);
+app.use('/feedback', feedbackRoutes);
+app.use('/reset', resetpasswordRoutes);
+
+
   
 
 // Wildcard route to serve the index.html file for all routes

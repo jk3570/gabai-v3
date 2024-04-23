@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import useUserData from "../../hooks/useUserData"; // Import the useUserData hook
-import { BaseURL } from '../BaseURL';
+import { BaseURL } from '../../BaseURL';
 
 const PasswordReset = ({ userData }) => {
   const { id, token } = useParams();
