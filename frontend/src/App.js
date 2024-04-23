@@ -91,7 +91,6 @@ const App = () => {
           <Route path="/search/result" element={<SearchResults />} />
 
           {/* Components routes */}
-
           {user ? null : <Route path="/#login" element={<Login />} />}
           {user ? null : <Route path="/#signup" element={<Signup />} />}
 

@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import useUserData from "../../hooks/useUserData"; // Import the useUserData hook
-import { BaseURL } from "../../BaseURL";
+import { BaseURL } from '../BaseURL';
 
-const ResetPassword = ({ userData }) => {
+const PasswordReset = ({ userData }) => {
   const { id, token } = useParams();
   const navigate = useNavigate();
 
@@ -21,7 +21,7 @@ const ResetPassword = ({ userData }) => {
   useEffect(() => {
     const fetchUserEmail = async () => {
       try {
-        const response = await axios.get(`${BaseURL}/user/${id}`);
+        const response = await axios.get(`${BaseURL}/reset/${id}`);
         setUserEmail(response.data.email);
       } catch (error) {
         console.error("Error fetching user email:", error);
@@ -84,7 +84,7 @@ const ResetPassword = ({ userData }) => {
 const PasswordResetContainer = () => {
   const { userData } = useUserData(); // Use the useUserData hook
 
-  return <ResetPassword userData={userData} />;
+  return <PasswordReset userData={userData} />;
 };
 
-export default ResetPassword;
+export default PasswordResetContainer;
