@@ -1,16 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const crypto = require("crypto");
-const { baseURL } = require("./baseURL");
 const userModel = require("../models/userModel");
-const emailjs = require("@emailjs/nodejs");
+const nodemailer = require("nodemailer");
+const { baseURL } = require("./baseURL");
 
 require("dotenv").config();
 
-const serviceID = process.env.SERVICE_ID;
-const templateID = process.env.TEMPLATE_ID;
-const PublicKey = process.env.EJS_PUBID;
-const PrivateKey = process.env.EJS_PRIVATE;
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
 
 // Define a middleware function to validate the email parameter
 const validateEmail = (req, res, next) => {
@@ -25,6 +28,11 @@ const validateEmail = (req, res, next) => {
   next();
 };
 
+// Function to capitalize the first letter of each word
+const capitalizeEachWord = (str) => {
+  return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+}
+
 // Add the middleware function to the /forgot-password route
 router.post("/forgot-password", validateEmail, async (req, res) => {
   try {
@@ -36,6 +44,10 @@ router.post("/forgot-password", validateEmail, async (req, res) => {
     if (!user) {
       return res.status(400).send("User not found");
     }
+
+    // Capitalize the first letter of firstname and lastname
+    const capitalizedFirstName = capitalizeEachWord(user.firstname);
+    const capitalizedLastName = capitalizeEachWord(user.lastname);
 
     // Generate a random token for the user
     const token = crypto.randomBytes(20).toString("hex");
@@ -56,19 +68,17 @@ router.post("/forgot-password", validateEmail, async (req, res) => {
       )
       .then(() => console.log("Token saved to database"));
 
-    // Send the email with the user ID instead of the token
-    const response = await emailjs.send(
-      serviceID,
-      templateID,
-      {
-        user_name: user.name,
-        user_email: user.email,
-        reset_link: `${baseURL}/password-reset/${userId}`,
-      },
-      { publicKey: PublicKey, privateKey: PrivateKey }
-    );
+    // Send the email with the reset link
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: 'GabAi - Password Reset',
+      html: `<p>Dear ${capitalizedFirstName} ${capitalizedLastName},</p><p>We've received a request to reset your password. If you didn't make this request, please ignore this email. Otherwise, please click <a href="${baseURL}/password-reset/${userId}">here</a> to reset your password. This link will expire in 1 hour for security reasons.</p><p>Thank you for choosing our service. If you have any questions or need further assistance, feel free to contact our support team at team.paragon.ucc@gmail.com.</p><p>Best regards,<br/>The PARAGON Team</p>`,
+    };
 
-    console.log("Email sent successfully:", response);
+    await transporter.sendMail(mailOptions);
+    
+    console.log("Email sent successfully");
     res.send("Reset password email sent");
   } catch (error) {
     console.log("Failed to send email:", error);
@@ -91,4 +101,5 @@ router.get("/find/:id", async (req, res) => {
     res.status(500).send("Failed to fetch user email");
   }
 });
+
 module.exports = router;
