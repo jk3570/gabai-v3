@@ -28,7 +28,7 @@ const ForgotPass = () => {
     }
 
     axios
-      .post(`${BaseURL}/forgot-password`, { email })
+      .post(`${BaseURL}/reset/forgot-password`, { email })
       .then((response) => {
         console.log("SUCCESS!", response.data);
         alert("Reset password link sent to your email!");

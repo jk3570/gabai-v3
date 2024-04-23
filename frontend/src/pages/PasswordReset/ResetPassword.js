@@ -21,7 +21,7 @@ const PasswordReset = ({ userData }) => {
   useEffect(() => {
     const fetchUserEmail = async () => {
       try {
-        const response = await axios.get(`${BaseURL}/reset/${id}`);
+        const response = await axios.get(`${BaseURL}/reset/find/${id}`);
         setUserEmail(response.data.email);
       } catch (error) {
         console.error("Error fetching user email:", error);

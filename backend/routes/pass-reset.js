@@ -76,7 +76,7 @@ router.post("/forgot-password", validateEmail, async (req, res) => {
   }
 });
 
-router.get("/reset/:id", async (req, res) => {
+router.get("/find/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const user = await userModel.findById(id);
