@@ -48,7 +48,7 @@ function ParticipantView(props) {
   }, [webcamOn]);
 
   return (
-    <div className="flex flex-row justify-center items-center">
+    <div className="flex flex-col md:flex-row justify-center items-center border border-red-500">
       <audio ref={micRef} autoPlay playsInline muted={isLocal} />{" "}
       {/* Audio element for mic playback */}
       <div>
@@ -56,11 +56,11 @@ function ParticipantView(props) {
         {webcamOn ? ( // If webcam is on
           <div
             style={{ position: "relative", width: "100%", height: "100%" }}
-            className="bg-gray-700 rounded-xl z-0"
+            className="bg-gray-700 rounded-xl z-0  flex flex-col md:flex-row"
           >
             <ReactPlayer
               style={{ zIndex: "999" }}
-              className="rounded-xl flex"
+              className="rounded-xl flex w-full"
               playsinline
               pip={false}
               light={false}
@@ -68,8 +68,8 @@ function ParticipantView(props) {
               muted={true}
               playing={true}
               url={videoStream} // Passing the constructed video stream as URL
-              height={"320px"}
-              width={"480px"}
+              /* height={"320px"}
+              width={"480px"} */
               onError={(err) => {
                 console.log(err, "participant video error");
               }} // Handling ReactPlayer errors

@@ -55,7 +55,7 @@ function MeetingView(props) {
                <h3>Meeting Id: {props.myId}</h3> */}
             </div>
             {joined && joined === "JOINED" ? (
-              <div className="flex flex-row gap-2 justify-center items-center">
+              <div className="flex flex-col md:flex-row p-5 gap-2 justify-center items-center w-full">
                 {mediaStream && <div />}
                 {[...participants.keys()].map((participantId) => (
                   <div key={participantId} className="flex flex-row gap-2">
