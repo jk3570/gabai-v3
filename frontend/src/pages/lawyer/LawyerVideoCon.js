@@ -59,7 +59,7 @@ const { id } = params; // Destructure the id property from params
       }}
       token={authToken}
     >
-      <div className="flex flex-ro  w">
+      <div className="flex">
         <MeetingView meetingId={id} myId={myId} params={params} onMeetingLeave={onMeetingLeave} />
       </div>
     </MeetingProvider>

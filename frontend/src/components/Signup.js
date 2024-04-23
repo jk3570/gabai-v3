@@ -291,11 +291,11 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
 
                       <div className="w-full h-full flex flex-col-1 justify-center px-4">
                       <div className="w-full h-full grid grid-cols-1 gap-4">
-                        <div className="flex flex-col items-center justify-center">
-                          <h1 className="font-bold text-3xl m-0">
-                            Sign Up to <span className="text-azure">GabAi</span>
+                        <div className="flex flex-col items-center justify-center text-center">
+                          <h1 className="font-bold text-3xl m-0 block justify-center">
+                            Sign Up to <span className="inline-block text-azure">GabAi</span>
                           </h1>
-                          <p className="block font-normal text-sm">
+                          <p className="font-normal text-sm flex">
                             Register now for a richer, more empowered journey!
                           </p>
                           
@@ -469,7 +469,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
 
                       <div className="w-full h-full flex flex-col-1 justify-center px-4">
                       <div className="w-full h-full grid grid-cols-1 gap-4">
-                        <div className="flex flex-col items-center justify-center">
+                        <div className="flex flex-col items-center justify-center text-center">
                           <h1 className="font-bold text-3xl m-0">
                             Sign Up to <span className="text-azure">GabAi</span>
                           </h1>
@@ -653,7 +653,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
 
                       <div className="w-full h-full flex flex-col-1 justify-center px-4">
                       <div className="w-full h-full grid grid-cols-1 gap-4">
-                        <div className="flex flex-col items-center justify-center">
+                        <div className="flex flex-col items-center justify-center text-center">
                           <h1 className="font-bold text-3xl m-0">
                             Sign Up to <span className="text-azure">GabAi</span>
                           </h1>

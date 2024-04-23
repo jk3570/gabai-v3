@@ -130,12 +130,15 @@ const RequestForm = ({ summary, onClose }) => {
                         <p className={label}>Request <span className="text-azure font-medium">online meeting</span> to a lawyer</p>
                     </div>
                     <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+
                         <div className="flex flex-row-1 gap-2">
                             <input type="text" className={input} placeholder="First Name" value={firstname} onChange={e => setFirstname(e.target.value)} readOnly />
                             <input type="text" className={input} placeholder="Last Name" value={lastname} onChange={e => setLastname(e.target.value)} readOnly />
                         </div>
+
                         <input type="email" className={input} placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} readOnly />
                         <input type="text" className={input} placeholder="Address" value={address} readOnly />
+
                         <textarea
                             name="summary"
                             className={summaryStyle}
@@ -144,10 +147,12 @@ const RequestForm = ({ summary, onClose }) => {
                             onChange={e => setFormSummary(e.target.value)} // Update formSummary state on change
                             readOnly
                         ></textarea>
+
                         <button type="submit" className={button} disabled={isLoading}>
                             {isLoading ? 'Submitting...' : 'Submit'}
                             <Toaster />
                         </button>
+                        
                         <button type="button" className={cancelButton} onClick={onClose}>
                             Cancel
                         </button>

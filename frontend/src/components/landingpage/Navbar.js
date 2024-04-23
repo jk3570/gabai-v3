@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 //Images and Icons
 import { Link } from "react-router-dom";
 import iconWhite from "../../img/iconWhite.svg";
+import iconAzure from "../../img/iconAzure.svg";
 import { BsMoon, BsSun  } from "react-icons/bs";
 import { FaSearch } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
@@ -145,13 +146,25 @@ function Navbar() {
           <IoCloseSharp className="text-3xl"/> : 
           <GiHamburgerMenu/>}
           </div>
+          
+          {/* Mobile Brand Logo */}
+          <div className="flex justify-center items-center gap-4 md:hidden">        
+          <Link to="/" onClick={() => scrollToElement("#home")}>
+              <button class="group relative z-0 font-bold flex justify-center gap-2 items-center">
+               <img src={iconAzure} alt="Logo" className="" style={{ height: "30px"}} />
+                  <span class="inline-flex text-azure transform text-3xl font-bold pt-1">
+                      GabAi
+                  </span>
+              </button>
+          </Link>
+          </div>
 
-          {/* Search Bar */}
+          {/* Nav Bar */}
           <div className="flex flex-row items-center text-md gap-x-2 md:gap-x-5 text-label px-1">
-            <div className="nav mr-10">
-
-              {/* Scroll navigate */}
-              <nav className="flex-row items-center gap-x-10 list-none text-label hidden md:flex">
+            
+            {/* Scroll navigate */}
+            <div className="nav mr-10 hidden md:flex">
+              <nav className="flex-row items-center gap-x-10 list-none text-label flex">
                 <li className="hover:scale-[1.1] transition-all duration-100 ease-in-out">
                   <Link to="/#home" onClick={() => scrollToElement("#home")}>
                     Home
