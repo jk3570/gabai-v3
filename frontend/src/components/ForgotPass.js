@@ -50,7 +50,8 @@ const ForgotPass = () => {
             />
           </div>
           <span className="items-center justify-center font-normal text-xs underline">
-            <h1>Forgot Password</h1>
+            <h1>"Forgot Your Password? No worries! </h1>
+              <p>Please enter your registered email address below, and we'll send you a secure link to create a new password.</p>
           </span>
           <br />
           <form

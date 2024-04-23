@@ -56,7 +56,9 @@ const PasswordReset = ({ userData }) => {
   return (
     <div className="h-screen w-screen flex justify-center items-center">
       <form onSubmit={handleSubmit} className="flex flex-col w-[80vw]">
-        <h1>Reset your password: {userEmail}</h1>
+        <h1>Create a New Password </h1>
+
+        <p>To ensure the security of your account, please enter a new password below. Make sure it's strong and unique!</p>
         <label htmlFor="newPassword">Type new Password</label>
         <input
           type="password"
