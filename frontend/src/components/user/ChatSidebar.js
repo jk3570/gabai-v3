@@ -10,7 +10,7 @@ import Signup from '../Signup';
 import NewChatPopup from '../NewChatPopup';
 
 
-const ChatSidebar = ({ handleNewChat, handleConversationClick, conversationTitles }) => {
+const ChatSidebar = ({ handleNewChat, handleConversationClick, conversationTitles, toggleSidebar,showRequestButton, setShowRequestButton, inputVisible, setInputVisible }) => {
   // No need for conversations state since we're using conversationTitles passed from props
   const { user, dispatch } = useAuthContext();
   const userid = user?.userid || 'guest';
@@ -63,7 +63,13 @@ const ChatSidebar = ({ handleNewChat, handleConversationClick, conversationTitle
 {/* New Chat Button  */}
       <div className="relative p-4 flex flex-col gap-4 w-full bg-bkg border-t border-gray-400 border-opacity-50">
         {user ? 
-        <button className="flex h-10 w-full px-3 py-2 bg-azure text-white rounded-md justify-center items-center text-sm transition-all duration-100 ease-in-out hover:bg-azure-300" onClick={handleNewChat}>
+        <button className="flex h-10 w-full px-3 py-2 bg-azure text-white rounded-md justify-center items-center text-sm transition-all duration-100 ease-in-out hover:bg-azure-300"
+          onClick={() => {
+            handleNewChat();
+            toggleSidebar();
+            setInputVisible(true); // Show the input field
+            setShowRequestButton(false); // Hide the buttons
+          }}>
           New Chat
         </button> : 
         <button className="flex h-10 w-full px-3 py-2 bg-azure text-white rounded-md justify-center items-center text-sm transition-all duration-100 ease-in-out hover:bg-azure-300" >

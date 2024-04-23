@@ -97,7 +97,7 @@ const ChatComponent = () => {
   }, [messages]); // Re-runs when messages change
 
   return (
-    <div className="relative z-10 w-full h-screen flex flex-row justify-start items-start">
+    <div className="relative z-10 w-full h-screen flex flex-row justify-start items-start overflow-x-hidden">
       <div className="flex flex-row w-full h-screen bg-bkg">
         {/* Chat History Sidebar */}
         <div
@@ -108,7 +108,11 @@ const ChatComponent = () => {
             handleNewChat={handleNewChat}
             handleConversationClick={handleConversationClick}
             conversationTitles={conversationTitles}
-            setShowRequestButton={setShowRequestButton}
+            toggleSidebar={toggleSidebar}
+            showRequestButton={showRequestButton} 
+            setShowRequestButton={setShowRequestButton} 
+            inputVisible={inputVisible} 
+            setInputVisible={setInputVisible}
           />
         </div>
 
