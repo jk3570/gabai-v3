@@ -124,7 +124,7 @@ function Navbar() {
         </div>         
       </div>
     
-        <div className="w-full max-w-4xl flex justify-between items-center px-3">
+        <div className="w-full max-w-4xl flex justify-between items-center px-3 md:px-0">
           {/* Brand Logo */}
           <Link to="/" onClick={() => scrollToElement("#home")} className="hidden md:block">
             <button
