@@ -21,6 +21,7 @@ import Footer from "./components/landingpage/Footer";
 import Terms from "./components/Terms";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import ResetPassword from  "./pages/PasswordReset/ResetPassword";
 import CreateAccount from "./components/CreateAccount";
 import SignupAdminAndLawyer from "./components/SignupAdminAndLawyer";
 import ChatComponent from "./components/user/Chat";
@@ -93,6 +94,8 @@ const App = () => {
 
           {user ? null : <Route path="/#login" element={<Login />} />}
           {user ? null : <Route path="/#signup" element={<Signup />} />}
+
+          <Route path="/password-reset/:id" element={<ResetPassword />} />
 
           {user ? <Route path="/profile" element={<UserProfile />} /> : null}
           <Route path="/request" element={<RequestForm />} />

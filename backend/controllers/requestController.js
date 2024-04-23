@@ -33,6 +33,16 @@ const getAllRequest = async (req, res) => {
   }
 };
 
+const totalCases = async (req, res) => {
+  try {
+    const totalCases = await Request.countDocuments();
+    res.json({ totalCases });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
 
 
-module.exports = { requestForm, getAllRequest };
+
+module.exports = { requestForm, getAllRequest, totalCases };
