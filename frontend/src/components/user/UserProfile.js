@@ -90,6 +90,14 @@ const UserProfile = () => {
                             <h6 className="mb-2 text-primary text-label font-medium text-1xl">Personal Details</h6>
                             <div className="grid grid-cols-1 gap-4">
                               <div className="grid grid-cols-2 gap-4">
+                                 <div>
+                                    <label className={label}>Username</label>
+                                    <input type="text" id="firstName" placeholder="Username" className={input} onKeyDown={handleKeyDown} value={username}/>
+                                </div>
+                                 <div>
+                                    <label className={label}>Email</label>
+                                    <input type="text" id="firstName" placeholder="Email" className={input} onKeyDown={handleKeyDown} value={email}/>
+                                </div>
                                 <div>
                                     <label className={label}>First Name</label>
                                     <input type="text" id="firstName" placeholder="First Name" className={input} onKeyDown={handleKeyDown} value={firstname}/>
