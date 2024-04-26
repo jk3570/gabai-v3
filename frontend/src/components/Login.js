@@ -170,7 +170,7 @@ const Login = ({ setLoginSuccess }) => {
                           Log In
                         </button>
                       </div>
-                      <div className="items-center justify-center font-normal text-sm hover:underline text-azure">
+                      <div className="items-center justify-center font-normal text-sm hover:underline text-azure cursor-pointer">
                         <ForgotPass />
                       </div>
                       {/* Testing */}
