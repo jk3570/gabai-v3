@@ -9,6 +9,7 @@ import useAcceptedRequest from '../../hooks/useAcceptedRequest';
 import { BaseURL } from "../../BaseURL"
 import Popup from 'reactjs-popup';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
+import { format } from "date-fns";
 
 const LawyerSchedule = () => {
   const navigate = useNavigate();
@@ -161,8 +162,22 @@ const LawyerSchedule = () => {
                     <td className="px-2 border-x-2 border-gray-300 text-wrap text-start h-8">{user.email}</td>
                     <td className="px-2 border-x-2 border-gray-300 text-wrap text-start h-8">{user.address}</td>
                     <td className="px-2 border-x-2 border-gray-300 text-wrap text-start h-8">{user.summary}</td>
-                    <td className="px-2 border-x-2 border-gray-300 text-wrap text-start h-8">{user.time}</td>
-                    <td className="px-2 border-x-2 border-gray-300 text-wrap text-start h-8">{user.date}</td>
+                    <td className="px-2 border-x-2 border-gray-300 text-wrap text-start h-8"> {(() => {
+                                  // Append a dummy date to the time string
+                                  const dateTimeString = `2000-01-01 ${user.time}`;
+                                  // Parse the concatenated string as a Date object
+                                  const parsedDate = new Date(dateTimeString);
+                                  // Format the parsed date in 12-hour time format
+                                  return parsedDate.toLocaleTimeString([], {
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                    hour12: true,
+                                  });
+                                })()}</td>
+                    <td className="px-2 border-x-2 border-gray-300 text-wrap text-start h-8">        {format(
+                                  new Date(user.date ?? ""),
+                                  "MMMM dd, yyyy"
+                                )}</td>
                     <td className="px-2 border-x-2 border-gray-300 text-wrap text-start h-8">{user.lawyername}</td>
                     <td className="px-2 border-x-2 border-gray-300 text-wrap text-start h-8">
                       <div className='flex flex-row gap-2'>

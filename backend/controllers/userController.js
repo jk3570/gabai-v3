@@ -7,6 +7,46 @@ const createToken = (_id) => {
   return jwt.sign({_id}, process.env.SECRET, { expiresIn: '1h' });
 };
 
+// Login a user via Google
+async function loginWithGoogle(req, res) {
+  const { gEmail } = req.body;
+
+  // Validate the request
+  if (!gEmail) {
+    return res.status(400).json({ error: "Missing email" });
+  }
+
+  try {
+    const user = await User.findOne({ email: gEmail });
+
+    if (!user) {
+      return res.status(401).json({ message: "The email doesn't exists" });
+    }
+
+    const token = createToken(user._id);
+
+    res.status(200).json({
+      token,
+      userid: user._id,
+      role: user.role,
+      email: user.email,
+      username: user.username,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      age: user.age,
+      gender: user.gender,
+      birthdate: user.birthdate,
+      province: user.province,
+      region: user.region,
+      barangay: user.barangay,
+      city: user.city,
+    });
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+}
+
 // Login a user
 const loginUser = async (req, res) => {
   const { identifier, password } = req.body;
@@ -144,4 +184,4 @@ const totalUsers = async (req, res) => {
   }
 };
 
-module.exports = { signupUser, loginUser, getAllUsers, updateUser, totalUsers};
+module.exports = { signupUser, loginUser, getAllUsers, updateUser, totalUsers,  loginWithGoogle};

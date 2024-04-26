@@ -3,6 +3,7 @@ import Popup from "reactjs-popup";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import ProfileSettings from "../ProfileSettings";
 import { Link } from "react-router-dom";
+import { format } from "date-fns";
 
 //AuthContext provider
 import { useAuthContext } from "../../hooks/useAuthContext";
@@ -96,7 +97,7 @@ const UserProfile = () => {
                                 </div>
                                  <div>
                                     <label className={label}>Email</label>
-                                    <input type="text" id="firstName" placeholder="Email" className={input} onKeyDown={handleKeyDown} value={email}/>
+                                    <input type="text" id="firstName" placeholder="Email" className={input} onKeyDown={handleKeyDown} value={username}/>
                                 </div>
                                 <div>
                                     <label className={label}>First Name</label>
@@ -130,7 +131,12 @@ const UserProfile = () => {
                                 <div>
                                     <label className={label}>Birthdate</label>
                                     <input type="text" id="birthDate" placeholder="DD/MM/YY" className={input} onKeyDown={handleKeyDown}
-                                    value={birthdate}/>
+                                     value= {format(
+                                  new Date(user.birthdate ?? ""),
+                                  "MMMM dd, yyyy"
+                                )}/>
+
+                                 
                                 </div>
                               </div>
 

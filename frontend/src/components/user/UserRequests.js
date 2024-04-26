@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { HiOutlineQueueList } from "react-icons/hi2";
 import useAcceptedRequest from '../../hooks/useAcceptedRequest';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import { format } from "date-fns";
 
 const UserRequests = () => {
     const { user, dispatch } = useAuthContext();
@@ -61,11 +62,29 @@ const UserRequests = () => {
                                         <div className="flex flex-row gap-2 w-full">
                                             <div className="w-[65%]">
                                                 <label className="text-xs text-opacity-[80%]">Date:</label>
-                                                <div className="flex w-full text-sm font-medium bg-bkg bg-opacity-[80%] border border-azure-200 rounded-md px-2 py-1">{user.date}</div>
+                                                <div className="flex w-full text-sm font-medium bg-bkg bg-opacity-[80%] border border-azure-200 rounded-md px-2 py-1">
+                                                {format(
+                                  new Date(user.date ?? ""),
+                                  "MMMM dd, yyyy"
+                                )}
+                                                </div>
                                             </div>
                                             <div className="w-[35%]">
                                                 <label className="text-xs text-opacity-[80%]">Time:</label>
-                                                <div className="flex w-full text-sm font-medium bg-bkg bg-opacity-[80%] border border-azure-200 rounded-md px-2 py-1">{user.time}</div>
+                                                <div className="flex w-full text-sm font-medium bg-bkg bg-opacity-[80%] border border-azure-200 rounded-md px-2 py-1">
+                                                 {(() => {
+                                  // Append a dummy date to the time string
+                                  const dateTimeString = `2000-01-01 ${user.time}`;
+                                  // Parse the concatenated string as a Date object
+                                  const parsedDate = new Date(dateTimeString);
+                                  // Format the parsed date in 12-hour time format
+                                  return parsedDate.toLocaleTimeString([], {
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                    hour12: true,
+                                  });
+                                })()}
+                                                </div>
                                             </div>
                                         </div>
 

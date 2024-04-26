@@ -3,9 +3,13 @@ const bcrypt = require("bcrypt");
 const userModel = require("../models/userModel");
 
 // controller functions
-const { loginUser, signupUser, getAllUsers, totalUsers } = require("../controllers/userController");
+const { loginUser, signupUser, getAllUsers, totalUsers,   loginWithGoogle, } = require("../controllers/userController");
+
 
 const router = express.Router();
+
+// Login with google
+router.post("/google", loginWithGoogle);
 
 // Get all users
 router.get('/users', getAllUsers);
@@ -43,5 +47,6 @@ router.put("/update-password/:id", async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
 
 module.exports = router;
