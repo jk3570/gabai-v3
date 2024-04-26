@@ -194,9 +194,11 @@ const Login = ({ setLoginSuccess }) => {
                         <span className={warning}>{errorgoogle}</span>
                       )}
                     </div>
-                    <div className="items-center justify-center font-normal text-sm hover:underline text-azure">
+                    <div className="flex items-center justify-center font-normal text-sm hover:underline text-azure">
                         <ForgotPass />
                       </div>
+
+                      
 
                     <div className="flex flex-col w-full items-center justify-center gap-3">
                       <div className="flex flex-col w-full">
@@ -208,9 +210,9 @@ const Login = ({ setLoginSuccess }) => {
                           Log In
                         </button>
                       </div>
-        or
+                            or
                    
-                      <div className="flex flex-col w-full items-center justify-center gap-3">
+                      <div className="flex items-center justify-center font-normal text-sm hover:underline text-azure">
                         {/*Google Login*/}
                         <GoogleLogin
                           clientId={clientId}
