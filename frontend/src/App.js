@@ -63,6 +63,10 @@ import LawyerVideoCon from "./pages/lawyer/LawyerVideoCon";
 import RequestForm from "./components/RequestForm";
 import VerificationPage from "./components/VerificationPage";
 
+
+
+import PasswordReset from "./pages/PasswordReset/ResetPassword";
+
 const App = () => {
   const { user, dispatch } = useAuthContext();
   /* console.log("Userahahha:", user); // Log the value of user for debugging */
@@ -141,6 +145,8 @@ const App = () => {
           {user ? null : <Route path="/footer" element={<Footer />} />}
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-and-condition" element={<TermsAndCondition />} />
+          <Route path="/password-reset" element={<ResetPassword />} /> 
+          
       </Routes>
 
       
