@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 //AuthContext provider
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom"
+import { IoPersonCircle } from "react-icons/io5";
 
 
 import UserProfile from "./user/UserProfile.js";
@@ -39,7 +40,7 @@ const { user, dispatch } = useAuthContext();
     <>
       <Popup
         trigger={
-          <button className="bg-gray-300 rounded-full h-[2rem] w-[2rem] flex items-center justify-center">
+          <button className="bg-gray-300 rounded-full h-[2rem] w-[2rem] flex items-center text-5xl justify-center overflow-clip"><IoPersonCircle />
           </button>
         }
         modal

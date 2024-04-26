@@ -1,84 +1,97 @@
 import { useState, useRef } from "react";
 import Popup from "reactjs-popup";
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import emailjs from "@emailjs/browser";
 import axios from "axios";
 import { BaseURL } from '../BaseURL';
+import { Link } from "react-router-dom";
 
 const ForgotPass = () => {
   const [email, setEmail] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(false);
+  const [myError, setError] = useState(null);
 
   const form = useRef();
 
-  const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!isEmailValid) {
+      setError("Invalid Email");
+      return;
+    }
+
+    try {
+      await axios.post(`${BaseURL}/reset/forgot-password`, { email });
+      alert("Reset password link sent to your email!");
+    } catch (error) {
+      console.log("FAILED...", error.response.data);
+      setError("Failed to send reset password link. Please try again.");
+      /* alert("Failed to send reset password link. Please try again."); */
+    }
+  };
 
   const handleChange = (e) => {
     const value = e.target.value;
     setEmail(value);
     setIsEmailValid(emailRegex.test(value));
+    setError(null); // Clear error when input changes
   };
 
-  const sendEmail = (e) => {
-    e.preventDefault();
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Prevent form submission
+      const inputs = Array.from(event.target.form.elements);
+      const currentIndex = inputs.indexOf(event.target);
+      const nextIndex = currentIndex + 1;
 
-    if (!email || !isEmailValid) {
-      alert("Please enter a valid email");
-      return;
+      if (nextIndex < inputs.length) {
+        inputs[nextIndex].focus();
+      }
     }
-
-    axios
-      .post(`${BaseURL}/reset/forgot-password`, { email })
-      .then((response) => {
-        console.log("SUCCESS!", response.data);
-        alert("Reset password link sent to your email!");
-      })
-      .catch((error) => {
-        console.log("FAILED...", error.response.data);
-        alert("Failed to send reset password link. Please try again.");
-      });
   };
+
+  const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+
+  const label = "block font-normal text-sm flex-row";
+  const warning = "block font-normal text-sm text-red-500 error mt-1";
+  const input = "flex h-10 w-full rounded-md border border-input bg-bkg px-3 py-2 text-xs ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
+  const button = "flex h-10 w-full px-3 py-2 bg-azure text-white rounded-md justify-center items-center text-sm";
 
   return (
-    <Popup trigger={<button> Forgot Password?</button>} modal nested>
+    <Popup trigger={<div> Forgot Password?</div>} modal nested>
       {(close) => (
-        <div className="modal h-[23rem] w-[31.00rem] rounded-2xl bg-white flex flex-col mx-10 self-center justify-center">
-          <div className="flex flex-row align-center justify-end p-1">
-            <IoIosCloseCircleOutline
-              className="text-3xl cursor-pointer"
-              onClick={close}
-            />
-          </div>
-          <span className="items-center justify-center font-normal text-xs underline">
-            <h1>"Forgot Your Password? No worries! </h1>
-              <p>Please enter your registered email address below, and we'll send you a secure link to create a new password.</p>
-          </span>
-          <br />
-          <form
-            ref={form}
-            onSubmit={sendEmail}
-            className="flex flex-col mx-2 gap-2"
-          >
-            <div className="flex flex-row gap-2 ">
-              <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                name="user_email"
-                onChange={handleChange}
-                className="w-[25rem] border-2 border-black rounded-xl p-2"
-              />
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 backdrop-filter backdrop-blur-lg bg-opacity-10 bg-black ">
+          <div className="modal relative h-auto w-[70%] sm:w-[55%] md:w-[50%] lg:w-[45%] xl:w-[35%] rounded-2xl bg-bkg text-content flex flex-col pt-7 py-10 px-8 gap-3">
+            <Link to="#" className="absolute flex align-center p-1 inset-y-0 right-0">
+              <IoIosCloseCircleOutline className="text-3xl cursor-pointer" onClick={() => close()} />
+            </Link>
 
-              <button onClick={sendEmail} disabled={!email || !isEmailValid}>
-                Send
-              </button>
+            <div className="flex flex-col items-start justify-start text-left gap-3">
+              <h1 className="font-bold text-xl m-0">Forgot Your Password? No worries! </h1>
+              <p className={label}>Please enter your registered email address below, and we'll send you a secure link to create a new password.</p>
             </div>
-            <span
-              className={isEmailValid ? "invisible" : "visible text-red-500"}
-            >
-              Please enter a valid email
-            </span>
-          </form>
+
+            <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+              <div className="flex flex-row gap-2 ">
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  name="user_email"
+                  onChange={handleChange}
+                  className={input}
+                  onKeyDown={handleKeyDown}
+                />
+              </div>
+              <span className={warning}>{myError}</span>
+
+              <div className="w-full flex justify-end">
+                <button className={button} onClick={handleSubmit} type="submit">
+                  Send
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       )}
     </Popup>

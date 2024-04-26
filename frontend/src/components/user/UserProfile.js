@@ -81,10 +81,10 @@ const UserProfile = () => {
                           onClick={() => close()}/>
                       </div>
               
-              <div className="w-full h-full flex flex-col md:flex-row gap-4 text-opacity-60 overflow-y-scroll md:overflow-y-clip no-scrollbar">
+              <div className="w-full h-full flex flex-col md:flex-row gap-4 text-opacity-60 overflow-y-scroll no-scrollbar">
                 {/* Details */}
                 <div className="w-full h-full rounded-xl p-5 text-content ">
-                <div className="card-body mt-8">
+                <div className="card-body">
 
                     <form className="grid grid-cols-1 gap-4">
                         <div>
@@ -114,6 +114,7 @@ const UserProfile = () => {
                                     <select
                                           name="gender"
                                           id="gender"
+                                          type="text"
                                           className={input}
                                           onKeyDown={handleKeyDown}
                                           value={gender}
@@ -171,8 +172,8 @@ const UserProfile = () => {
 
                     </form>
 
-                    <div className="flex justify-end mt-10">
-                      <div className="flex w-[70%] gap-2">
+                    <div className="flex justify-end mt-5 md:mt-10">
+                      <div className="flex w-full md:w-[70%] gap-2">
                          <button id="submit" name="submit" className={button} onClick={handleLogout}>Logout</button>
                       </div>
                     </div>

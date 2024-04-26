@@ -7,6 +7,10 @@ import RequestForm from '../RequestForm';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import ChatSidebar from './ChatSidebar';
 import { BaseURL } from "../../BaseURL"
+import Popup from 'reactjs-popup';
+import { Link } from 'react-router-dom';
+import { IoIosCloseCircleOutline } from 'react-icons/io';
+
 
 const ChatComponent = () => {
   const { user } = useAuthContext();
@@ -23,6 +27,7 @@ const ChatComponent = () => {
   const [requestMeetingClicked, setRequestMeetingClicked] = useState(false);
   const [showRequestButton, setShowRequestButton] = useState(false);
   const [inputVisible, setInputVisible] = useState(true); // State to control input visibility
+  
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -98,11 +103,12 @@ const ChatComponent = () => {
 
   return (
     <div className="relative z-10 w-full h-screen flex flex-row justify-start items-start overflow-x-hidden">
+
       <div className="flex flex-row w-full h-screen bg-bkg">
         {/* Chat History Sidebar */}
         <div
           id="chat-history"
-          className={`transition-all overflow-hidden ${sidebarOpen ? 'w-0' : 'w-full md:w-64'} h-full bg-bkg z-50 shadow-lg left-0 top-0`}
+          className={`transition-all overflow-hidden ${sidebarOpen ? 'w-full md:w-0' : 'w-0 md:w-64'} h-full bg-bkg z-50 shadow-lg left-0 top-0`}
         >
           <ChatSidebar
             handleNewChat={handleNewChat}
@@ -122,7 +128,7 @@ const ChatComponent = () => {
         </div>
 
         {/* Chat Conversation */}
-        <div id="chat-content" className={`flex flex-col h-full ${sidebarOpen ? 'w-full' : 'w-0 md:w-full'} mx-auto max-w-4xl justify-between pt-[3.875rem]`}>
+        <div id="chat-content" className={`flex flex-col h-full ${sidebarOpen ? 'w-0 md:w-full' : 'w-full'} mx-auto max-w-4xl justify-between pt-[3.875rem]`}>
           <div ref={chatContentRef} className="h-full overflow-y-auto flex flex-col gap-2 p-5 pt-7">
             {messages.map((message, index) => (
               <div className="p-5 bg-gray-400 bg-opacity-20 rounded-xl animate__animated text-content" key={index}>

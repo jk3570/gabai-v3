@@ -208,8 +208,7 @@ const Login = ({ setLoginSuccess }) => {
                           Log In
                         </button>
                       </div>
-                 
-                      or
+        or
                    
                       <div className="flex flex-col w-full items-center justify-center gap-3">
                         {/*Google Login*/}
@@ -219,6 +218,7 @@ const Login = ({ setLoginSuccess }) => {
                           onFailure={responseGoogle}
                           cookiePolicy={"single_host_origin"}
                         />
+
                       </div>
                       
                       {/* Testing */}
