@@ -17,7 +17,7 @@ import { Icon } from "react-icons-kit";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
 import { useNavigate } from "react-router-dom"
-
+import { MdPersonAdd } from "react-icons/md";
 
 const CreateAccount = ({ initialAddress }) => {
 
@@ -270,8 +270,8 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
   return (
     <Popup
       trigger={
-        <div className="flex w-full h-full justify-center items-center"><Link to="#create-account">
-          Create new account
+        <div className="flex w-full h-full justify-center items-center text-2xl"><Link to="#create-account">
+          <MdPersonAdd />
         </Link></div>
       }
       modal

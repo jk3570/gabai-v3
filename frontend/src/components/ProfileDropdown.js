@@ -40,7 +40,7 @@ const { user, dispatch } = useAuthContext();
     <>
       <Popup
         trigger={
-          <button className="bg-gray-300 rounded-full h-[2rem] w-[2rem] flex items-center text-5xl justify-center overflow-clip"><IoPersonCircle />
+          <button className="bg-label text-bkg rounded-full h-[2rem] w-[2rem] flex items-center text-5xl justify-center overflow-clip"><IoPersonCircle />
           </button>
         }
         modal

@@ -21,7 +21,7 @@ const ChatNotice = () => {
 
       {(close) => (
         <div className="fixed z-40 top-0 left-0 w-full h-full flex items-center justify-center backdrop-filter backdrop-blur-lg bg-opacity-5 bg-black pt-[3.875rem]">
-        <div id="account-notice-modal" className="modal absolute z-50 h-auto w-[70%] sm:w-[55%] md:w-[50%] lg:w-[45%] xl:w-[35%] rounded-2xl bg-bkg text-content flex flex-col justify-center md:items-start items-center p-5 gap-2">
+        <div id="account-notice-modal" className="modal absolute z-50 h-auto w-[90%] sm:w-[55%] md:w-[50%] lg:w-[45%] xl:w-[35%] rounded-2xl bg-bkg text-content flex flex-col justify-center md:items-start items-center p-5 gap-2">
         <h1 className="my-0 text-2xl font-bold">Continue without an account?</h1>
                 <div className="flex w-full border-b-2 border-gray"></div>
         <div className="flex flex-col gap-4">
