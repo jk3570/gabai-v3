@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
-import pdfMake from "pdfmake/build/pdfmake"; // Import pdfmake library
-import pdfFonts from "pdfmake/build/vfs_fonts"; // Import fonts for pdfmake
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
 import TotalList from "../../components/admin/TotalList";
 import AllDemo from "../../components/admin/AllDemo";
-// CSS
 import "../../css/admin-dashboard.css";
 
-pdfMake.vfs = pdfFonts.pdfMake.vfs; // Set the fonts for pdfmake
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 function AdminDashboard() {
   const name = "Admin";
@@ -72,23 +71,12 @@ function AdminDashboard() {
           - 51-60: ${userData.age5160}
           - 60 and Above: ${userData.age60Above}`, margin: [0, 5, 0, 0] },
         {
-          columns: [
-            {
-              text: "Location Distribution:",
-              margin: [0, 10, 0, 0],
-            },
-            {
-              text: "",
-            },
-          ],
+          text: "Location Distribution:",
+          style: "subheader",
+          margin: [0, 10, 0, 0],
         },
         {
-          columns: [
-            
-            {
-              text: Object.entries(locationData).map(([key, value]) => `${key}: ${value === 0 ? "0" : value}`).join("\n"),
-            },
-          ],
+          ul: Object.entries(locationData).map(([key, value]) => `${key}: ${value === 0 ? "0" : value}`),
         },
         {
           text:
@@ -111,40 +99,31 @@ function AdminDashboard() {
       },
     };
 
-    const pdfDoc = pdfMake.createPdf(docDefinition);
-    pdfDoc.download(`workplace_discrimination_report_${currentDate}_${currentTime}.pdf`);
+    pdfMake.createPdf(docDefinition).download(`workplace_discrimination_report_${currentDate}_${currentTime}.pdf`);
   };
 
   return (
     <>
       <Helmet>
-        {/* Title of the Page */}
         <title>Admin Dashboard - GabAI</title>
       </Helmet>
-
-      <div className="relative z-10 w-full pt-[3.875rem] flex flex-col justify-start items-center min-h-screen max-md:p-1 bg-bkg text-content">
+      <div className="relative z-10 w-full mt-[4rem] md:mt-[3.875rem] flex flex-col justify-start items-center min-h-screen max-md:p-1 bg-bkg text-content">
         <div id="main-content" className="flex flex-col w-full mx-auto max-w-5xl">
-          {/* Contents */}
           <div className="mt-0">
             <h1 className="text-2xl font-semibold">Welcome, {name}!</h1>
           </div>
-
-          {/* Shows the Number of Users, Cases, etc. */}
           <TotalList />
           <div className="flex flex-col justify-stretch items-stretch mt-2">
             <AllDemo />
           </div>
-
-         
         </div>
         <br/>
-         {/* Button to generate report */}
-          <button
-            onClick={generateReport}
-            className="rounded-xl bg-azure-500 px-4 py-1.5 text-white hover:scale-[1.1] transition-all duration-100 ease-in-out relative z-10 after:absolute after:-z-20  after:h-1 after:w-1 after:bg-azure-300 after:left-5 overflow-hidden after:bottom-0 after:translate-y-full after:rounded-md after:hover:scale-[50] after:hover:transition-all after:hover:duration-650 after:transition-all after:duration-300 hidden md:block"
-          >
-            Generate Report
-          </button>
+        <button
+          onClick={generateReport}
+          className="rounded-xl bg-azure-500 px-4 py-1.5 text-white hover:scale-[1.1] transition-all duration-100 ease-in-out relative z-10 after:absolute after:-z-20  after:h-1 after:w-1 after:bg-azure-300 after:left-5 overflow-hidden after:bottom-0 after:translate-y-full after:rounded-md after:hover:scale-[50] after:hover:transition-all after:hover:duration-650 after:transition-all after:duration-300 hidden md:block"
+        >
+          Generate Report
+        </button>
       </div>
     </>
   );

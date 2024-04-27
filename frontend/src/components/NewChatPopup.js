@@ -22,7 +22,7 @@ const NewChatPopup = () => {
 
       {(close) => (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 backdrop-filter backdrop-blur-lg bg-opacity-25 bg-black" onClick={() => close()}>
-        <div className="modal relative h-auto w-[70%] sm:w-[55%] md:w-[50%] lg:w-[45%] xl:w-[35%] rounded-2xl bg-bkg text-content flex flex-col ">
+        <div className="modal relative h-auto w-[90%] sm:w-[55%] md:w-[50%] lg:w-[45%] xl:w-[35%] rounded-2xl bg-bkg text-content flex flex-col pt-7 py-10 p-3">
                 <div className="flex flex-col py-4 px-7">
                   <h1 className="font-bold text-xl m-0">
                     New Chat?

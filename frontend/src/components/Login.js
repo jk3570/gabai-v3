@@ -134,7 +134,7 @@ const Login = ({ setLoginSuccess }) => {
     >
       {(close) => (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 backdrop-filter backdrop-blur-lg bg-opacity-25 bg-black ">
-          <div className="modal relative h-auto w-[70%] sm:w-[55%] md:w-[50%] lg:w-[45%] xl:w-[35%] rounded-2xl bg-bkg text-content flex flex-col pt-7 py-10 p-3">
+          <div className="modal relative h-auto w-[90%] sm:w-[55%] md:w-[50%] lg:w-[45%] xl:w-[35%] rounded-2xl bg-bkg text-content flex flex-col pt-7 py-10 p-3">
             <Link
               to="#"
               className="absolute flex align-center p-1 inset-y-0 right-0"
@@ -144,7 +144,7 @@ const Login = ({ setLoginSuccess }) => {
                 onClick={() => close()}
               />
             </Link>
-            <div className="w-full h-full flex flex-col-1 justify-center px-4">
+            <div className="w-full h-full flex flex-col-1 justify-center md:px-4">
               <div className="w-full h-full grid grid-cols-1 gap-4">
                 <div className="flex flex-col items-center justify-center">
                   <h1 className="font-bold text-3xl m-0">

@@ -10,6 +10,8 @@ import { BaseURL } from "../../BaseURL"
 import Popup from 'reactjs-popup';
 import { Link } from 'react-router-dom';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
+import { MdError } from "react-icons/md";
+import Login from '../Login';
 
 
 const ChatComponent = () => {
@@ -28,6 +30,9 @@ const ChatComponent = () => {
   const [showRequestButton, setShowRequestButton] = useState(false);
   const [inputVisible, setInputVisible] = useState(true); // State to control input visibility
   
+  const button = "flex h-10 px-1 py-1 bg-azure text-white rounded-md justify-center items-center w-full text-xs";
+  const cancelButton = "flex h-10 px-3 py-2 bg-white text-azure border border-azure rounded-md justify-center items-center w-full text-sm";
+  const label = "block font-normal text-sm";
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -128,7 +133,7 @@ const ChatComponent = () => {
         </div>
 
         {/* Chat Conversation */}
-        <div id="chat-content" className={`flex flex-col h-full ${sidebarOpen ? 'w-0 md:w-full' : 'w-full'} mx-auto max-w-4xl justify-between pt-[3.875rem]`}>
+        <div id="chat-content" className={`flex flex-col h-full ${sidebarOpen ? 'w-0 md:w-full' : 'w-full'} mx-auto max-w-4xl justify-between pt-[3.875rem] gap-3`}>
           <div ref={chatContentRef} className="h-full overflow-y-auto flex flex-col gap-2 p-5 pt-7">
             {messages.map((message, index) => (
               <div className="p-5 bg-gray-400 bg-opacity-20 rounded-xl animate__animated text-content" key={index}>
@@ -137,12 +142,38 @@ const ChatComponent = () => {
               </div>
             ))}
           </div>
-          <div className="relative items-center">
-            <div className="flex flex-col justify-center items-center">
+
+          <div className="relative flex justify-center items-center">
+            <div className="flex flex-col justify-center items-center w-full px-3">
               {showRequestButton && !requestMeetingClicked ? (
                 <>
-                  <button className="flex h-10 w-[50%] px-3 py-2 bg-azure text-white rounded-md justify-center items-center text-sm transition-all duration-100 ease-in-out hover:bg-azure-300" onClick={() => setShowRequestForm(true) || setRequestMeetingClicked(true)}>Request a video conference</button>
-                  <button className="flex h-10 w-[50%] px-3 py-2 bg-white border border-azure text-azure rounded-md justify-center items-center text-sm transition-all duration-100 ease-in-out my-2" onClick={() => {
+                  {user ? 
+                  <button className="flex h-10 w-full md:w-[50%] px-3 py-2 bg-azure text-white rounded-md justify-center items-center text-sm transition-all duration-100 ease-in-out hover:bg-azure-300" onClick={() => setShowRequestForm(true) || setRequestMeetingClicked(true)}>
+                    Request a video conference</button>
+                  :                   
+                  <Popup trigger={
+                  <button className="flex h-10 w-full md:w-[50%] px-3 py-2 bg-azure text-white rounded-md justify-center items-center text-sm transition-all duration-100 ease-in-out hover:bg-azure-300">Request a video conference</button>
+                  } modal>
+                  {closeCase => (
+                    <div className="modal relative h-auto w-96 rounded-2xl bg-bkg flex flex-col justify-center items-start p-4 text-content border border-gray-200 border-opacity-20 drop-shadow-lg gap-2">
+                      <div className="flex flex-col justify-center w-full gap-2">
+                        
+                        <h1 className="font-semibold text-2xl m-0 flex items-center"><MdError className="text-3xl justify-center text-red-500 inline-block mr-2"/>You are not signed in.</h1>
+                        <p>Please Sign in order to access this feature.</p>
+                        <div className="flex flex-row gap-2 mt-2">
+                          {/* <button className={cancelButton}><Login /></button> */}
+                          <button className={button} onClick={closeCase}>I understand</button>
+                        </div>
+                      </div>
+                      <button className="absolute top-2 right-2" onClick={closeCase}>
+                          <IoIosCloseCircleOutline size={24} />
+                      </button>
+                    </div>
+                  )}
+                  </Popup>
+                  }
+
+                  <button className="flex h-10 w-full md:w-[50%] px-3 py-2 bg-white border border-azure text-azure rounded-md justify-center items-center text-sm transition-all duration-100 ease-in-out my-2" onClick={() => {
                     setInputVisible(true); // Show the input field
                     setShowRequestButton(false); // Hide the buttons
                   }}>Continue the conversation</button>
