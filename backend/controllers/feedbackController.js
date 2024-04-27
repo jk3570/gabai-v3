@@ -1,6 +1,6 @@
 const Feedback = require('../models/feedbackModel');
 
-// Create a user
+// Create a feedback
 const createFeedback = async (req, res) => {
   try {
     // Create the user using the data from the request body

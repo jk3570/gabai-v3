@@ -25,7 +25,7 @@ const Feedback = ({ onClose }) => {
       });
       // Navigate to the home page after successful submission
       /* navigate("#"); */
-      close();
+      
     } catch (error) {
       console.error(error);
       // If there is an error, do not show the toast

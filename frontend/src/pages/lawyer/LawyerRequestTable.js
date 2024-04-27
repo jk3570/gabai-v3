@@ -8,7 +8,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { BaseURL } from '../../BaseURL'
-
+  
 import JoinScreen from "../../components/lawyer/video-call/JoinScreen";
 import MeetingView from "../../components/lawyer/video-call/MeetingView";
 import { MeetingProvider } from "@videosdk.live/react-sdk";
@@ -78,6 +78,21 @@ const LawyerRequestTable = () => {
   const handleSubmit = async (event, user) => {
     event.preventDefault();
 
+      // Get today's date
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      // Parse the selected date from the form
+      const selectedDate = new Date(formData.date);
+
+      // Check if the selected date is today or in the past
+      if (selectedDate <= today) {
+        alert('Please select a future date for the consultation.');
+        return; // Prevent further execution of the function
+      }
+
+    const id = user.userid
+    console.log(id)
     try {
       const formDataFromUser = {
         userid: user.userid,
@@ -92,19 +107,24 @@ const LawyerRequestTable = () => {
         lawyername: lawyername,
         meetingId: meetingId,
       };
+      console.log(formDataFromUser)
+      const response = await axios.post(`http://localhost:4000/accept/confirm`, formDataFromUser);
       
-      const response = await axios.post(`${BaseURL}/accept/confirm`, formDataFromUser);
 
       if (response.status === 201) {
         alert('Request accepted successfully');
-        navigate('/lawyer/lawyer-request');
+
+        await axios.delete(`http://localhost:4000/form/delete/${id}`)
+
+        navigate('/lawyer/lawyer-schedule');
       } else {
-        alert('Failed to accept request');
+        alert('Failed to process request');
       }
     } catch (error) {
       console.error(error);
     }
   };
+
 
   const handleDateChange = (e) => {
     setFormData({ ...formData, date: e.target.value });
@@ -207,9 +227,9 @@ const LawyerRequestTable = () => {
                                 <button onClick={onCreateClick} className={button}>Generate Meeting ID</button>
                                 <input type="date" className={input} placeholder="Date" onChange={handleDateChange} />
                                 <input type="time" className={input} placeholder="Time" onChange={handleTimeChange} /> 
-                                <button type="submit" disabled={!isMeetingIdGenerated || !isDateTimeFilled} className={button}>Submit</button>
+                                <button type="submit" disabled={!isMeetingIdGenerated || !isDateTimeFilled} className={button} >Submit</button>
                                 <Link to="/lawyer/lawyer-request">
-                                  <button type="button" className={cancelButton} onClick={close}>Cancel</button>
+                                  <button type="button" className={cancelButton} onClick={closeAccept}>Cancel</button>
                                 </Link>
                               </form>
                             </div>
@@ -250,9 +270,9 @@ const LawyerRequestTable = () => {
             <table className="table-auto w-full border-collapse border border-gray-200 text-xs">
               <thead>
                 <tr className="bg-azure-200 bg-opacity-20">
-                  <th className={tableHeader}>Case Names</th>
-                  <th className={tableHeader}></th>
-                  <th className={tableHeader}></th>
+                  <th className={tableHeader}>First name</th>
+                  <th className={tableHeader}>Last name</th>
+                  <th className={tableHeader}>More</th>
                 </tr>
               </thead>
 

@@ -10,6 +10,7 @@ const userRoutes = require('./routes/user');
 const chatRoutes = require('./routes/chat');
 const formRoutes = require('./routes/request');
 const acceptRoutes = require('./routes/accept');
+const archiveRoutes = require('./routes/archiveslawyer');
 const verifyRoutes = require('./routes/verify');
 const feedbackRoutes = require('./routes/feedback');
 const resetpasswordRoutes = require('./routes/pass-reset');
@@ -32,6 +33,7 @@ app.use(express.static(path.join(__dirname, '../frontend/build')));
 
 // routes
 app.use('/accept', acceptRoutes);
+app.use('/archive', archiveRoutes);
 app.use('/gab', chatRoutes);
 app.use('/form', formRoutes);
 app.use('/user', userRoutes);

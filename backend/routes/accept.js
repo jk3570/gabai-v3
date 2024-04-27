@@ -1,7 +1,7 @@
 const express = require("express");
 
 // controller functions
-const { acceptRequest, getAllRequest, getAllRequestLawyer } = require("../controllers/acceptController");
+const { acceptRequest, getAllRequest, getAllRequestLawyer, deleteRequest } = require("../controllers/acceptController");
 
 const router = express.Router();
 
@@ -13,5 +13,7 @@ router.get('/get-all-requests-lawyer/:email', getAllRequestLawyer);
 
 //insert request form
 router.post('/confirm', acceptRequest);
+
+router.delete('/delete/:id', deleteRequest);
 
 module.exports = router;

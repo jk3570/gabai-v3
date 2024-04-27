@@ -162,9 +162,11 @@ function Footer() {
            {/*  Bottom Part */}
             <hr class="my-6 border-gray-500 sm:mx-auto lg:my-8" />
             <div class="sm:flex sm:items-center sm:justify-between">
-                <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="#developers" class="hover:underline">PARAGON™</a>. All Rights Reserved.
+                <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400 ">© 2024 <a href="#developers" class="hover:underline">PARAGON™</a>. All Rights Reserved.
                 </span>
-                <div class="flex mt-4 sm:justify-center sm:mt-0 gap-5">
+
+                
+                {/* <div class="flex mt-4 sm:justify-center sm:mt-0 gap-5">
                     <a target="_blank" href="https://www.facebook.com/profile.php?id=61557696106427&mibextid=ZbWKwL" >
                         <svg class="w-4 h-4 fill-gray-500 hover:fill-azure-100" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 8 19">
                                 <path fillRule="evenodd" d="M6.135 3H8V0H6.135a4.147 4.147 0 0 0-4.142 4.142V6H0v3h2v9.938h3V9h2.021l.592-3H5V3.591A.6.6 0 0 1 5.592 3h.543Z" clip-rule="evenodd"/>
@@ -189,7 +191,7 @@ function Footer() {
                         </svg>
                         <span class="sr-only">GitHub account</span>
                     </a>
-                </div>
+                </div> */}
             </div>
 
             </div>
