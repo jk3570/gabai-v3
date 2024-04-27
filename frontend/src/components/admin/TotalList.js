@@ -47,20 +47,20 @@ const Counter = () => {
 
 
   const totalNoStyle =
-    "flex flex-row bg-gray-400 bg-opacity-30 rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl h-auto w-[35%] text-1xl p-5 justify-between items-center border-azure-500";
+    "flex flex-row bg-gray-400 bg-opacity-30 rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl h-auto w-full text-1xl p-5 justify-between items-center border-azure-500";
 
   return (
-    <div className="flex flex-row gap-3 mx-auto justify-center shrink self-center w-full">
+    <div className="flex flex-col md:flex-row gap-3 mx-auto justify-center shrink self-center w-full">
       {/* Start */}
       <div className={totalNoStyle}>
         <div>
           {/* User Count */}
           Total No. of Users
           <br />
-          <span className="text-5xl text-azure">{totalUsers}</span>
+          <span className="text-4xl text-azure">{totalUsers}</span>
         </div>
         <div>
-          <FaRegUser className="h-[4rem] w-[4rem] p-2 fill-azure" />
+          <FaRegUser className="text-6xl p-2 fill-azure" />
         </div>
       </div>
       {/* End */}
@@ -71,10 +71,10 @@ const Counter = () => {
           {/* Case Count */}
           Total No. of Cases
           <br />
-          <span className="text-5xl text-azure">{totalCases}</span>
+          <span className="text-4xl text-azure">{totalCases}</span>
         </div>
         <div>
-          <LiaBalanceScaleSolid className="h-[4rem] w-[4rem] fill-azure" />
+          <LiaBalanceScaleSolid className="text-6xl fill-azure" />
         </div>
       </div>
       {/* End */}
@@ -85,10 +85,10 @@ const Counter = () => {
           {/* Feedback Count */}
           Total No. of Feedbacks
           <br />
-          <span className="text-5xl text-azure">{totalFeedbacks}</span>
+          <span className="text-4xl text-azure">{totalFeedbacks}</span>
         </div>
         <div>
-          <VscFeedback className="h-[4rem] w-[4rem] p-1 fill-azure" />
+          <VscFeedback className="text-6xl p-1 fill-azure" />
         </div>
       </div>
       {/* End */}

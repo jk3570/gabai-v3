@@ -2,11 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 import { HiOutlineQueueList } from "react-icons/hi2";
-import useAcceptedRequest from "../../hooks/useAcceptedRequest";
+import useAcceptedRequest from '../../hooks/useAcceptedRequest';
+import { useAuthContext } from '../../hooks/useAuthContext';
+import { format } from "date-fns";
 
 const UserBurgerMenu = () => {
-    
-    const { requestData, loading } = useAcceptedRequest();
+    const { user, dispatch } = useAuthContext();
+    const { requestData, loading } = useAcceptedRequest(user.userid); // Pass userid to the hook
+
+    console.log("requestData:", requestData);
+    console.log("loading:", loading);
     
     const button = "flex h-10 w-full px-3 py-2 bg-azure text-white rounded-md justify-center items-center text-sm hover:bg-azure-300";
     const join = "flex h-5 w-full px-2 py-1 bg-azure text-white rounded-md justify-center items-center text-sm hover:bg-azure-300 hover:scale-[1.02] hover:text-base";
