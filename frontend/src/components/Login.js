@@ -63,14 +63,14 @@ const Login = ({ setLoginSuccess }) => {
     }
 
     console.log(`error: ${error}`);
-    console.log(`user: ${user}`);
+    // console.log(`user: ${user}`);
   };
 
   const responseGoogle = async (response) => {
     const token = jwtDecode(response.credential);
-    console.log(`Google user email: ${token.email}`);
+    // console.log(`Google user email: ${token.email}`);
     const gEmail = token.email;
-    console.log(gEmail);
+    // console.log(gEmail);
 
     // Check if the user exists in the database
     const userExists = await loginwithgoogle(gEmail);

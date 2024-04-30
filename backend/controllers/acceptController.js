@@ -2,6 +2,19 @@ const { validationResult } = require('express-validator');
 
 const Accept = require('../models/acceptModel');
 
+
+// Define route to get total count
+const totalAccepts = async (req, res) => {
+  try {
+    const totalAccepts = await Accept.countDocuments();
+    res.json({ totalAccepts });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+
 // Create a feedback
 const acceptRequest = async (req, res) => {
   try {
@@ -61,4 +74,4 @@ const getAllRequestLawyer = async (req, res) => {
     }
 };
 
-module.exports = { acceptRequest, getAllRequest, getAllRequestLawyer, deleteRequest };
+module.exports = { acceptRequest, getAllRequest, getAllRequestLawyer, deleteRequest, totalAccepts };

@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const userModel = require("../models/userModel");
 
 // controller functions
-const { loginUser, signupUser, getAllUsers, totalUsers,   loginWithGoogle, } = require("../controllers/userController");
+const { loginUser, signupUser, getAllUsers, totalUsers,  loginWithGoogle, countsByGender, countsByRegion, countsByAge } = require("../controllers/userController");
 
 
 const router = express.Router();
@@ -20,6 +20,9 @@ router.post("/login", loginUser);
 
 // Access sign up
 router.post("/signup", signupUser);
+router.get("/countsByGender", countsByGender);
+router.get("/countsByRegion", countsByRegion);
+router.get("/countsByAge", countsByAge);
 
 // Update password
 router.put("/update-password/:id", async (req, res) => {

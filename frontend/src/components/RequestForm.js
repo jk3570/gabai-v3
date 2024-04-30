@@ -49,23 +49,29 @@ const RequestForm = ({ summary, onClose }) => {
     const failNotif = () => toast.error('Failed to insert data');
 
     const handleSubmit = async e => {
-        e.preventDefault();
-        setIsLoading(true);
-        try {
-            await axios.post(`${BaseURL}/form/request`, { userid, firstname, lastname, email, address, summary: formSummary });
-            setIsLoading(false);
-            successNotif();
-            /* alert('Request sent successfully'); */
-            setTimeout(() => {
-                onClose(); // Close the modal
-            }, 1000);
-        } catch (error) {
-            setIsLoading(false);
-            console.error(error);
-            failNotif();
-            /* alert('Failed to insert data'); */
-        }
-    };
+    e.preventDefault();
+    setIsLoading(true);
+    try {
+        await axios.post(`${BaseURL}/form/request`, {
+            userid,
+            firstname,
+            lastname,
+            email,
+            address,
+            summary: formSummary // Ensure you include the summary field
+        });
+        setIsLoading(false);
+        successNotif();
+        setTimeout(() => {
+            onClose(); // Close the modal
+        }, 1000);
+    } catch (error) {
+        setIsLoading(false);
+        console.error(error);
+        failNotif();
+    }
+};
+
 
     return (
     <div className="fixed z-40 top-0 left-0 w-full h-full flex items-center justify-center backdrop-filter backdrop-blur-lg bg-opacity-5 bg-black pt-[3.875rem]">

@@ -1,9 +1,11 @@
 const express = require("express");
 
 // controller functions
-const { acceptRequest, getAllRequest, getAllRequestLawyer, deleteRequest } = require("../controllers/acceptController");
+const { acceptRequest, getAllRequest, getAllRequestLawyer, deleteRequest, totalAccepts } = require("../controllers/acceptController");
 
 const router = express.Router();
+
+router.get('/total', totalAccepts);
 
 //get all request for user
 router.get('/get-all-requests/:userid', getAllRequest);

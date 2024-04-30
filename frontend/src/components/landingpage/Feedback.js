@@ -5,6 +5,7 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { BaseURL } from '../../BaseURL'
 
 const Feedback = ({ onClose }) => {
   const { user } = useAuthContext();
@@ -13,11 +14,12 @@ const Feedback = ({ onClose }) => {
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await axios.post("http://localhost:4000/feedback/create", { email, message });
+      await axios.post(`${BaseURL}/feedback/create`, { email, message });
       // If the request succeeds, show the success toast
       toast.success("Feedback submitted successfully!", {
         position: "top-center",

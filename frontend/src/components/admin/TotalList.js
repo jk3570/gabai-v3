@@ -1,3 +1,4 @@
+/* eslint-disable no-labels */
 //icon sets
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
@@ -10,7 +11,19 @@ const Counter = () => {
 
   const [totalUsers, setTotalUsers] = useState(0);
   const [totalFeedbacks, setTotalFeedbacks] = useState(0);
+  const [totalForms, setTotalForms] = useState(0);
+  const [totalAccepts, setTotalAccepts] = useState(0);
+  const [totalArchives, setTotalArchives] = useState(0);
   const [totalCases, setTotalCases] = useState(0);
+
+  useEffect(() => {
+    // Calculate the sum of totalForms, totalAccepts, and totalArchives
+    const sum = totalForms + totalAccepts + totalArchives;
+    
+    // Set the sum to totalCases
+    setTotalCases(sum);
+  }, [totalForms, totalAccepts, totalArchives]);
+
 
 //total users
   useEffect(() => {
@@ -34,11 +47,33 @@ const Counter = () => {
       });
   }, []);
 
-//total cases
+//form cases
   useEffect(() => {
     axios.get(`${BaseURL}/form/total`)
       .then(response => {
-        setTotalCases(response.data.totalCases);
+        setTotalForms(response.data.totalForms);
+      })
+      .catch(error => {
+        console.error('Error fetching total count:', error);
+      });
+  }, []);
+
+//accept cases
+  useEffect(() => {
+    axios.get(`${BaseURL}/accept/total`)
+      .then(response => {
+        setTotalAccepts(response.data.totalAccepts);
+      })
+      .catch(error => {
+        console.error('Error fetching total count:', error);
+      });
+  }, []);
+
+//request cases
+  useEffect(() => {
+    axios.get(`${BaseURL}/archive/total`)
+      .then(response => {
+        setTotalArchives(response.data.totalArchives);
       })
       .catch(error => {
         console.error('Error fetching total count:', error);

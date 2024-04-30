@@ -86,7 +86,7 @@ const navigate = useNavigate();
   useEffect(() => {
     regions()
       .then((regionList) => {
-        console.log("Fetched regions:", regionList); // Log fetched regions
+        // console.log("Fetched regions:", regionList); // Log fetched regions
         setRegionOptions(regionList);
         if (initialAddress && initialAddress.region) {
           setSelectedRegion(initialAddress.region.region_code);
@@ -99,11 +99,11 @@ const navigate = useNavigate();
 
   // Fetch provinces when region changes
   useEffect(() => {
-    console.log("Selected region:", selectedRegion); // Log selected region
+    // console.log("Selected region:", selectedRegion); // Log selected region
     if (selectedRegion) {
       provinces(selectedRegion)
         .then((provinceList) => {
-          console.log("Fetched provinces:", provinceList); // Log fetched provinces
+          // console.log("Fetched provinces:", provinceList); // Log fetched provinces
           setProvinceOptions(provinceList);
           setSelectedProvince(""); // Reset selected province when region changes
         })
@@ -118,7 +118,7 @@ const navigate = useNavigate();
     if (selectedProvince) {
       cities(selectedProvince)
         .then((cityList) => {
-          console.log("Fetched cities:", cityList); // Log fetched cities
+          // console.log("Fetched cities:", cityList); // Log fetched cities
           setCityOptions(cityList);
           setSelectedCity(""); // Reset selected city when province changes
         })
@@ -133,7 +133,7 @@ const navigate = useNavigate();
     if (selectedCity) {
       barangays(selectedCity)
         .then((barangayList) => {
-          console.log("Fetched barangays:", barangayList); // Log fetched barangays
+          // console.log("Fetched barangays:", barangayList); // Log fetched barangays
           setBarangayOptions(barangayList);
           setSelectedBarangay(""); // Reset selected barangay when city changes
         })

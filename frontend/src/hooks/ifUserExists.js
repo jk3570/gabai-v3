@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
-import { BaseURL } from '../BaseURL'
+import { BaseURL } from "../BaseURL";
 
 export const useCheckIfUserExists = () => {
   const [errorgoogle, setErrorgoogle] = useState(null);
@@ -23,8 +23,6 @@ export const useCheckIfUserExists = () => {
       setErrorgoogle("Email doesn't exist");
     }
     if (response.ok) {
-      localStorage.setItem("user", JSON.stringify(json));
-
       dispatch({ type: "LOGIN", payload: json });
 
       setIsLoadinggoogle(false);

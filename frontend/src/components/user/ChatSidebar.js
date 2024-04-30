@@ -23,7 +23,6 @@ const ChatSidebar = ({ handleNewChat, handleConversationClick, conversationTitle
       .catch(error => console.error('Error fetching conversation titles:', error));
   }, []);
 
-  console.log("Conversation Titles:", conversationTitles); // Check the value of conversationTitles
 
   
 
