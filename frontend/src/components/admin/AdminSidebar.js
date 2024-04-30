@@ -71,7 +71,7 @@ const AdminSidebar = () => {
                     Users
                 </Link>
                 </div>
-                <div className={navList}>
+                {/* <div className={navList}>
                 <Link
                     to="/admin/cases"
                     className={text}
@@ -79,7 +79,7 @@ const AdminSidebar = () => {
                     <LiaBalanceScaleSolid className={icon} />
                     Cases
                 </Link>
-                </div>
+                </div> */}
                 <div className={navList}>
                 <Link
                     to="admin/feedbacks"
@@ -89,14 +89,14 @@ const AdminSidebar = () => {
                     Feedbacks
                 </Link>
                 </div>
-                <div className={navList}>
+                {/* <div className={navList}>
                 <Link 
                     to="admin/admin-archive/"
                     className={text}>
                     <FaBoxArchive className={icon} />
                     Archived
                 </Link>
-                </div>
+                </div> */}
             </nav>
             </div>
 

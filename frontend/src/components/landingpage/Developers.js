@@ -37,7 +37,7 @@ const Developers = () => {
                       </div>
                       <h2 className={devName}>Joko Gadingan</h2>
                       <p className={devPos}
-                        >Project Manager / Backend Developer</p>
+                        >Project Manager</p>
                     </div>
                     
                     <div className="grid grid-cols-3 max-md:grid-cols-2 gap-5">

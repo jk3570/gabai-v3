@@ -46,9 +46,9 @@ const UserRequests = () => {
                                     <div key={user._id} className="relative w-full h-auto flex flex-col bg-gray-300 bg-opacity-30 text-sm text-content font-normal shadow-md rounded-md p-3 border border-gray-400 border-opacity-20">
                                         
                                     <div className="flex flex-col gap-2"> 
-                                        <div className="text-base font-bold text content">
+                                        {/* <div className="text-base font-bold text content">
                                             <h2>Case Summary</h2>
-                                        </div>
+                                        </div> */}
  
                                         <div className="flex flex-row gap-2">
                                             <div className="font-medium text-sm">

@@ -22,7 +22,7 @@ function SearchResults() {
       );
       const searchResults = response.data.items;
       // Navigate to searchResults route and pass search results as state
-      navigate("/searchResults", { state: { searchResults } });
+      navigate("/search/result", { state: { searchResults } });
     } catch (error) {
       console.error(error);
     }
