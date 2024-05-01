@@ -74,7 +74,7 @@ const UserProfile = () => {
       >
         {(close) => (
           <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 backdrop-filter backdrop-blur-lg bg-opacity-25 bg-black ">
-            <div className="modal relative h-[80%] w-[80%] rounded-2xl bg-bkg text-content flex flex-col pt-1 p-2">
+            <div className="modal relative h-auto w-[80%] rounded-2xl bg-bkg text-content flex flex-col pt-1 p-2">
                       <div className="absolute flex align-center p-1 inset-y-0 right-0">
                         <IoIosCloseCircleOutline
                           className="text-3xl cursor-pointer"
@@ -111,22 +111,15 @@ const UserProfile = () => {
                               <div className="grid grid-cols-2 gap-4">
                                 <div>
                                     <label className={label}>Gender</label>
-                                    <select
+                                    <input 
                                           name="gender"
                                           id="gender"
                                           type="text"
                                           className={input}
                                           onKeyDown={handleKeyDown}
                                           value={gender}
-                                        >
-                                          <option value="">- Select Gender -</option>
-                                          <option value="Male">Male</option>
-                                          <option value="Female">Female</option>
-                                          <option value="LGBTQ">LGBTQ</option>
-                                          <option value="Prefer not to say">
-                                            Prefer not to say
-                                          </option>
-                                        </select>
+                                       
+                                        />
                                     {/* <input type="" id="gender" placeholder="Gender" className={input}/> */}
                                 </div>
                                 <div>
@@ -172,11 +165,11 @@ const UserProfile = () => {
 
                     </form>
 
-                    <div className="flex justify-end mt-5 md:mt-10">
-                      <div className="flex w-full md:w-[70%] gap-2">
+                    {/* <div className="flex justify-end mt-5 md:mt-10">
+                      <div className="flex w-full md:w-[50%] gap-2">
                          <button id="submit" name="submit" className={button} onClick={handleLogout}>Logout</button>
                       </div>
-                    </div>
+                    </div> */}
 
                 </div>  
 

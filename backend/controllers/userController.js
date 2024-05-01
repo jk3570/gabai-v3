@@ -184,4 +184,84 @@ const totalUsers = async (req, res) => {
   }
 };
 
-module.exports = { signupUser, loginUser, getAllUsers, updateUser, totalUsers,  loginWithGoogle};
+// Endpoint to get total count per gender
+const countsByGender = async (req, res) => {
+  try {
+    const countsByGender = await User.aggregate([
+      {
+        $group: {
+          _id: '$gender',
+          count: { $sum: 1 }, 
+        },
+      },
+    ]);
+    res.json(countsByGender);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+
+// Endpoint to get total count per gender
+const countsByRegion = async (req, res) => {
+  try {
+    const countsByRegion = await User.aggregate([
+      {
+        $group: {
+          _id: '$region',
+          count: { $sum: 1 }, 
+        },
+      },
+    ]);
+    res.json(countsByRegion);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+const countsByAge = async (req, res) => {
+  try {
+    // Retrieve all users from the database
+    const users = await User.find();
+
+    // Calculate age and categorize users
+    const countsByAge = {
+      '18-20': 0,
+      '21-30': 0,
+      '31-40': 0,
+      '41-50': 0,
+      '51-59': 0,
+      '60 above': 0
+    };
+
+    const currentDate = new Date();
+    users.forEach(user => {
+      const birthDate = new Date(user.birthdate);
+      const age = currentDate.getFullYear() - birthDate.getFullYear();
+      if (age >= 18 && age <= 20) {
+        countsByAge['18-20']++;
+      } else if (age >= 21 && age <= 30) {
+        countsByAge['21-30']++;
+      } else if (age >= 31 && age <= 40) {
+        countsByAge['31-40']++;
+      } else if (age >= 41 && age <= 50) {
+        countsByAge['41-50']++;
+      } else if (age >= 51 && age <= 59) {
+        countsByAge['51-59']++;
+      } else {
+        countsByAge['60 above']++;
+      }
+    });
+
+    res.json(countsByAge);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+
+
+module.exports = { signupUser, loginUser, getAllUsers, updateUser, totalUsers,  loginWithGoogle, countsByGender, countsByRegion, countsByAge};

@@ -2,25 +2,50 @@ const { validationResult } = require('express-validator');
 
 const Accept = require('../models/acceptModel');
 
-const acceptRequest = async (req, res) => {
-    // Check for validation errors
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
-    // Log the request body
-    console.log("Request Body:", req.body);
 
-    try {
-        const newData = new Accept(req.body);
-        await newData.save();
-        res.status(201).json({ message: 'Request accepted successfully' });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Server error' });
-    }
+// Define route to get total count
+const totalAccepts = async (req, res) => {
+  try {
+    const totalAccepts = await Accept.countDocuments();
+    res.json({ totalAccepts });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
 };
 
+
+// Create a feedback
+const acceptRequest = async (req, res) => {
+  try {
+    // Create the user using the data from the request body
+    const newAccept = await Accept.create(req.body);
+    // Send the newly created user in the response
+    res.status(201).json(newAccept);
+  } catch (error) {
+    // Log the error for debugging purposes
+    console.error('Error creating user:', error);
+    // Send an error response to the client
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+
+// delete one schedule
+const deleteRequest = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const deletedUser = await Accept.findOneAndDelete({userid:id});
+    if (deletedUser) {
+      res.json({ message: 'User deleted successfully' });
+    } else {
+      res.status(404).json({ message: 'User not found' });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
 
 // Function to handle fetching all data
 const getAllRequest = async (req, res) => {
@@ -49,4 +74,4 @@ const getAllRequestLawyer = async (req, res) => {
     }
 };
 
-module.exports = { acceptRequest, getAllRequest, getAllRequestLawyer };
+module.exports = { acceptRequest, getAllRequest, getAllRequestLawyer, deleteRequest, totalAccepts };

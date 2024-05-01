@@ -1,62 +1,72 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BarChart, PieChart } from "@mui/x-charts";
-
-// Data for the Bar Graph and Pie Chart
-
-const MyBarGraph = React.memo(() => (
-  <BarChart
-    xAxis={[{ scaleType: "band", data: ["Age"] }]}
-    series={[
-      { data: ["10"], label: "18-20" },
-      { data: ["20"], label: "21-30" },
-      { data: ["20"], label: "31-40" },
-      { data: ["20"], label: "41-50" },
-      { data: ["20"], label: "51-59" },
-      { data: ["20"], label: "60 above" },
-    ]}
-    width={250}
-    height={300}
-    slotProps={{
-      legend: {
-        direction: "row",
-        position: { vertical: "bottom", horizontal: "middle" },
-        padding: 0,
-        hidden: true,
-      },
-    }}
-  />
-));
-
-const PieChartComponent = React.memo(() => (
-  <PieChart
-    series={[
-      {
-        data: [
-          { id: 0, value: "10", label: "18-20" },
-          { id: 1, value: "20", label: "21-30" },
-          { id: 2, value: "20", label: "31-40" },
-          { id: 3, value: "20", label: "41-50" },
-          { id: 4, value: "20", label: "51-59" },
-          { id: 5, value: "20", label: "60 above" },
-        ],
-      },
-    ]}
-    width={400}
-    height={200}
-  />
-));
+import axios from 'axios';
+import { BaseURL } from "../../BaseURL"
 
 function Sex() {
+  const [countsByAge, setCountsByAge] = useState({});
+
+  // Fetch age counts from the server
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${BaseURL}/user/countsByAge`);
+        setCountsByAge(response.data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    
+    fetchData();
+  }, []);
+
+  // Extract counts from the fetched data
+  const ageCategories = Object.keys(countsByAge);
+  const ageCounts = Object.values(countsByAge);
+
+  // Prepare data for BarChart and PieChart
+  const barChartData = ageCategories.map((category, index) => ({
+    data: [ageCounts[index]],
+    label: category
+  }));
+
+  const pieChartData = ageCategories.map((category, index) => ({
+    id: index,
+    value: ageCounts[index],
+    label: category
+  }));
+
   return (
     <div className="flex flex-row gap-1 items-center justify-center text-azure">
       <div>
         {/* Bar Graph */}
-        <MyBarGraph />
+        <BarChart
+          xAxis={[{ scaleType: "band", data: ["Age"] }]}
+          series={barChartData}
+          width={250}
+          height={300}
+          slotProps={{
+            legend: {
+              direction: "row",
+              position: { vertical: "bottom", horizontal: "middle" },
+              padding: 0,
+              hidden: true,
+            },
+          }}
+        />
       </div>
-
       <br />
       <div>
-        <PieChartComponent />
+        {/* Pie Chart */}
+        {ageCategories.length > 0 && ageCounts.length > 0 ? (
+          <PieChart
+            series={[{ data: pieChartData }]}
+            width={400}
+            height={200}
+          />
+        ) : (
+          <p>Loading...</p>
+        )}
       </div>
     </div>
   );

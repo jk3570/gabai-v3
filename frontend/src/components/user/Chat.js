@@ -17,7 +17,18 @@ import Login from '../Login';
 const ChatComponent = () => {
   const { user } = useAuthContext();
 
-  const userid = user?.userid || 'guest';
+  function generateRandomId(length) {
+  const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let randomId = '';
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * charset.length);
+    randomId += charset[randomIndex];
+  }
+  return randomId;
+}
+
+  const userid = user?.userid || generateRandomId(8);
+  // console.log(userid)
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isSendDisabled, setIsSendDisabled] = useState(true);
@@ -78,10 +89,12 @@ const ChatComponent = () => {
           }
 
           setSummary(response.data.summary);
-
-          if (response.data.message.includes("Thank you for confirming. You can now request a video conference")) {
-            setShowRequestButton(true);
-            setInputVisible(false); // Hide the input field
+          if (
+              response.data.message.includes("Thank you for confirming. You can now request a video conference") || 
+              response.data.message.includes("Salamat sa pagkumpirma. Maaari ka nang humiling ng isang video conference")
+          ) {
+              setShowRequestButton(true);
+              setInputVisible(false); // Hide the input field
           }
 
         })

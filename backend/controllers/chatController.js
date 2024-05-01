@@ -15,51 +15,71 @@ let conversationHistory = []; // Moved the conversation history outside the func
 let randomForestModel;
 let uniqueLabels; // Define uniqueLabels globally
 let encodedLabels; // Define encodedLabels globally
-let dataset; // Declare dataset globally
-let features; // Declare features globally
-let labels; // Declare labels globally
+let dataset = []; // Declare dataset globally
+let features = []; // Declare features globally
+let labels = []; // Declare labels globally
 let tfidfFeatures; // Define tfidfFeatures globally
 let summary = ''; // Initialize the summary variable
 
-
-
 // Path to the training data JSON file
-const trainingDataPath = path.join(__dirname, 'WorkplaceDiscriminationDataset.json');
+const trainingDataPath = path.join(__dirname, 'WorkplaceDiscriminationDataset.jsonl');
 
-// Load the training data from the JSON file
-let rawData = JSON.parse(fs.readFileSync(trainingDataPath, 'utf-8'));
+// Function to load training data from the JSONL file
+const loadTrainingData = () => {
+    try {
+        const lines = fs.readFileSync(trainingDataPath, 'utf-8').split('\n');
+        lines.forEach(line => {
+            if (line.trim() !== '') {
+                try {
+                    const [input, label] = JSON.parse(line);
+                    dataset.push([input, label]);
+                } catch (error) {
+                    console.error('Error parsing line:', line);
+                }
+            }
+        });
 
-// Restructure the dataset to have each data point as [input, label]
-dataset = rawData[0].map((input, index) => [input, rawData[1][index]]);
+        // Separate features and labels
+        features = dataset.map(([input, _]) => input);
+        labels = dataset.map(([_, label]) => label);
 
-// Separate input features and labels
-features = dataset.map(([input]) => input);
-labels = dataset.map(([, label]) => label);
+    } catch (error) {
+        console.error('Error loading training data:', error);
+    }
+};
 
-// Initialize a TF-IDF vectorizer
-const tfidf = new natural.TfIdf();
+const evaluateModel = (tfidf, features) => {
+    const tfidfFeatures = features.map((document) => {
+        const terms = tfidf.listTerms(document).map(term => term.term);
+        const tfidfVector = [];
+        terms.forEach(term => {
+            tfidfVector.push(tfidf.tfidf(term, document));
+        });
+        return tfidfVector;
+    });
 
-// Add documents to the vectorizer
-features.forEach((document) => {
-    tfidf.addDocument(document);
-});
-
-// Function to evaluate the model on the training data
-const evaluateModel = () => {
     const predictions = randomForestModel.predict(tfidfFeatures);
     const correctPredictions = predictions.filter((prediction, index) => prediction === encodedLabels[index]);
     const accuracy = correctPredictions.length / predictions.length;
     console.log('Model Evaluation - Accuracy:', accuracy);
+
+    // Get terms from TF-IDF
+    const terms = tfidf.listTerms(features[0]).map(term => term.term);
+
+    console.log('Terms:', terms);
+    console.log('TF-IDF Vector:', tfidfFeatures); // Assuming this is what you want to log
 };
+
 
 // Function to update the dataset and retrain the model
 const updateDatasetAndModel = () => {
-    // Check dataset balance before training
-    checkDatasetBalance();
-
     // Transform the features into TF-IDF vectors
+    const tfidf = new natural.TfIdf();
+    features.forEach((document) => {
+        tfidf.addDocument(document);
+    });
     tfidfFeatures = features.map((document) => {
-        const terms = tfidf.listTerms(document).map(term => term.term);
+        const terms = tfidf.listTerms(document).map(term => term.term); // Define 'terms' here
         const tfidfVector = [];
         terms.forEach(term => {
             tfidfVector.push(tfidf.tfidf(term, document));
@@ -77,37 +97,30 @@ const updateDatasetAndModel = () => {
         randomForestModel.train(tfidfFeatures, encodedLabels);
         console.log('Random Forest model trained successfully.');
         // Evaluate the model on the training data
-        evaluateModel();
+        evaluateModel(tfidf, features);
     } catch (error) {
         console.error('Error training Random Forest model:', error);
     }
 };
 
+
 // Function to append new data point to the dataset and update the model
 const appendToDatasetAndModel = (input, label) => {
-    let matchedLabel = label; // Initialize matched label as the provided label
-
-    // Check if the provided label matches one of the unique labels
-    if (!uniqueLabels.includes(label)) {
-        // Find the closest matching label from the unique labels
-        const closestLabel = natural.JaroWinklerDistance(label, uniqueLabels[0]) > 0.8 ? uniqueLabels[0] : uniqueLabels[1];
-        console.warn(`Provided label '${label}' not found in unique labels. Using closest match: '${closestLabel}'`);
-        matchedLabel = closestLabel;
-    }
-
     // Append the new data point to the dataset
-    dataset.push([input, matchedLabel]);
+    const newDataPoint = { text: input, label };
+    dataset.push(newDataPoint);
 
     // Update the features and labels arrays
     features.push(input);
-    labels.push(matchedLabel);
+    labels.push(label);
 
-    // Update the training data file
-    fs.writeFileSync(trainingDataPath, JSON.stringify([features, labels], null, 2));
+    // Update the training data file with the new data point
+    fs.appendFileSync(trainingDataPath, JSON.stringify([newDataPoint.text, newDataPoint.label]) + '\n');
 
     // Retrain the model with the updated dataset
     updateDatasetAndModel();
 };
+
 
 // Function to check the balance of discrimination types in the dataset
 const checkDatasetBalance = () => {
@@ -131,34 +144,58 @@ const checkDatasetBalance = () => {
         // Perform oversampling by duplicating samples in minority classes
         const balancedDataset = [];
         const labelSamples = {};
-        dataset.forEach(([input, label]) => {
-            balancedDataset.push([input, label]);
+        dataset.forEach(({ text, label }) => {
+            balancedDataset.push({ text, label });
             labelSamples[label] = (labelSamples[label] || 0) + 1;
             if (labelSamples[label] < desiredSampleCount && labelCounts[label] < maxLabelCount) {
-                balancedDataset.push([input, label]);
+                balancedDataset.push({ text, label });
                 labelSamples[label] = (labelSamples[label] || 0) + 1;
             }
         });
 
         // Update the dataset with the balanced dataset
         dataset = balancedDataset;
-        features = dataset.map(([input]) => input);
-        labels = dataset.map(([, label]) => label);
+        features = dataset.map((data) => data.text);
+        labels = dataset.map((data) => data.label);
 
         console.log('Balanced Dataset Size:', balancedDataset.length);
     }
 };
 
+const makePrediction = (input) => {
+    // Transform the input into TF-IDF features
+    const tfidf = new natural.TfIdf();
+    tfidf.addDocument(input);
+
+    // Calculate TF-IDF scores for the input
+    const tfidfVector = tfidfFeatures.map(document => {
+        const terms = tfidf.listTerms(document).map(term => term.term);
+        return terms.map(term => tfidf.tfidf(term, input));
+    });
+
+    // Predict the type of discrimination
+    const predictionIndex = randomForestModel.predict(tfidfVector)[0];
+    const predictedLabel = uniqueLabels[predictionIndex];
+    const discriminationType = labels[predictionIndex]; // Extract discrimination type from dataset
+
+    console.log(`Predicted Label: ${predictedLabel}`);
+    console.log(`Discrimination Type: ${discriminationType}`);
+
+    return { predictedLabel, discriminationType };
+};
+
 const makeChat = async (req, res) => {
     const { input, conversationId, userid } = req.body;
-    console.log('Request Body:', req.body); // Log the entire request body
+    console.log('Request Body:', req.body);
 
     try {
+        // Check if input is valid
         if (!input || typeof input !== 'string' || input.trim() === '') {
             return res.status(400).json({ error: "Invalid input. 'input' must be a non-empty string." });
         }
 
         let conversation;
+        // Find or create conversation based on conversationId
         if (conversationId) {
             conversation = await Chat.findById(conversationId);
         } else {
@@ -166,25 +203,20 @@ const makeChat = async (req, res) => {
             conversation.title = input;
         }
 
+        // Reset conversation history and summary if it's a new conversation
         if (!conversationId) {
-            // Only clear conversation history if it's a new conversation
             conversationHistory = [];
-            summary = ''; // Reset summary for new conversation
+            summary = '';
         }
 
         console.log(`User: ${input}`);
         conversationHistory.push({ role: 'user', content: input });
 
-        // Transform the input into TF-IDF vector
-        const terms = tfidf.listTerms(input).map(term => term.term);
-        const inputVector = {};
-        terms.forEach(term => {
-            inputVector[term] = tfidf.tfidf(term, input);
-        });
-
+        // Train the model if it's not trained yet
         if (!randomForestModel) {
             console.log('Random Forest model not trained yet. Training...');
-            updateDatasetAndModel(); // Retrain the model
+            loadTrainingData();
+            updateDatasetAndModel();
         }
 
         if (!randomForestModel) {
@@ -192,22 +224,21 @@ const makeChat = async (req, res) => {
             return res.status(500).send('Error: Random Forest model is still not available after training.');
         }
 
-        // Predict the type of discrimination
-        const predictionIndex = randomForestModel.predict([Object.values(inputVector)])[0];
-        const predictedLabel = uniqueLabels[predictionIndex];
-        const discriminationType = rawData[1][predictionIndex]; // Extract discrimination type from dataset
+        // Make prediction based on user input
+        const { predictedLabel, discriminationType } = makePrediction(input);
 
-        console.log(`Predicted Label Index: ${predictionIndex}`);
-        console.log(`Predicted Label: ${predictedLabel}`);
-        console.log(`Discrimination Type: ${discriminationType}`);
+        if (predictedLabel && discriminationType) {
+            // Append user input to dataset and retrain the model
+            appendToDatasetAndModel(input, discriminationType);
+        } else {
+            console.error('Error: Predicted label or discrimination type is null.');
+        }
 
-        // Update the dataset and model with the user input and predicted label
-        appendToDatasetAndModel(input, discriminationType);
-
-        // Set the userid for the conversation
+        // Associate conversation with user
         conversation.userid = userid;
 
-        const response = await openai.chat.completions.create({
+        // Generate AI response asynchronously
+        const responsePromise = openai.chat.completions.create({
             model: process.env.GPT_MODEL,
             messages: [
                 {
@@ -223,32 +254,45 @@ const makeChat = async (req, res) => {
             presence_penalty: 0.5,
         });
 
-        console.log(`AI: ${response.choices[0].message.content}`);
+        // Handling response asynchronously
+            responsePromise.then(async (response) => {
+            console.log(`AI: ${response.choices[0].message.content}`);
 
-                // Extract the summary from the AI response if the relevant prompt is found
-        const relevantPrompt = 'Thank you for confirming. You can now request a video conference with a lawyer by clicking the Request a Video Conference button below.';
-        const summaryIndex = response.choices[0].message.content.indexOf(relevantPrompt);
-        if (summaryIndex !== -1) {
-            summary = response.choices[0].message.content.substring(summaryIndex + relevantPrompt.length).trim();
-            console.log(`Summary: ${summary}`); // Log the summary
-        } else {
-            summary = 'No relevant summary has been detected in the conversation.'; // Set a default value for summary
-        }
+            // Extract summary from AI response
+            const relevantPrompt = 'Thank you for confirming. You can now request a video conference with a lawyer by clicking the Request a Video Conference button below.';
+            const summaryIndex = response.choices[0].message.content.indexOf(relevantPrompt);
+            if (summaryIndex !== -1) {
+                summary = response.choices[0].message.content.substring(summaryIndex + relevantPrompt.length).trim();
+                console.log(`Summary: ${summary}`);
+            } else {
+                summary = 'No relevant summary has been detected in the conversation.';
+            }
 
-        conversationHistory.push({ role: 'assistant', content: response.choices[0].message.content });
+            // Update conversation history with AI response
+            conversationHistory.push({ role: 'assistant', content: response.choices[0].message.content });
 
-        conversation.messages = conversationHistory;
+            // Update conversation data
+            conversation.messages = conversationHistory;
 
-        await conversation.save();
+            // Save conversation to database
+            await conversation.save();
 
-        const responseMessage = response.choices[0].message.content;
+            // Send AI response and summary to client
+            const responseMessage = response.choices[0].message.content;
+            res.json({ message: responseMessage, conversationId: conversation._id, summary });
+        }).catch((error) => {
+            console.error('Error generating AI response:', error);
+            res.status(500).send('Error generating AI response');
+        });
 
-        res.json({ message: responseMessage, conversationId: conversation._id, summary });
     } catch (error) {
         console.error('Error processing request:', error);
         res.status(500).send('Error processing request');
     }
 };
+
+
+
 
 const getConversationTitles = async (req, res) => {
     const { userid } = req.params; // Assuming userid is sent as a URL parameter
@@ -265,9 +309,6 @@ const getConversationTitles = async (req, res) => {
         res.status(500).send('Error fetching conversation titles');
     }
 };
-
-
-
 
 const getConversationMessages = async (req, res) => {
     const { conversationId } = req.params;
