@@ -153,9 +153,9 @@ const UserTable = () => {
       </div>
           
 
-      <div className="bg-bkg md:h-96 h-[23rem] overflow-x-auto w-full">
+      <div className="bg-bkg md:h-96 h-[23rem] overflow-x-auto">
       {/* Table on Mobile */}
-      <div className="overflow-y-scroll md:hidden block w-full">
+      <div className="overflow-y-scroll md:hidden block">
         <table className="table-auto w-full border-collapse border border-gray-200 text-xs">
           <thead>
             <tr className="bg-azure-200 bg-opacity-20">
