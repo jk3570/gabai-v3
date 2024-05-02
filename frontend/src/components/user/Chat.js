@@ -1,17 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { FaGripLinesVertical, FaMicrophone } from "react-icons/fa";
+import { FaGripLinesVertical, FaMicrophone, FaPlay, FaStop } from "react-icons/fa"; // Added FaPlay and FaStop icons
 import { BsSend } from "react-icons/bs";
 import Markdown from 'markdown-to-jsx';
-import RequestForm from '../RequestForm';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import ChatSidebar from './ChatSidebar';
-import { BaseURL } from "../../BaseURL"
 import Popup from 'reactjs-popup';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 import { MdError } from "react-icons/md";
-import Login from '../Login';
+import RequestForm from '../RequestForm';
 
+import Login from '../Login';
 
 const ChatComponent = () => {
   const { user } = useAuthContext();
@@ -38,9 +37,9 @@ const ChatComponent = () => {
   const [requestMeetingClicked, setRequestMeetingClicked] = useState(false);
   const [showRequestButton, setShowRequestButton] = useState(false);
   const [inputVisible, setInputVisible] = useState(true);
-
-    const button = "flex h-10 px-1 py-1 bg-azure text-white rounded-md justify-center items-center w-full text-xs";
-
+  const [speaking, setSpeaking] = useState(false); // Added state for tracking speech synthesis
+  const chatContentRef = useRef(null);
+const button = "flex h-10 px-1 py-1 bg-azure text-white rounded-md justify-center items-center w-full text-xs";
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
@@ -108,8 +107,6 @@ const ChatComponent = () => {
     fetchConversationTitles();
   }, []);
 
-  const chatContentRef = useRef(null);
-
   useEffect(() => {
     chatContentRef.current.scrollTop = chatContentRef.current.scrollHeight;
   }, [messages]);
@@ -126,9 +123,23 @@ const ChatComponent = () => {
     recognition.start();
   };
 
+  const speakText = (text) => {
+    const synth = window.speechSynthesis;
+    const utterance = new SpeechSynthesisUtterance(text);
+    synth.speak(utterance);
+    setSpeaking(true);
+    utterance.onend = () => {
+      setSpeaking(false);
+    };
+  };
+
+  const stopSpeaking = () => {
+    window.speechSynthesis.cancel();
+    setSpeaking(false);
+  };
+
   return (
     <div className="relative z-10 w-full h-screen flex flex-row justify-start items-start overflow-x-hidden">
-
       <div className="flex flex-row w-full h-screen bg-bkg">
         {/* Chat History Sidebar */}
         <div
@@ -155,14 +166,33 @@ const ChatComponent = () => {
         {/* Chat Conversation */}
         <div id="chat-content" className={`flex flex-col h-full ${sidebarOpen ? 'w-0 md:w-full' : 'w-full'} mx-auto max-w-4xl justify-between pt-[3.875rem] gap-3`}>
           <div ref={chatContentRef} className="h-full overflow-y-auto flex flex-col gap-2 p-5 pt-7">
-              <div className="p-5 bg-gray-400 bg-opacity-20 rounded-xl animate__animated text-content">
-                <p><b>Gab</b></p>
-                <p>Hello! I'm Gab, your online AI assistant against workplace discrimination in the Philippines. How can I assist you today?</p>
-              </div>
+            <div className="p-5 bg-gray-400 bg-opacity-20 rounded-xl animate__animated text-content">
+              <p><b>Gab</b></p>
+              <p>Hello! I'm Gab, your online AI assistant against workplace discrimination in the Philippines. How can I assist you today?</p>
+            </div>
             {messages.map((message, index) => (
               <div className="p-5 bg-gray-400 bg-opacity-20 rounded-xl animate__animated text-content" key={index}>
                 <p><b>{message.role === 'user' ? 'You' : 'Gab'}</b></p>
                 <p><Markdown>{message.content}</Markdown></p>
+                {message.role === 'assistant' && (
+                  <div className="flex items-center">
+                    {!speaking ? (
+                      <button
+                        className="text-blue-500 hover:text-blue-700"
+                        onClick={() => speakText(message.content)}
+                      >
+                        <FaPlay />
+                      </button>
+                    ) : (
+                      <button
+                        className="text-red-500 hover:text-red-700"
+                        onClick={stopSpeaking}
+                      >
+                        <FaStop />
+                      </button>
+                    )}
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -181,7 +211,6 @@ const ChatComponent = () => {
                       {closeCase => (
                         <div className="modal relative h-auto w-96 rounded-2xl bg-bkg flex flex-col justify-center items-start p-4 text-content border border-gray-200 border-opacity-20 drop-shadow-lg gap-2">
                           <div className="flex flex-col justify-center w-full gap-2">
-
                             <h1 className="font-semibold text-2xl m-0 flex items-center"><MdError className="text-3xl justify-center text-red-500 inline-block mr-2" />You are not signed in.</h1>
                             <p>Please Sign in order to access this feature.</p>
                             <div className="flex flex-row gap-2 mt-2">
@@ -247,23 +276,19 @@ const ChatComponent = () => {
                 </>
               )}
             </div>
-
-
-            {showRequestForm && 
-            <RequestForm 
-              handleNewChat={handleNewChat}
-              handleConversationClick={handleConversationClick}
-              conversationTitles={conversationTitles}
-              toggleSidebar={toggleSidebar}
-              showRequestButton={showRequestButton} 
-              setShowRequestButton={setShowRequestButton} 
-              inputVisible={inputVisible} 
-              setInputVisible={setInputVisible}
-              summary={summary} 
-              onClose={() => { setShowRequestForm(false); setRequestMeetingClicked(false); }} 
-              
+            {showRequestForm &&
+              <RequestForm
+                handleNewChat={handleNewChat}
+                handleConversationClick={handleConversationClick}
+                conversationTitles={conversationTitles}
+                toggleSidebar={toggleSidebar}
+                showRequestButton={showRequestButton}
+                setShowRequestButton={setShowRequestButton}
+                inputVisible={inputVisible}
+                setInputVisible={setInputVisible}
+                summary={summary}
+                onClose={() => { setShowRequestForm(false); setRequestMeetingClicked(false); }}
               />}
-          
           </div>
         </div>
       </div>
@@ -272,5 +297,3 @@ const ChatComponent = () => {
 };
 
 export default ChatComponent;
-
-

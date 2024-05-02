@@ -6,13 +6,13 @@ import toast, { Toaster } from 'react-hot-toast';
 
 import { BaseURL } from '../BaseURL'
 
-<<<<<<< HEAD
-const RequestForm = ({ conversationId, summary, onClose }) => {
 
-        const [formConversationId, setConversationId] = useState(conversationId)
-=======
-const RequestForm = ({ summary, onClose, handleNewChat, handleConversationClick, conversationTitles, toggleSidebar,showRequestButton, setShowRequestButton, inputVisible, setInputVisible }) => {
->>>>>>> 66d9aea27e57047e66a79694b7f9703669c843e7
+
+const RequestForm = ({ summary, onClose, handleNewChat, handleConversationClick, conversationTitles, toggleSidebar,showRequestButton, setShowRequestButton, inputVisible, setInputVisible, conversationId }) => {
+
+            const [formConversationId, setConversationId] = useState(conversationId)
+
+
         const [formSummary, setFormSummary] = useState(summary);
         const [isChecked, setIsChecked] = useState(false);
         const [firstModalOpen, setFirstModalOpen] = useState(true);

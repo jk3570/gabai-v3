@@ -8,6 +8,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { BaseURL } from '../../BaseURL'
+import toast, { Toaster } from "react-hot-toast";
   
 import JoinScreen from "../../components/lawyer/video-call/JoinScreen";
 import MeetingView from "../../components/lawyer/video-call/MeetingView";
@@ -72,7 +73,11 @@ const LawyerRequestTable = () => {
     setMeetingId(meetingId);
     setMyId(meetingId);
     setIsMeetingIdGenerated(true);
-    alert("Meeting ID Generated")
+      toast.success("Meeting ID Generated!", {
+        position: "top-center",
+        duration: 5000,
+
+      })
   };
 
   const handleSubmit = async (event, user) => {
@@ -259,10 +264,14 @@ const LawyerRequestTable = () => {
 
   return (
     <div className="relative z-10 w-full py-[3.875rem] flex flex-col justify-start items-start min-h-screen max-md:p-1 bg-bkg text-content">
+    <div>
+                  <Toaster position="bottom-center" />
+                </div>
       <div id="main-content" className="flex flex-col w-full mx-auto max-w-7xl gap-3 md:pt-0 pt-14">
         <div className="flex flex-row-1 justify-between items-center mt-4">
           <h1 className="md:text-2xl text-xl font-semibold text-nowrap my-0">Request Queue</h1>
         </div>
+                
 
         <div className="bg-bkg md:h-96 h-[30rem] overflow-x-auto">
           {/* Table on Mobile */}
