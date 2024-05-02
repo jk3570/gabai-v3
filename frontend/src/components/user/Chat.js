@@ -148,6 +148,10 @@ const ChatComponent = () => {
         {/* Chat Conversation */}
         <div id="chat-content" className={`flex flex-col h-full ${sidebarOpen ? 'w-0 md:w-full' : 'w-full'} mx-auto max-w-4xl justify-between pt-[3.875rem] gap-3`}>
           <div ref={chatContentRef} className="h-full overflow-y-auto flex flex-col gap-2 p-5 pt-7">
+              <div className="p-5 bg-gray-400 bg-opacity-20 rounded-xl animate__animated text-content">
+                <p><b>Gab</b></p>
+                <p>Hello! I'm Gab, your online AI assistant against workplace discrimination in the Philippines. How can I assist you today?</p>
+              </div>
             {messages.map((message, index) => (
               <div className="p-5 bg-gray-400 bg-opacity-20 rounded-xl animate__animated text-content" key={index}>
                 <p><b>{message.role === 'user' ? 'You' : 'Gab'}</b></p>
@@ -229,7 +233,20 @@ const ChatComponent = () => {
                 </>
               )}
             </div>
-            {showRequestForm && <RequestForm summary={summary} onClose={() => { setShowRequestForm(false); setRequestMeetingClicked(false); }} />}
+            {showRequestForm && 
+            <RequestForm 
+              handleNewChat={handleNewChat}
+              handleConversationClick={handleConversationClick}
+              conversationTitles={conversationTitles}
+              toggleSidebar={toggleSidebar}
+              showRequestButton={showRequestButton} 
+              setShowRequestButton={setShowRequestButton} 
+              inputVisible={inputVisible} 
+              setInputVisible={setInputVisible}
+              summary={summary} 
+              onClose={() => { setShowRequestForm(false); setRequestMeetingClicked(false); }} 
+              
+              />}
             
           </div>
         </div>

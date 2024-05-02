@@ -10,7 +10,6 @@ import AllDemo from "../../components/admin/AllDemo";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import TotalList from "../../components/admin/TotalList";
-import AllDemo from "../../components/admin/AllDemo";
 import "../../css/admin-dashboard.css";
 import { BaseURL } from "../../BaseURL";
 import iconAzure from "../../img/iconAzure.png";
