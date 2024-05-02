@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 
+import toast, { Toaster } from 'react-hot-toast';
+
 const Home = () => {
     const navigate = useNavigate();
     const { user, setUser } = useAuthContext();
@@ -12,16 +14,19 @@ const Home = () => {
         if (user) {
             switch (myrole) {
                 case "user":
-                    // navigate("/user-landingpage");
-                    navigate("/user/home");
+                    toast.success('Login successful!', { duration: 5000 });
+                    navigate("/user");
                     break;
                 case "lawyer":
+                    toast.success('Login successful!', { duration: 5000 });
                     navigate("/lawyer");
                     break;
                 case "admin":
+                    toast.success('Login successful!', { duration: 5000 });
                     navigate("/admin");
                     break;
                 default:
+                    toast.error('Login error!');
                     navigate("/");
                     break;
             }

@@ -3,6 +3,7 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import React, { useState, useEffect } from "react";
 import Helmet from "react-helmet";
 import { Link } from "react-router-dom";
+import toast, { Toaster } from 'react-hot-toast';
 
 // Components
 import UserSection1 from "../../components/user/UserSection1";
@@ -24,6 +25,15 @@ const UserLandingPage = () => {
       setActiveSection(sectionId);
     };
 
+    /* useEffect(() => {
+      // Check if the user just logged in (you can use a state variable or context for this)
+      const justLoggedIn = true; // Change this to your actual logic
+      if (justLoggedIn) {
+          // Display toast notification for successful login
+          toast.success('Login successful!!!');
+      }
+  }, []); */ // Empty dependency array ensures the effect runs only once, when component mounts
+
     const page = "";
     const pageContent = "w-full h-full relative max-w-4xl px-5 center mx-auto";
 
@@ -35,9 +45,9 @@ const UserLandingPage = () => {
       <Helmet>
         <title>Home | GabAi</title>
       </Helmet>            
-
+         <Toaster />
             <div className="w-full h-screen bg-bkg flex flex-col items-center overflow-x-hidden">
-
+           
                 <div class="fixed w-screen h-screen z-0">
                         <img 
                         id="backgroundImage" 

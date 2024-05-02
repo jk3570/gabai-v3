@@ -37,7 +37,7 @@ function Sex() {
   }));
 
   return (
-    <div className="flex flex-row gap-1 items-center justify-center text-azure">
+    <div className="flex flex-col md:flex-row gap-1 items-center justify-center text-azure">
       <div>
         {/* Bar Graph */}
         <BarChart

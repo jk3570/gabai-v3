@@ -27,7 +27,7 @@ function Sex() {
   const lgbtqCount = countsByGender.find(item => item._id === "LGBTQ")?.count || 0;
 
   return (
-    <div className="flex flex-row gap-1 items-center justify-center">
+    <div className="flex flex-col md:flex-row gap-1 items-center justify-center">
       <div>
         {/* Bar Graph */}
         <BarChart

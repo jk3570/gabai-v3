@@ -2,6 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 
 import { Link } from "react-router-dom";
+import toast, { Toaster } from 'react-hot-toast';
 
 import { HiMiniQueueList } from "react-icons/hi2";
 import { AiFillSchedule } from "react-icons/ai";
@@ -20,7 +21,7 @@ function LawyerDashboard() {
             {/* Title of the Page */}
             <title>Lawyer Dashboard - GabAi</title>
           </Helmet>
-
+          <Toaster />
         <div className="relative z-10 w-full py-[3.875rem] flex flex-col justify-start min-h-screen max-md:p-1 bg-bkg text-content">
             <div id="main-content" className="flex flex-col w-full mx-auto max-w-5xl">
               {/* Contents */}
