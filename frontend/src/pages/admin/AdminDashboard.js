@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Helmet } from "react-helmet";
+
+import toast, { Toaster } from 'react-hot-toast';
+
+//components and pages
+import Sidebar from "../../components/admin/AdminSidebar.js";
+import AllDemo from "../../components/admin/AllDemo";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import TotalList from "../../components/admin/TotalList";
-import AllDemo from "../../components/admin/AllDemo";
 import "../../css/admin-dashboard.css";
 import { BaseURL } from "../../BaseURL";
 import iconAzure from "../../img/iconAzure.png";
@@ -314,6 +319,7 @@ function AdminDashboard() {
       <Helmet>
         <title>Admin Dashboard - GabAi</title>
       </Helmet>
+      <Toaster />
       <div className="relative z-10 w-full mt-[4rem] md:mt-[3.875rem] flex flex-col justify-start items-center min-h-screen max-md:p-1 bg-bkg text-content">
         <div id="main-content" className="flex flex-col w-full mx-auto max-w-5xl">
           <div className="mt-0">

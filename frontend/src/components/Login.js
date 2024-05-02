@@ -15,6 +15,8 @@ import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import { useCheckIfUserExists } from "../hooks/ifUserExists";
 
+import toast, { Toaster } from 'react-hot-toast';
+
 const Login = ({ setLoginSuccess }) => {
   const { user } = useAuthContext();
   const [identifier, setIdentifier] = useState("");
@@ -60,6 +62,7 @@ const Login = ({ setLoginSuccess }) => {
       }
     } else if (!error || error === false || error === null) {
       navigate("/login-routes");
+      
     }
 
     console.log(`error: ${error}`);
@@ -123,6 +126,7 @@ const Login = ({ setLoginSuccess }) => {
     "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-center items-center w-full text-sm";
 
   return (
+    <>
     <Popup
       trigger={
         <div className="flex w-full h-full items-center justify-center">
@@ -245,6 +249,7 @@ const Login = ({ setLoginSuccess }) => {
         </div>
       )}
     </Popup>
+    </>
   );
 };
 

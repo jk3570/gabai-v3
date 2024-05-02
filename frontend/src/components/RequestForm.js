@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
+import Popup from "reactjs-popup";
 import axios from "axios";
 import { useAuthContext } from "../hooks/useAuthContext";
 import toast, { Toaster } from 'react-hot-toast';
 
 import { BaseURL } from '../BaseURL'
 
-const RequestForm = ({ summary, onClose }) => {
+const RequestForm = ({ summary, onClose, handleNewChat, handleConversationClick, conversationTitles, toggleSidebar,showRequestButton, setShowRequestButton, inputVisible, setInputVisible }) => {
         const [formSummary, setFormSummary] = useState(summary);
         const [isChecked, setIsChecked] = useState(false);
         const [firstModalOpen, setFirstModalOpen] = useState(true);
@@ -37,6 +38,7 @@ const RequestForm = ({ summary, onClose }) => {
     const [barangay, setBarangay] = useState(user ? user.barangay : '');
     const [address, setAddress] = useState(`${region}, ${province}, ${city}, ${barangay}`);
     const [isLoading, setIsLoading] = useState(false);
+    const [showPopup, setShowPopup] = useState(false); 
 
 
     const input = "flex h-10 w-full rounded-md border border-input bg-gray-400 bg-opacity-20 px-3 py-2 text-xs text-content ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
@@ -62,9 +64,7 @@ const RequestForm = ({ summary, onClose }) => {
         });
         setIsLoading(false);
         successNotif();
-        setTimeout(() => {
-            onClose(); // Close the modal
-        }, 1000);
+        setShowPopup(true);
     } catch (error) {
         setIsLoading(false);
         console.error(error);
@@ -167,6 +167,27 @@ const RequestForm = ({ summary, onClose }) => {
             </div>
         </div>
         )}
+
+        {/* Popup */}
+        {showPopup && (
+                <div className="fixed z-50 top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
+                    <div className="modal relative z-10 h-auto w-[70%] sm:w-[55%] md:w-[50%] lg:w-[45%] xl:w-[35%] rounded-2xl bg-bkg text-content flex flex-col justify-center items-start pt-7 p-6 gap-2">
+                        <h1 className="my-0 text-xl font-bold">Request submitted successfully!</h1>
+                        <p>Your request has been sent and is waiting to be accepted by an available lawyer. Please wait 5-7 days.</p>
+                        <p>Would you like to initiate a new conversation with Gab?</p><br/>
+                        <button type="button" className={cancelButton} 
+                        onClick={() => { 
+                            setShowPopup(false); 
+                            onClose(); 
+                            handleNewChat();
+                            setInputVisible(true); // Show the input field
+                            setShowRequestButton(false); // Hide the buttons
+                            }}>
+                            New Chat
+                        </button>
+                    </div>
+                </div>
+            )}
     </div>
     );
 };

@@ -41,7 +41,7 @@ function AllDemo() {
         </div>
       <div className="flex flex-col w-full h-fit rounded-xl bg-white bg-opacity-50">     
         {/* TODO: Graph */}
-        <div id="center" className="flex flex-col w-full bg-opacity-50 p-2 border-azure rounded-b-xl text-content md:scale-100 scale-50 justify-center items-center">
+        <div id="center" className="flex flex-col w-full bg-opacity-50 p-2 border-azure rounded-b-xl text-content justify-center items-center">
           {currentPage === "gender" && <GenderDemo />}
           {currentPage === "location" && <LocationDemo />}
           {currentPage === "age" && <AgeDemo />}
