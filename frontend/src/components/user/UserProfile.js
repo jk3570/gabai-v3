@@ -97,7 +97,7 @@ const UserProfile = () => {
                                 </div>
                                  <div>
                                     <label className={label}>Email</label>
-                                    <input type="text" id="firstName" placeholder="Email" className={input} onKeyDown={handleKeyDown} value={username}/>
+                                    <input type="text" id="firstName" placeholder="Email" className={input} onKeyDown={handleKeyDown} value={email}/>
                                 </div>
                                 <div>
                                     <label className={label}>First Name</label>

@@ -38,7 +38,7 @@ function AdminDashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${BaseURL}/user/countsByAge`);
+        const response = await axios.get(`http://localhost:4000/user/countsByAge`);
         setCountsByAge(response.data);
       } catch (err) {
         console.error(err);
@@ -52,7 +52,7 @@ function AdminDashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${BaseURL}/user/countsByRegion`);
+        const response = await axios.get(`http://localhost:4000/user/countsByRegion`);
         setCountsByRegion(response.data);
       } catch (err) {
         console.error(err);
@@ -66,7 +66,7 @@ function AdminDashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${BaseURL}/user/countsByGender`);
+        const response = await axios.get(`http://localhost:4000/user/countsByGender`);
         setCountsByGender(response.data);
       } catch (err) {
         console.error(err);
@@ -78,7 +78,7 @@ function AdminDashboard() {
   
   // Fetch total user count from the server
   useEffect(() => {
-    axios.get(`${BaseURL}/user/total`)
+    axios.get(`http://localhost:4000/user/total`)
       .then(response => {
         setTotalUsers(response.data.totalUsers);
       })
@@ -89,7 +89,7 @@ function AdminDashboard() {
 
   //form cases
   useEffect(() => {
-    axios.get(`${BaseURL}/form/total`)
+    axios.get(`http://localhost:4000/form/total`)
       .then(response => {
         setTotalForms(response.data.totalForms);
       })
@@ -100,7 +100,7 @@ function AdminDashboard() {
 
 //accept cases
   useEffect(() => {
-    axios.get(`${BaseURL}/accept/total`)
+    axios.get(`http://localhost:4000/accept/total`)
       .then(response => {
         setTotalAccepts(response.data.totalAccepts);
       })
@@ -111,7 +111,7 @@ function AdminDashboard() {
 
 //request cases
   useEffect(() => {
-    axios.get(`${BaseURL}/archive/total`)
+    axios.get(`http://localhost:4000/archive/total`)
       .then(response => {
         setTotalArchives(response.data.totalArchives);
       })
@@ -167,43 +167,64 @@ function AdminDashboard() {
       }
     });
 
- countsByRegion.forEach(item => {
-    if (item._id === "Region I (Ilocos Region)") {
-      userData.region1 = item.count;
-    } else if (item._id === "Region II (Cagayan Valley)") {
-      userData.region2 = item.count;
-    } else if (item._id === "Region III (Central Luzon)") {
-      userData.region3 = item.count;
-    } else if (item._id === "Region IV-A (CALABARZON)") {
-      userData.region4a = item.count;
-    } else if (item._id === "Region IV-B (MIMAROPA)") {
-      userData.region4b = item.count;
-    } else if (item._id === "Region V (Bicol Region)") {
-      userData.region5 = item.count;
-    } else if (item._id === "Region VI (Western Visayas)") {
-      userData.region6 = item.count;
-    } else if (item._id === "Region VII (Central Visayas)") {
-      userData.region7 = item.count;
-    } else if (item._id === "Region VIII (Eastern Visayas) ") {
-      userData.region8 = item.count;
-    } else if (item._id === "Region IX (Zamboanga Peninzula)") {
-      userData.region9 = item.count;
-    } else if (item._id === "Region X (Northern Mindanao)") {
-      userData.region10 = item.count;
-    } else if (item._id === "Region XI (Davao Region)") {
-      userData.region11 = item.count;
-    } else if (item._id === "Region XII (SOCCSKSARGEN)  ") {
-      userData.region12 = item.count;
-    } else if (item._id === "National Capital Region (NCR)") {
-      userData.ncr = item.count;
-    } else if (item._id === "Cordillera Administrative Region (CAR)") {
-      userData.createPdf = item.count;
-    } else if (item._id === "Autonomous Region in Muslim Mindanao (ARMM)") {
-      userData.armm = item.count;
-    } else if (item._id === "Region XIII (Caraga)") {
-      userData.caraga = item.count;
-    }
-  });
+    // Update userData with region distribution from countsByRegion
+    countsByRegion.forEach(item => {
+      switch(item._id) {
+        case "Region I (Ilocos Region)":
+          userData.region1 = item.count;
+          break;
+        case "Region II (Cagayan Valley)":
+          userData.region2 = item.count;
+          break;
+        case "Region III (Central Luzon)":
+          userData.region3 = item.count;
+          break;
+        case "Region IV-A (CALABARZON)":
+          userData.region4a = item.count;
+          break;
+        case "Region IV-B (MIMAROPA)":
+          userData.region4b = item.count;
+          break;
+        case "Region V (Bicol Region)":
+          userData.region5 = item.count;
+          break;
+        case "Region VI (Western Visayas)":
+          userData.region6 = item.count;
+          break;
+        case "Region VII (Central Visayas)":
+          userData.region7 = item.count;
+          break;
+        case "Region VIII (Eastern Visayas)":
+          userData.region8 = item.count;
+          break;
+        case "Region IX (Zamboanga Peninzula)":
+          userData.region9 = item.count;
+          break;
+        case "Region X (Northern Mindanao)":
+          userData.region10 = item.count;
+          break;
+        case "Region XI (Davao Region)":
+          userData.region11 = item.count;
+          break;
+        case "Region XII (SOCCSKSARGEN)":
+          userData.region12 = item.count;
+          break;
+        case "National Capital Region (NCR)":
+          userData.regionncr = item.count;
+          break;
+        case "Cordillera Administrative Region (CAR)":
+          userData.regioncar = item.count;
+          break;
+        case "Autonomous Region in Muslim Mindanao (ARMM)":
+          userData.regionarmm = item.count;
+          break;
+        case "Region XIII (CARAGA)":
+          userData.regioncaraga = item.count;
+          break;
+        default:
+          break;
+      }
+    });
 
     // Update userData with age distribution from countsByAge
     Object.entries(countsByAge).forEach(([ageRange, count]) => {
@@ -231,9 +252,6 @@ function AdminDashboard() {
       }
     });
 
-    const caseData = {
-      totalCases: 0,
-    };
     const currentDate = new Date().toLocaleDateString();
     const currentTime = new Date().toLocaleTimeString();
 
@@ -245,22 +263,26 @@ function AdminDashboard() {
         { text: `Time: ${currentTime}`, style: "generate" },
         { text: `Total Users: ${userData.totalUsers}`, margin: [0, 10, 0, 0] },
         { text: `Total Cases: ${userData.totalCases}`, margin: [0, 5, 0, 0] },
-
-        { text: `Gender Distribution:
+        {
+          text: `Gender Distribution:
           • Male: ${userData.male}
           • Female: ${userData.female}
           • Prefer Not to Say: ${userData.preferNotToSay}
-          • LGBTQ+: ${userData.lgbtq}`, margin: [0, 5, 0, 0] },
-      
-        { text: `Age Distribution:
+          • LGBTQ+: ${userData.lgbtq}`,
+          margin: [0, 5, 0, 0]
+        },
+        {
+          text: `Age Distribution:
           • 18-20: ${userData.age1820}
           • 21-30: ${userData.age2130}
           • 31-40: ${userData.age3140}
           • 41-50: ${userData.age4150}
           • 51-60: ${userData.age5160}
-          • 60 and above: ${userData.age60Above}`, margin: [0, 5, 0, 0] },
-
-       { text: `Location Distribution (Region):
+          • 60 and above: ${userData.age60Above}`,
+          margin: [0, 5, 0, 0]
+        },
+        {
+          text: `Location Distribution (Region):
           • Region I (Ilocos Region): ${userData.region1}
           • Region II (Cagayan Valley): ${userData.region2}
           • Region III (Central Luzon): ${userData.region3}
@@ -277,8 +299,9 @@ function AdminDashboard() {
           • National Capital Region (NCR): ${userData.regionncr}
           • Cordillera Administrative Region (CAR): ${userData.regioncar}
           • Autonomous Region in Muslim Mindanao (ARMM): ${userData.regionarmm}
-          • Region XIII (CARAGA): ${userData.regioncaraga}
-          `, margin: [0, 5, 0, 0] },
+          • Region XIII (CARAGA): ${userData.regioncaraga}`,
+          margin: [0, 5, 0, 0]
+        },
         {
           text:
             "This report presents information on the current demographics of GabAi. It outlines the total count of individuals, the breakdown of gender, total cases reported, age demographics, and geographical (region) distribution. By grasping these elements, proactive steps can be implemented to tackle discrimination and foster diversity and inclusivity within the workplace in the Philippines.",
@@ -293,11 +316,6 @@ function AdminDashboard() {
           alignment: "center",
           margin: [0, 0, 0, 10],
         },
-        subheader: {
-          fontSize: 12,
-          bold: true,
-          margin: [0, 10, 0, 5],
-        },
         generate: {
           fontSize: 10,
           bold: false,
@@ -306,7 +324,7 @@ function AdminDashboard() {
       },
     };
 
-    pdfMake.createPdf(docDefinition).download(`data_summary_report_${currentDate}_${currentTime}.pdf`);
+    pdfMake.createPdf(docDefinition).open();
   };
 
   return (

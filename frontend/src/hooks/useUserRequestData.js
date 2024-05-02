@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react';
 import { BaseURL } from '../BaseURL'
 
-const useUserRequestData = () => {
+const useUserRequestData = (userid) => {
   const [userRequestData, setUserRequestData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loadingPending, setLoadingPending] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(`${BaseURL}/form/all-requests`); 
+        const response = await fetch(`http://localhost:4000/form/all-requests/${userid}`); 
         const data = await response.json();
         setUserRequestData(data);
-        setLoading(false);
+        setLoadingPending(false);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -21,7 +21,7 @@ const useUserRequestData = () => {
 
   }, []);
 
-  return { userRequestData, loading };
+  return { userRequestData, loadingPending };
 };
 
 export default useUserRequestData;

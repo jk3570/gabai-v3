@@ -21,7 +21,7 @@ const PasswordReset = ({ userData }) => {
   useEffect(() => {
     const fetchUserEmail = async () => {
       try {
-        const response = await axios.get(`${BaseURL}/reset/find/${id}`);
+        const response = await axios.get(`http://localhost:4000/reset/find/${id}`);
         setUserEmail(response.data.email);
       } catch (error) {
         console.error("Error fetching user email:", error);
@@ -41,7 +41,7 @@ const PasswordReset = ({ userData }) => {
     const newPassword = event.target.newPassword.value;
 
     try {
-      await axios.put(`${BaseURL}/user/update-password/${id}`, {
+      await axios.put(`http://localhost:4000/user/update-password/${id}`, {
         newPassword,
       });
       alert("Password updated successfully");

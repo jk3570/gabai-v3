@@ -17,7 +17,7 @@ const ChatSidebar = ({ handleNewChat, handleConversationClick, conversationTitle
 
  useEffect(() => {
     // Fetch conversation titles from the server
-    axios.get(`${BaseURL}/gab/conversations/${userid}`)
+    axios.get(`http://localhost:4000/gab/conversations/${userid}`)
       .then(response => {
       })
       .catch(error => console.error('Error fetching conversation titles:', error));

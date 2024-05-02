@@ -26,7 +26,7 @@ const LawyerArchives = () => {
   useEffect(() => {
     async function fetchRequests() {
       try {
-        const response = await fetch (`${BaseURL}/archive/schedule`);
+        const response = await fetch (`http://localhost:4000/archive/schedule`);
         //  console.log("Response Data:", response.data); 
         const data = await response.json();
         //  console.log("User email:", user.email); 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { FaGripLinesVertical } from "react-icons/fa";
+import { FaGripLinesVertical, FaMicrophone } from "react-icons/fa";
 import { BsSend } from "react-icons/bs";
 import Markdown from 'markdown-to-jsx';
 import RequestForm from '../RequestForm';
@@ -8,7 +8,6 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import ChatSidebar from './ChatSidebar';
 import { BaseURL } from "../../BaseURL"
 import Popup from 'reactjs-popup';
-import { Link } from 'react-router-dom';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 import { MdError } from "react-icons/md";
 import Login from '../Login';
@@ -18,17 +17,16 @@ const ChatComponent = () => {
   const { user } = useAuthContext();
 
   function generateRandomId(length) {
-  const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  let randomId = '';
-  for (let i = 0; i < length; i++) {
-    const randomIndex = Math.floor(Math.random() * charset.length);
-    randomId += charset[randomIndex];
+    const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let randomId = '';
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * charset.length);
+      randomId += charset[randomIndex];
+    }
+    return randomId;
   }
-  return randomId;
-}
 
   const userid = user?.userid || generateRandomId(8);
-  // console.log(userid)
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isSendDisabled, setIsSendDisabled] = useState(true);
@@ -39,11 +37,9 @@ const ChatComponent = () => {
   const [showRequestForm, setShowRequestForm] = useState(false);
   const [requestMeetingClicked, setRequestMeetingClicked] = useState(false);
   const [showRequestButton, setShowRequestButton] = useState(false);
-  const [inputVisible, setInputVisible] = useState(true); // State to control input visibility
-  
-  const button = "flex h-10 px-1 py-1 bg-azure text-white rounded-md justify-center items-center w-full text-xs";
-  const cancelButton = "flex h-10 px-3 py-2 bg-white text-azure border border-azure rounded-md justify-center items-center w-full text-sm";
-  const label = "block font-normal text-sm";
+  const [inputVisible, setInputVisible] = useState(true);
+
+    const button = "flex h-10 px-1 py-1 bg-azure text-white rounded-md justify-center items-center w-full text-xs";
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -57,7 +53,7 @@ const ChatComponent = () => {
   };
 
   const fetchConversationTitles = () => {
-    axios.get(`${BaseURL}/gab/conversations/${userid}`)
+    axios.get(`http://localhost:4000/gab/conversations/${userid}`)
       .then(response => {
         setConversationTitles(response.data);
       })
@@ -65,7 +61,7 @@ const ChatComponent = () => {
   };
 
   const handleConversationClick = (conversationId) => {
-    axios.get(`${BaseURL}/gab/conversation/${conversationId}`)
+    axios.get(`http://localhost:4000/gab/conversation/${conversationId}`)
       .then(response => {
         setMessages(response.data.messages);
         setConversationId(conversationId);
@@ -79,7 +75,7 @@ const ChatComponent = () => {
       setMessages(prevMessages => [...prevMessages, newMessage]);
       setInput('');
 
-      axios.post(`${BaseURL}/gab/conversation`, { input, conversationId, userid: userid})
+      axios.post(`http://localhost:4000/gab/conversation`, { input, conversationId, userid: userid })
         .then(response => {
           const aiMessage = { role: 'assistant', content: response.data.message };
           setMessages(prevMessages => [...prevMessages, aiMessage]);
@@ -90,11 +86,11 @@ const ChatComponent = () => {
 
           setSummary(response.data.summary);
           if (
-              response.data.message.includes("Thank you for confirming. You can now request a video conference") || 
-              response.data.message.includes("Salamat sa pagkumpirma. Maaari ka nang humiling ng isang video conference")
+            response.data.message.includes("Thank you for confirming. You can now request a video conference") ||
+            response.data.message.includes("Salamat sa pagkumpirma. Maaari ka nang humiling ng isang video conference")
           ) {
-              setShowRequestButton(true);
-              setInputVisible(false); // Hide the input field
+            setShowRequestButton(true);
+            setInputVisible(false);
           }
 
         })
@@ -115,9 +111,20 @@ const ChatComponent = () => {
   const chatContentRef = useRef(null);
 
   useEffect(() => {
-    // Scrolls to the bottom of the chat container
     chatContentRef.current.scrollTop = chatContentRef.current.scrollHeight;
-  }, [messages]); // Re-runs when messages change
+  }, [messages]);
+
+  const handleSpeechToText = () => {
+    const recognition = new window.webkitSpeechRecognition();
+    recognition.lang = 'en-US';
+
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      setInput(transcript);
+    };
+
+    recognition.start();
+  };
 
   return (
     <div className="relative z-10 w-full h-screen flex flex-row justify-start items-start overflow-x-hidden">
@@ -133,9 +140,9 @@ const ChatComponent = () => {
             handleConversationClick={handleConversationClick}
             conversationTitles={conversationTitles}
             toggleSidebar={toggleSidebar}
-            showRequestButton={showRequestButton} 
-            setShowRequestButton={setShowRequestButton} 
-            inputVisible={inputVisible} 
+            showRequestButton={showRequestButton}
+            setShowRequestButton={setShowRequestButton}
+            inputVisible={inputVisible}
             setInputVisible={setInputVisible}
           />
         </div>
@@ -160,35 +167,35 @@ const ChatComponent = () => {
             <div className="flex flex-col justify-center items-center w-full px-3">
               {showRequestButton && !requestMeetingClicked ? (
                 <>
-                  {user ? 
-                  <button className="flex h-10 w-full md:w-[50%] px-3 py-2 bg-azure text-white rounded-md justify-center items-center text-sm transition-all duration-100 ease-in-out hover:bg-azure-300" onClick={() => setShowRequestForm(true) || setRequestMeetingClicked(true)}>
-                    Request a video conference</button>
-                  :                   
-                  <Popup trigger={
-                  <button className="flex h-10 w-full md:w-[50%] px-3 py-2 bg-azure text-white rounded-md justify-center items-center text-sm transition-all duration-100 ease-in-out hover:bg-azure-300">Request a video conference</button>
-                  } modal>
-                  {closeCase => (
-                    <div className="modal relative h-auto w-96 rounded-2xl bg-bkg flex flex-col justify-center items-start p-4 text-content border border-gray-200 border-opacity-20 drop-shadow-lg gap-2">
-                      <div className="flex flex-col justify-center w-full gap-2">
-                        
-                        <h1 className="font-semibold text-2xl m-0 flex items-center"><MdError className="text-3xl justify-center text-red-500 inline-block mr-2"/>You are not signed in.</h1>
-                        <p>Please Sign in order to access this feature.</p>
-                        <div className="flex flex-row gap-2 mt-2">
-                          {/* <button className={cancelButton}><Login /></button> */}
-                          <button className={button} onClick={closeCase}>I understand</button>
+                  {user ?
+                    <button className="flex h-10 w-full md:w-[50%] px-3 py-2 bg-azure text-white rounded-md justify-center items-center text-sm transition-all duration-100 ease-in-out hover:bg-azure-300" onClick={() => setShowRequestForm(true) || setRequestMeetingClicked(true)}>
+                      Request a video conference</button>
+                    :
+                    <Popup trigger={
+                      <button className="flex h-10 w-full md:w-[50%] px-3 py-2 bg-azure text-white rounded-md justify-center items-center text-sm transition-all duration-100 ease-in-out hover:bg-azure-300">Request a video conference</button>
+                    } modal>
+                      {closeCase => (
+                        <div className="modal relative h-auto w-96 rounded-2xl bg-bkg flex flex-col justify-center items-start p-4 text-content border border-gray-200 border-opacity-20 drop-shadow-lg gap-2">
+                          <div className="flex flex-col justify-center w-full gap-2">
+
+                            <h1 className="font-semibold text-2xl m-0 flex items-center"><MdError className="text-3xl justify-center text-red-500 inline-block mr-2" />You are not signed in.</h1>
+                            <p>Please Sign in order to access this feature.</p>
+                            <div className="flex flex-row gap-2 mt-2">
+                              {/* <button className={cancelButton}><Login /></button> */}
+                              <button className={button} onClick={closeCase}>I understand</button>
+                            </div>
+                          </div>
+                          <button className="absolute top-2 right-2" onClick={closeCase}>
+                            <IoIosCloseCircleOutline size={24} />
+                          </button>
                         </div>
-                      </div>
-                      <button className="absolute top-2 right-2" onClick={closeCase}>
-                          <IoIosCloseCircleOutline size={24} />
-                      </button>
-                    </div>
-                  )}
-                  </Popup>
+                      )}
+                    </Popup>
                   }
 
                   <button className="flex h-10 w-full md:w-[50%] px-3 py-2 bg-white border border-azure text-azure rounded-md justify-center items-center text-sm transition-all duration-100 ease-in-out my-2" onClick={() => {
-                    setInputVisible(true); // Show the input field
-                    setShowRequestButton(false); // Hide the buttons
+                    setInputVisible(true);
+                    setShowRequestButton(false);
                   }}>Continue the conversation</button>
                 </>
               ) : (
@@ -201,6 +208,13 @@ const ChatComponent = () => {
                       }}
                       className="flex flex-row gap-1 bottom-0 w-full py-2 px-2"
                     >
+                      <button
+                        type="button"
+                        className="p-2 text-gray-500 hover:text-gray-700"
+                        onClick={handleSpeechToText}
+                      >
+                        <FaMicrophone className="h-6 w-6" />
+                      </button>
                       <input
                         type="text"
                         value={input}
@@ -230,7 +244,7 @@ const ChatComponent = () => {
               )}
             </div>
             {showRequestForm && <RequestForm summary={summary} onClose={() => { setShowRequestForm(false); setRequestMeetingClicked(false); }} />}
-            
+
           </div>
         </div>
       </div>
@@ -239,3 +253,5 @@ const ChatComponent = () => {
 };
 
 export default ChatComponent;
+
+

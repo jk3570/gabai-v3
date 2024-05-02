@@ -11,9 +11,9 @@ const requestForm = async (req, res) => {
 
     try {
         // Extract the fields you want to save
-        const { userid, firstname, lastname, email, address, summary } = req.body;
+        const { userid, firstname, lastname, email, address, summary, conversationId, createdAt = "", createdTime = "" } = req.body;
         // Use the extracted fields to create a new Request instance
-        const newData = new Request({ userid, firstname, lastname, email, address, summary });
+        const newData = new Request({ userid, firstname, lastname, email, address, summary, conversationId, createdAt, createdTime });
         await newData.save();
         res.status(201).json({ message: 'Request submitted successfully' });
     } catch (error) {
@@ -23,16 +23,29 @@ const requestForm = async (req, res) => {
 };
 
 
-// Get all requests
+// Function to handle fetching all data
 const getAllRequest = async (req, res) => {
     try {
-        const requests = await Request.find();
-        res.status(200).json(requests);
-    } catch (error) {
-        console.error('Error fetching requests:', error);
-        res.status(500).json({ error: 'Internal server error' });
-    }
+    // Retrieve the userid from the request parameters
+    const { userid } = req.params;
+    const requestspending = await Request.find({userid:userid});
+    res.status(200).json(requestspending);
+  } catch (error) {
+    console.error('Error fetching requests:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 };
+
+const getAllRequestLawyer = async (req, res) => {
+    try {
+    const requestspending = await Request.find();
+    res.status(200).json(requestspending);
+  } catch (error) {
+    console.error('Error fetching requests:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
 
 // Get total number of cases
 const totalForms = async (req, res) => {
@@ -60,4 +73,4 @@ const deleteRequest = async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 };
-module.exports = { requestForm, getAllRequest, totalForms, deleteRequest };
+module.exports = { requestForm, getAllRequest, totalForms, deleteRequest, getAllRequestLawyer };

@@ -26,7 +26,7 @@
     useEffect(() => {
       async function fetchRequests() {
         try {
-          const response =  await fetch (`${BaseURL}/accept/get-all-requests-lawyer/${email}`);
+          const response =  await fetch (`http://localhost:4000/accept/get-all-requests-lawyer/${email}`);
           //  console.log("Response Data:", response.data); 
           const data = await response.json();
           //  console.log("User email:", user.email); 
@@ -60,10 +60,10 @@
         };
         
         console.log(`this is the data ${formDataFromUser} `)
-        const response = await axios.post(`${BaseURL}/archive/create`, formDataFromUser);
+        const response = await axios.post(`http://localhost:4000/archive/create`, formDataFromUser);
 
         if (response.status === 201) {
-           await axios.delete(`${BaseURL}/accept/delete/${id}`)
+           await axios.delete(`http://localhost:4000/accept/delete/${id}`)
           alert('Data moved in archive successfully');
          
           navigate('/lawyer/lawyer-archive');

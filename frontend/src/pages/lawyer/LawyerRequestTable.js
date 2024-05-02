@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import useUserRequestData from '../../hooks/useUserRequestData';
+import useUserRequestDataLawyer from '../../hooks/useUserRequestDataLawyer';
 import ReactPaginate from 'react-paginate';
 import Popup from 'reactjs-popup';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
@@ -29,7 +29,7 @@ const LawyerRequestTable = () => {
   const [meetingId, setMeetingId] = useState(null);
   const [myId, setMyId] = useState(null);
 
-  const { userRequestData, loading } = useUserRequestData();
+  const { userRequestDataLawyer, loadingPendingLawyer } = useUserRequestDataLawyer();
   const [currentPage, setCurrentPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
   const [formData, setFormData] = useState({
@@ -53,7 +53,7 @@ const LawyerRequestTable = () => {
   const cancelButton = "flex h-10 px-3 py-2 bg-white text-azure border border-azure rounded-md justify-center items-center w-full text-sm";
   const label = "block font-normal text-sm";
 
-  if (loading) {
+  if (loadingPendingLawyer) {
     return <div>Loading...</div>;
   }
 
@@ -108,13 +108,13 @@ const LawyerRequestTable = () => {
         meetingId: meetingId,
       };
       console.log(formDataFromUser)
-      const response = await axios.post(`${BaseURL}/accept/confirm`, formDataFromUser);
+      const response = await axios.post(`http://localhost:4000/accept/confirm`, formDataFromUser);
       
 
       if (response.status === 201) {
         alert('Request accepted successfully');
 
-        await axios.delete(`${BaseURL}/form/delete/${id}`)
+        await axios.delete(`http://localhost:4000/form/delete/${id}`)
 
         navigate('/lawyer/lawyer-schedule');
       } else {
@@ -136,7 +136,7 @@ const LawyerRequestTable = () => {
     setIsDateTimeFilled(!!e.target.value && !!formData.date);
   };
 
-  const filteredData = userRequestData.filter((user) =>
+  const filteredData = userRequestDataLawyer.filter((user) =>
     Object.values(user).some((field) =>
       field && field.toString().toLowerCase().includes(searchTerm.toLowerCase())
     )

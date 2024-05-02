@@ -5,7 +5,9 @@ import toast, { Toaster } from 'react-hot-toast';
 
 import { BaseURL } from '../BaseURL'
 
-const RequestForm = ({ summary, onClose }) => {
+const RequestForm = ({ conversationId, summary, onClose }) => {
+
+        const [formConversationId, setConversationId] = useState(conversationId)
         const [formSummary, setFormSummary] = useState(summary);
         const [isChecked, setIsChecked] = useState(false);
         const [firstModalOpen, setFirstModalOpen] = useState(true);
@@ -28,6 +30,7 @@ const RequestForm = ({ summary, onClose }) => {
           
     const { user } = useAuthContext();
     const [userid, setUserId] = useState(user ? user.userid : '');
+    const [status, setStatus] = useState("pending");
     const [firstname, setFirstname] = useState(user ? user.firstname : '');
     const [lastname, setLastname] = useState(user ? user.lastname : '');
     const [email, setEmail] = useState(user ? user.email : '');
@@ -52,13 +55,15 @@ const RequestForm = ({ summary, onClose }) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-        await axios.post(`${BaseURL}/form/request`, {
+        await axios.post(`http://localhost:4000/form/request`, {
             userid,
             firstname,
             lastname,
             email,
             address,
-            summary: formSummary // Ensure you include the summary field
+            status,
+            summary: formSummary,
+            conversationId: formConversationId // Ensure you include the summary field
         });
         setIsLoading(false);
         successNotif();

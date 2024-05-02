@@ -45,6 +45,11 @@ const acceptSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  status: {
+    type: String,
+    default: "accepted",
+    required: true,
+  },
 });
 
 module.exports = mongoose.model('Accept', acceptSchema);

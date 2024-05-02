@@ -292,8 +292,6 @@ const makeChat = async (req, res) => {
 };
 
 
-
-
 const getConversationTitles = async (req, res) => {
     const { userid } = req.params; // Assuming userid is sent as a URL parameter
     try {

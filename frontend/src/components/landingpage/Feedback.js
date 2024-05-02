@@ -19,7 +19,7 @@ const Feedback = ({ onClose }) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await axios.post(`${BaseURL}/feedback/create`, { email, message });
+      await axios.post(`http://localhost:4000/feedback/create`, { email, message });
       // If the request succeeds, show the success toast
       toast.success("Feedback submitted successfully!", {
         position: "top-center",
