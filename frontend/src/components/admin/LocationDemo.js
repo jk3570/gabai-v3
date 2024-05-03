@@ -10,7 +10,7 @@ function Sex() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/user/countsByRegion`);
+        const response = await axios.get(`${BaseURL}/user/countsByRegion`);
         setCountsByRegion(response.data);
       } catch (err) {
         console.error(err);

@@ -116,13 +116,13 @@ const LawyerRequestTable = () => {
         meetingId: meetingId,
       };
       console.log(formDataFromUser)
-      const response = await axios.post(`http://localhost:4000/accept/confirm`, formDataFromUser);
+      const response = await axios.post(`${BaseURL}/accept/confirm`, formDataFromUser);
       
 
       if (response.status === 201) {
         alert('Request accepted successfully');
 
-        await axios.delete(`http://localhost:4000/form/delete/${id}`)
+        await axios.delete(`${BaseURL}/form/delete/${id}`)
 
         navigate('/lawyer/lawyer-schedule');
       } else {

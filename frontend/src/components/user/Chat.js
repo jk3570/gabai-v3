@@ -9,6 +9,7 @@ import Popup from 'reactjs-popup';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 import { MdError } from "react-icons/md";
 import RequestForm from '../RequestForm';
+import { BaseURL } from "../../BaseURL";
 
 import Login from '../Login';
 
@@ -52,7 +53,7 @@ const button = "flex h-10 px-1 py-1 bg-azure text-white rounded-md justify-cente
   };
 
   const fetchConversationTitles = () => {
-    axios.get(`http://localhost:4000/gab/conversations/${userid}`)
+    axios.get(`${BaseURL}/gab/conversations/${userid}`)
       .then(response => {
         setConversationTitles(response.data);
       })
@@ -60,7 +61,7 @@ const button = "flex h-10 px-1 py-1 bg-azure text-white rounded-md justify-cente
   };
 
   const handleConversationClick = (conversationId) => {
-    axios.get(`http://localhost:4000/gab/conversation/${conversationId}`)
+    axios.get(`${BaseURL}/gab/conversation/${conversationId}`)
       .then(response => {
         setMessages(response.data.messages);
         setConversationId(conversationId);
@@ -74,7 +75,7 @@ const button = "flex h-10 px-1 py-1 bg-azure text-white rounded-md justify-cente
       setMessages(prevMessages => [...prevMessages, newMessage]);
       setInput('');
 
-      axios.post(`http://localhost:4000/gab/conversation`, { input, conversationId, userid: userid })
+      axios.post(`${BaseURL}/gab/conversation`, { input, conversationId, userid: userid })
         .then(response => {
           const aiMessage = { role: 'assistant', content: response.data.message };
           setMessages(prevMessages => [...prevMessages, aiMessage]);

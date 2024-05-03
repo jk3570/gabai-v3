@@ -3,6 +3,7 @@ import { useParticipant, useMeeting } from "@videosdk.live/react-sdk";
 import { MdCallEnd } from "react-icons/md";
 import { IoIosMic, IoIosMicOff } from "react-icons/io";
 import { HiMiniVideoCamera, HiMiniVideoCameraSlash } from "react-icons/hi2";
+import { useNavigate } from "react-router-dom";
 
 const leaveBtnStyle =
   "bg-red-500 p-3 h-[4rem] w-[4rem] rounded-full flex justify-center items-center text-white text-center text-3xl hover:bg-red-300 transition-all duration-150";
@@ -12,6 +13,8 @@ const disabledBtnStyle =
   "bg-gray-500 p-3 h-[4rem] w-[4rem] rounded-full flex justify-center items-center text-white text-center text-3xl hover:bg-gray-300 transition-all duration-150";
 
 function Controls(props) {
+
+   const navigate = useNavigate();
   // Get participant data and meeting functions from the SDK
   const { webcamStream, micStream, isLocal } = useParticipant(
     props.participantId
@@ -40,11 +43,12 @@ function Controls(props) {
 
   const leaveBtn = () => {
     // Display a confirmation dialog using alert
-    if (window.confirm("Do you want to leave the meeting?")) {
-      alert("You've left the meeting");
-      leave(); // Call the leave function if user confirms
+    // if (window.confirm("Do you want to leave the meeting?")) {
+    //   alert("You've left the meeting");
+    
       
-    }
+    // }
+       navigate("/lawyer");
   };
 
   return (

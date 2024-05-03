@@ -43,7 +43,7 @@ function AdminDashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/user/countsByAge`);
+        const response = await axios.get(`${BaseURL}/user/countsByAge`);
         setCountsByAge(response.data);
       } catch (err) {
         console.error(err);
@@ -57,7 +57,7 @@ function AdminDashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/user/countsByRegion`);
+        const response = await axios.get(`${BaseURL}/user/countsByRegion`);
         setCountsByRegion(response.data);
       } catch (err) {
         console.error(err);
@@ -71,7 +71,7 @@ function AdminDashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/user/countsByGender`);
+        const response = await axios.get(`${BaseURL}/user/countsByGender`);
         setCountsByGender(response.data);
       } catch (err) {
         console.error(err);
@@ -83,7 +83,7 @@ function AdminDashboard() {
   
   // Fetch total user count from the server
   useEffect(() => {
-    axios.get(`http://localhost:4000/user/total`)
+    axios.get(`${BaseURL}/user/total`)
       .then(response => {
         setTotalUsers(response.data.totalUsers);
       })
@@ -94,7 +94,7 @@ function AdminDashboard() {
 
   //form cases
   useEffect(() => {
-    axios.get(`http://localhost:4000/form/total`)
+    axios.get(`${BaseURL}/form/total`)
       .then(response => {
         setTotalForms(response.data.totalForms);
       })
@@ -105,7 +105,7 @@ function AdminDashboard() {
 
 //accept cases
   useEffect(() => {
-    axios.get(`http://localhost:4000/accept/total`)
+    axios.get(`${BaseURL}/accept/total`)
       .then(response => {
         setTotalAccepts(response.data.totalAccepts);
       })
@@ -116,7 +116,7 @@ function AdminDashboard() {
 
 //request cases
   useEffect(() => {
-    axios.get(`http://localhost:4000/archive/total`)
+    axios.get(`${BaseURL}/archive/total`)
       .then(response => {
         setTotalArchives(response.data.totalArchives);
       })

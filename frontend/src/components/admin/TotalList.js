@@ -27,7 +27,7 @@ const Counter = () => {
 
 //total users
   useEffect(() => {
-    axios.get(`http://localhost:4000/user/total`)
+    axios.get(`${BaseURL}/user/total`)
       .then(response => {
         setTotalUsers(response.data.totalUsers);
       })
@@ -38,7 +38,7 @@ const Counter = () => {
 
 //total feedbacks
   useEffect(() => {
-    axios.get(`http://localhost:4000/feedback/total`)
+    axios.get(`${BaseURL}/feedback/total`)
       .then(response => {
         setTotalFeedbacks(response.data.totalFeedbacks);
       })
@@ -49,7 +49,7 @@ const Counter = () => {
 
 //form cases
   useEffect(() => {
-    axios.get(`http://localhost:4000/form/total`)
+    axios.get(`${BaseURL}/form/total`)
       .then(response => {
         setTotalForms(response.data.totalForms);
       })
@@ -60,7 +60,7 @@ const Counter = () => {
 
 //accept cases
   useEffect(() => {
-    axios.get(`http://localhost:4000/accept/total`)
+    axios.get(`${BaseURL}/accept/total`)
       .then(response => {
         setTotalAccepts(response.data.totalAccepts);
       })
@@ -71,7 +71,7 @@ const Counter = () => {
 
 //request cases
   useEffect(() => {
-    axios.get(`http://localhost:4000/archive/total`)
+    axios.get(`${BaseURL}/archive/total`)
       .then(response => {
         setTotalArchives(response.data.totalArchives);
       })

@@ -20,7 +20,7 @@ const LawyerSchedule = () => {
   useEffect(() => {
     async function fetchRequests() {
       try {
-        const response = await fetch (`http://localhost:4000/feedback/get-all-feedbacks`);
+        const response = await fetch (`${BaseURL}/feedback/get-all-feedbacks`);
         //  console.log("Response Data:", response.data); 
         const data = await response.json();
         //  console.log("User email:", user.email); 

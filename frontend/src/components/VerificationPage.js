@@ -14,7 +14,7 @@
     
 //     try {
 //         // Make a GET request to the backend route with the token
-//         await axios.get(`http://localhost:4000/account/verify/${token}`);
+//         await axios.get(`${BaseURL}/account/verify/${token}`);
 //         console.log(token)
         
 //         // Update the verification status

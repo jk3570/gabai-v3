@@ -8,7 +8,7 @@ const useAcceptedRequest = (userid) => { // Accept userid as a parameter
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(`http://localhost:4000/accept/get-all-requests/${userid}`); // Include userid in the URL
+        const response = await fetch(`${BaseURL}/accept/get-all-requests/${userid}`); // Include userid in the URL
         const data = await response.json();
         setRequestData(data);
         setLoading(false);

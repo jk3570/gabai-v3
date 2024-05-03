@@ -67,11 +67,11 @@ const { id } = params; // Destructure the id property from params
     <div>
     
         <JoinScreen generateMeetingId={generateMeetingId} params={params} myId={myId} meetingId={id} />
-        <button onClick={onCreateClick}>
+        {/* <button onClick={onCreateClick}> */}
           {/* Create Meeting button */}
-          Create Meeeeting
+          {/* Create Meeeeting
         </button>
-        <p>this is the id: {params}</p>
+        <p>this is the id: {params}</p> */}
 
     </div>
     
