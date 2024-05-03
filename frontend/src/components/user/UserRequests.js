@@ -12,9 +12,11 @@ import { IoIosMore } from "react-icons/io";
 const UserRequests = ({ summary }) => {
     const { user, dispatch } = useAuthContext();
     const { requestData, loading } = useAcceptedRequest(user.userid); // Pass userid to the hook
+
     const { userRequestData, loadingPending } = useUserRequestData(user.userid); // Pass userid to the hook
     
     const [formSummary, setFormSummary] = useState(summary);
+
     
   const firstname = user ? user.firstname : null;
   const lastname = user ? user.lastname : null;
@@ -60,13 +62,17 @@ const UserRequests = ({ summary }) => {
                                     { firstname } { lastname }
                                     </div>
                                     <div>
+
                                        Date: {format(
+
                                         new Date(user.date ?? ""),
                                         "MMMM dd, yyyy"
                                         )}
                                     </div>
                                     <div>
+
                                        Time: {(() => {
+
                                         // Append a dummy date to the time string
                                         const dateTimeString = `2000-01-01 ${user.time}`;
                                         // Parse the concatenated string as a Date object
@@ -81,7 +87,9 @@ const UserRequests = ({ summary }) => {
                                     </div>
                                 </div>
                                 <div className="absolute top-3 right-3 flex flex-row text-sm font-semibold italic text-content text-opacity-50">
+
                                     status:<span className="inline-block ml-1 bg-azure rounded-2xl px-2 font-normal not-italic text-white">accepted</span>
+
                                 </div>
                                     
                                 <Popup trigger={<div className="absolute bottom-3 right-5 text-2xl font-bold rounded-xl px-1 text-white bg-gray-400 cursor-pointer"><IoIosMore /></div>}
@@ -146,6 +154,7 @@ const UserRequests = ({ summary }) => {
 
                                             <div className="flex w-full justify-end mt-2">
                                                 <div className="w-[60%] justify-end">
+
                                                     <button className={button}>
                                                     <Link to={`/user/video-conference/${user.meetingId}`}>Meet Lawyer</Link>
                                                     </button>
@@ -162,6 +171,7 @@ const UserRequests = ({ summary }) => {
                                 </div>
                                 ))
                             )}
+
                             
 
 

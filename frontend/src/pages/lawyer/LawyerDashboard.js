@@ -23,7 +23,7 @@ function LawyerDashboard() {
           </Helmet>
           <Toaster />
         <div className="relative z-10 w-full py-[3.875rem] flex flex-col justify-start min-h-screen max-md:p-1 bg-bkg text-content">
-            <div id="main-content" className="flex flex-col w-full mx-auto max-w-5xl">
+            <div id="main-content" className="flex flex-col w-full mx-auto max-w-5xl md:pt-0 pt-14">
               {/* Contents */}
               <div className="mt-0">
                 <h1 className="text-2xl font-semibold">Welcome, {name}!</h1>
