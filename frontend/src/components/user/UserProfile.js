@@ -45,17 +45,12 @@ const UserProfile = () => {
   const province = user ? user.province : null;
   const barangay = user ? user.barangay : null;
 
-/* 
-  const firstname = user ? user.firstname : null;
-  const lastname = user ? user.lastname : null;
-  const email = user ? user.email : null;
-  const username = user ? user.username : null; */
-
   /* Text Hierarchy */
   const label = "block font-normal text-sm"
   const input = "flex h-10 w-full rounded-md border border-input bg-bkg bg-opacity-50 px-3 py-2 text-xs ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
   const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-center items-center w-full text-sm hover:bg-azure-300"
   const icon = "text-xl";
+  
 
   return (
     <>

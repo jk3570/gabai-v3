@@ -166,12 +166,13 @@ const button = "flex h-10 px-1 py-1 bg-azure text-white rounded-md justify-cente
         {/* Chat Conversation */}
         <div id="chat-content" className={`flex flex-col h-full ${sidebarOpen ? 'w-0 md:w-full' : 'w-full'} mx-auto max-w-4xl justify-between pt-[3.875rem] gap-3`}>
           <div ref={chatContentRef} className="h-full overflow-y-auto flex flex-col gap-2 p-5 pt-7">
-            <div className="p-5 bg-gray-400 bg-opacity-20 rounded-xl animate__animated text-content">
+            <div className="p-5 bg-gray-400 bg-opacity-20 rounded-xl animate__animated text-content mr-5 w-fit">
               <p><b>Gab</b></p>
               <p>Hello! I'm Gab, your online AI assistant against workplace discrimination in the Philippines. How can I assist you today?</p>
             </div>
             {messages.map((message, index) => (
-              <div className="p-5 bg-gray-400 bg-opacity-20 rounded-xl animate__animated text-content" key={index}>
+              <div className={`flex ${message.role === 'user' ? 'justify-end items-end' : 'justify-start'}`}>
+                <div className={`p-5 rounded-xl animate__animated text-content w-fit ${message.role === 'user' ? 'bg-azure-500 bg-opacity-50 ml-5 justify-self-end' : 'bg-gray-400 bg-opacity-20 mr-5'}`} key={index}>
                 <p><b>{message.role === 'user' ? 'You' : 'Gab'}</b></p>
                 <p><Markdown>{message.content}</Markdown></p>
                 {message.role === 'assistant' && (
@@ -194,6 +195,8 @@ const button = "flex h-10 px-1 py-1 bg-azure text-white rounded-md justify-cente
                   </div>
                 )}
               </div>
+              </div>
+              
             ))}
           </div>
 
