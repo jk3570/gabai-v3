@@ -6,6 +6,7 @@ import { IoIosCloseCircleOutline } from 'react-icons/io';
 import { Link } from 'react-router-dom'; 
 import CreateAccount from "../../components/CreateAccount"
 import { useAuthContext } from '../../hooks/useAuthContext';
+import { format } from "date-fns";
 
 const UserTable = () => {
   const { userData, loading } = useUserData();
@@ -50,18 +51,6 @@ const UserTable = () => {
 
   const { user, dispatch } = useAuthContext();
 
-
-  const username = user ? user.username : null;
-  const email = user ? user.email : null;
-  const firstname = user ? user.firstname : null;
-  const lastname = user ? user.lastname : null;
-  const gender = user ? user.gender : null;
-  const birthdate = user ? user.birthdate : null;
-  const region = user ? user.region : null;
-  const city = user ? user.city : null;
-  const province = user ? user.province : null;
-  const barangay = user ? user.barangay : null;
-
   const offset = currentPage * itemsPerPage;
 
   const cardsData = filteredData
@@ -95,19 +84,19 @@ const UserTable = () => {
                               <div className="grid grid-cols-2 gap-4">
                                  <div>
                                     <label className={label}>Username</label>
-                                    <input type="text" id="firstName" placeholder="Username" className={input} value={username}/>
+                                    <input type="text" id="firstName" placeholder="Username" className={input} value={user.username} readOnly/>
                                 </div>
                                  <div>
                                     <label className={label}>Email</label>
-                                    <input type="text" id="firstName" placeholder="Email" className={input} value={email}/>
+                                    <input type="text" id="firstName" placeholder="Email" className={input} value={user.email} readOnly/>
                                 </div>
                                 <div>
                                     <label className={label}>First Name</label>
-                                    <input type="text" id="firstName" placeholder="First Name" className={input} value={firstname}/>
+                                    <input type="text" id="firstName" placeholder="First Name" className={input} value={user.firstname} readOnly/>
                                 </div>
                                 <div>
                                     <label className={label}>Last Name</label>
-                                    <input type="text" id="lastName" placeholder="Last Name" className={input} value={lastname}/>
+                                    <input type="text" id="lastName" placeholder="Last Name" className={input} value={user.lastname} readOnly/>
                                 </div>
                               </div>
                               <div className="grid grid-cols-2 gap-4">
@@ -118,8 +107,8 @@ const UserTable = () => {
                                           id="gender"
                                           type="text"
                                           className={input}
-                                        
-                                          value={gender}
+                                          readOnly
+                                          value={user.gender}
                                        
                                         />
                                     {/* <input type="" id="gender" placeholder="Gender" className={input}/> */}
@@ -127,10 +116,10 @@ const UserTable = () => {
                                 <div>
                                     <label className={label}>Birthdate</label>
                                     <input type="text" id="birthDate" placeholder="DD/MM/YY" className={input}
-                                     /* value= {format(
-                                    new Date(user.birthdate ?? ""),
-                                    "MMMM dd, yyyy"
-                                    )} *//>
+                                     value= {format(
+                                      new Date(user.birthdate ?? ""),
+                                      "MMMM dd, yyyy"
+                                      )} readOnly/>
 
                                  
                                 </div>
@@ -145,22 +134,22 @@ const UserTable = () => {
                                 <div>
                                     <label  className={label}>Region</label>
                                     <input type="text" id="Street" placeholder="Region" className={input}
-                                    value={region}/>
+                                    value={user.region} readOnly/>
                                 </div>
                                 <div>
                                     <label  className={label}>Province</label>
                                     <input type="text" id="ciTy" placeholder="Province" className={input}
-                                    value={province}/>
+                                    value={user.province} readOnly/>
                                 </div>
                                 <div>
                                     <label className={label}>City</label>
                                     <input type="text" id="sTate" placeholder="City" className={input}
-                                    value={city}/>
+                                    value={user.city} readOnly/>
                                 </div>
                                 <div>
                                     <label className={label}>Barangay</label>
                                     <input type="text" id="zIp" placeholder="Barangay" className={input}
-                                    value={barangay}/>
+                                    value={user.barangay} readOnly/>
                                 </div>
                             </div>
                         </div>
