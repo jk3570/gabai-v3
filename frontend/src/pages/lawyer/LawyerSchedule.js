@@ -224,7 +224,7 @@
 
     return (
       <div className="relative z-10 w-full py-[3.875rem] flex flex-col justify-start items-start min-h-screen max-md:p-1 bg-bkg text-content">
-        <div id="main-content" className="flex flex-col w-full mx-auto max-w-7xl gap-3 md:pt-0 pt-14">
+        <div id="main-content" className="flex flex-col w-full mx-auto max-w-5xl gap-3 md:pt-0 pt-14">
           <div className="flex flex-row-1 justify-between items-center mt-4">
             <h1 className="md:text-2x text-xl font-semibold text-nowrap my-0">Lawyer Schedule</h1>
           </div>
