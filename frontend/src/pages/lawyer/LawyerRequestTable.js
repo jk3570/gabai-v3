@@ -244,7 +244,38 @@ const LawyerRequestTable = () => {
       <div id="main-content" className="flex flex-col w-full mx-auto max-w-5xl gap-3 md:pt-0 pt-14">
         <div className="flex flex-row-1 justify-between items-center mt-4">
           <h1 className="md:text-2xl text-xl font-semibold text-nowrap my-0">Request Queue</h1>
+        
+        {/* search field */}
+        <div className="flex flex-col justify-end items-end w-full">
+            <div className="md:w-64 w-full relative">
+              <input
+                type="text"
+                placeholder="Search..."
+                value={searchTerm}
+                onChange={handleSearch}
+                className="relative px-4 py-2 w-full border border-gray-300 bg-azure-200 bg-opacity-20 rounded-md text-xs"
+              />
+              <span className="absolute inset-y-0 right-0 flex items-center justify-end mx-5">
+              <svg
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                className="items-center p-1 h-[1.5rem] w-[1.5rem]"
+                >
+                <path
+                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                  stroke="currentColor"
+                ></path>
+              </svg>
+              </span> 
+            </div>
         </div>
+        </div>
+
         
         <div className="bg-bkg md:h-[30rem] h-[30rem] overflow-x-auto no-scrollbar grid grid-cols-1 md:grid-cols-2 gap-2 p-2">
           {cardsData}
