@@ -7,6 +7,7 @@
   import { useAuthContext } from "../../hooks/useAuthContext";
   import useAcceptedRequest from '../../hooks/useAcceptedRequest';
   import { BaseURL } from "../../BaseURL"
+  import toast, { Toaster } from "react-hot-toast";
   import Popup from 'reactjs-popup';
   import { IoIosCloseCircleOutline } from 'react-icons/io';
   import { format } from "date-fns";
@@ -64,11 +65,17 @@
 
         if (response.status === 201) {
            await axios.delete(`http://localhost:4000/accept/delete/${id}`)
-          alert('Data moved in archive successfully');
+           toast.success("Data moved in archive successfully!", {
+            position: "bottom-center",
+            duration: 5000,
+          })
          
-          navigate('/lawyer/lawyer-archive');
+          // navigate('/lawyer/lawyer-archive');
         } else {
-          alert('Failed to process request');
+          toast.error("Failed to move in archive", {
+                position: "bottom-center",
+                duration: 5000,
+          })
         }
       } catch (error) {
         console.error(error);
@@ -115,6 +122,9 @@
           <div className="flex flex-row-1 justify-between items-center mt-4">
             <h1 className="md:text-2x text-xl font-semibold text-nowrap my-0">Lawyer Schedule</h1>
           </div>
+          <div>
+  <Toaster position="bottom-center" />
+</div>
           <form onSubmit={handleSubmit}>
           
           <div className="bg-bkg md:h-96 h-[30rem] overflow-x-auto">

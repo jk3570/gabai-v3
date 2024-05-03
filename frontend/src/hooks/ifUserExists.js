@@ -5,6 +5,7 @@ import { BaseURL } from "../BaseURL";
 export const useCheckIfUserExists = () => {
   const [errorgoogle, setErrorgoogle] = useState(null);
   const [isLoadinggoogle, setIsLoadinggoogle] = useState(null);
+  const [userProfile, setUserProfile] = useState("");
   const { dispatch } = useAuthContext();
 
   const loginwithgoogle = async (gEmail) => {

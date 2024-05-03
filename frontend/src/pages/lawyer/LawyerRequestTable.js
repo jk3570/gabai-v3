@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { BaseURL } from '../../BaseURL'
 import toast, { Toaster } from "react-hot-toast";
-  
 import JoinScreen from "../../components/lawyer/video-call/JoinScreen";
 import MeetingView from "../../components/lawyer/video-call/MeetingView";
 import { MeetingProvider } from "@videosdk.live/react-sdk";
@@ -74,7 +73,7 @@ const LawyerRequestTable = () => {
     setMyId(meetingId);
     setIsMeetingIdGenerated(true);
       toast.success("Meeting ID Generated!", {
-        position: "top-center",
+        position: "bottom-center",
         duration: 5000,
 
       })
@@ -92,7 +91,10 @@ const LawyerRequestTable = () => {
 
       // Check if the selected date is today or in the past
       if (selectedDate <= today) {
-        alert('Please select a future date for the consultation.');
+        toast.success("Please select a future date for the consultation.", {
+        position: "bottom-center",
+        duration: 5000,
+      })
         return; // Prevent further execution of the function
       }
 
@@ -117,13 +119,19 @@ const LawyerRequestTable = () => {
       
 
       if (response.status === 201) {
-        alert('Request accepted successfully');
+        toast.success("Request accepted successfully!", {
+              position: "bottom-center",
+              duration: 5000,
+        })
 
         await axios.delete(`http://localhost:4000/form/delete/${id}`)
 
-        navigate('/lawyer/lawyer-schedule');
+        // navigate('/lawyer/lawyer-schedule');
       } else {
-        alert('Failed to process request');
+        toast.error("Failed to process request", {
+       position: "bottom-center",
+       duration: 5000,
+})
       }
     } catch (error) {
       console.error(error);

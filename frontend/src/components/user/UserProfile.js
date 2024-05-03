@@ -126,7 +126,7 @@ const UserProfile = () => {
                                     <label className={label}>Birthdate</label>
                                     <input type="text" id="birthDate" placeholder="DD/MM/YY" className={input} onKeyDown={handleKeyDown}
                                      value= {format(
-                                  new Date(user.birthdate ?? ""),
+                                  new Date(birthdate ?? ""),
                                   "MMMM dd, yyyy"
                                 )}/>
 

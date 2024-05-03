@@ -14,7 +14,7 @@ const UserLandingPageSuccess = () => {
     if (hasShownToastBefore === "false") {
       // Show toast if it hasn't been shown before
       toast.success("Account created successfully!", {
-        position: "top-center",
+        position: "bottom-center",
         duration: 5000,
       });
       // Set a flag in local storage to indicate that the toast has been shown
@@ -44,7 +44,7 @@ const UserLandingPageSuccess = () => {
             <section id="home">
               <div className="w-full h-full relative flex justify-center items-center mx-auto">
                 <div>
-                  <Toaster position="top-center" />
+                  <Toaster position="bottom-center" />
                 </div>
                 <UserSection1 />
               </div>

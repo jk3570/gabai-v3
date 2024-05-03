@@ -22,7 +22,7 @@ const Feedback = ({ onClose }) => {
       await axios.post(`http://localhost:4000/feedback/create`, { email, message });
       // If the request succeeds, show the success toast
       toast.success("Feedback submitted successfully!", {
-        position: "top-center",
+        position: "bottom-center",
         duration: 5000,
       });
       // Navigate to the home page after successful submission
@@ -60,7 +60,7 @@ const Feedback = ({ onClose }) => {
             <div className="w-full h-full flex flex-col-1 ">
               <div className="flex flex-col">
                 <>
-                  <Toaster position="top-center" />
+                  <Toaster position="bottom-center" />
                 </>
                 <h1 className="font-bold text-2xl m-0">
                   Feedback Form

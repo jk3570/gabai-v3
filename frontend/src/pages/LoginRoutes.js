@@ -13,15 +13,15 @@ const LoginRoutes = () => {
         if (user) {
             switch (myrole) {
                 case "user":
-                    toast.success('Login successful!', { duration: 5000 });
+                    // toast.success('Login successful!', { duration: 5000 });
                     navigate("/user");
                     break;
                 case "lawyer":
-                    toast.success('Login successful!', { duration: 5000 });
+                    // toast.success('Login successful!', { duration: 5000 });
                     navigate("/lawyer");
                     break;
                 case "admin":
-                    toast.success('Login successful!', { duration: 5000 });
+                    // toast.success('Login successful!', { duration: 5000 });
                     navigate("/admin");
                     break;
                 default:

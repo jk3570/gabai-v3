@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import { useCheckIfUserExists } from "../hooks/ifUserExists";
+import ProfileDropdown from "./ProfileDropdown";
 
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -73,7 +74,11 @@ const Login = ({ setLoginSuccess }) => {
     const token = jwtDecode(response.credential);
     // console.log(`Google user email: ${token.email}`);
     const gEmail = token.email;
-    // console.log(gEmail);
+    const gPic = "hahahaha";
+    
+
+     <ProfileDropdown gPic={gPic} />;
+    console.log("lasssssst" + gPic);
 
     // Check if the user exists in the database
     const userExists = await loginwithgoogle(gEmail);
