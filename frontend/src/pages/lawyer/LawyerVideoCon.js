@@ -5,11 +5,14 @@ import { MeetingProvider } from "@videosdk.live/react-sdk"; // Importing Meeting
 import { authToken, createMeeting } from "../../API"; // Importing functions for authentication and meeting creation
 import { Helmet } from "react-helmet"; // Importing Helmet for managing document head metadata
 import { useParams } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 
 
 // videocon component
 const VideoCon = () => {
+  const button = "p-3 rounded-xl bg-azure text-white w-full flex justify-center items-center";
+
 
     // Function to handle creating a meeting
 
@@ -59,26 +62,16 @@ const { id } = params; // Destructure the id property from params
       }}
       token={authToken}
     >
-      <div className="flex">
+      <div className="flex w-full h-full justify-center items-center max-w-5xl">
         <MeetingView meetingId={id} myId={myId} params={params} onMeetingLeave={onMeetingLeave} />
       </div>
     </MeetingProvider>
   ) : (
-    <div>
-    
-        <JoinScreen generateMeetingId={generateMeetingId} params={params} myId={myId} meetingId={id} />
-        <button onClick={onCreateClick}>
-          {/* Create Meeting button */}
-          Create Meeeeting
-        </button>
-        <p>this is the id: {params}</p>
-
+    <div className="flex flex-col gap-2 justify-center items-center">
+    <h1 className="text-2xl my-0">Your meeting has ended</h1>
+    <p className="text-sm max-w-md text-center">If this is a mistake and you want to return to the Case meeting, open <b>Scheduled Cases</b> again, navigate to the Case you want to return to, then click <b>View Case</b> then <b>Join</b>.</p>
+    <Link to="/lawyer" className={button}>Return to home</Link>
     </div>
-    
-     
-  
-
-
     
   );
   
@@ -89,7 +82,7 @@ const LawyerVideoCon = () => {
 
   
   return (
-    <div className=" py-20 px-auto flex justify-center items-center h-screen bg-bkg text-content">
+    <div className=" py-20 px-auto flex justify-center items-center bg-bkg h-screen text-content">
       <Helmet>
         <title>Video Chat - GabAi</title> {/* Setting document title */}
       </Helmet>

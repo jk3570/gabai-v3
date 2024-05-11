@@ -153,7 +153,7 @@ const LawyerRequestTable = () => {
   const cardsData = filteredData
     .slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage)
     .map((user) => (
-      <div key={user._id} className="relative w-full h-auto flex flex-row bg-gray-200 bg-opacity-20 justify-between hover:bg-azure-50 hover:bg-opacity-10 p-3 text-sm text-content rounded-md border border-gray-400 border-opacity-20 shadow-md hover:-translate-y-1">
+      <div key={user._id} className="relative w-full h-fit flex flex-row bg-gray-200 bg-opacity-20 justify-between hover:bg-azure-50 hover:bg-opacity-10 p-3 text-sm text-content rounded-md border border-gray-400 border-opacity-20 shadow-md hover:-translate-y-1">
       <div className="flex flex-col w-full justify-between">
         <div className="font-bold text-content">
         {user.firstname} {user.lastname}

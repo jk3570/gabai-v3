@@ -5,6 +5,7 @@ import { MeetingProvider } from "@videosdk.live/react-sdk"; // Importing Meeting
 import { authToken, createMeeting } from "../../API"; // Importing functions for authentication and meeting creation
 import { Helmet } from "react-helmet"; // Importing Helmet for managing document head metadata
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { useParams } from "react-router-dom"
 
@@ -12,6 +13,8 @@ import { useParams } from "react-router-dom"
 
 // videocon component
 const VideoCon = () => {
+
+  const button = "p-3 rounded-xl bg-azure text-white w-full flex justify-center items-center";
 
     // Function to handle creating a meeting
 
@@ -56,13 +59,15 @@ const { id } = params; // Destructure the id property from params
       }}
       token={authToken}
     >
-      <div className="flex flex-row">
+      <div className="flex w-full h-full justify-center items-center max-w-5xl">
         <MeetingView meetingId={id} myId={myId} params={params} onMeetingLeave={onMeetingLeave} />
       </div>
     </MeetingProvider>
   ) : (
-    <div>
-        <JoinScreen generateMeetingId={generateMeetingId} myId={myId} params={params} meetingId={id} />
+    <div className="flex flex-col gap-2 justify-center items-center">
+        <h1 className="text-2xl my-0">Your meeting has ended</h1>
+        <p className="text-sm max-w-md text-center">If this is a mistake and you want to return to the meeting, open your request queue again and click <b>Meet lawyer</b>.</p>
+        <Link to="/user" className={button}>Return to home</Link>
     </div>
   );
   
@@ -73,7 +78,7 @@ const UserVideoCon = () => {
 
   
   return (
-    <div className="px-auto flex justify-center items-center h-screen bg-bkg text-content">
+    <div className=" py-20 px-auto flex justify-center items-center bg-bkg h-screen text-content">
       <Helmet>
         <title>Video Chat - GabAi</title> {/* Setting document title */}
       </Helmet>

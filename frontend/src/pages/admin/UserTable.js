@@ -57,7 +57,7 @@ const UserTable = () => {
   const cardsData = filteredData
   .slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage)
   .map((user) => (
-    <div key={user._id} className="relative w-full h-auto flex flex-row bg-gray-200 bg-opacity-20 justify-between hover:bg-azure-50 hover:bg-opacity-10 p-3 text-sm text-content rounded-md border border-gray-400 border-opacity-20 shadow-md hover:-translate-y-1">
+    <div key={user._id} className="relative w-full h-fit flex flex-row bg-gray-200 bg-opacity-20 justify-between hover:bg-azure-50 hover:bg-opacity-10 p-3 text-sm text-content rounded-md border border-gray-400 border-opacity-20 shadow-md hover:-translate-y-1">
     <div className="flex flex-col w-full justify-between">
       <div className="font-bold text-content">
       {user.firstname} {user.lastname}
@@ -176,7 +176,7 @@ const UserTable = () => {
     </div>
 ));
 
-  const pageCount = Math.ceil(filteredData.length / itemsPerPage);
+  const   pageCount = Math.ceil(filteredData.length / itemsPerPage);
 
   const handlePageClick = ({ selected: selectedPage }) => {
     setCurrentPage(selectedPage);
@@ -185,7 +185,7 @@ const UserTable = () => {
 
   return (
     <div className="relative z-10 w-full py-[3.875rem] flex flex-col justify-start items-start min-h-screen max-md:p-1 bg-bkg text-content">
-      <div id="main-content" className="flex flex-col w-full mx-auto max-w-7xl gap-3 md:pt-0 pt-14">
+      <div id="main-content" className="flex flex-col w-full mx-auto max-w-5xl gap-3 md:pt-0 pt-14">
         <div className="flex md:flex-row flex-col justify-center items-start mt-4 gap-2">
         <div className='flex justify-between items-center w-full'> 
           <h1 className="md:text-2xl text-xl font-semibold text-nowrap my-0">User List</h1>
@@ -232,7 +232,7 @@ const UserTable = () => {
       </div>
           
 
-      <div className="bg-bkg md:h-[30rem] h-[30rem] overflow-x-auto no-scrollbar grid grid-cols-1 md:grid-cols-2 gap-2 p-2">
+      <div className="bg-bkg md:h-[30rem] h-[30rem] overflow-x-auto grid grid-cols-1 md:grid-cols-2 gap-2 p-2">
         {cardsData}
       </div>
 

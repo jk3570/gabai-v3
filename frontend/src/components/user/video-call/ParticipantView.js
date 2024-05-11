@@ -7,6 +7,7 @@ function ParticipantView(props) {
   const { webcamStream, micStream, webcamOn, micOn, isLocal } = useParticipant(
     props.participantId
   ); // Destructuring properties from the useParticipant custom hook
+  
 
   // Memoized video stream based on webcam status
   const videoStream = useMemo(() => {
@@ -59,35 +60,55 @@ function ParticipantView(props) {
   
 
   return (
-    <div className="flex flex-row justify-center items-center w-full h-full">
+    <div className="flex flex-col md:flex-row justify-center items-center">
       <audio ref={micRef} autoPlay playsInline muted={isLocal} />{" "}
       {/* Audio element for mic playback */}
-      <div className="flex justify-center items-center w-full h-full">
         {/* Conditionally render ReactPlayer or gray background based on webcam status */}
         {webcamOn ? ( // If webcam is on
-          <div
-            className="relative py-5 bg-gray-700 rounded-xl overflow-clip z-0"
-          >
-            <ReactPlayer
-              style={{ zIndex: "999" }}
-              className="rounded-xl flex h-full justify-center items-center"
-              playsinline
-              pip={false}
-              light={false}
-              controls={false}
-              muted={true}
-              playing={true}
-              url={videoStream} // Passing the constructed video stream as URL
-              onError={(err) => {
-                console.log(err, "participant video error");
-              }} // Handling ReactPlayer errors
-            />
-          </div>
+          isLocal ? (
+            <div className="absolute bottom-0 right-0 z-10 bg-gray-700 rounded-xl w-[240px] h-[160px] flex flex-col md:flex-row overflow-clip">
+              <ReactPlayer
+                className="rounded-xl flex w-full h-full"
+                playsinline
+                pip={false}
+                light={false}
+                controls={false}
+                muted={true}
+                playing={true}
+                url={videoStream}
+                height={"160px"}
+                width={"240px"}
+                onError={(err) => {
+                  console.log(err, "participant video error");
+                }}
+              />
+            </div>
+          ) : (
+            <div className="relative z-0 bg-gray-700 rounded-xl w-full h-full flex flex-col md:flex-row overflow-clip">
+              <ReactPlayer
+                className="rounded-xl flex w-full h-full"
+                playsinline
+                pip={false}
+                light={false}
+                controls={false}
+                muted={true}
+                playing={true}
+                url={videoStream}
+                onError={(err) => {
+                  console.log(err, "participant video error");
+                }}
+              />
+            </div>
+          )
         ) : (
           // If webcam is off
-          <div className=" relative w-full h-full bg-gray-700 rounded-xl overflow-clip z-0" /> // Displaying a gray background
+          isLocal ? (
+          <div className="absolute bottom-0 right-0 bg-gray-700 rounded-xl w-[240px] h-[160px] z-10" />
+          ) : (
+          <div className="relative bg-gray-700 rounded-xl w-full h-full z-0" />  
+          )
         )}
-      </div>
+      
     </div>
   );
 }
