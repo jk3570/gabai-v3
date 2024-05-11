@@ -12,7 +12,6 @@ import { IoIosMore } from "react-icons/io";
 const UserRequests = ({ summary }) => {
     const { user, dispatch } = useAuthContext();
     const { requestData, loading } = useAcceptedRequest(user.userid); // Pass userid to the hook
-
     const { userRequestData, loadingPending } = useUserRequestData(user.userid); // Pass userid to the hook
     
     const [formSummary, setFormSummary] = useState(summary);

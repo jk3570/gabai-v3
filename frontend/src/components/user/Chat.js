@@ -230,10 +230,10 @@ const button = "flex h-10 px-1 py-1 bg-azure text-white rounded-md justify-cente
                     </Popup>
                   }
 
-                  <button className="flex h-10 w-full md:w-[50%] px-3 py-2 bg-white border border-azure text-azure rounded-md justify-center items-center text-sm transition-all duration-100 ease-in-out my-2" onClick={() => {
+                  {/* <button className="flex h-10 w-full md:w-[50%] px-3 py-2 bg-white border border-azure text-azure rounded-md justify-center items-center text-sm transition-all duration-100 ease-in-out my-2" onClick={() => {
                     setInputVisible(true);
                     setShowRequestButton(false);
-                  }}>Continue the conversation</button>
+                  }}>Continue the conversation</button> */}
                 </>
               ) : (
                 <>

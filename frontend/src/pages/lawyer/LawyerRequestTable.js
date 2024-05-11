@@ -95,7 +95,13 @@ const LawyerRequestTable = () => {
 
       // Check if the selected date is today or in the past
       if (selectedDate <= today) {
-        alert('Please select a future date for the consultation.');
+
+         toast.error("Please select a future date for the consultation.", {
+        position: "bottom-center",
+        duration: 5000,
+
+      })
+       
         return; // Prevent further execution of the function
       }
 
@@ -120,13 +126,21 @@ const LawyerRequestTable = () => {
       
 
       if (response.status === 201) {
-        alert('Request accepted successfully');
+        toast.success("Request accepted successfully!", {
+        position: "bottom-center",
+        duration: 5000,
+
+      })
 
         await axios.delete(`${BaseURL}/form/delete/${id}`)
 
-        navigate('/lawyer/lawyer-schedule');
+        // navigate('/lawyer/lawyer-schedule');
       } else {
-        alert('Failed to process request');
+         toast.error("Failed to process request", {
+        position: "bottom-center",
+        duration: 5000,
+
+      })
       }
     } catch (error) {
       console.error(error);

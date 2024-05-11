@@ -37,7 +37,7 @@ const Developers = () => {
                       </div>
                       <h2 className={devName}>Joko Gadingan</h2>
                       <p className={devPos}
-                        >God Level Project Manager</p>
+                        >Project Manager</p>
                     </div>
                     
                     <div className="grid grid-cols-3 max-md:grid-cols-2 gap-5">
@@ -46,42 +46,42 @@ const Developers = () => {
                 <img src={Lei} alt="" className={rounded} />
               </div>
               <h2 className={devName}>Louise Angelo Ocopio</h2>
-              <p className={devPos}>Grandmaster API Developer</p>
+              <p className={devPos}>Fullstack Developer</p>
             </div>
             <div className={center}>
               <div className={img}>
                 <img src={Kadu} alt="" className={rounded} />
               </div>
               <h2 className={devName}>Evehn Kadusale</h2>
-              <p className={devPos}>Grandmaster AI/ML Developer</p>
+              <p className={devPos}>Lead AI Developer</p>
             </div>
             <div className={center}>
               <div className={img}>
                 <img src={Leonard} alt="" className={rounded} />
               </div>
               <h2 className={devName}>John Leonard Leaño</h2>
-              <p className={devPos}>Grandmaster Frontend Developer</p>
+              <p className={devPos}>Lead Frontend Developer</p>
             </div>
             <div className={center}>
               <div className={img}>
                 <img src={Nikol} alt="" className={rounded} />
               </div>
               <h2 className={devName}>Nicole Del Carmen</h2>
-              <p className={devPos}>Master Frontend Developer / Warrior AI Prompt Engineer</p>
+              <p className={devPos}>Frontend Developer / AI Prompt Engineer</p>
             </div>
             <div className={center}>
               <div className={img}>
                 <img src={Marot} alt="" className={rounded} />
               </div>
               <h2 className={devName}>Mary Rose Crisostomo</h2>
-              <p className={devPos}>Master Frontend Developer / Warrior AI Prompt Engineer</p>
+              <p className={devPos}>Frontend Developer / AI Prompt Engineer</p>
             </div>
             <div className={center}>
               <div className={img}>
                 <img src={Even} alt="" className={rounded} />
               </div>
               <h2 className={devName}>Evenezer Francis Basan</h2>
-              <p className={devPos}>Master Frontend Developer / Warrior AI Prompt Engineer</p>
+              <p className={devPos}>Frontend Developer / AI Prompt Engineer</p>
             </div>
           </div>
         </div>

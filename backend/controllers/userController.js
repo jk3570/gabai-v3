@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 const createToken = (_id) => {
   //Create a token using the ID provided
-  //Expires in one day
+
   return jwt.sign({_id}, process.env.SECRET, { expiresIn: '1h' });
 };
 
@@ -80,7 +80,7 @@ const loginUser = async (req, res) => {
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
-};
+}
 
 
 // Signup a user
@@ -195,7 +195,7 @@ const countsByGender = async (req, res) => {
         },
       },
     ]);
-    res.json(countsByGender);
+    res.json(countsbygender);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Server error' });

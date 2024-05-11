@@ -11,6 +11,7 @@
   import { IoIosCloseCircleOutline } from 'react-icons/io';
   import { format } from "date-fns";
   import { useReducer } from 'react';
+  import toast, { Toaster } from "react-hot-toast";
 
   const LawyerSchedule = () => {
     const navigate = useNavigate();
@@ -64,11 +65,22 @@
 
         if (response.status === 201) {
            await axios.delete(`${BaseURL}/accept/delete/${id}`)
-          alert('Data moved in archive successfully');
+
+            toast.success("Data moved in archive successfully", {
+        position: "bottom-center",
+        duration: 5000,
+
+      })
+          // alert('');
          
-          navigate('/lawyer/lawyer-archive');
+          // navigate('/lawyer/lawyer-archive');
         } else {
-          alert('Failed to process request');
+
+           toast.error("Failed to move in archived", {
+        position: "bottom-center",
+        duration: 5000,
+
+      })
         }
       } catch (error) {
         console.error(error);
@@ -224,6 +236,7 @@
 
     return (
       <div className="relative z-10 w-full py-[3.875rem] flex flex-col justify-start items-start min-h-screen max-md:p-1 bg-bkg text-content">
+      <Toaster />
         <div id="main-content" className="flex flex-col w-full mx-auto max-w-7xl gap-3 md:pt-0 pt-14">
           <div className="flex flex-row-1 justify-between items-center mt-4">
             <h1 className="md:text-2x text-xl font-semibold text-nowrap my-0">Lawyer Schedule</h1>
