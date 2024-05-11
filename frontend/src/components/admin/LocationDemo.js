@@ -68,7 +68,7 @@ function Sex() {
           height={300}
         />
       </div>
-      <div className='flex flex-col'>
+      <div style={{ position: 'relative' }}>
         {/* Pie Chart */}
         <PieChart
           series={[

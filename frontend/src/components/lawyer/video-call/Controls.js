@@ -39,12 +39,13 @@ function Controls(props) {
   };
 
   const leaveBtn = () => {
+    leave();
     // Display a confirmation dialog using alert
-    if (window.confirm("Do you want to leave the meeting?")) {
+/*     if (window.confirm("Do you want to leave the meeting?")) {
       alert("You've left the meeting");
       leave(); // Call the leave function if user confirms
       
-    }
+    } */
   };
 
   return (

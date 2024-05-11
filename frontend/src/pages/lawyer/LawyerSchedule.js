@@ -105,19 +105,49 @@
     const cardsData = filteredData
     .slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage)
     .map((user) => (
-      <div key={user._id} className="relative w-full h-auto flex flex-row bg-gray-200 bg-opacity-20 justify-between hover:bg-azure-50 hover:bg-opacity-10 p-3 text-sm text-content rounded-md border border-gray-400 border-opacity-20 shadow-md hover:-translate-y-1">
+      <div key={user._id} className="relative w-full h-fit flex flex-row bg-gray-200 bg-opacity-20 justify-between hover:bg-azure-50 hover:bg-opacity-10 p-3 text-sm text-content rounded-md border border-gray-400 border-opacity-20 shadow-md hover:-translate-y-1">
       <div className="flex flex-col w-full justify-between">
         <div className="font-bold text-content">
         {user.firstname} {user.lastname}
         </div>
-        <div>{user.email}</div>
-        <div>{user.address}</div>
+        {/* <div>{user.email}</div>
+        <div>{user.address}</div> */}
+        
+        <div className="flex flex-row gap-2 w-full">
+                    <div className="w-[65%]">
+                        <label className="text-xs text-opacity-[80%]">Date:</label>
+                        <div className="flex w-full text-sm font-medium bg-bkg bg-opacity-[80%] border border-azure-200 rounded-md px-2 py-1">
+                        {format(
+                        new Date(user.date ?? ""),
+                        "MMMM dd, yyyy"
+                        )}
+                        </div>
+                    </div>
+                    <div className="w-[35%]">
+                        <label className="text-xs text-opacity-[80%]">Time:</label>
+                        <div className="flex w-full text-sm font-medium bg-bkg bg-opacity-[80%] border border-azure-200 rounded-md px-2 py-1">
+                          {(() => {
+                          // Append a dummy date to the time string
+                          const dateTimeString = `2000-01-01 ${user.time}`;
+                          // Parse the concatenated string as a Date object
+                          const parsedDate = new Date(dateTimeString);
+                          // Format the parsed date in 12-hour time format
+                          return parsedDate.toLocaleTimeString([], {
+                              hour: "2-digit",
+                              minute: "2-digit",
+                              hour12: true,
+                          });
+                          })()}
+                        </div>
+                    </div>
+                  </div>
+
         <div className='flex w-full flex-row gap-2 mt-6'>
           <Popup trigger={<div className={cancelButton}>View Case</div>
           }
               modal>
           {closeForm => (
-            <div className="fixed z-50 top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50" onClick={closeForm}>
+            <div className="fixed z-50 top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
               <div className="modal relative z-10 h-auto w-[90%] sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-[50%] rounded-2xl bg-bkg text-content flex flex-col justify-center items-center pt-8 p-6 gap-4">
                 
               <div className='flex flex-col md:flex-row w-full gap-3'>
@@ -191,9 +221,7 @@
                       
                   {/* Buttons */}
                   <div className='flex flex-col gap-2 w-full mt-7'>
-                    <button className={button}>
-                      <Link to={`/lawyer/video-conference/${user.meetingId}`}>Join</Link>
-                    </button>
+                      <Link to={`/lawyer/video-conference/${user.meetingId}`}  className={button}>Join</Link>
                     <button className={cancelButton} type="submit" onClick={(event) => handleSubmit(event, user)}>
                       Move to archive
                     </button>
@@ -202,7 +230,7 @@
               </div>
 
                 <button className="absolute top-2 right-2">
-                  <IoIosCloseCircleOutline size={24} />
+                  <IoIosCloseCircleOutline size={24}  onClick={closeForm} />
                 </button>    
               </div>
               
@@ -224,7 +252,7 @@
 
     return (
       <div className="relative z-10 w-full py-[3.875rem] flex flex-col justify-start items-start min-h-screen max-md:p-1 bg-bkg text-content">
-        <div id="main-content" className="flex flex-col w-full mx-auto max-w-7xl gap-3 md:pt-0 pt-14">
+        <div id="main-content" className="flex flex-col w-full mx-auto max-w-5xl gap-3 md:pt-0 pt-14">
           <div className="flex flex-row-1 justify-between items-center mt-4">
             <h1 className="md:text-2x text-xl font-semibold text-nowrap my-0">Lawyer Schedule</h1>
           </div>
