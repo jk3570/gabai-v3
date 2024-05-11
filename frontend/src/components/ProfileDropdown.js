@@ -15,8 +15,6 @@ import ThemesDropdown from "./ThemesDropdown.js";
 
 const ProfileDropdown = ({ gPic }) => {
 
-  // console.log("pic" + this.props.gPic)
-
 const navigate = useNavigate()
 
 
@@ -45,7 +43,8 @@ const handleLogout = () => {
       <Popup
         trigger={
           <button className="bg-label text-bkg rounded-full h-[2rem] w-[2rem] flex items-center text-5xl justify-center overflow-clip">
-          {/* <img src={gPic} alt="Profile Pic" /> Use gPic */}
+
+
           <IoPersonCircle />
           </button>
         }

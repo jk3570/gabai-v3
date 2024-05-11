@@ -7,6 +7,7 @@ import useUserRequestData from '../../hooks/useUserRequestData';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { format } from "date-fns";
 import { IoIosMore } from "react-icons/io";
+import { IoIosCloseCircleOutline } from 'react-icons/io';
 
 
 const UserRequests = ({ summary }) => {
@@ -25,7 +26,7 @@ const UserRequests = ({ summary }) => {
     console.log("requestData:", requestData);
     console.log("loading:", loading);
 
-    const button = "flex h-10 w-full px-3 py-2 bg-azure text-white rounded-md justify-center items-center text-sm hover:bg-azure-300";
+    const button = "flex h-10 w-full px-3 py-2 bg-azure text-white rounded-md justify-center items-center text-sm hover:bg-azure-300 cursor-pointer";
     const join = "flex h-5 w-full px-2 py-1 bg-azure text-white rounded-md justify-center items-center text-sm hover:bg-azure-300 hover:scale-[1.02] hover:text-base";
 
     return (
@@ -40,7 +41,7 @@ const UserRequests = ({ summary }) => {
                 nested
             >
                 {(close) => (
-                    <div className="fixed z-40 top-0 right-0 flex translate-y-[3.3rem] translate-x-[-4rem]">
+                    <div className="fixed z-40 top-0 right-0 flex translate-y-[3.3rem] translate-x-[-4rem]" onClick={close}>
                     <div className="modal relative max-h-96 w-96 rounded-2xl bg-bkg flex flex-col shadow-lg border border-gray-400 border-opacity-20">
 
                     <div className="relative z-50 bg-bkg w-full p-3 gap-3 border-b border-opacity-20 border-gray-400">
@@ -93,8 +94,8 @@ const UserRequests = ({ summary }) => {
                                     
                                 <Popup trigger={<div className="absolute bottom-3 right-5 text-2xl font-bold rounded-xl px-1 text-white bg-gray-400 cursor-pointer"><IoIosMore /></div>}
                                     modal>
-                                {close => (
-                                    <div className="fixed z-50 top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50" onClick={close}>
+                                {closeMore => (
+                                    <div className="fixed z-50 top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50" onClick={closeMore}>
                                     <div className="flex bg-bkg p-2 rounded-md gap-2">
                                         <div className="relative w-full h-auto flex flex-col bg-gray-300 bg-opacity-30 text-sm text-content font-normal shadow-md rounded-md p-3 border border-gray-400 border-opacity-20">
                                         <label className="text-xs text-opacity-[80%]">Case Summary:</label>
@@ -153,15 +154,13 @@ const UserRequests = ({ summary }) => {
 
                                             <div className="flex w-full justify-end mt-2">
                                                 <div className="w-[60%] justify-end">
-
-                                                    <button className={button}>
-                                                    <Link to={`/user/video-conference/${user.meetingId}`}>Meet Lawyer</Link>
-                                                    </button>
+                                                    <Link to={`/user/video-conference/${user.meetingId}`} className={button}>Meet Lawyer</Link>
                                                 </div>
                                             </div>
                                         </div>
                                         </div>
-                                    </div>  
+                                    </div>
+ 
                                     </div>
                                     
                                     )}
