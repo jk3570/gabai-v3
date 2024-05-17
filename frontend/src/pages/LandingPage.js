@@ -5,6 +5,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 
 // Components
 import Section1 from "../components/landingpage/Section1";
+import VideoDemo from "../components/landingpage/VideoDemo1";
 import Section2 from "../components/landingpage/Section2";
 import Section3 from "../components/landingpage/Section3";
 import Section4 from "../components/landingpage/Section4";
@@ -96,6 +97,11 @@ useEffect(() => {
         <section id="home">
           {/* 1st section of landing page */}
          <Section1 />
+        </section>
+
+        <section id="demo">
+          {/* Video demo of landing page */}
+         <VideoDemo />
         </section>
 
         <section id="about">
