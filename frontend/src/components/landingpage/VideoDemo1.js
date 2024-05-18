@@ -43,7 +43,7 @@ const VideoDemoTutorial = () => {
       </h1>
 
       <div
-        className="relative z-20 bg-gray-700 rounded-lg shadow-2xl flex flex-col justify-around items-center max-md:px-2 hover:md:scale-[1.2]"
+        className="relative z-20 bg-gray-700 rounded-lg shadow-2xl flex flex-col justify-around items-center max-md:px-2"
         ref={videoContainerRef}
       >
         <div className="relative z-0 justify-center items-center bg-gray-700 rounded-xl md:w-full md:h-full w-[320px] h-[180px] flex flex-col md:flex-row overflow-clip">
